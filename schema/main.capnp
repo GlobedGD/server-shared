@@ -58,7 +58,7 @@ struct LoginOkMessage {
 }
 
 enum LoginFailedReason {
-    invalidUserToken @0;
+    invalidUserToken    @0;
     invalidArgonToken   @1;
     argonNotSupported   @2;
     argonUnreachable    @3;

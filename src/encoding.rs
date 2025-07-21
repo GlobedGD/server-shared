@@ -123,6 +123,8 @@ pub enum DataDecodeError {
     InvalidBinary(#[from] ByteReaderError),
     #[error("supplied string was longer than permitted: {0} bytes (limit: {1})")]
     StringTooLong(usize, usize),
+    #[error("nan/inf value in floating point data")]
+    InvalidFloat,
 }
 
 #[macro_export]

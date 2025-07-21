@@ -28,6 +28,8 @@ pub enum TokenValidationError {
     UsernameTooLong,
     #[error("Invalid signature")]
     InvalidSignature,
+    #[error("Account ID mismatch")]
+    AccountMismatch,
 }
 
 impl TokenIssuer {
@@ -90,7 +92,7 @@ impl TokenIssuer {
     ) -> Result<TokenData, TokenValidationError> {
         let data = self.validate(token)?;
         if data.account_id != account_id {
-            return Err(TokenValidationError::InvalidSignature);
+            return Err(TokenValidationError::AccountMismatch);
         }
 
         Ok(data)
@@ -128,8 +130,8 @@ impl TokenIssuer {
 
         format!(
             "{}.{}",
+            str::from_utf8(&data_buf[..data_len]).expect("data must be valid UTF-8"),
             str::from_utf8(&sig_buf).expect("signature must be valid UTF-8"),
-            str::from_utf8(&data_buf[..data_len]).expect("data must be valid UTF-8")
         )
     }
 }
