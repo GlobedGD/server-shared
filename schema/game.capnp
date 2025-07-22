@@ -78,6 +78,7 @@ struct PlayerData {
     timestamp   @1 :Float32;
     frameNumber @2 :UInt8;
     deathCount  @3 :UInt8;
+    percentage  @13 :UInt16;
 
     isDead        @4 :Bool;
     isPaused      @5 :Bool;

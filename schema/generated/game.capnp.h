@@ -12,6 +12,7 @@
 #error "Version mismatch between generated code and library headers.  You must use the same version of the Cap'n Proto compiler and library."
 #endif
 
+#include "shared.capnp.h"
 
 CAPNP_BEGIN_HEADER
 
@@ -32,12 +33,17 @@ CAPNP_DECLARE_SCHEMA(cb73420259ca5cfc);
 CAPNP_DECLARE_SCHEMA(bc6decb777029037);
 CAPNP_DECLARE_SCHEMA(dff86b3bb0c6c45f);
 enum class JoinSessionFailedReason_dff86b3bb0c6c45f: uint16_t {
-  NOT_FOUND,
   INVALID_PASSCODE,
 };
 CAPNP_DECLARE_ENUM(JoinSessionFailedReason, dff86b3bb0c6c45f);
 CAPNP_DECLARE_SCHEMA(d0220b919cc3f7e9);
 CAPNP_DECLARE_SCHEMA(ab51fdae26ff1d81);
+CAPNP_DECLARE_SCHEMA(920467072fa8ce3c);
+CAPNP_DECLARE_SCHEMA(ea51b18e3e4bdda6);
+CAPNP_DECLARE_SCHEMA(98e7cf6452ead0d1);
+CAPNP_DECLARE_SCHEMA(8c81bcb5b34031b2);
+CAPNP_DECLARE_SCHEMA(f5b211f1db0defbc);
+CAPNP_DECLARE_SCHEMA(f3e0f84d2138b356);
 CAPNP_DECLARE_SCHEMA(ee430f29eef52d4e);
 
 }  // namespace schemas
@@ -171,6 +177,102 @@ struct LeaveSessionMessage {
   };
 };
 
+struct PlayerObjectData {
+  PlayerObjectData() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(920467072fa8ce3c, 2, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct PlayerData {
+  PlayerData() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+  enum Which: uint16_t {
+    DUAL,
+    SINGLE,
+  };
+  struct Dual;
+  struct Single;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(ea51b18e3e4bdda6, 2, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct PlayerData::Dual {
+  Dual() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(98e7cf6452ead0d1, 2, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct PlayerData::Single {
+  Single() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(8c81bcb5b34031b2, 2, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct PlayerDataMessage {
+  PlayerDataMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(f5b211f1db0defbc, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct LevelDataMessage {
+  LevelDataMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct Message {
   Message() = delete;
 
@@ -184,6 +286,10 @@ struct Message {
     LOGIN_U_TOKEN_AND_JOIN,
     JOIN_SESSION,
     LEAVE_SESSION,
+    PLAYER_DATA,
+    JOIN_SESSION_OK,
+    JOIN_SESSION_FAILED,
+    LEVEL_DATA,
   };
 
   struct _capnpPrivate {
@@ -829,6 +935,627 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class PlayerObjectData::Reader {
+public:
+  typedef PlayerObjectData Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline float getPositionX() const;
+
+  inline float getPositionY() const;
+
+  inline float getRotation() const;
+
+  inline  ::globed::schema::shared::IconType getIconType() const;
+
+  inline bool getIsVisible() const;
+
+  inline bool getIsLookingLeft() const;
+
+  inline bool getIsUpsideDown() const;
+
+  inline bool getIsDashing() const;
+
+  inline bool getIsMini() const;
+
+  inline bool getIsGrounded() const;
+
+  inline bool getIsStationary() const;
+
+  inline bool getIsFalling() const;
+
+  inline bool getIsRotating() const;
+
+  inline bool getIsSideways() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PlayerObjectData::Builder {
+public:
+  typedef PlayerObjectData Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline float getPositionX();
+  inline void setPositionX(float value);
+
+  inline float getPositionY();
+  inline void setPositionY(float value);
+
+  inline float getRotation();
+  inline void setRotation(float value);
+
+  inline  ::globed::schema::shared::IconType getIconType();
+  inline void setIconType( ::globed::schema::shared::IconType value);
+
+  inline bool getIsVisible();
+  inline void setIsVisible(bool value);
+
+  inline bool getIsLookingLeft();
+  inline void setIsLookingLeft(bool value);
+
+  inline bool getIsUpsideDown();
+  inline void setIsUpsideDown(bool value);
+
+  inline bool getIsDashing();
+  inline void setIsDashing(bool value);
+
+  inline bool getIsMini();
+  inline void setIsMini(bool value);
+
+  inline bool getIsGrounded();
+  inline void setIsGrounded(bool value);
+
+  inline bool getIsStationary();
+  inline void setIsStationary(bool value);
+
+  inline bool getIsFalling();
+  inline void setIsFalling(bool value);
+
+  inline bool getIsRotating();
+  inline void setIsRotating(bool value);
+
+  inline bool getIsSideways();
+  inline void setIsSideways(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PlayerObjectData::Pipeline {
+public:
+  typedef PlayerObjectData Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class PlayerData::Reader {
+public:
+  typedef PlayerData Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline Which which() const;
+  inline  ::int32_t getAccountId() const;
+
+  inline float getTimestamp() const;
+
+  inline  ::uint8_t getFrameNumber() const;
+
+  inline  ::uint8_t getDeathCount() const;
+
+  inline bool getIsDead() const;
+
+  inline bool getIsPaused() const;
+
+  inline bool getIsPracticing() const;
+
+  inline bool getIsInEditor() const;
+
+  inline bool getIsEditorBuilding() const;
+
+  inline bool getIsLastDeathReal() const;
+
+  inline bool isDual() const;
+  inline typename Dual::Reader getDual() const;
+
+  inline bool isSingle() const;
+  inline typename Single::Reader getSingle() const;
+
+  inline  ::uint16_t getPercentage() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PlayerData::Builder {
+public:
+  typedef PlayerData Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline Which which();
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline float getTimestamp();
+  inline void setTimestamp(float value);
+
+  inline  ::uint8_t getFrameNumber();
+  inline void setFrameNumber( ::uint8_t value);
+
+  inline  ::uint8_t getDeathCount();
+  inline void setDeathCount( ::uint8_t value);
+
+  inline bool getIsDead();
+  inline void setIsDead(bool value);
+
+  inline bool getIsPaused();
+  inline void setIsPaused(bool value);
+
+  inline bool getIsPracticing();
+  inline void setIsPracticing(bool value);
+
+  inline bool getIsInEditor();
+  inline void setIsInEditor(bool value);
+
+  inline bool getIsEditorBuilding();
+  inline void setIsEditorBuilding(bool value);
+
+  inline bool getIsLastDeathReal();
+  inline void setIsLastDeathReal(bool value);
+
+  inline bool isDual();
+  inline typename Dual::Builder getDual();
+  inline typename Dual::Builder initDual();
+
+  inline bool isSingle();
+  inline typename Single::Builder getSingle();
+  inline typename Single::Builder initSingle();
+
+  inline  ::uint16_t getPercentage();
+  inline void setPercentage( ::uint16_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PlayerData::Pipeline {
+public:
+  typedef PlayerData Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class PlayerData::Dual::Reader {
+public:
+  typedef Dual Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasPlayer1() const;
+  inline  ::globed::schema::game::PlayerObjectData::Reader getPlayer1() const;
+
+  inline bool hasPlayer2() const;
+  inline  ::globed::schema::game::PlayerObjectData::Reader getPlayer2() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PlayerData::Dual::Builder {
+public:
+  typedef Dual Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasPlayer1();
+  inline  ::globed::schema::game::PlayerObjectData::Builder getPlayer1();
+  inline void setPlayer1( ::globed::schema::game::PlayerObjectData::Reader value);
+  inline  ::globed::schema::game::PlayerObjectData::Builder initPlayer1();
+  inline void adoptPlayer1(::capnp::Orphan< ::globed::schema::game::PlayerObjectData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::PlayerObjectData> disownPlayer1();
+
+  inline bool hasPlayer2();
+  inline  ::globed::schema::game::PlayerObjectData::Builder getPlayer2();
+  inline void setPlayer2( ::globed::schema::game::PlayerObjectData::Reader value);
+  inline  ::globed::schema::game::PlayerObjectData::Builder initPlayer2();
+  inline void adoptPlayer2(::capnp::Orphan< ::globed::schema::game::PlayerObjectData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::PlayerObjectData> disownPlayer2();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PlayerData::Dual::Pipeline {
+public:
+  typedef Dual Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::game::PlayerObjectData::Pipeline getPlayer1();
+  inline  ::globed::schema::game::PlayerObjectData::Pipeline getPlayer2();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class PlayerData::Single::Reader {
+public:
+  typedef Single Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasPlayer1() const;
+  inline  ::globed::schema::game::PlayerObjectData::Reader getPlayer1() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PlayerData::Single::Builder {
+public:
+  typedef Single Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasPlayer1();
+  inline  ::globed::schema::game::PlayerObjectData::Builder getPlayer1();
+  inline void setPlayer1( ::globed::schema::game::PlayerObjectData::Reader value);
+  inline  ::globed::schema::game::PlayerObjectData::Builder initPlayer1();
+  inline void adoptPlayer1(::capnp::Orphan< ::globed::schema::game::PlayerObjectData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::PlayerObjectData> disownPlayer1();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PlayerData::Single::Pipeline {
+public:
+  typedef Single Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::game::PlayerObjectData::Pipeline getPlayer1();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class PlayerDataMessage::Reader {
+public:
+  typedef PlayerDataMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasData() const;
+  inline  ::globed::schema::game::PlayerData::Reader getData() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PlayerDataMessage::Builder {
+public:
+  typedef PlayerDataMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasData();
+  inline  ::globed::schema::game::PlayerData::Builder getData();
+  inline void setData( ::globed::schema::game::PlayerData::Reader value);
+  inline  ::globed::schema::game::PlayerData::Builder initData();
+  inline void adoptData(::capnp::Orphan< ::globed::schema::game::PlayerData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::PlayerData> disownData();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PlayerDataMessage::Pipeline {
+public:
+  typedef PlayerDataMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::game::PlayerData::Pipeline getData();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class LevelDataMessage::Reader {
+public:
+  typedef LevelDataMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasPlayers() const;
+  inline  ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Reader getPlayers() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class LevelDataMessage::Builder {
+public:
+  typedef LevelDataMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasPlayers();
+  inline  ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Builder getPlayers();
+  inline void setPlayers( ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Builder initPlayers(unsigned int size);
+  inline void adoptPlayers(::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>> disownPlayers();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class LevelDataMessage::Pipeline {
+public:
+  typedef LevelDataMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class Message::Reader {
 public:
   typedef Message Reads;
@@ -870,6 +1597,22 @@ public:
   inline bool isLeaveSession() const;
   inline bool hasLeaveSession() const;
   inline  ::globed::schema::game::LeaveSessionMessage::Reader getLeaveSession() const;
+
+  inline bool isPlayerData() const;
+  inline bool hasPlayerData() const;
+  inline  ::globed::schema::game::PlayerDataMessage::Reader getPlayerData() const;
+
+  inline bool isJoinSessionOk() const;
+  inline bool hasJoinSessionOk() const;
+  inline  ::globed::schema::game::JoinSessionOkMessage::Reader getJoinSessionOk() const;
+
+  inline bool isJoinSessionFailed() const;
+  inline bool hasJoinSessionFailed() const;
+  inline  ::globed::schema::game::JoinSessionFailedMessage::Reader getJoinSessionFailed() const;
+
+  inline bool isLevelData() const;
+  inline bool hasLevelData() const;
+  inline  ::globed::schema::game::LevelDataMessage::Reader getLevelData() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -947,6 +1690,38 @@ public:
   inline  ::globed::schema::game::LeaveSessionMessage::Builder initLeaveSession();
   inline void adoptLeaveSession(::capnp::Orphan< ::globed::schema::game::LeaveSessionMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::LeaveSessionMessage> disownLeaveSession();
+
+  inline bool isPlayerData();
+  inline bool hasPlayerData();
+  inline  ::globed::schema::game::PlayerDataMessage::Builder getPlayerData();
+  inline void setPlayerData( ::globed::schema::game::PlayerDataMessage::Reader value);
+  inline  ::globed::schema::game::PlayerDataMessage::Builder initPlayerData();
+  inline void adoptPlayerData(::capnp::Orphan< ::globed::schema::game::PlayerDataMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::PlayerDataMessage> disownPlayerData();
+
+  inline bool isJoinSessionOk();
+  inline bool hasJoinSessionOk();
+  inline  ::globed::schema::game::JoinSessionOkMessage::Builder getJoinSessionOk();
+  inline void setJoinSessionOk( ::globed::schema::game::JoinSessionOkMessage::Reader value);
+  inline  ::globed::schema::game::JoinSessionOkMessage::Builder initJoinSessionOk();
+  inline void adoptJoinSessionOk(::capnp::Orphan< ::globed::schema::game::JoinSessionOkMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::JoinSessionOkMessage> disownJoinSessionOk();
+
+  inline bool isJoinSessionFailed();
+  inline bool hasJoinSessionFailed();
+  inline  ::globed::schema::game::JoinSessionFailedMessage::Builder getJoinSessionFailed();
+  inline void setJoinSessionFailed( ::globed::schema::game::JoinSessionFailedMessage::Reader value);
+  inline  ::globed::schema::game::JoinSessionFailedMessage::Builder initJoinSessionFailed();
+  inline void adoptJoinSessionFailed(::capnp::Orphan< ::globed::schema::game::JoinSessionFailedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::JoinSessionFailedMessage> disownJoinSessionFailed();
+
+  inline bool isLevelData();
+  inline bool hasLevelData();
+  inline  ::globed::schema::game::LevelDataMessage::Builder getLevelData();
+  inline void setLevelData( ::globed::schema::game::LevelDataMessage::Reader value);
+  inline  ::globed::schema::game::LevelDataMessage::Builder initLevelData();
+  inline void adoptLevelData(::capnp::Orphan< ::globed::schema::game::LevelDataMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::LevelDataMessage> disownLevelData();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1168,6 +1943,600 @@ inline  ::globed::schema::game::JoinSessionFailedReason JoinSessionFailedMessage
 inline void JoinSessionFailedMessage::Builder::setReason( ::globed::schema::game::JoinSessionFailedReason value) {
   _builder.setDataField< ::globed::schema::game::JoinSessionFailedReason>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline float PlayerObjectData::Reader::getPositionX() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline float PlayerObjectData::Builder::getPositionX() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setPositionX(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline float PlayerObjectData::Reader::getPositionY() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline float PlayerObjectData::Builder::getPositionY() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setPositionY(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline float PlayerObjectData::Reader::getRotation() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline float PlayerObjectData::Builder::getRotation() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setRotation(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::globed::schema::shared::IconType PlayerObjectData::Reader::getIconType() const {
+  return _reader.getDataField< ::globed::schema::shared::IconType>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+
+inline  ::globed::schema::shared::IconType PlayerObjectData::Builder::getIconType() {
+  return _builder.getDataField< ::globed::schema::shared::IconType>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIconType( ::globed::schema::shared::IconType value) {
+  _builder.setDataField< ::globed::schema::shared::IconType>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsVisible() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<112>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsVisible() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<112>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsVisible(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<112>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsLookingLeft() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<113>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsLookingLeft() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<113>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsLookingLeft(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<113>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsUpsideDown() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<114>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsUpsideDown() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<114>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsUpsideDown(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<114>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsDashing() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<115>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsDashing() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<115>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsDashing(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<115>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsMini() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<116>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsMini() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<116>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsMini(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<116>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsGrounded() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<117>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsGrounded() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<117>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsGrounded(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<117>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsStationary() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<118>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsStationary() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<118>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsStationary(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<118>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsFalling() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<119>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsFalling() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<119>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsFalling(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<119>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsRotating() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<120>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsRotating() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<120>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsRotating(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<120>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsSideways() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<121>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsSideways() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<121>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsSideways(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<121>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::globed::schema::game::PlayerData::Which PlayerData::Reader::which() const {
+  return _reader.getDataField<Which>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+inline  ::globed::schema::game::PlayerData::Which PlayerData::Builder::which() {
+  return _builder.getDataField<Which>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t PlayerData::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t PlayerData::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline float PlayerData::Reader::getTimestamp() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline float PlayerData::Builder::getTimestamp() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setTimestamp(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint8_t PlayerData::Reader::getFrameNumber() const {
+  return _reader.getDataField< ::uint8_t>(
+      ::capnp::bounded<8>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint8_t PlayerData::Builder::getFrameNumber() {
+  return _builder.getDataField< ::uint8_t>(
+      ::capnp::bounded<8>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setFrameNumber( ::uint8_t value) {
+  _builder.setDataField< ::uint8_t>(
+      ::capnp::bounded<8>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint8_t PlayerData::Reader::getDeathCount() const {
+  return _reader.getDataField< ::uint8_t>(
+      ::capnp::bounded<9>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint8_t PlayerData::Builder::getDeathCount() {
+  return _builder.getDataField< ::uint8_t>(
+      ::capnp::bounded<9>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setDeathCount( ::uint8_t value) {
+  _builder.setDataField< ::uint8_t>(
+      ::capnp::bounded<9>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerData::Reader::getIsDead() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<80>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerData::Builder::getIsDead() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<80>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setIsDead(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<80>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerData::Reader::getIsPaused() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<81>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerData::Builder::getIsPaused() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<81>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setIsPaused(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<81>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerData::Reader::getIsPracticing() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<82>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerData::Builder::getIsPracticing() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<82>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setIsPracticing(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<82>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerData::Reader::getIsInEditor() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<83>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerData::Builder::getIsInEditor() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<83>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setIsInEditor(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<83>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerData::Reader::getIsEditorBuilding() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<84>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerData::Builder::getIsEditorBuilding() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<84>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setIsEditorBuilding(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<84>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerData::Reader::getIsLastDeathReal() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<85>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerData::Builder::getIsLastDeathReal() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<85>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setIsLastDeathReal(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<85>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerData::Reader::isDual() const {
+  return which() == PlayerData::DUAL;
+}
+inline bool PlayerData::Builder::isDual() {
+  return which() == PlayerData::DUAL;
+}
+inline typename PlayerData::Dual::Reader PlayerData::Reader::getDual() const {
+  KJ_IREQUIRE((which() == PlayerData::DUAL),
+              "Must check which() before get()ing a union member.");
+  return typename PlayerData::Dual::Reader(_reader);
+}
+inline typename PlayerData::Dual::Builder PlayerData::Builder::getDual() {
+  KJ_IREQUIRE((which() == PlayerData::DUAL),
+              "Must check which() before get()ing a union member.");
+  return typename PlayerData::Dual::Builder(_builder);
+}
+inline typename PlayerData::Dual::Builder PlayerData::Builder::initDual() {
+  _builder.setDataField<PlayerData::Which>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS, PlayerData::DUAL);
+  _builder.getPointerField(::capnp::bounded<0>() * ::capnp::POINTERS).clear();
+  _builder.getPointerField(::capnp::bounded<1>() * ::capnp::POINTERS).clear();
+  return typename PlayerData::Dual::Builder(_builder);
+}
+inline bool PlayerData::Reader::isSingle() const {
+  return which() == PlayerData::SINGLE;
+}
+inline bool PlayerData::Builder::isSingle() {
+  return which() == PlayerData::SINGLE;
+}
+inline typename PlayerData::Single::Reader PlayerData::Reader::getSingle() const {
+  KJ_IREQUIRE((which() == PlayerData::SINGLE),
+              "Must check which() before get()ing a union member.");
+  return typename PlayerData::Single::Reader(_reader);
+}
+inline typename PlayerData::Single::Builder PlayerData::Builder::getSingle() {
+  KJ_IREQUIRE((which() == PlayerData::SINGLE),
+              "Must check which() before get()ing a union member.");
+  return typename PlayerData::Single::Builder(_builder);
+}
+inline typename PlayerData::Single::Builder PlayerData::Builder::initSingle() {
+  _builder.setDataField<PlayerData::Which>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS, PlayerData::SINGLE);
+  _builder.getPointerField(::capnp::bounded<0>() * ::capnp::POINTERS).clear();
+  return typename PlayerData::Single::Builder(_builder);
+}
+inline  ::uint16_t PlayerData::Reader::getPercentage() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t PlayerData::Builder::getPercentage() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Builder::setPercentage( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerData::Dual::Reader::hasPlayer1() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerData::Dual::Builder::hasPlayer1() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::PlayerObjectData::Reader PlayerData::Dual::Reader::getPlayer1() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::PlayerObjectData::Builder PlayerData::Dual::Builder::getPlayer1() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::game::PlayerObjectData::Pipeline PlayerData::Dual::Pipeline::getPlayer1() {
+  return  ::globed::schema::game::PlayerObjectData::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void PlayerData::Dual::Builder::setPlayer1( ::globed::schema::game::PlayerObjectData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::PlayerObjectData::Builder PlayerData::Dual::Builder::initPlayer1() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void PlayerData::Dual::Builder::adoptPlayer1(
+    ::capnp::Orphan< ::globed::schema::game::PlayerObjectData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::PlayerObjectData> PlayerData::Dual::Builder::disownPlayer1() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool PlayerData::Dual::Reader::hasPlayer2() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerData::Dual::Builder::hasPlayer2() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::PlayerObjectData::Reader PlayerData::Dual::Reader::getPlayer2() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::PlayerObjectData::Builder PlayerData::Dual::Builder::getPlayer2() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::game::PlayerObjectData::Pipeline PlayerData::Dual::Pipeline::getPlayer2() {
+  return  ::globed::schema::game::PlayerObjectData::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void PlayerData::Dual::Builder::setPlayer2( ::globed::schema::game::PlayerObjectData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::PlayerObjectData::Builder PlayerData::Dual::Builder::initPlayer2() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void PlayerData::Dual::Builder::adoptPlayer2(
+    ::capnp::Orphan< ::globed::schema::game::PlayerObjectData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::PlayerObjectData> PlayerData::Dual::Builder::disownPlayer2() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool PlayerData::Single::Reader::hasPlayer1() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerData::Single::Builder::hasPlayer1() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::PlayerObjectData::Reader PlayerData::Single::Reader::getPlayer1() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::PlayerObjectData::Builder PlayerData::Single::Builder::getPlayer1() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::game::PlayerObjectData::Pipeline PlayerData::Single::Pipeline::getPlayer1() {
+  return  ::globed::schema::game::PlayerObjectData::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void PlayerData::Single::Builder::setPlayer1( ::globed::schema::game::PlayerObjectData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::PlayerObjectData::Builder PlayerData::Single::Builder::initPlayer1() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void PlayerData::Single::Builder::adoptPlayer1(
+    ::capnp::Orphan< ::globed::schema::game::PlayerObjectData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::PlayerObjectData> PlayerData::Single::Builder::disownPlayer1() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool PlayerDataMessage::Reader::hasData() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerDataMessage::Builder::hasData() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::PlayerData::Reader PlayerDataMessage::Reader::getData() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerData>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::PlayerData::Builder PlayerDataMessage::Builder::getData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerData>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::game::PlayerData::Pipeline PlayerDataMessage::Pipeline::getData() {
+  return  ::globed::schema::game::PlayerData::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void PlayerDataMessage::Builder::setData( ::globed::schema::game::PlayerData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerData>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::PlayerData::Builder PlayerDataMessage::Builder::initData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerData>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void PlayerDataMessage::Builder::adoptData(
+    ::capnp::Orphan< ::globed::schema::game::PlayerData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::PlayerData> PlayerDataMessage::Builder::disownData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerData>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool LevelDataMessage::Reader::hasPlayers() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool LevelDataMessage::Builder::hasPlayers() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Reader LevelDataMessage::Reader::getPlayers() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Builder LevelDataMessage::Builder::getPlayers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void LevelDataMessage::Builder::setPlayers( ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Builder LevelDataMessage::Builder::initPlayers(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void LevelDataMessage::Builder::adoptPlayers(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>> LevelDataMessage::Builder::disownPlayers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline  ::globed::schema::game::Message::Which Message::Reader::which() const {
@@ -1500,6 +2869,222 @@ inline ::capnp::Orphan< ::globed::schema::game::LeaveSessionMessage> Message::Bu
   KJ_IREQUIRE((which() == Message::LEAVE_SESSION),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::LeaveSessionMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isPlayerData() const {
+  return which() == Message::PLAYER_DATA;
+}
+inline bool Message::Builder::isPlayerData() {
+  return which() == Message::PLAYER_DATA;
+}
+inline bool Message::Reader::hasPlayerData() const {
+  if (which() != Message::PLAYER_DATA) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasPlayerData() {
+  if (which() != Message::PLAYER_DATA) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::PlayerDataMessage::Reader Message::Reader::getPlayerData() const {
+  KJ_IREQUIRE((which() == Message::PLAYER_DATA),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerDataMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::PlayerDataMessage::Builder Message::Builder::getPlayerData() {
+  KJ_IREQUIRE((which() == Message::PLAYER_DATA),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerDataMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setPlayerData( ::globed::schema::game::PlayerDataMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_DATA);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerDataMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::PlayerDataMessage::Builder Message::Builder::initPlayerData() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_DATA);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerDataMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptPlayerData(
+    ::capnp::Orphan< ::globed::schema::game::PlayerDataMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_DATA);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerDataMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::PlayerDataMessage> Message::Builder::disownPlayerData() {
+  KJ_IREQUIRE((which() == Message::PLAYER_DATA),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerDataMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isJoinSessionOk() const {
+  return which() == Message::JOIN_SESSION_OK;
+}
+inline bool Message::Builder::isJoinSessionOk() {
+  return which() == Message::JOIN_SESSION_OK;
+}
+inline bool Message::Reader::hasJoinSessionOk() const {
+  if (which() != Message::JOIN_SESSION_OK) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasJoinSessionOk() {
+  if (which() != Message::JOIN_SESSION_OK) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::JoinSessionOkMessage::Reader Message::Reader::getJoinSessionOk() const {
+  KJ_IREQUIRE((which() == Message::JOIN_SESSION_OK),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionOkMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::JoinSessionOkMessage::Builder Message::Builder::getJoinSessionOk() {
+  KJ_IREQUIRE((which() == Message::JOIN_SESSION_OK),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionOkMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setJoinSessionOk( ::globed::schema::game::JoinSessionOkMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_SESSION_OK);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionOkMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::JoinSessionOkMessage::Builder Message::Builder::initJoinSessionOk() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_SESSION_OK);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionOkMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptJoinSessionOk(
+    ::capnp::Orphan< ::globed::schema::game::JoinSessionOkMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_SESSION_OK);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionOkMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::JoinSessionOkMessage> Message::Builder::disownJoinSessionOk() {
+  KJ_IREQUIRE((which() == Message::JOIN_SESSION_OK),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionOkMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isJoinSessionFailed() const {
+  return which() == Message::JOIN_SESSION_FAILED;
+}
+inline bool Message::Builder::isJoinSessionFailed() {
+  return which() == Message::JOIN_SESSION_FAILED;
+}
+inline bool Message::Reader::hasJoinSessionFailed() const {
+  if (which() != Message::JOIN_SESSION_FAILED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasJoinSessionFailed() {
+  if (which() != Message::JOIN_SESSION_FAILED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::JoinSessionFailedMessage::Reader Message::Reader::getJoinSessionFailed() const {
+  KJ_IREQUIRE((which() == Message::JOIN_SESSION_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionFailedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::JoinSessionFailedMessage::Builder Message::Builder::getJoinSessionFailed() {
+  KJ_IREQUIRE((which() == Message::JOIN_SESSION_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionFailedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setJoinSessionFailed( ::globed::schema::game::JoinSessionFailedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_SESSION_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionFailedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::JoinSessionFailedMessage::Builder Message::Builder::initJoinSessionFailed() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_SESSION_FAILED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionFailedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptJoinSessionFailed(
+    ::capnp::Orphan< ::globed::schema::game::JoinSessionFailedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_SESSION_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionFailedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::JoinSessionFailedMessage> Message::Builder::disownJoinSessionFailed() {
+  KJ_IREQUIRE((which() == Message::JOIN_SESSION_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::JoinSessionFailedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isLevelData() const {
+  return which() == Message::LEVEL_DATA;
+}
+inline bool Message::Builder::isLevelData() {
+  return which() == Message::LEVEL_DATA;
+}
+inline bool Message::Reader::hasLevelData() const {
+  if (which() != Message::LEVEL_DATA) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasLevelData() {
+  if (which() != Message::LEVEL_DATA) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::LevelDataMessage::Reader Message::Reader::getLevelData() const {
+  KJ_IREQUIRE((which() == Message::LEVEL_DATA),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelDataMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::LevelDataMessage::Builder Message::Builder::getLevelData() {
+  KJ_IREQUIRE((which() == Message::LEVEL_DATA),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelDataMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setLevelData( ::globed::schema::game::LevelDataMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_DATA);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::LevelDataMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::LevelDataMessage::Builder Message::Builder::initLevelData() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_DATA);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelDataMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptLevelData(
+    ::capnp::Orphan< ::globed::schema::game::LevelDataMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_DATA);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::LevelDataMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::LevelDataMessage> Message::Builder::disownLevelData() {
+  KJ_IREQUIRE((which() == Message::LEVEL_DATA),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelDataMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

@@ -278,10 +278,10 @@ macro_rules! encode_message_heap {
         let mut buffer = server.request_buffer($estcap).await;
 
         // safety: we just allocated a buffer of size $estcap
-        let mut builder = $crate::encoding::CapnpBorrowAlloc::new(unsafe {
-            buffer.write_window($estcap).unwrap()
-        })
-        .into_builder();
+        let wnd = unsafe { buffer.write_window($estcap).unwrap() };
+        debug_assert!(wnd.len() >= $estcap);
+
+        let mut builder = $crate::encoding::CapnpBorrowAlloc::new(wnd).into_builder();
 
         $crate::encode_with_builder!($($schema)::*, server, builder, $msg => $code)
     }};

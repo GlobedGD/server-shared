@@ -18,6 +18,20 @@ CAPNP_BEGIN_HEADER
 namespace capnp {
 namespace schemas {
 
+CAPNP_DECLARE_SCHEMA(c71ad48a4a77aafa);
+enum class IconType_c71ad48a4a77aafa: uint16_t {
+  UNKNOWN,
+  CUBE,
+  SHIP,
+  BALL,
+  UFO,
+  WAVE,
+  ROBOT,
+  SPIDER,
+  SWING,
+  JETPACK,
+};
+CAPNP_DECLARE_ENUM(IconType, c71ad48a4a77aafa);
 CAPNP_DECLARE_SCHEMA(dbd9733cd0577674);
 
 }  // namespace schemas
@@ -26,6 +40,8 @@ CAPNP_DECLARE_SCHEMA(dbd9733cd0577674);
 namespace globed {
 namespace schema {
 namespace shared {
+
+typedef ::capnp::schemas::IconType_c71ad48a4a77aafa IconType;
 
 struct GameServer {
   GameServer() = delete;
