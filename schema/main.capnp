@@ -122,10 +122,20 @@ struct JoinFailedMessage {
     reason @0 :JoinSessionFailedReason;
 }
 
-# Warping
-
 struct WarpPlayerMessage {
     session @0 :LevelSession;
+}
+
+# Misc
+
+enum KickReason {
+    custom @0;
+    duplicateLogin @1;
+}
+
+struct KickedMessage {
+    reason @0 :KickReason;
+    message @1 :Text;
 }
 
 struct Message {
@@ -152,7 +162,8 @@ struct Message {
         roomState     @11 :RoomStateMessage;
 
         joinFailed    @14 :JoinFailedMessage;
-
         warpPlayer    @10 :WarpPlayerMessage;
+
+        kicked        @15 :KickedMessage;
     }
 }

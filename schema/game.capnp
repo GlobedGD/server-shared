@@ -108,6 +108,19 @@ struct PlayerDataMessage {
 
 struct LevelDataMessage {
     players @0 :List(PlayerData);
+    culled  @1 :List(Int32); # Account IDs of players that were culled
+}
+
+# Misc
+
+enum KickReason {
+    custom @0;
+    duplicateLogin @1;
+}
+
+struct KickedMessage {
+    reason @0 :KickReason;
+    message @1 :Text;
 }
 
 struct Message {
@@ -125,5 +138,6 @@ struct Message {
         joinSessionOk      @7 :JoinSessionOkMessage;
         joinSessionFailed  @8 :JoinSessionFailedMessage;
         levelData          @9 :LevelDataMessage;
+        kicked             @10 :KickedMessage;
     }
 }

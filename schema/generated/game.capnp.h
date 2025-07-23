@@ -44,6 +44,13 @@ CAPNP_DECLARE_SCHEMA(98e7cf6452ead0d1);
 CAPNP_DECLARE_SCHEMA(8c81bcb5b34031b2);
 CAPNP_DECLARE_SCHEMA(f5b211f1db0defbc);
 CAPNP_DECLARE_SCHEMA(f3e0f84d2138b356);
+CAPNP_DECLARE_SCHEMA(c8a95e9766c5920c);
+enum class KickReason_c8a95e9766c5920c: uint16_t {
+  CUSTOM,
+  DUPLICATE_LOGIN,
+};
+CAPNP_DECLARE_ENUM(KickReason, c8a95e9766c5920c);
+CAPNP_DECLARE_SCHEMA(b42ff33e56f21298);
 CAPNP_DECLARE_SCHEMA(ee430f29eef52d4e);
 
 }  // namespace schemas
@@ -266,7 +273,24 @@ struct LevelDataMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 0, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+typedef ::capnp::schemas::KickReason_c8a95e9766c5920c KickReason;
+
+struct KickedMessage {
+  KickedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(b42ff33e56f21298, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -290,6 +314,7 @@ struct Message {
     JOIN_SESSION_OK,
     JOIN_SESSION_FAILED,
     LEVEL_DATA,
+    KICKED,
   };
 
   struct _capnpPrivate {
@@ -1495,6 +1520,9 @@ public:
   inline bool hasPlayers() const;
   inline  ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Reader getPlayers() const;
 
+  inline bool hasCulled() const;
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getCulled() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1530,6 +1558,14 @@ public:
   inline void adoptPlayers(::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>> disownPlayers();
 
+  inline bool hasCulled();
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getCulled();
+  inline void setCulled( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setCulled(::kj::ArrayPtr<const  ::int32_t> value);
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initCulled(unsigned int size);
+  inline void adoptCulled(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownCulled();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -1543,6 +1579,92 @@ private:
 class LevelDataMessage::Pipeline {
 public:
   typedef LevelDataMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class KickedMessage::Reader {
+public:
+  typedef KickedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::globed::schema::game::KickReason getReason() const;
+
+  inline bool hasMessage() const;
+  inline  ::capnp::Text::Reader getMessage() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class KickedMessage::Builder {
+public:
+  typedef KickedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::globed::schema::game::KickReason getReason();
+  inline void setReason( ::globed::schema::game::KickReason value);
+
+  inline bool hasMessage();
+  inline  ::capnp::Text::Builder getMessage();
+  inline void setMessage( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initMessage(unsigned int size);
+  inline void adoptMessage(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownMessage();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class KickedMessage::Pipeline {
+public:
+  typedef KickedMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -1613,6 +1735,10 @@ public:
   inline bool isLevelData() const;
   inline bool hasLevelData() const;
   inline  ::globed::schema::game::LevelDataMessage::Reader getLevelData() const;
+
+  inline bool isKicked() const;
+  inline bool hasKicked() const;
+  inline  ::globed::schema::game::KickedMessage::Reader getKicked() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1722,6 +1848,14 @@ public:
   inline  ::globed::schema::game::LevelDataMessage::Builder initLevelData();
   inline void adoptLevelData(::capnp::Orphan< ::globed::schema::game::LevelDataMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::LevelDataMessage> disownLevelData();
+
+  inline bool isKicked();
+  inline bool hasKicked();
+  inline  ::globed::schema::game::KickedMessage::Builder getKicked();
+  inline void setKicked( ::globed::schema::game::KickedMessage::Reader value);
+  inline  ::globed::schema::game::KickedMessage::Builder initKicked();
+  inline void adoptKicked(::capnp::Orphan< ::globed::schema::game::KickedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::KickedMessage> disownKicked();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -2539,6 +2673,92 @@ inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::ca
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool LevelDataMessage::Reader::hasCulled() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool LevelDataMessage::Builder::hasCulled() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader LevelDataMessage::Reader::getCulled() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder LevelDataMessage::Builder::getCulled() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void LevelDataMessage::Builder::setCulled( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline void LevelDataMessage::Builder::setCulled(::kj::ArrayPtr<const  ::int32_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder LevelDataMessage::Builder::initCulled(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void LevelDataMessage::Builder::adoptCulled(
+    ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> LevelDataMessage::Builder::disownCulled() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline  ::globed::schema::game::KickReason KickedMessage::Reader::getReason() const {
+  return _reader.getDataField< ::globed::schema::game::KickReason>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::globed::schema::game::KickReason KickedMessage::Builder::getReason() {
+  return _builder.getDataField< ::globed::schema::game::KickReason>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void KickedMessage::Builder::setReason( ::globed::schema::game::KickReason value) {
+  _builder.setDataField< ::globed::schema::game::KickReason>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool KickedMessage::Reader::hasMessage() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool KickedMessage::Builder::hasMessage() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader KickedMessage::Reader::getMessage() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder KickedMessage::Builder::getMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void KickedMessage::Builder::setMessage( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder KickedMessage::Builder::initMessage(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void KickedMessage::Builder::adoptMessage(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> KickedMessage::Builder::disownMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline  ::globed::schema::game::Message::Which Message::Reader::which() const {
   return _reader.getDataField<Which>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -3085,6 +3305,60 @@ inline ::capnp::Orphan< ::globed::schema::game::LevelDataMessage> Message::Build
   KJ_IREQUIRE((which() == Message::LEVEL_DATA),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelDataMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isKicked() const {
+  return which() == Message::KICKED;
+}
+inline bool Message::Builder::isKicked() {
+  return which() == Message::KICKED;
+}
+inline bool Message::Reader::hasKicked() const {
+  if (which() != Message::KICKED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasKicked() {
+  if (which() != Message::KICKED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::KickedMessage::Reader Message::Reader::getKicked() const {
+  KJ_IREQUIRE((which() == Message::KICKED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::KickedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::KickedMessage::Builder Message::Builder::getKicked() {
+  KJ_IREQUIRE((which() == Message::KICKED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::KickedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setKicked( ::globed::schema::game::KickedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::KICKED);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::KickedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::KickedMessage::Builder Message::Builder::initKicked() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::KICKED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::KickedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptKicked(
+    ::capnp::Orphan< ::globed::schema::game::KickedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::KICKED);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::KickedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::KickedMessage> Message::Builder::disownKicked() {
+  KJ_IREQUIRE((which() == Message::KICKED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::KickedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
