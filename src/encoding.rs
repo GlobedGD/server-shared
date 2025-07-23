@@ -129,7 +129,7 @@ pub enum DataDecodeError {
 
 #[macro_export]
 macro_rules! decode_message_match {
-    ($($schema:ident)::*, $srvr:expr, $data:expr, {$($variant:ident($msg_var:ident) => {  $($t:tt)* }),* $(,)?}) => {{
+    ($($schema:ident)::*, $srvr:expr, $data:expr, $unpacked_data:ident, {$($variant:ident($msg_var:ident) => {  $($t:tt)* }),* $(,)?}) => {{
         use $($schema::)*{self as schema};
 
         let _res: Result<_, $crate::encoding::DataDecodeError> = try {
@@ -141,12 +141,12 @@ macro_rules! decode_message_match {
             }
 
             // allocate a buffer for the unpacked message
-            let mut unpacked_buf = $srvr.request_buffer(unpacked_len).await;
+            let mut $unpacked_data = $srvr.request_buffer(unpacked_len).await;
 
             let mut rembuf = reader.remaining_bytes();
             let reader = capnp::serialize_packed::read_message_no_alloc(
                 &mut rembuf,
-                unsafe { unpacked_buf.write_window(unpacked_len).unwrap() },
+                unsafe { $unpacked_data.write_window(unpacked_len).unwrap() },
                 capnp::message::ReaderOptions::new(),
             )?;
 
