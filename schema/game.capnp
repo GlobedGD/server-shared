@@ -10,13 +10,15 @@ using Shared = import "shared.capnp";
 struct LoginUTokenMessage {
     accountId @0 :Int32;
     token @1 :Text;
+    icons @2 :Shared.PlayerIconData;
 }
 
 struct LoginUTokenAndJoinMessage {
     accountId @0 :Int32;
     token @1 :Text;
-    sessionId @2 :UInt64;
-    passcode  @3 :UInt32;
+    icons @2 :Shared.PlayerIconData;
+    sessionId @3 :UInt64;
+    passcode  @4 :UInt32;
 }
 
 struct LoginOkMessage {
@@ -104,14 +106,20 @@ struct PlayerData {
 
 struct PlayerDataMessage {
     data @0 :PlayerData;
+    dataRequests @1 :List(Int32);
 }
 
 struct LevelDataMessage {
     players @0 :List(PlayerData);
     culled  @1 :List(Int32); # Account IDs of players that were culled
+    displayDatas @2 :List(Shared.PlayerDisplayData);
 }
 
 # Misc
+
+struct UpdateIconsMessage {
+    icons @0 :Shared.PlayerIconData;
+}
 
 enum KickReason {
     custom @0;
@@ -131,6 +139,7 @@ struct Message {
         joinSession        @4 :JoinSessionMessage;
         leaveSession       @5 :LeaveSessionMessage;
         playerData         @6 :PlayerDataMessage;
+        updateIcons        @11 :UpdateIconsMessage;
 
         # Server messages
         loginOk            @1 :LoginOkMessage;

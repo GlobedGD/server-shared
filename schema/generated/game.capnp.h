@@ -44,6 +44,7 @@ CAPNP_DECLARE_SCHEMA(98e7cf6452ead0d1);
 CAPNP_DECLARE_SCHEMA(8c81bcb5b34031b2);
 CAPNP_DECLARE_SCHEMA(f5b211f1db0defbc);
 CAPNP_DECLARE_SCHEMA(f3e0f84d2138b356);
+CAPNP_DECLARE_SCHEMA(ee95a98b84cdb612);
 CAPNP_DECLARE_SCHEMA(c8a95e9766c5920c);
 enum class KickReason_c8a95e9766c5920c: uint16_t {
   CUSTOM,
@@ -68,7 +69,7 @@ struct LoginUTokenMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(c89d589e40b63e4c, 1, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(c89d589e40b63e4c, 1, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -83,7 +84,7 @@ struct LoginUTokenAndJoinMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b5df2f02ff01e1a4, 2, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(b5df2f02ff01e1a4, 2, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -258,7 +259,7 @@ struct PlayerDataMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(f5b211f1db0defbc, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(f5b211f1db0defbc, 0, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -273,7 +274,22 @@ struct LevelDataMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 0, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 0, 3)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct UpdateIconsMessage {
+  UpdateIconsMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(ee95a98b84cdb612, 0, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -315,6 +331,7 @@ struct Message {
     JOIN_SESSION_FAILED,
     LEVEL_DATA,
     KICKED,
+    UPDATE_ICONS,
   };
 
   struct _capnpPrivate {
@@ -348,6 +365,9 @@ public:
 
   inline bool hasToken() const;
   inline  ::capnp::Text::Reader getToken() const;
+
+  inline bool hasIcons() const;
+  inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -387,6 +407,13 @@ public:
   inline void adoptToken(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownToken();
 
+  inline bool hasIcons();
+  inline  ::globed::schema::shared::PlayerIconData::Builder getIcons();
+  inline void setIcons( ::globed::schema::shared::PlayerIconData::Reader value);
+  inline  ::globed::schema::shared::PlayerIconData::Builder initIcons();
+  inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -405,6 +432,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::globed::schema::shared::PlayerIconData::Pipeline getIcons();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -434,6 +462,9 @@ public:
 
   inline bool hasToken() const;
   inline  ::capnp::Text::Reader getToken() const;
+
+  inline bool hasIcons() const;
+  inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
   inline  ::uint64_t getSessionId() const;
 
@@ -477,6 +508,13 @@ public:
   inline void adoptToken(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownToken();
 
+  inline bool hasIcons();
+  inline  ::globed::schema::shared::PlayerIconData::Builder getIcons();
+  inline void setIcons( ::globed::schema::shared::PlayerIconData::Reader value);
+  inline  ::globed::schema::shared::PlayerIconData::Builder initIcons();
+  inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
+
   inline  ::uint64_t getSessionId();
   inline void setSessionId( ::uint64_t value);
 
@@ -501,6 +539,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::globed::schema::shared::PlayerIconData::Pipeline getIcons();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -1438,6 +1477,9 @@ public:
   inline bool hasData() const;
   inline  ::globed::schema::game::PlayerData::Reader getData() const;
 
+  inline bool hasDataRequests() const;
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getDataRequests() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1472,6 +1514,14 @@ public:
   inline  ::globed::schema::game::PlayerData::Builder initData();
   inline void adoptData(::capnp::Orphan< ::globed::schema::game::PlayerData>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::PlayerData> disownData();
+
+  inline bool hasDataRequests();
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getDataRequests();
+  inline void setDataRequests( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setDataRequests(::kj::ArrayPtr<const  ::int32_t> value);
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initDataRequests(unsigned int size);
+  inline void adoptDataRequests(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownDataRequests();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1523,6 +1573,9 @@ public:
   inline bool hasCulled() const;
   inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getCulled() const;
 
+  inline bool hasDisplayDatas() const;
+  inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Reader getDisplayDatas() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1566,6 +1619,13 @@ public:
   inline void adoptCulled(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownCulled();
 
+  inline bool hasDisplayDatas();
+  inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Builder getDisplayDatas();
+  inline void setDisplayDatas( ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Builder initDisplayDatas(unsigned int size);
+  inline void adoptDisplayDatas(::capnp::Orphan< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>> disownDisplayDatas();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -1584,6 +1644,88 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class UpdateIconsMessage::Reader {
+public:
+  typedef UpdateIconsMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasIcons() const;
+  inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class UpdateIconsMessage::Builder {
+public:
+  typedef UpdateIconsMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasIcons();
+  inline  ::globed::schema::shared::PlayerIconData::Builder getIcons();
+  inline void setIcons( ::globed::schema::shared::PlayerIconData::Reader value);
+  inline  ::globed::schema::shared::PlayerIconData::Builder initIcons();
+  inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class UpdateIconsMessage::Pipeline {
+public:
+  typedef UpdateIconsMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::shared::PlayerIconData::Pipeline getIcons();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -1740,6 +1882,10 @@ public:
   inline bool hasKicked() const;
   inline  ::globed::schema::game::KickedMessage::Reader getKicked() const;
 
+  inline bool isUpdateIcons() const;
+  inline bool hasUpdateIcons() const;
+  inline  ::globed::schema::game::UpdateIconsMessage::Reader getUpdateIcons() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1857,6 +2003,14 @@ public:
   inline void adoptKicked(::capnp::Orphan< ::globed::schema::game::KickedMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::KickedMessage> disownKicked();
 
+  inline bool isUpdateIcons();
+  inline bool hasUpdateIcons();
+  inline  ::globed::schema::game::UpdateIconsMessage::Builder getUpdateIcons();
+  inline void setUpdateIcons( ::globed::schema::game::UpdateIconsMessage::Reader value);
+  inline  ::globed::schema::game::UpdateIconsMessage::Builder initUpdateIcons();
+  inline void adoptUpdateIcons(::capnp::Orphan< ::globed::schema::game::UpdateIconsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::UpdateIconsMessage> disownUpdateIcons();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -1933,6 +2087,45 @@ inline ::capnp::Orphan< ::capnp::Text> LoginUTokenMessage::Builder::disownToken(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool LoginUTokenMessage::Reader::hasIcons() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginUTokenMessage::Builder::hasIcons() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::PlayerIconData::Reader LoginUTokenMessage::Reader::getIcons() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginUTokenMessage::Builder::getIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::PlayerIconData::Pipeline LoginUTokenMessage::Pipeline::getIcons() {
+  return  ::globed::schema::shared::PlayerIconData::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void LoginUTokenMessage::Builder::setIcons( ::globed::schema::shared::PlayerIconData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginUTokenMessage::Builder::initIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void LoginUTokenMessage::Builder::adoptIcons(
+    ::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> LoginUTokenMessage::Builder::disownIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
 inline  ::int32_t LoginUTokenAndJoinMessage::Reader::getAccountId() const {
   return _reader.getDataField< ::int32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -1979,6 +2172,45 @@ inline void LoginUTokenAndJoinMessage::Builder::adoptToken(
 inline ::capnp::Orphan< ::capnp::Text> LoginUTokenAndJoinMessage::Builder::disownToken() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool LoginUTokenAndJoinMessage::Reader::hasIcons() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginUTokenAndJoinMessage::Builder::hasIcons() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::PlayerIconData::Reader LoginUTokenAndJoinMessage::Reader::getIcons() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginUTokenAndJoinMessage::Builder::getIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::PlayerIconData::Pipeline LoginUTokenAndJoinMessage::Pipeline::getIcons() {
+  return  ::globed::schema::shared::PlayerIconData::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void LoginUTokenAndJoinMessage::Builder::setIcons( ::globed::schema::shared::PlayerIconData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginUTokenAndJoinMessage::Builder::initIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void LoginUTokenAndJoinMessage::Builder::adoptIcons(
+    ::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> LoginUTokenAndJoinMessage::Builder::disownIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline  ::uint64_t LoginUTokenAndJoinMessage::Reader::getSessionId() const {
@@ -2639,6 +2871,44 @@ inline ::capnp::Orphan< ::globed::schema::game::PlayerData> PlayerDataMessage::B
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool PlayerDataMessage::Reader::hasDataRequests() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerDataMessage::Builder::hasDataRequests() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader PlayerDataMessage::Reader::getDataRequests() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerDataMessage::Builder::getDataRequests() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void PlayerDataMessage::Builder::setDataRequests( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline void PlayerDataMessage::Builder::setDataRequests(::kj::ArrayPtr<const  ::int32_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerDataMessage::Builder::initDataRequests(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void PlayerDataMessage::Builder::adoptDataRequests(
+    ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> PlayerDataMessage::Builder::disownDataRequests() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
 inline bool LevelDataMessage::Reader::hasPlayers() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -2709,6 +2979,79 @@ inline void LevelDataMessage::Builder::adoptCulled(
 inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> LevelDataMessage::Builder::disownCulled() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool LevelDataMessage::Reader::hasDisplayDatas() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool LevelDataMessage::Builder::hasDisplayDatas() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Reader LevelDataMessage::Reader::getDisplayDatas() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Builder LevelDataMessage::Builder::getDisplayDatas() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void LevelDataMessage::Builder::setDisplayDatas( ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Builder LevelDataMessage::Builder::initDisplayDatas(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+}
+inline void LevelDataMessage::Builder::adoptDisplayDatas(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>> LevelDataMessage::Builder::disownDisplayDatas() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline bool UpdateIconsMessage::Reader::hasIcons() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool UpdateIconsMessage::Builder::hasIcons() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::PlayerIconData::Reader UpdateIconsMessage::Reader::getIcons() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder UpdateIconsMessage::Builder::getIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::PlayerIconData::Pipeline UpdateIconsMessage::Pipeline::getIcons() {
+  return  ::globed::schema::shared::PlayerIconData::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void UpdateIconsMessage::Builder::setIcons( ::globed::schema::shared::PlayerIconData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder UpdateIconsMessage::Builder::initIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void UpdateIconsMessage::Builder::adoptIcons(
+    ::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> UpdateIconsMessage::Builder::disownIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline  ::globed::schema::game::KickReason KickedMessage::Reader::getReason() const {
@@ -3359,6 +3702,60 @@ inline ::capnp::Orphan< ::globed::schema::game::KickedMessage> Message::Builder:
   KJ_IREQUIRE((which() == Message::KICKED),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::KickedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isUpdateIcons() const {
+  return which() == Message::UPDATE_ICONS;
+}
+inline bool Message::Builder::isUpdateIcons() {
+  return which() == Message::UPDATE_ICONS;
+}
+inline bool Message::Reader::hasUpdateIcons() const {
+  if (which() != Message::UPDATE_ICONS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUpdateIcons() {
+  if (which() != Message::UPDATE_ICONS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::UpdateIconsMessage::Reader Message::Reader::getUpdateIcons() const {
+  KJ_IREQUIRE((which() == Message::UPDATE_ICONS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateIconsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::UpdateIconsMessage::Builder Message::Builder::getUpdateIcons() {
+  KJ_IREQUIRE((which() == Message::UPDATE_ICONS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateIconsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUpdateIcons( ::globed::schema::game::UpdateIconsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ICONS);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateIconsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::UpdateIconsMessage::Builder Message::Builder::initUpdateIcons() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ICONS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateIconsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUpdateIcons(
+    ::capnp::Orphan< ::globed::schema::game::UpdateIconsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ICONS);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateIconsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::UpdateIconsMessage> Message::Builder::disownUpdateIcons() {
+  KJ_IREQUIRE((which() == Message::UPDATE_ICONS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateIconsMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

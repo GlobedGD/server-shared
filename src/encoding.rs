@@ -125,6 +125,8 @@ pub enum DataDecodeError {
     StringTooLong(usize, usize),
     #[error("nan/inf value in floating point data")]
     InvalidFloat,
+    #[error("data is logically invalid, validation failed")]
+    ValidationFailed,
 }
 
 #[macro_export]
@@ -297,4 +299,11 @@ macro_rules! encode_message {
             $crate::encode_message_heap!($($schema)::*, $srvr, $estcap, $msg => $code)
         }
     }};
+}
+
+pub fn heapless_str_from_reader<'a, const N: usize>(
+    reader: capnp::text::Reader<'a>,
+) -> Result<heapless::String<N>, DataDecodeError> {
+    let s = reader.to_str()?;
+    heapless::String::try_from(s).map_err(|_| DataDecodeError::StringTooLong(s.len(), N))
 }

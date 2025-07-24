@@ -19,7 +19,6 @@ CAPNP_BEGIN_HEADER
 namespace capnp {
 namespace schemas {
 
-CAPNP_DECLARE_SCHEMA(91a9615edd4f3b7c);
 CAPNP_DECLARE_SCHEMA(d8e63e340b51fcd5);
 CAPNP_DECLARE_SCHEMA(e7a1fff383ec4dd3);
 CAPNP_DECLARE_SCHEMA(b5eb5fe04349279e);
@@ -68,21 +67,6 @@ CAPNP_DECLARE_SCHEMA(a55b5ef7374b3a21);
 namespace globed {
 namespace schema {
 namespace main {
-
-struct PlayerIconData {
-  PlayerIconData() = delete;
-
-  class Reader;
-  class Builder;
-  class Pipeline;
-
-  struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(91a9615edd4f3b7c, 4, 0)
-    #if !CAPNP_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
-  };
-};
 
 struct PlayerAccountData {
   PlayerAccountData() = delete;
@@ -409,152 +393,6 @@ struct Message {
 };
 
 // =======================================================================================
-
-class PlayerIconData::Reader {
-public:
-  typedef PlayerIconData Reads;
-
-  Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
-
-  inline ::capnp::MessageSize totalSize() const {
-    return _reader.totalSize().asPublic();
-  }
-
-#if !CAPNP_LITE
-  inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
-  }
-#endif  // !CAPNP_LITE
-
-  inline  ::int16_t getCube() const;
-
-  inline  ::int16_t getShip() const;
-
-  inline  ::int16_t getBall() const;
-
-  inline  ::int16_t getUfo() const;
-
-  inline  ::int16_t getWave() const;
-
-  inline  ::int16_t getRobot() const;
-
-  inline  ::int16_t getSpider() const;
-
-  inline  ::int16_t getSwing() const;
-
-  inline  ::int16_t getJetpack() const;
-
-  inline  ::uint16_t getColor1() const;
-
-  inline  ::uint16_t getColor2() const;
-
-  inline  ::uint16_t getGlowColor() const;
-
-  inline  ::uint8_t getDeathEffect() const;
-
-  inline  ::uint8_t getTrail() const;
-
-  inline  ::uint8_t getShipTrail() const;
-
-private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
-};
-
-class PlayerIconData::Builder {
-public:
-  typedef PlayerIconData Builds;
-
-  Builder() = delete;  // Deleted to discourage incorrect usage.
-                       // You can explicitly initialize to nullptr instead.
-  inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
-  inline operator Reader() const { return Reader(_builder.asReader()); }
-  inline Reader asReader() const { return *this; }
-
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
-  inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
-
-  inline  ::int16_t getCube();
-  inline void setCube( ::int16_t value);
-
-  inline  ::int16_t getShip();
-  inline void setShip( ::int16_t value);
-
-  inline  ::int16_t getBall();
-  inline void setBall( ::int16_t value);
-
-  inline  ::int16_t getUfo();
-  inline void setUfo( ::int16_t value);
-
-  inline  ::int16_t getWave();
-  inline void setWave( ::int16_t value);
-
-  inline  ::int16_t getRobot();
-  inline void setRobot( ::int16_t value);
-
-  inline  ::int16_t getSpider();
-  inline void setSpider( ::int16_t value);
-
-  inline  ::int16_t getSwing();
-  inline void setSwing( ::int16_t value);
-
-  inline  ::int16_t getJetpack();
-  inline void setJetpack( ::int16_t value);
-
-  inline  ::uint16_t getColor1();
-  inline void setColor1( ::uint16_t value);
-
-  inline  ::uint16_t getColor2();
-  inline void setColor2( ::uint16_t value);
-
-  inline  ::uint16_t getGlowColor();
-  inline void setGlowColor( ::uint16_t value);
-
-  inline  ::uint8_t getDeathEffect();
-  inline void setDeathEffect( ::uint8_t value);
-
-  inline  ::uint8_t getTrail();
-  inline void setTrail( ::uint8_t value);
-
-  inline  ::uint8_t getShipTrail();
-  inline void setShipTrail( ::uint8_t value);
-
-private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-};
-
-#if !CAPNP_LITE
-class PlayerIconData::Pipeline {
-public:
-  typedef PlayerIconData Pipelines;
-
-  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
-      : _typeless(kj::mv(typeless)) {}
-
-private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-};
-#endif  // !CAPNP_LITE
 
 class PlayerAccountData::Reader {
 public:
@@ -1243,7 +1081,7 @@ public:
 #endif  // !CAPNP_LITE
 
   inline bool hasIcons() const;
-  inline  ::globed::schema::main::PlayerIconData::Reader getIcons() const;
+  inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1274,11 +1112,11 @@ public:
 #endif  // !CAPNP_LITE
 
   inline bool hasIcons();
-  inline  ::globed::schema::main::PlayerIconData::Builder getIcons();
-  inline void setIcons( ::globed::schema::main::PlayerIconData::Reader value);
-  inline  ::globed::schema::main::PlayerIconData::Builder initIcons();
-  inline void adoptIcons(::capnp::Orphan< ::globed::schema::main::PlayerIconData>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::PlayerIconData> disownIcons();
+  inline  ::globed::schema::shared::PlayerIconData::Builder getIcons();
+  inline void setIcons( ::globed::schema::shared::PlayerIconData::Reader value);
+  inline  ::globed::schema::shared::PlayerIconData::Builder initIcons();
+  inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1298,7 +1136,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::globed::schema::main::PlayerIconData::Pipeline getIcons();
+  inline  ::globed::schema::shared::PlayerIconData::Pipeline getIcons();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -2387,216 +2225,6 @@ private:
 
 // =======================================================================================
 
-inline  ::int16_t PlayerIconData::Reader::getCube() const {
-  return _reader.getDataField< ::int16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int16_t PlayerIconData::Builder::getCube() {
-  return _builder.getDataField< ::int16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setCube( ::int16_t value) {
-  _builder.setDataField< ::int16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::int16_t PlayerIconData::Reader::getShip() const {
-  return _reader.getDataField< ::int16_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int16_t PlayerIconData::Builder::getShip() {
-  return _builder.getDataField< ::int16_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setShip( ::int16_t value) {
-  _builder.setDataField< ::int16_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::int16_t PlayerIconData::Reader::getBall() const {
-  return _reader.getDataField< ::int16_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int16_t PlayerIconData::Builder::getBall() {
-  return _builder.getDataField< ::int16_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setBall( ::int16_t value) {
-  _builder.setDataField< ::int16_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::int16_t PlayerIconData::Reader::getUfo() const {
-  return _reader.getDataField< ::int16_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int16_t PlayerIconData::Builder::getUfo() {
-  return _builder.getDataField< ::int16_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setUfo( ::int16_t value) {
-  _builder.setDataField< ::int16_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::int16_t PlayerIconData::Reader::getWave() const {
-  return _reader.getDataField< ::int16_t>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int16_t PlayerIconData::Builder::getWave() {
-  return _builder.getDataField< ::int16_t>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setWave( ::int16_t value) {
-  _builder.setDataField< ::int16_t>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::int16_t PlayerIconData::Reader::getRobot() const {
-  return _reader.getDataField< ::int16_t>(
-      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int16_t PlayerIconData::Builder::getRobot() {
-  return _builder.getDataField< ::int16_t>(
-      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setRobot( ::int16_t value) {
-  _builder.setDataField< ::int16_t>(
-      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::int16_t PlayerIconData::Reader::getSpider() const {
-  return _reader.getDataField< ::int16_t>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int16_t PlayerIconData::Builder::getSpider() {
-  return _builder.getDataField< ::int16_t>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setSpider( ::int16_t value) {
-  _builder.setDataField< ::int16_t>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::int16_t PlayerIconData::Reader::getSwing() const {
-  return _reader.getDataField< ::int16_t>(
-      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int16_t PlayerIconData::Builder::getSwing() {
-  return _builder.getDataField< ::int16_t>(
-      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setSwing( ::int16_t value) {
-  _builder.setDataField< ::int16_t>(
-      ::capnp::bounded<7>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::int16_t PlayerIconData::Reader::getJetpack() const {
-  return _reader.getDataField< ::int16_t>(
-      ::capnp::bounded<8>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int16_t PlayerIconData::Builder::getJetpack() {
-  return _builder.getDataField< ::int16_t>(
-      ::capnp::bounded<8>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setJetpack( ::int16_t value) {
-  _builder.setDataField< ::int16_t>(
-      ::capnp::bounded<8>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::uint16_t PlayerIconData::Reader::getColor1() const {
-  return _reader.getDataField< ::uint16_t>(
-      ::capnp::bounded<9>() * ::capnp::ELEMENTS);
-}
-
-inline  ::uint16_t PlayerIconData::Builder::getColor1() {
-  return _builder.getDataField< ::uint16_t>(
-      ::capnp::bounded<9>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setColor1( ::uint16_t value) {
-  _builder.setDataField< ::uint16_t>(
-      ::capnp::bounded<9>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::uint16_t PlayerIconData::Reader::getColor2() const {
-  return _reader.getDataField< ::uint16_t>(
-      ::capnp::bounded<10>() * ::capnp::ELEMENTS);
-}
-
-inline  ::uint16_t PlayerIconData::Builder::getColor2() {
-  return _builder.getDataField< ::uint16_t>(
-      ::capnp::bounded<10>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setColor2( ::uint16_t value) {
-  _builder.setDataField< ::uint16_t>(
-      ::capnp::bounded<10>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::uint16_t PlayerIconData::Reader::getGlowColor() const {
-  return _reader.getDataField< ::uint16_t>(
-      ::capnp::bounded<11>() * ::capnp::ELEMENTS);
-}
-
-inline  ::uint16_t PlayerIconData::Builder::getGlowColor() {
-  return _builder.getDataField< ::uint16_t>(
-      ::capnp::bounded<11>() * ::capnp::ELEMENTS);
-}
-inline void PlayerIconData::Builder::setGlowColor( ::uint16_t value) {
-  _builder.setDataField< ::uint16_t>(
-      ::capnp::bounded<11>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::uint8_t PlayerIconData::Reader::getDeathEffect() const {
-  return _reader.getDataField< ::uint8_t>(
-      ::capnp::bounded<24>() * ::capnp::ELEMENTS, 1u);
-}
-
-inline  ::uint8_t PlayerIconData::Builder::getDeathEffect() {
-  return _builder.getDataField< ::uint8_t>(
-      ::capnp::bounded<24>() * ::capnp::ELEMENTS, 1u);
-}
-inline void PlayerIconData::Builder::setDeathEffect( ::uint8_t value) {
-  _builder.setDataField< ::uint8_t>(
-      ::capnp::bounded<24>() * ::capnp::ELEMENTS, value, 1u);
-}
-
-inline  ::uint8_t PlayerIconData::Reader::getTrail() const {
-  return _reader.getDataField< ::uint8_t>(
-      ::capnp::bounded<25>() * ::capnp::ELEMENTS, 255u);
-}
-
-inline  ::uint8_t PlayerIconData::Builder::getTrail() {
-  return _builder.getDataField< ::uint8_t>(
-      ::capnp::bounded<25>() * ::capnp::ELEMENTS, 255u);
-}
-inline void PlayerIconData::Builder::setTrail( ::uint8_t value) {
-  _builder.setDataField< ::uint8_t>(
-      ::capnp::bounded<25>() * ::capnp::ELEMENTS, value, 255u);
-}
-
-inline  ::uint8_t PlayerIconData::Reader::getShipTrail() const {
-  return _reader.getDataField< ::uint8_t>(
-      ::capnp::bounded<26>() * ::capnp::ELEMENTS, 255u);
-}
-
-inline  ::uint8_t PlayerIconData::Builder::getShipTrail() {
-  return _builder.getDataField< ::uint8_t>(
-      ::capnp::bounded<26>() * ::capnp::ELEMENTS, 255u);
-}
-inline void PlayerIconData::Builder::setShipTrail( ::uint8_t value) {
-  _builder.setDataField< ::uint8_t>(
-      ::capnp::bounded<26>() * ::capnp::ELEMENTS, value, 255u);
-}
-
 inline  ::int32_t PlayerAccountData::Reader::getAccountId() const {
   return _reader.getDataField< ::int32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -2932,34 +2560,34 @@ inline bool UpdateOwnDataMessage::Builder::hasIcons() {
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::globed::schema::main::PlayerIconData::Reader UpdateOwnDataMessage::Reader::getIcons() const {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerIconData>::get(_reader.getPointerField(
+inline  ::globed::schema::shared::PlayerIconData::Reader UpdateOwnDataMessage::Reader::getIcons() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::globed::schema::main::PlayerIconData::Builder UpdateOwnDataMessage::Builder::getIcons() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerIconData>::get(_builder.getPointerField(
+inline  ::globed::schema::shared::PlayerIconData::Builder UpdateOwnDataMessage::Builder::getIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 #if !CAPNP_LITE
-inline  ::globed::schema::main::PlayerIconData::Pipeline UpdateOwnDataMessage::Pipeline::getIcons() {
-  return  ::globed::schema::main::PlayerIconData::Pipeline(_typeless.getPointerField(0));
+inline  ::globed::schema::shared::PlayerIconData::Pipeline UpdateOwnDataMessage::Pipeline::getIcons() {
+  return  ::globed::schema::shared::PlayerIconData::Pipeline(_typeless.getPointerField(0));
 }
 #endif  // !CAPNP_LITE
-inline void UpdateOwnDataMessage::Builder::setIcons( ::globed::schema::main::PlayerIconData::Reader value) {
-  ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerIconData>::set(_builder.getPointerField(
+inline void UpdateOwnDataMessage::Builder::setIcons( ::globed::schema::shared::PlayerIconData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline  ::globed::schema::main::PlayerIconData::Builder UpdateOwnDataMessage::Builder::initIcons() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerIconData>::init(_builder.getPointerField(
+inline  ::globed::schema::shared::PlayerIconData::Builder UpdateOwnDataMessage::Builder::initIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::init(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 inline void UpdateOwnDataMessage::Builder::adoptIcons(
-    ::capnp::Orphan< ::globed::schema::main::PlayerIconData>&& value) {
-  ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerIconData>::adopt(_builder.getPointerField(
+    ::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::globed::schema::main::PlayerIconData> UpdateOwnDataMessage::Builder::disownIcons() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerIconData>::disown(_builder.getPointerField(
+inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> UpdateOwnDataMessage::Builder::disownIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

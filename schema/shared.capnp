@@ -16,6 +16,31 @@ enum IconType {
     jetpack @9;
 }
 
+struct PlayerIconData {
+    cube        @0 :Int16;
+    ship        @1 :Int16;
+    ball        @2 :Int16;
+    ufo         @3 :Int16;
+    wave        @4 :Int16;
+    robot       @5 :Int16;
+    spider      @6 :Int16;
+    swing       @7 :Int16;
+    jetpack     @8 :Int16;
+    color1      @9 :UInt16;
+    color2      @10 :UInt16;
+    glowColor   @11 :UInt16;
+    deathEffect @12 :UInt8 = 1;     # 255 means none/default
+    trail       @13 :UInt8 = 255;
+    shipTrail   @14 :UInt8 = 255;
+}
+
+struct PlayerDisplayData {
+    accountId @0 :Int32;
+    userId    @1 :Int32;
+    username  @2 :Text;
+    icons     @3 :PlayerIconData;
+}
+
 struct GameServer {
     address  @0 :Text;  # Qunet URL
     stringId @1 :Text;  # Permanently unique server ID
