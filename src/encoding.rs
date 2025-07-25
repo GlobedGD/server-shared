@@ -133,6 +133,7 @@ pub enum DataDecodeError {
 macro_rules! decode_message_match {
     ($($schema:ident)::*, $srvr:expr, $data:expr, $unpacked_data:ident, {$($variant:ident($msg_var:ident) => {  $($t:tt)* }),* $(,)?}) => {{
         use $($schema::)*{self as schema};
+        use $crate::encoding::MaybeIntoResult;
 
         let _res: Result<_, $crate::encoding::DataDecodeError> = try {
             let mut reader = qunet::buffers::ByteReader::new($data.as_bytes());
@@ -160,7 +161,7 @@ macro_rules! decode_message_match {
 
             match message.which().map_err(|_| $crate::encoding::DataDecodeError::InvalidDiscriminant)? {
                 $(schema::message::Which::$variant(msg) => {
-                    let $msg_var = msg?;
+                    let $msg_var = msg._maybe_into_result()?;
                     $($t)*
                 })*
 
@@ -306,4 +307,31 @@ pub fn heapless_str_from_reader<'a, const N: usize>(
 ) -> Result<heapless::String<N>, DataDecodeError> {
     let s = reader.to_str()?;
     heapless::String::try_from(s).map_err(|_| DataDecodeError::StringTooLong(s.len(), N))
+}
+
+// (very hacky) trait to allow us to use Void as a message type and invoke ? operator on it
+
+pub trait MaybeIntoResult: Sized {
+    type Output = Self;
+
+    fn _maybe_into_result(self) -> Result<Self::Output, DataDecodeError>;
+}
+
+impl<T, E> MaybeIntoResult for Result<T, E>
+where
+    E: Into<DataDecodeError>,
+{
+    type Output = T;
+
+    fn _maybe_into_result(self) -> Result<T, DataDecodeError> {
+        self.map_err(Into::into)
+    }
+}
+
+impl MaybeIntoResult for () {
+    type Output = ();
+
+    fn _maybe_into_result(self) -> Result<(), DataDecodeError> {
+        Ok(())
+    }
 }

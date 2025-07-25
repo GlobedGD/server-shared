@@ -13,24 +13,23 @@ struct PlayerAccountData {
     username  @2 :Text;
 }
 
-struct LevelSession {
-    sessionId @0 :UInt64;
-}
-
 # Login messages
 
 struct LoginUTokenMessage {
     accountId @0 :Int32;
     token @1 :Text;
+    icons @2 :Shared.PlayerIconData;
 }
 
 struct LoginArgonMessage {
     accountId @0 :Int32;
     token @1 :Text;
+    icons @2 :Shared.PlayerIconData;
 }
 
 struct LoginPlainMessage {
     data @0 :PlayerAccountData;
+    icons @1 :Shared.PlayerIconData;
 }
 
 struct LoginOkMessage {
@@ -71,14 +70,10 @@ struct JoinRoomMessage {
     roomId @0 :UInt32;
 }
 
-struct LeaveRoomMessage {
-    # empty
-}
-
 struct RoomPlayer {
     accountData @0 :PlayerAccountData;
     cube @1 :Int16;
-    level @2 :LevelSession;
+    session @2 :UInt64;
 }
 
 struct RoomStateMessage {
@@ -105,7 +100,7 @@ struct JoinFailedMessage {
 }
 
 struct WarpPlayerMessage {
-    session @0 :LevelSession;
+    session @0 :UInt64;
 }
 
 # Misc
@@ -131,7 +126,8 @@ struct Message {
 
         createRoom    @7 :CreateRoomMessage;
         joinRoom      @8 :JoinRoomMessage;
-        leaveRoom     @9 :LeaveRoomMessage;
+        leaveRoom     @9 :Void;
+        checkRoomState @16 :Void;
 
         joinSession   @12 :JoinSessionMessage;
         leaveSession  @13 :LeaveSessionMessage;

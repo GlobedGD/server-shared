@@ -1,3 +1,5 @@
+#![feature(associated_type_defaults)]
+
 #[cfg(feature = "main")]
 #[allow(warnings)]
 #[path = "../schema/generated/main_capnp.rs"]

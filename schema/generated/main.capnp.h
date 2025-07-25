@@ -20,7 +20,6 @@ namespace capnp {
 namespace schemas {
 
 CAPNP_DECLARE_SCHEMA(d8e63e340b51fcd5);
-CAPNP_DECLARE_SCHEMA(e7a1fff383ec4dd3);
 CAPNP_DECLARE_SCHEMA(b5eb5fe04349279e);
 CAPNP_DECLARE_SCHEMA(b99e020791d89dd4);
 CAPNP_DECLARE_SCHEMA(e00502d30307b862);
@@ -39,7 +38,6 @@ CAPNP_DECLARE_SCHEMA(c0792171a7e24cec);
 CAPNP_DECLARE_SCHEMA(b90a50af13cffdeb);
 CAPNP_DECLARE_SCHEMA(ebbb3301ca9b3b86);
 CAPNP_DECLARE_SCHEMA(de35351c7d81af2a);
-CAPNP_DECLARE_SCHEMA(b6d00e88c7eab31d);
 CAPNP_DECLARE_SCHEMA(da80ce7d00b0d262);
 CAPNP_DECLARE_SCHEMA(ccb001c4c4eb3e03);
 CAPNP_DECLARE_SCHEMA(d29a1ce11a72e63b);
@@ -83,21 +81,6 @@ struct PlayerAccountData {
   };
 };
 
-struct LevelSession {
-  LevelSession() = delete;
-
-  class Reader;
-  class Builder;
-  class Pipeline;
-
-  struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e7a1fff383ec4dd3, 1, 0)
-    #if !CAPNP_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
-  };
-};
-
 struct LoginUTokenMessage {
   LoginUTokenMessage() = delete;
 
@@ -106,7 +89,7 @@ struct LoginUTokenMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b5eb5fe04349279e, 1, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(b5eb5fe04349279e, 1, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -121,7 +104,7 @@ struct LoginArgonMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b99e020791d89dd4, 1, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(b99e020791d89dd4, 1, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -136,7 +119,7 @@ struct LoginPlainMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e00502d30307b862, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(e00502d30307b862, 0, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -235,21 +218,6 @@ struct JoinRoomMessage {
   };
 };
 
-struct LeaveRoomMessage {
-  LeaveRoomMessage() = delete;
-
-  class Reader;
-  class Builder;
-  class Pipeline;
-
-  struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b6d00e88c7eab31d, 0, 0)
-    #if !CAPNP_LITE
-    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
-    #endif  // !CAPNP_LITE
-  };
-};
-
 struct RoomPlayer {
   RoomPlayer() = delete;
 
@@ -258,7 +226,7 @@ struct RoomPlayer {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(da80ce7d00b0d262, 1, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(da80ce7d00b0d262, 2, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -335,7 +303,7 @@ struct WarpPlayerMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(83b0a859b8e7faec, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(83b0a859b8e7faec, 1, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -382,6 +350,7 @@ struct Message {
     LEAVE_SESSION,
     JOIN_FAILED,
     KICKED,
+    CHECK_ROOM_STATE,
   };
 
   struct _capnpPrivate {
@@ -485,82 +454,6 @@ private:
 };
 #endif  // !CAPNP_LITE
 
-class LevelSession::Reader {
-public:
-  typedef LevelSession Reads;
-
-  Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
-
-  inline ::capnp::MessageSize totalSize() const {
-    return _reader.totalSize().asPublic();
-  }
-
-#if !CAPNP_LITE
-  inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
-  }
-#endif  // !CAPNP_LITE
-
-  inline  ::uint64_t getSessionId() const;
-
-private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
-};
-
-class LevelSession::Builder {
-public:
-  typedef LevelSession Builds;
-
-  Builder() = delete;  // Deleted to discourage incorrect usage.
-                       // You can explicitly initialize to nullptr instead.
-  inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
-  inline operator Reader() const { return Reader(_builder.asReader()); }
-  inline Reader asReader() const { return *this; }
-
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
-  inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
-
-  inline  ::uint64_t getSessionId();
-  inline void setSessionId( ::uint64_t value);
-
-private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-};
-
-#if !CAPNP_LITE
-class LevelSession::Pipeline {
-public:
-  typedef LevelSession Pipelines;
-
-  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
-      : _typeless(kj::mv(typeless)) {}
-
-private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-};
-#endif  // !CAPNP_LITE
-
 class LoginUTokenMessage::Reader {
 public:
   typedef LoginUTokenMessage Reads;
@@ -582,6 +475,9 @@ public:
 
   inline bool hasToken() const;
   inline  ::capnp::Text::Reader getToken() const;
+
+  inline bool hasIcons() const;
+  inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -621,6 +517,13 @@ public:
   inline void adoptToken(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownToken();
 
+  inline bool hasIcons();
+  inline  ::globed::schema::shared::PlayerIconData::Builder getIcons();
+  inline void setIcons( ::globed::schema::shared::PlayerIconData::Reader value);
+  inline  ::globed::schema::shared::PlayerIconData::Builder initIcons();
+  inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -639,6 +542,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::globed::schema::shared::PlayerIconData::Pipeline getIcons();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -668,6 +572,9 @@ public:
 
   inline bool hasToken() const;
   inline  ::capnp::Text::Reader getToken() const;
+
+  inline bool hasIcons() const;
+  inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -707,6 +614,13 @@ public:
   inline void adoptToken(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownToken();
 
+  inline bool hasIcons();
+  inline  ::globed::schema::shared::PlayerIconData::Builder getIcons();
+  inline void setIcons( ::globed::schema::shared::PlayerIconData::Reader value);
+  inline  ::globed::schema::shared::PlayerIconData::Builder initIcons();
+  inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -725,6 +639,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::globed::schema::shared::PlayerIconData::Pipeline getIcons();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -752,6 +667,9 @@ public:
 
   inline bool hasData() const;
   inline  ::globed::schema::main::PlayerAccountData::Reader getData() const;
+
+  inline bool hasIcons() const;
+  inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -788,6 +706,13 @@ public:
   inline void adoptData(::capnp::Orphan< ::globed::schema::main::PlayerAccountData>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::PlayerAccountData> disownData();
 
+  inline bool hasIcons();
+  inline  ::globed::schema::shared::PlayerIconData::Builder getIcons();
+  inline void setIcons( ::globed::schema::shared::PlayerIconData::Reader value);
+  inline  ::globed::schema::shared::PlayerIconData::Builder initIcons();
+  inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -807,6 +732,7 @@ public:
       : _typeless(kj::mv(typeless)) {}
 
   inline  ::globed::schema::main::PlayerAccountData::Pipeline getData();
+  inline  ::globed::schema::shared::PlayerIconData::Pipeline getIcons();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -1302,77 +1228,6 @@ private:
 };
 #endif  // !CAPNP_LITE
 
-class LeaveRoomMessage::Reader {
-public:
-  typedef LeaveRoomMessage Reads;
-
-  Reader() = default;
-  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
-
-  inline ::capnp::MessageSize totalSize() const {
-    return _reader.totalSize().asPublic();
-  }
-
-#if !CAPNP_LITE
-  inline ::kj::StringTree toString() const {
-    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
-  }
-#endif  // !CAPNP_LITE
-
-private:
-  ::capnp::_::StructReader _reader;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::List;
-  friend class ::capnp::MessageBuilder;
-  friend class ::capnp::Orphanage;
-};
-
-class LeaveRoomMessage::Builder {
-public:
-  typedef LeaveRoomMessage Builds;
-
-  Builder() = delete;  // Deleted to discourage incorrect usage.
-                       // You can explicitly initialize to nullptr instead.
-  inline Builder(decltype(nullptr)) {}
-  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
-  inline operator Reader() const { return Reader(_builder.asReader()); }
-  inline Reader asReader() const { return *this; }
-
-  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
-#if !CAPNP_LITE
-  inline ::kj::StringTree toString() const { return asReader().toString(); }
-#endif  // !CAPNP_LITE
-
-private:
-  ::capnp::_::StructBuilder _builder;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-  friend class ::capnp::Orphanage;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::_::PointerHelpers;
-};
-
-#if !CAPNP_LITE
-class LeaveRoomMessage::Pipeline {
-public:
-  typedef LeaveRoomMessage Pipelines;
-
-  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
-  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
-      : _typeless(kj::mv(typeless)) {}
-
-private:
-  ::capnp::AnyPointer::Pipeline _typeless;
-  friend class ::capnp::PipelineHook;
-  template <typename, ::capnp::Kind>
-  friend struct ::capnp::ToDynamic_;
-};
-#endif  // !CAPNP_LITE
-
 class RoomPlayer::Reader {
 public:
   typedef RoomPlayer Reads;
@@ -1395,8 +1250,7 @@ public:
 
   inline  ::int16_t getCube() const;
 
-  inline bool hasLevel() const;
-  inline  ::globed::schema::main::LevelSession::Reader getLevel() const;
+  inline  ::uint64_t getSession() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1436,12 +1290,8 @@ public:
   inline  ::int16_t getCube();
   inline void setCube( ::int16_t value);
 
-  inline bool hasLevel();
-  inline  ::globed::schema::main::LevelSession::Builder getLevel();
-  inline void setLevel( ::globed::schema::main::LevelSession::Reader value);
-  inline  ::globed::schema::main::LevelSession::Builder initLevel();
-  inline void adoptLevel(::capnp::Orphan< ::globed::schema::main::LevelSession>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::LevelSession> disownLevel();
+  inline  ::uint64_t getSession();
+  inline void setSession( ::uint64_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1462,7 +1312,6 @@ public:
       : _typeless(kj::mv(typeless)) {}
 
   inline  ::globed::schema::main::PlayerAccountData::Pipeline getAccountData();
-  inline  ::globed::schema::main::LevelSession::Pipeline getLevel();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -1807,8 +1656,7 @@ public:
   }
 #endif  // !CAPNP_LITE
 
-  inline bool hasSession() const;
-  inline  ::globed::schema::main::LevelSession::Reader getSession() const;
+  inline  ::uint64_t getSession() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1838,12 +1686,8 @@ public:
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
 
-  inline bool hasSession();
-  inline  ::globed::schema::main::LevelSession::Builder getSession();
-  inline void setSession( ::globed::schema::main::LevelSession::Reader value);
-  inline  ::globed::schema::main::LevelSession::Builder initSession();
-  inline void adoptSession(::capnp::Orphan< ::globed::schema::main::LevelSession>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::LevelSession> disownSession();
+  inline  ::uint64_t getSession();
+  inline void setSession( ::uint64_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1863,7 +1707,6 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
-  inline  ::globed::schema::main::LevelSession::Pipeline getSession();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -2013,8 +1856,7 @@ public:
   inline  ::globed::schema::main::JoinRoomMessage::Reader getJoinRoom() const;
 
   inline bool isLeaveRoom() const;
-  inline bool hasLeaveRoom() const;
-  inline  ::globed::schema::main::LeaveRoomMessage::Reader getLeaveRoom() const;
+  inline  ::capnp::Void getLeaveRoom() const;
 
   inline bool isWarpPlayer() const;
   inline bool hasWarpPlayer() const;
@@ -2039,6 +1881,9 @@ public:
   inline bool isKicked() const;
   inline bool hasKicked() const;
   inline  ::globed::schema::main::KickedMessage::Reader getKicked() const;
+
+  inline bool isCheckRoomState() const;
+  inline  ::capnp::Void getCheckRoomState() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -2142,12 +1987,8 @@ public:
   inline ::capnp::Orphan< ::globed::schema::main::JoinRoomMessage> disownJoinRoom();
 
   inline bool isLeaveRoom();
-  inline bool hasLeaveRoom();
-  inline  ::globed::schema::main::LeaveRoomMessage::Builder getLeaveRoom();
-  inline void setLeaveRoom( ::globed::schema::main::LeaveRoomMessage::Reader value);
-  inline  ::globed::schema::main::LeaveRoomMessage::Builder initLeaveRoom();
-  inline void adoptLeaveRoom(::capnp::Orphan< ::globed::schema::main::LeaveRoomMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::LeaveRoomMessage> disownLeaveRoom();
+  inline  ::capnp::Void getLeaveRoom();
+  inline void setLeaveRoom( ::capnp::Void value = ::capnp::VOID);
 
   inline bool isWarpPlayer();
   inline bool hasWarpPlayer();
@@ -2196,6 +2037,10 @@ public:
   inline  ::globed::schema::main::KickedMessage::Builder initKicked();
   inline void adoptKicked(::capnp::Orphan< ::globed::schema::main::KickedMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::KickedMessage> disownKicked();
+
+  inline bool isCheckRoomState();
+  inline  ::capnp::Void getCheckRoomState();
+  inline void setCheckRoomState( ::capnp::Void value = ::capnp::VOID);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -2287,20 +2132,6 @@ inline ::capnp::Orphan< ::capnp::Text> PlayerAccountData::Builder::disownUsernam
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline  ::uint64_t LevelSession::Reader::getSessionId() const {
-  return _reader.getDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-
-inline  ::uint64_t LevelSession::Builder::getSessionId() {
-  return _builder.getDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-inline void LevelSession::Builder::setSessionId( ::uint64_t value) {
-  _builder.setDataField< ::uint64_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
-}
-
 inline  ::int32_t LoginUTokenMessage::Reader::getAccountId() const {
   return _reader.getDataField< ::int32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -2347,6 +2178,45 @@ inline void LoginUTokenMessage::Builder::adoptToken(
 inline ::capnp::Orphan< ::capnp::Text> LoginUTokenMessage::Builder::disownToken() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool LoginUTokenMessage::Reader::hasIcons() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginUTokenMessage::Builder::hasIcons() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::PlayerIconData::Reader LoginUTokenMessage::Reader::getIcons() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginUTokenMessage::Builder::getIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::PlayerIconData::Pipeline LoginUTokenMessage::Pipeline::getIcons() {
+  return  ::globed::schema::shared::PlayerIconData::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void LoginUTokenMessage::Builder::setIcons( ::globed::schema::shared::PlayerIconData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginUTokenMessage::Builder::initIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void LoginUTokenMessage::Builder::adoptIcons(
+    ::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> LoginUTokenMessage::Builder::disownIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline  ::int32_t LoginArgonMessage::Reader::getAccountId() const {
@@ -2397,6 +2267,45 @@ inline ::capnp::Orphan< ::capnp::Text> LoginArgonMessage::Builder::disownToken()
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool LoginArgonMessage::Reader::hasIcons() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginArgonMessage::Builder::hasIcons() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::PlayerIconData::Reader LoginArgonMessage::Reader::getIcons() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginArgonMessage::Builder::getIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::PlayerIconData::Pipeline LoginArgonMessage::Pipeline::getIcons() {
+  return  ::globed::schema::shared::PlayerIconData::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void LoginArgonMessage::Builder::setIcons( ::globed::schema::shared::PlayerIconData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginArgonMessage::Builder::initIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void LoginArgonMessage::Builder::adoptIcons(
+    ::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> LoginArgonMessage::Builder::disownIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
 inline bool LoginPlainMessage::Reader::hasData() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -2434,6 +2343,45 @@ inline void LoginPlainMessage::Builder::adoptData(
 inline ::capnp::Orphan< ::globed::schema::main::PlayerAccountData> LoginPlainMessage::Builder::disownData() {
   return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerAccountData>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool LoginPlainMessage::Reader::hasIcons() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginPlainMessage::Builder::hasIcons() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::PlayerIconData::Reader LoginPlainMessage::Reader::getIcons() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginPlainMessage::Builder::getIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::PlayerIconData::Pipeline LoginPlainMessage::Pipeline::getIcons() {
+  return  ::globed::schema::shared::PlayerIconData::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void LoginPlainMessage::Builder::setIcons( ::globed::schema::shared::PlayerIconData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::PlayerIconData::Builder LoginPlainMessage::Builder::initIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void LoginPlainMessage::Builder::adoptIcons(
+    ::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> LoginPlainMessage::Builder::disownIcons() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline bool LoginOkMessage::Reader::hasNewToken() const {
@@ -2692,43 +2640,18 @@ inline void RoomPlayer::Builder::setCube( ::int16_t value) {
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool RoomPlayer::Reader::hasLevel() const {
-  return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+inline  ::uint64_t RoomPlayer::Reader::getSession() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
-inline bool RoomPlayer::Builder::hasLevel() {
-  return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+
+inline  ::uint64_t RoomPlayer::Builder::getSession() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
-inline  ::globed::schema::main::LevelSession::Reader RoomPlayer::Reader::getLevel() const {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::LevelSession::Builder RoomPlayer::Builder::getLevel() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-#if !CAPNP_LITE
-inline  ::globed::schema::main::LevelSession::Pipeline RoomPlayer::Pipeline::getLevel() {
-  return  ::globed::schema::main::LevelSession::Pipeline(_typeless.getPointerField(1));
-}
-#endif  // !CAPNP_LITE
-inline void RoomPlayer::Builder::setLevel( ::globed::schema::main::LevelSession::Reader value) {
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::LevelSession::Builder RoomPlayer::Builder::initLevel() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-inline void RoomPlayer::Builder::adoptLevel(
-    ::capnp::Orphan< ::globed::schema::main::LevelSession>&& value) {
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::LevelSession> RoomPlayer::Builder::disownLevel() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
+inline void RoomPlayer::Builder::setSession( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint32_t RoomStateMessage::Reader::getRoomId() const {
@@ -2841,43 +2764,18 @@ inline void JoinFailedMessage::Builder::setReason( ::globed::schema::main::JoinS
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool WarpPlayerMessage::Reader::hasSession() const {
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+inline  ::uint64_t WarpPlayerMessage::Reader::getSession() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
-inline bool WarpPlayerMessage::Builder::hasSession() {
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+
+inline  ::uint64_t WarpPlayerMessage::Builder::getSession() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
-inline  ::globed::schema::main::LevelSession::Reader WarpPlayerMessage::Reader::getSession() const {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::LevelSession::Builder WarpPlayerMessage::Builder::getSession() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-#if !CAPNP_LITE
-inline  ::globed::schema::main::LevelSession::Pipeline WarpPlayerMessage::Pipeline::getSession() {
-  return  ::globed::schema::main::LevelSession::Pipeline(_typeless.getPointerField(0));
-}
-#endif  // !CAPNP_LITE
-inline void WarpPlayerMessage::Builder::setSession( ::globed::schema::main::LevelSession::Reader value) {
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::LevelSession::Builder WarpPlayerMessage::Builder::initSession() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void WarpPlayerMessage::Builder::adoptSession(
-    ::capnp::Orphan< ::globed::schema::main::LevelSession>&& value) {
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::LevelSession> WarpPlayerMessage::Builder::disownSession() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelSession>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+inline void WarpPlayerMessage::Builder::setSession( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::main::KickReason KickedMessage::Reader::getReason() const {
@@ -3429,52 +3327,24 @@ inline bool Message::Reader::isLeaveRoom() const {
 inline bool Message::Builder::isLeaveRoom() {
   return which() == Message::LEAVE_ROOM;
 }
-inline bool Message::Reader::hasLeaveRoom() const {
-  if (which() != Message::LEAVE_ROOM) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasLeaveRoom() {
-  if (which() != Message::LEAVE_ROOM) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::LeaveRoomMessage::Reader Message::Reader::getLeaveRoom() const {
+inline  ::capnp::Void Message::Reader::getLeaveRoom() const {
   KJ_IREQUIRE((which() == Message::LEAVE_ROOM),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LeaveRoomMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return _reader.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
-inline  ::globed::schema::main::LeaveRoomMessage::Builder Message::Builder::getLeaveRoom() {
+
+inline  ::capnp::Void Message::Builder::getLeaveRoom() {
   KJ_IREQUIRE((which() == Message::LEAVE_ROOM),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LeaveRoomMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  return _builder.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
-inline void Message::Builder::setLeaveRoom( ::globed::schema::main::LeaveRoomMessage::Reader value) {
+inline void Message::Builder::setLeaveRoom( ::capnp::Void value) {
   _builder.setDataField<Message::Which>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEAVE_ROOM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LeaveRoomMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::LeaveRoomMessage::Builder Message::Builder::initLeaveRoom() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEAVE_ROOM);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LeaveRoomMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptLeaveRoom(
-    ::capnp::Orphan< ::globed::schema::main::LeaveRoomMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEAVE_ROOM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LeaveRoomMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::LeaveRoomMessage> Message::Builder::disownLeaveRoom() {
-  KJ_IREQUIRE((which() == Message::LEAVE_ROOM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LeaveRoomMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
+  _builder.setDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool Message::Reader::isWarpPlayer() const {
@@ -3799,6 +3669,32 @@ inline ::capnp::Orphan< ::globed::schema::main::KickedMessage> Message::Builder:
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isCheckRoomState() const {
+  return which() == Message::CHECK_ROOM_STATE;
+}
+inline bool Message::Builder::isCheckRoomState() {
+  return which() == Message::CHECK_ROOM_STATE;
+}
+inline  ::capnp::Void Message::Reader::getCheckRoomState() const {
+  KJ_IREQUIRE((which() == Message::CHECK_ROOM_STATE),
+              "Must check which() before get()ing a union member.");
+  return _reader.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::capnp::Void Message::Builder::getCheckRoomState() {
+  KJ_IREQUIRE((which() == Message::CHECK_ROOM_STATE),
+              "Must check which() before get()ing a union member.");
+  return _builder.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void Message::Builder::setCheckRoomState( ::capnp::Void value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CHECK_ROOM_STATE);
+  _builder.setDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 }  // namespace
