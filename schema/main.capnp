@@ -57,29 +57,43 @@ struct LoginRequiredMessage {
 # General messages
 
 struct UpdateOwnDataMessage {
-    icons @0 :Shared.PlayerIconData;
+    icons @0 :Shared.PlayerIconData; # nullable
+    friendList @1 :List(Int32); # nullable
+}
+
+struct RequestPlayerCountsMessage {
+    levels @0 :List(UInt64);
+}
+
+struct PlayerCountsMessage {
+    levelIds @0 :List(UInt64);
+    counts @1 :List(UInt16);
 }
 
 # Room management messages
 
 struct CreateRoomMessage {
     name @0 :Text;
+    passcode @1 :UInt32;
 }
 
 struct JoinRoomMessage {
     roomId @0 :UInt32;
+    passcode @1 :UInt32;
 }
 
 struct RoomPlayer {
     accountData @0 :PlayerAccountData;
     cube @1 :Int16;
-    session @2 :UInt64;
+    color1 @2 :UInt16;
+    color2 @3 :UInt16;
+    session @4 :UInt64;
 }
 
 struct RoomStateMessage {
     roomId @0 : UInt32;
     name @1 :Text;
-    players @2 :List(RoomPlayer);
+    players @2 :List(RoomPlayer); # optional field
 }
 
 # Session management messages
@@ -123,10 +137,11 @@ struct Message {
         loginPlain    @2 :LoginPlainMessage;
 
         updateOwnData @6 :UpdateOwnDataMessage;
+        requestPlayerCounts @17 :RequestPlayerCountsMessage;
 
         createRoom    @7 :CreateRoomMessage;
         joinRoom      @8 :JoinRoomMessage;
-        leaveRoom     @9 :Void;
+        leaveRoom     @9 :Void; # TODO (high): check if we can change this to a struct without breaking old clients
         checkRoomState @16 :Void;
 
         joinSession   @12 :JoinSessionMessage;
@@ -136,6 +151,8 @@ struct Message {
         loginOk       @3 :LoginOkMessage;
         loginFailed   @4 :LoginFailedMessage;
         loginRequired @5 :LoginRequiredMessage;
+
+        playerCounts  @18 :PlayerCountsMessage;
 
         roomState     @11 :RoomStateMessage;
 

@@ -36,6 +36,8 @@ CAPNP_DECLARE_ENUM(LoginFailedReason, c74467e7c2ba2ab4);
 CAPNP_DECLARE_SCHEMA(bbfb3e6266b46e00);
 CAPNP_DECLARE_SCHEMA(c0792171a7e24cec);
 CAPNP_DECLARE_SCHEMA(b90a50af13cffdeb);
+CAPNP_DECLARE_SCHEMA(f6f0f63e8a860c1c);
+CAPNP_DECLARE_SCHEMA(8eeeb2b3e84844c7);
 CAPNP_DECLARE_SCHEMA(ebbb3301ca9b3b86);
 CAPNP_DECLARE_SCHEMA(de35351c7d81af2a);
 CAPNP_DECLARE_SCHEMA(da80ce7d00b0d262);
@@ -181,7 +183,37 @@ struct UpdateOwnDataMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b90a50af13cffdeb, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(b90a50af13cffdeb, 0, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct RequestPlayerCountsMessage {
+  RequestPlayerCountsMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(f6f0f63e8a860c1c, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct PlayerCountsMessage {
+  PlayerCountsMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(8eeeb2b3e84844c7, 0, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -196,7 +228,7 @@ struct CreateRoomMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(ebbb3301ca9b3b86, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(ebbb3301ca9b3b86, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -351,6 +383,8 @@ struct Message {
     JOIN_FAILED,
     KICKED,
     CHECK_ROOM_STATE,
+    REQUEST_PLAYER_COUNTS,
+    PLAYER_COUNTS,
   };
 
   struct _capnpPrivate {
@@ -1009,6 +1043,9 @@ public:
   inline bool hasIcons() const;
   inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
+  inline bool hasFriendList() const;
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getFriendList() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1044,6 +1081,14 @@ public:
   inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
   inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
 
+  inline bool hasFriendList();
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getFriendList();
+  inline void setFriendList( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setFriendList(::kj::ArrayPtr<const  ::int32_t> value);
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initFriendList(unsigned int size);
+  inline void adoptFriendList(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownFriendList();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -1071,6 +1116,181 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class RequestPlayerCountsMessage::Reader {
+public:
+  typedef RequestPlayerCountsMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasLevels() const;
+  inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader getLevels() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class RequestPlayerCountsMessage::Builder {
+public:
+  typedef RequestPlayerCountsMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasLevels();
+  inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder getLevels();
+  inline void setLevels( ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setLevels(::kj::ArrayPtr<const  ::uint64_t> value);
+  inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder initLevels(unsigned int size);
+  inline void adoptLevels(::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>> disownLevels();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class RequestPlayerCountsMessage::Pipeline {
+public:
+  typedef RequestPlayerCountsMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class PlayerCountsMessage::Reader {
+public:
+  typedef PlayerCountsMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasLevelIds() const;
+  inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader getLevelIds() const;
+
+  inline bool hasCounts() const;
+  inline  ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>::Reader getCounts() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PlayerCountsMessage::Builder {
+public:
+  typedef PlayerCountsMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasLevelIds();
+  inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder getLevelIds();
+  inline void setLevelIds( ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setLevelIds(::kj::ArrayPtr<const  ::uint64_t> value);
+  inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder initLevelIds(unsigned int size);
+  inline void adoptLevelIds(::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>> disownLevelIds();
+
+  inline bool hasCounts();
+  inline  ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>::Builder getCounts();
+  inline void setCounts( ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setCounts(::kj::ArrayPtr<const  ::uint16_t> value);
+  inline  ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>::Builder initCounts(unsigned int size);
+  inline void adoptCounts(::capnp::Orphan< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>> disownCounts();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PlayerCountsMessage::Pipeline {
+public:
+  typedef PlayerCountsMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class CreateRoomMessage::Reader {
 public:
   typedef CreateRoomMessage Reads;
@@ -1090,6 +1310,8 @@ public:
 
   inline bool hasName() const;
   inline  ::capnp::Text::Reader getName() const;
+
+  inline  ::uint32_t getPasscode() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1125,6 +1347,9 @@ public:
   inline  ::capnp::Text::Builder initName(unsigned int size);
   inline void adoptName(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownName();
+
+  inline  ::uint32_t getPasscode();
+  inline void setPasscode( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1171,6 +1396,8 @@ public:
 
   inline  ::uint32_t getRoomId() const;
 
+  inline  ::uint32_t getPasscode() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1201,6 +1428,9 @@ public:
 
   inline  ::uint32_t getRoomId();
   inline void setRoomId( ::uint32_t value);
+
+  inline  ::uint32_t getPasscode();
+  inline void setPasscode( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1250,6 +1480,10 @@ public:
 
   inline  ::int16_t getCube() const;
 
+  inline  ::uint16_t getColor1() const;
+
+  inline  ::uint16_t getColor2() const;
+
   inline  ::uint64_t getSession() const;
 
 private:
@@ -1289,6 +1523,12 @@ public:
 
   inline  ::int16_t getCube();
   inline void setCube( ::int16_t value);
+
+  inline  ::uint16_t getColor1();
+  inline void setColor1( ::uint16_t value);
+
+  inline  ::uint16_t getColor2();
+  inline void setColor2( ::uint16_t value);
 
   inline  ::uint64_t getSession();
   inline void setSession( ::uint64_t value);
@@ -1885,6 +2125,14 @@ public:
   inline bool isCheckRoomState() const;
   inline  ::capnp::Void getCheckRoomState() const;
 
+  inline bool isRequestPlayerCounts() const;
+  inline bool hasRequestPlayerCounts() const;
+  inline  ::globed::schema::main::RequestPlayerCountsMessage::Reader getRequestPlayerCounts() const;
+
+  inline bool isPlayerCounts() const;
+  inline bool hasPlayerCounts() const;
+  inline  ::globed::schema::main::PlayerCountsMessage::Reader getPlayerCounts() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2041,6 +2289,22 @@ public:
   inline bool isCheckRoomState();
   inline  ::capnp::Void getCheckRoomState();
   inline void setCheckRoomState( ::capnp::Void value = ::capnp::VOID);
+
+  inline bool isRequestPlayerCounts();
+  inline bool hasRequestPlayerCounts();
+  inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder getRequestPlayerCounts();
+  inline void setRequestPlayerCounts( ::globed::schema::main::RequestPlayerCountsMessage::Reader value);
+  inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder initRequestPlayerCounts();
+  inline void adoptRequestPlayerCounts(::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage> disownRequestPlayerCounts();
+
+  inline bool isPlayerCounts();
+  inline bool hasPlayerCounts();
+  inline  ::globed::schema::main::PlayerCountsMessage::Builder getPlayerCounts();
+  inline void setPlayerCounts( ::globed::schema::main::PlayerCountsMessage::Reader value);
+  inline  ::globed::schema::main::PlayerCountsMessage::Builder initPlayerCounts();
+  inline void adoptPlayerCounts(::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage> disownPlayerCounts();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -2539,6 +2803,158 @@ inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> UpdateOwnDataM
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool UpdateOwnDataMessage::Reader::hasFriendList() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool UpdateOwnDataMessage::Builder::hasFriendList() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader UpdateOwnDataMessage::Reader::getFriendList() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder UpdateOwnDataMessage::Builder::getFriendList() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void UpdateOwnDataMessage::Builder::setFriendList( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline void UpdateOwnDataMessage::Builder::setFriendList(::kj::ArrayPtr<const  ::int32_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder UpdateOwnDataMessage::Builder::initFriendList(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void UpdateOwnDataMessage::Builder::adoptFriendList(
+    ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> UpdateOwnDataMessage::Builder::disownFriendList() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool RequestPlayerCountsMessage::Reader::hasLevels() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool RequestPlayerCountsMessage::Builder::hasLevels() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader RequestPlayerCountsMessage::Reader::getLevels() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder RequestPlayerCountsMessage::Builder::getLevels() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void RequestPlayerCountsMessage::Builder::setLevels( ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void RequestPlayerCountsMessage::Builder::setLevels(::kj::ArrayPtr<const  ::uint64_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder RequestPlayerCountsMessage::Builder::initLevels(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void RequestPlayerCountsMessage::Builder::adoptLevels(
+    ::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>> RequestPlayerCountsMessage::Builder::disownLevels() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool PlayerCountsMessage::Reader::hasLevelIds() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerCountsMessage::Builder::hasLevelIds() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader PlayerCountsMessage::Reader::getLevelIds() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerCountsMessage::Builder::getLevelIds() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void PlayerCountsMessage::Builder::setLevelIds( ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void PlayerCountsMessage::Builder::setLevelIds(::kj::ArrayPtr<const  ::uint64_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerCountsMessage::Builder::initLevelIds(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void PlayerCountsMessage::Builder::adoptLevelIds(
+    ::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>> PlayerCountsMessage::Builder::disownLevelIds() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool PlayerCountsMessage::Reader::hasCounts() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerCountsMessage::Builder::hasCounts() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>::Reader PlayerCountsMessage::Reader::getCounts() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerCountsMessage::Builder::getCounts() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void PlayerCountsMessage::Builder::setCounts( ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline void PlayerCountsMessage::Builder::setCounts(::kj::ArrayPtr<const  ::uint16_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerCountsMessage::Builder::initCounts(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void PlayerCountsMessage::Builder::adoptCounts(
+    ::capnp::Orphan< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>> PlayerCountsMessage::Builder::disownCounts() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint16_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
 inline bool CreateRoomMessage::Reader::hasName() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -2573,6 +2989,20 @@ inline ::capnp::Orphan< ::capnp::Text> CreateRoomMessage::Builder::disownName() 
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline  ::uint32_t CreateRoomMessage::Reader::getPasscode() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t CreateRoomMessage::Builder::getPasscode() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void CreateRoomMessage::Builder::setPasscode( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
 inline  ::uint32_t JoinRoomMessage::Reader::getRoomId() const {
   return _reader.getDataField< ::uint32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -2585,6 +3015,20 @@ inline  ::uint32_t JoinRoomMessage::Builder::getRoomId() {
 inline void JoinRoomMessage::Builder::setRoomId( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t JoinRoomMessage::Reader::getPasscode() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t JoinRoomMessage::Builder::getPasscode() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void JoinRoomMessage::Builder::setPasscode( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool RoomPlayer::Reader::hasAccountData() const {
@@ -2638,6 +3082,34 @@ inline  ::int16_t RoomPlayer::Builder::getCube() {
 inline void RoomPlayer::Builder::setCube( ::int16_t value) {
   _builder.setDataField< ::int16_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t RoomPlayer::Reader::getColor1() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t RoomPlayer::Builder::getColor1() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void RoomPlayer::Builder::setColor1( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t RoomPlayer::Reader::getColor2() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t RoomPlayer::Builder::getColor2() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void RoomPlayer::Builder::setColor2( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint64_t RoomPlayer::Reader::getSession() const {
@@ -3695,6 +4167,114 @@ inline void Message::Builder::setCheckRoomState( ::capnp::Void value) {
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CHECK_ROOM_STATE);
   _builder.setDataField< ::capnp::Void>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool Message::Reader::isRequestPlayerCounts() const {
+  return which() == Message::REQUEST_PLAYER_COUNTS;
+}
+inline bool Message::Builder::isRequestPlayerCounts() {
+  return which() == Message::REQUEST_PLAYER_COUNTS;
+}
+inline bool Message::Reader::hasRequestPlayerCounts() const {
+  if (which() != Message::REQUEST_PLAYER_COUNTS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRequestPlayerCounts() {
+  if (which() != Message::REQUEST_PLAYER_COUNTS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RequestPlayerCountsMessage::Reader Message::Reader::getRequestPlayerCounts() const {
+  KJ_IREQUIRE((which() == Message::REQUEST_PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder Message::Builder::getRequestPlayerCounts() {
+  KJ_IREQUIRE((which() == Message::REQUEST_PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRequestPlayerCounts( ::globed::schema::main::RequestPlayerCountsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_PLAYER_COUNTS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder Message::Builder::initRequestPlayerCounts() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_PLAYER_COUNTS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRequestPlayerCounts(
+    ::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_PLAYER_COUNTS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage> Message::Builder::disownRequestPlayerCounts() {
+  KJ_IREQUIRE((which() == Message::REQUEST_PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isPlayerCounts() const {
+  return which() == Message::PLAYER_COUNTS;
+}
+inline bool Message::Builder::isPlayerCounts() {
+  return which() == Message::PLAYER_COUNTS;
+}
+inline bool Message::Reader::hasPlayerCounts() const {
+  if (which() != Message::PLAYER_COUNTS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasPlayerCounts() {
+  if (which() != Message::PLAYER_COUNTS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::PlayerCountsMessage::Reader Message::Reader::getPlayerCounts() const {
+  KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::PlayerCountsMessage::Builder Message::Builder::getPlayerCounts() {
+  KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setPlayerCounts( ::globed::schema::main::PlayerCountsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_COUNTS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::PlayerCountsMessage::Builder Message::Builder::initPlayerCounts() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_COUNTS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptPlayerCounts(
+    ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_COUNTS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage> Message::Builder::disownPlayerCounts() {
+  KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 }  // namespace
