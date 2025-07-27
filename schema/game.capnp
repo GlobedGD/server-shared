@@ -104,15 +104,22 @@ struct PlayerData {
     }
 }
 
+struct Event {
+    type @0 :UInt16;
+    data @1 :Data;
+}
+
 struct PlayerDataMessage {
     data @0 :PlayerData;
     dataRequests @1 :List(Int32);
+    events @2 :List(Event);
 }
 
 struct LevelDataMessage {
     players @0 :List(PlayerData);
     culled  @1 :List(Int32); # Account IDs of players that were culled
     displayDatas @2 :List(Shared.PlayerDisplayData);
+    events @3 :List(Event);
 }
 
 # Misc

@@ -72,9 +72,23 @@ struct PlayerCountsMessage {
 
 # Room management messages
 
+struct RoomSettings {
+    playerLimit @0 :UInt16 = 0;
+    fasterReset @1 :Bool = false;
+    hidden @2 :Bool = false;
+    privateInvites @3 :Bool = false;
+    isFollower @4 :Bool = false;
+    levelIntegrity @8 :Bool = false;
+
+    collision @5 :Bool = false;
+    twoPlayerMode @6 :Bool = false;
+    deathlink @7 :Bool = false;
+}
+
 struct CreateRoomMessage {
     name @0 :Text;
     passcode @1 :UInt32;
+    settings @2 :RoomSettings;
 }
 
 struct JoinRoomMessage {
@@ -92,8 +106,10 @@ struct RoomPlayer {
 
 struct RoomStateMessage {
     roomId @0 : UInt32;
-    name @1 :Text;
-    players @2 :List(RoomPlayer); # optional field
+    roomOwner @1 :Int32;
+    roomName @2 :Text;
+    players @3 :List(RoomPlayer); # optional field
+    settings @4 :RoomSettings;
 }
 
 # Session management messages
