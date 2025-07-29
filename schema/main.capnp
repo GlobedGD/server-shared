@@ -73,6 +73,7 @@ struct PlayerCountsMessage {
 # Room management messages
 
 struct RoomSettings {
+    serverId @9 :UInt8 = 0;
     playerLimit @0 :UInt16 = 0;
     fasterReset @1 :Bool = false;
     hidden @2 :Bool = false;
@@ -110,6 +111,28 @@ struct RoomStateMessage {
     roomName @2 :Text;
     players @3 :List(RoomPlayer); # optional field
     settings @4 :RoomSettings;
+}
+
+enum RoomJoinFailedReason {
+    notFound @0;
+    invalidPasscode @1;
+    full @2;
+}
+
+struct RoomJoinFailedMessage {
+    reason @0 :RoomJoinFailedReason;
+}
+
+enum RoomCreateFailedReason {
+    invalidName @0;
+    invalidSettings @1;
+    invalidPasscode @2;
+    invalidServer @3;
+    serverDown @4;
+}
+
+struct RoomCreateFailedMessage {
+    reason @0 :RoomCreateFailedReason;
 }
 
 # Session management messages
@@ -171,6 +194,8 @@ struct Message {
         playerCounts  @18 :PlayerCountsMessage;
 
         roomState     @11 :RoomStateMessage;
+        roomJoinFailed @19 :RoomJoinFailedMessage;
+        roomCreateFailed @20 :RoomCreateFailedMessage;
 
         joinFailed    @14 :JoinFailedMessage;
         warpPlayer    @10 :WarpPlayerMessage;

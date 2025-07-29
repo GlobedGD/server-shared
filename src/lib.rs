@@ -24,4 +24,7 @@ pub mod data;
 pub mod encoding;
 pub mod logging;
 pub mod schema;
+mod session_id;
 pub mod token_issuer;
+
+pub use session_id::SessionId;

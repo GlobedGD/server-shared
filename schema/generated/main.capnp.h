@@ -43,6 +43,24 @@ CAPNP_DECLARE_SCHEMA(ebbb3301ca9b3b86);
 CAPNP_DECLARE_SCHEMA(de35351c7d81af2a);
 CAPNP_DECLARE_SCHEMA(da80ce7d00b0d262);
 CAPNP_DECLARE_SCHEMA(ccb001c4c4eb3e03);
+CAPNP_DECLARE_SCHEMA(e8b80e1d2395f44a);
+enum class RoomJoinFailedReason_e8b80e1d2395f44a: uint16_t {
+  NOT_FOUND,
+  INVALID_PASSCODE,
+  FULL,
+};
+CAPNP_DECLARE_ENUM(RoomJoinFailedReason, e8b80e1d2395f44a);
+CAPNP_DECLARE_SCHEMA(8911338fc9a382c3);
+CAPNP_DECLARE_SCHEMA(84e06a378efe2263);
+enum class RoomCreateFailedReason_84e06a378efe2263: uint16_t {
+  INVALID_NAME,
+  INVALID_SETTINGS,
+  INVALID_PASSCODE,
+  INVALID_SERVER,
+  SERVER_DOWN,
+};
+CAPNP_DECLARE_ENUM(RoomCreateFailedReason, 84e06a378efe2263);
+CAPNP_DECLARE_SCHEMA(ea1cad45b5cbffd4);
 CAPNP_DECLARE_SCHEMA(d29a1ce11a72e63b);
 CAPNP_DECLARE_SCHEMA(90a88382c0ae35d9);
 CAPNP_DECLARE_SCHEMA(b2c070962aef8cf9);
@@ -296,6 +314,40 @@ struct RoomStateMessage {
   };
 };
 
+typedef ::capnp::schemas::RoomJoinFailedReason_e8b80e1d2395f44a RoomJoinFailedReason;
+
+struct RoomJoinFailedMessage {
+  RoomJoinFailedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(8911338fc9a382c3, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+typedef ::capnp::schemas::RoomCreateFailedReason_84e06a378efe2263 RoomCreateFailedReason;
+
+struct RoomCreateFailedMessage {
+  RoomCreateFailedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(ea1cad45b5cbffd4, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct JoinSessionMessage {
   JoinSessionMessage() = delete;
 
@@ -401,6 +453,8 @@ struct Message {
     CHECK_ROOM_STATE,
     REQUEST_PLAYER_COUNTS,
     PLAYER_COUNTS,
+    ROOM_JOIN_FAILED,
+    ROOM_CREATE_FAILED,
   };
 
   struct _capnpPrivate {
@@ -1342,6 +1396,8 @@ public:
 
   inline bool getLevelIntegrity() const;
 
+  inline  ::uint8_t getServerId() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1396,6 +1452,9 @@ public:
 
   inline bool getLevelIntegrity();
   inline void setLevelIntegrity(bool value);
+
+  inline  ::uint8_t getServerId();
+  inline void setServerId( ::uint8_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1807,6 +1866,158 @@ public:
       : _typeless(kj::mv(typeless)) {}
 
   inline  ::globed::schema::main::RoomSettings::Pipeline getSettings();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class RoomJoinFailedMessage::Reader {
+public:
+  typedef RoomJoinFailedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::globed::schema::main::RoomJoinFailedReason getReason() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class RoomJoinFailedMessage::Builder {
+public:
+  typedef RoomJoinFailedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::globed::schema::main::RoomJoinFailedReason getReason();
+  inline void setReason( ::globed::schema::main::RoomJoinFailedReason value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class RoomJoinFailedMessage::Pipeline {
+public:
+  typedef RoomJoinFailedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class RoomCreateFailedMessage::Reader {
+public:
+  typedef RoomCreateFailedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::globed::schema::main::RoomCreateFailedReason getReason() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class RoomCreateFailedMessage::Builder {
+public:
+  typedef RoomCreateFailedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::globed::schema::main::RoomCreateFailedReason getReason();
+  inline void setReason( ::globed::schema::main::RoomCreateFailedReason value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class RoomCreateFailedMessage::Pipeline {
+public:
+  typedef RoomCreateFailedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -2292,6 +2503,14 @@ public:
   inline bool hasPlayerCounts() const;
   inline  ::globed::schema::main::PlayerCountsMessage::Reader getPlayerCounts() const;
 
+  inline bool isRoomJoinFailed() const;
+  inline bool hasRoomJoinFailed() const;
+  inline  ::globed::schema::main::RoomJoinFailedMessage::Reader getRoomJoinFailed() const;
+
+  inline bool isRoomCreateFailed() const;
+  inline bool hasRoomCreateFailed() const;
+  inline  ::globed::schema::main::RoomCreateFailedMessage::Reader getRoomCreateFailed() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2464,6 +2683,22 @@ public:
   inline  ::globed::schema::main::PlayerCountsMessage::Builder initPlayerCounts();
   inline void adoptPlayerCounts(::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage> disownPlayerCounts();
+
+  inline bool isRoomJoinFailed();
+  inline bool hasRoomJoinFailed();
+  inline  ::globed::schema::main::RoomJoinFailedMessage::Builder getRoomJoinFailed();
+  inline void setRoomJoinFailed( ::globed::schema::main::RoomJoinFailedMessage::Reader value);
+  inline  ::globed::schema::main::RoomJoinFailedMessage::Builder initRoomJoinFailed();
+  inline void adoptRoomJoinFailed(::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage> disownRoomJoinFailed();
+
+  inline bool isRoomCreateFailed();
+  inline bool hasRoomCreateFailed();
+  inline  ::globed::schema::main::RoomCreateFailedMessage::Builder getRoomCreateFailed();
+  inline void setRoomCreateFailed( ::globed::schema::main::RoomCreateFailedMessage::Reader value);
+  inline  ::globed::schema::main::RoomCreateFailedMessage::Builder initRoomCreateFailed();
+  inline void adoptRoomCreateFailed(::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage> disownRoomCreateFailed();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3240,6 +3475,20 @@ inline void RoomSettings::Builder::setLevelIntegrity(bool value) {
       ::capnp::bounded<23>() * ::capnp::ELEMENTS, value);
 }
 
+inline  ::uint8_t RoomSettings::Reader::getServerId() const {
+  return _reader.getDataField< ::uint8_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint8_t RoomSettings::Builder::getServerId() {
+  return _builder.getDataField< ::uint8_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setServerId( ::uint8_t value) {
+  _builder.setDataField< ::uint8_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
 inline bool CreateRoomMessage::Reader::hasName() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -3583,6 +3832,34 @@ inline void RoomStateMessage::Builder::adoptSettings(
 inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> RoomStateMessage::Builder::disownSettings() {
   return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::disown(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline  ::globed::schema::main::RoomJoinFailedReason RoomJoinFailedMessage::Reader::getReason() const {
+  return _reader.getDataField< ::globed::schema::main::RoomJoinFailedReason>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::globed::schema::main::RoomJoinFailedReason RoomJoinFailedMessage::Builder::getReason() {
+  return _builder.getDataField< ::globed::schema::main::RoomJoinFailedReason>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void RoomJoinFailedMessage::Builder::setReason( ::globed::schema::main::RoomJoinFailedReason value) {
+  _builder.setDataField< ::globed::schema::main::RoomJoinFailedReason>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::globed::schema::main::RoomCreateFailedReason RoomCreateFailedMessage::Reader::getReason() const {
+  return _reader.getDataField< ::globed::schema::main::RoomCreateFailedReason>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::globed::schema::main::RoomCreateFailedReason RoomCreateFailedMessage::Builder::getReason() {
+  return _builder.getDataField< ::globed::schema::main::RoomCreateFailedReason>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void RoomCreateFailedMessage::Builder::setReason( ::globed::schema::main::RoomCreateFailedReason value) {
+  _builder.setDataField< ::globed::schema::main::RoomCreateFailedReason>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint64_t JoinSessionMessage::Reader::getSessionId() const {
@@ -4651,6 +4928,114 @@ inline ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage> Message::Bu
   KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomJoinFailed() const {
+  return which() == Message::ROOM_JOIN_FAILED;
+}
+inline bool Message::Builder::isRoomJoinFailed() {
+  return which() == Message::ROOM_JOIN_FAILED;
+}
+inline bool Message::Reader::hasRoomJoinFailed() const {
+  if (which() != Message::ROOM_JOIN_FAILED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomJoinFailed() {
+  if (which() != Message::ROOM_JOIN_FAILED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomJoinFailedMessage::Reader Message::Reader::getRoomJoinFailed() const {
+  KJ_IREQUIRE((which() == Message::ROOM_JOIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomJoinFailedMessage::Builder Message::Builder::getRoomJoinFailed() {
+  KJ_IREQUIRE((which() == Message::ROOM_JOIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomJoinFailed( ::globed::schema::main::RoomJoinFailedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_JOIN_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomJoinFailedMessage::Builder Message::Builder::initRoomJoinFailed() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_JOIN_FAILED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomJoinFailed(
+    ::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_JOIN_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage> Message::Builder::disownRoomJoinFailed() {
+  KJ_IREQUIRE((which() == Message::ROOM_JOIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomCreateFailed() const {
+  return which() == Message::ROOM_CREATE_FAILED;
+}
+inline bool Message::Builder::isRoomCreateFailed() {
+  return which() == Message::ROOM_CREATE_FAILED;
+}
+inline bool Message::Reader::hasRoomCreateFailed() const {
+  if (which() != Message::ROOM_CREATE_FAILED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomCreateFailed() {
+  if (which() != Message::ROOM_CREATE_FAILED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomCreateFailedMessage::Reader Message::Reader::getRoomCreateFailed() const {
+  KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomCreateFailedMessage::Builder Message::Builder::getRoomCreateFailed() {
+  KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomCreateFailed( ::globed::schema::main::RoomCreateFailedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_CREATE_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomCreateFailedMessage::Builder Message::Builder::initRoomCreateFailed() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_CREATE_FAILED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomCreateFailed(
+    ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_CREATE_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage> Message::Builder::disownRoomCreateFailed() {
+  KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

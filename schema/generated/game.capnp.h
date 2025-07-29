@@ -34,6 +34,7 @@ CAPNP_DECLARE_SCHEMA(bc6decb777029037);
 CAPNP_DECLARE_SCHEMA(dff86b3bb0c6c45f);
 enum class JoinSessionFailedReason_dff86b3bb0c6c45f: uint16_t {
   INVALID_PASSCODE,
+  INVALID_ROOM,
 };
 CAPNP_DECLARE_ENUM(JoinSessionFailedReason, dff86b3bb0c6c45f);
 CAPNP_DECLARE_SCHEMA(d0220b919cc3f7e9);

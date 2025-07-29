@@ -46,6 +46,7 @@ struct JoinSessionOkMessage {
 
 enum JoinSessionFailedReason {
     invalidPasscode @0;
+    invalidRoom @1;
 }
 
 struct JoinSessionFailedMessage {
