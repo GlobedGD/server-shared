@@ -144,7 +144,7 @@ macro_rules! decode_message_match {
             }
 
             // allocate a buffer for the unpacked message
-            let mut $unpacked_data = $srvr.request_buffer(unpacked_len).await;
+            let mut $unpacked_data = $srvr.request_buffer(unpacked_len);
 
             let mut rembuf = reader.remaining_bytes();
             let reader = capnp::serialize_packed::read_message_no_alloc(
@@ -241,7 +241,7 @@ macro_rules! encode_with_builder {
             tracing::debug!("serialized size: {ser_size}");
 
             // the 4 here is for the varuint length prefix
-            let mut buf = server.request_buffer(ser_size + 4).await;
+            let mut buf = server.request_buffer(ser_size + 4);
 
             let mut tmp_len_buf = [0u8; 4];
             let mut len_buf = qunet::buffers::ByteWriter::new(&mut tmp_len_buf);
@@ -278,7 +278,7 @@ macro_rules! encode_message_unsafe {
 macro_rules! encode_message_heap {
     ($($schema:ident)::*, $srvr:expr, $estcap:expr, $msg:ident => $code:expr) => {{
         let server = $srvr;
-        let mut buffer = server.request_buffer($estcap).await;
+        let mut buffer = server.request_buffer($estcap);
 
         // safety: we just allocated a buffer of size $estcap
         let wnd = unsafe { buffer.write_window($estcap).unwrap() };
