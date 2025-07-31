@@ -41,6 +41,7 @@ CAPNP_DECLARE_SCHEMA(8eeeb2b3e84844c7);
 CAPNP_DECLARE_SCHEMA(b8949f0d2a5b8019);
 CAPNP_DECLARE_SCHEMA(ebbb3301ca9b3b86);
 CAPNP_DECLARE_SCHEMA(de35351c7d81af2a);
+CAPNP_DECLARE_SCHEMA(cc26655ccf6a542b);
 CAPNP_DECLARE_SCHEMA(da80ce7d00b0d262);
 CAPNP_DECLARE_SCHEMA(ccb001c4c4eb3e03);
 CAPNP_DECLARE_SCHEMA(e8b80e1d2395f44a);
@@ -58,9 +59,12 @@ enum class RoomCreateFailedReason_84e06a378efe2263: uint16_t {
   INVALID_PASSCODE,
   INVALID_SERVER,
   SERVER_DOWN,
+  INAPPROPRIATE_NAME,
 };
 CAPNP_DECLARE_ENUM(RoomCreateFailedReason, 84e06a378efe2263);
 CAPNP_DECLARE_SCHEMA(ea1cad45b5cbffd4);
+CAPNP_DECLARE_SCHEMA(aebac2806ec82f8d);
+CAPNP_DECLARE_SCHEMA(d56d617651a514bf);
 CAPNP_DECLARE_SCHEMA(d29a1ce11a72e63b);
 CAPNP_DECLARE_SCHEMA(90a88382c0ae35d9);
 CAPNP_DECLARE_SCHEMA(b2c070962aef8cf9);
@@ -284,6 +288,21 @@ struct JoinRoomMessage {
   };
 };
 
+struct RequestRoomListMessage {
+  RequestRoomListMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(cc26655ccf6a542b, 0, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct RoomPlayer {
   RoomPlayer() = delete;
 
@@ -342,6 +361,36 @@ struct RoomCreateFailedMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(ea1cad45b5cbffd4, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct RoomListingInfo {
+  RoomListingInfo() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(aebac2806ec82f8d, 2, 3)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct RoomListMessage {
+  RoomListMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(d56d617651a514bf, 0, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -455,6 +504,8 @@ struct Message {
     PLAYER_COUNTS,
     ROOM_JOIN_FAILED,
     ROOM_CREATE_FAILED,
+    REQUEST_ROOM_LIST,
+    ROOM_LIST,
   };
 
   struct _capnpPrivate {
@@ -1660,6 +1711,77 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class RequestRoomListMessage::Reader {
+public:
+  typedef RequestRoomListMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class RequestRoomListMessage::Builder {
+public:
+  typedef RequestRoomListMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class RequestRoomListMessage::Pipeline {
+public:
+  typedef RequestRoomListMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class RoomPlayer::Reader {
 public:
   typedef RoomPlayer Reads;
@@ -1687,6 +1809,8 @@ public:
   inline  ::uint16_t getColor2() const;
 
   inline  ::uint64_t getSession() const;
+
+  inline  ::uint16_t getGlowColor() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1734,6 +1858,9 @@ public:
 
   inline  ::uint64_t getSession();
   inline void setSession( ::uint64_t value);
+
+  inline  ::uint16_t getGlowColor();
+  inline void setGlowColor( ::uint16_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -2013,6 +2140,205 @@ private:
 class RoomCreateFailedMessage::Pipeline {
 public:
   typedef RoomCreateFailedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class RoomListingInfo::Reader {
+public:
+  typedef RoomListingInfo Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getRoomId() const;
+
+  inline bool hasRoomName() const;
+  inline  ::capnp::Text::Reader getRoomName() const;
+
+  inline bool hasRoomOwner() const;
+  inline  ::globed::schema::main::RoomPlayer::Reader getRoomOwner() const;
+
+  inline  ::uint32_t getPlayerCount() const;
+
+  inline bool getHasPassword() const;
+
+  inline bool hasSettings() const;
+  inline  ::globed::schema::main::RoomSettings::Reader getSettings() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class RoomListingInfo::Builder {
+public:
+  typedef RoomListingInfo Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getRoomId();
+  inline void setRoomId( ::uint32_t value);
+
+  inline bool hasRoomName();
+  inline  ::capnp::Text::Builder getRoomName();
+  inline void setRoomName( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initRoomName(unsigned int size);
+  inline void adoptRoomName(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownRoomName();
+
+  inline bool hasRoomOwner();
+  inline  ::globed::schema::main::RoomPlayer::Builder getRoomOwner();
+  inline void setRoomOwner( ::globed::schema::main::RoomPlayer::Reader value);
+  inline  ::globed::schema::main::RoomPlayer::Builder initRoomOwner();
+  inline void adoptRoomOwner(::capnp::Orphan< ::globed::schema::main::RoomPlayer>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomPlayer> disownRoomOwner();
+
+  inline  ::uint32_t getPlayerCount();
+  inline void setPlayerCount( ::uint32_t value);
+
+  inline bool getHasPassword();
+  inline void setHasPassword(bool value);
+
+  inline bool hasSettings();
+  inline  ::globed::schema::main::RoomSettings::Builder getSettings();
+  inline void setSettings( ::globed::schema::main::RoomSettings::Reader value);
+  inline  ::globed::schema::main::RoomSettings::Builder initSettings();
+  inline void adoptSettings(::capnp::Orphan< ::globed::schema::main::RoomSettings>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> disownSettings();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class RoomListingInfo::Pipeline {
+public:
+  typedef RoomListingInfo Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::main::RoomPlayer::Pipeline getRoomOwner();
+  inline  ::globed::schema::main::RoomSettings::Pipeline getSettings();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class RoomListMessage::Reader {
+public:
+  typedef RoomListMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasRooms() const;
+  inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Reader getRooms() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class RoomListMessage::Builder {
+public:
+  typedef RoomListMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasRooms();
+  inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Builder getRooms();
+  inline void setRooms( ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Builder initRooms(unsigned int size);
+  inline void adoptRooms(::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>> disownRooms();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class RoomListMessage::Pipeline {
+public:
+  typedef RoomListMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -2511,6 +2837,14 @@ public:
   inline bool hasRoomCreateFailed() const;
   inline  ::globed::schema::main::RoomCreateFailedMessage::Reader getRoomCreateFailed() const;
 
+  inline bool isRequestRoomList() const;
+  inline bool hasRequestRoomList() const;
+  inline  ::globed::schema::main::RequestRoomListMessage::Reader getRequestRoomList() const;
+
+  inline bool isRoomList() const;
+  inline bool hasRoomList() const;
+  inline  ::globed::schema::main::RoomListMessage::Reader getRoomList() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2699,6 +3033,22 @@ public:
   inline  ::globed::schema::main::RoomCreateFailedMessage::Builder initRoomCreateFailed();
   inline void adoptRoomCreateFailed(::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage> disownRoomCreateFailed();
+
+  inline bool isRequestRoomList();
+  inline bool hasRequestRoomList();
+  inline  ::globed::schema::main::RequestRoomListMessage::Builder getRequestRoomList();
+  inline void setRequestRoomList( ::globed::schema::main::RequestRoomListMessage::Reader value);
+  inline  ::globed::schema::main::RequestRoomListMessage::Builder initRequestRoomList();
+  inline void adoptRequestRoomList(::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage> disownRequestRoomList();
+
+  inline bool isRoomList();
+  inline bool hasRoomList();
+  inline  ::globed::schema::main::RoomListMessage::Builder getRoomList();
+  inline void setRoomList( ::globed::schema::main::RoomListMessage::Reader value);
+  inline  ::globed::schema::main::RoomListMessage::Builder initRoomList();
+  inline void adoptRoomList(::capnp::Orphan< ::globed::schema::main::RoomListMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomListMessage> disownRoomList();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3699,6 +4049,20 @@ inline void RoomPlayer::Builder::setSession( ::uint64_t value) {
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
+inline  ::uint16_t RoomPlayer::Reader::getGlowColor() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t RoomPlayer::Builder::getGlowColor() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void RoomPlayer::Builder::setGlowColor( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
 inline  ::uint32_t RoomStateMessage::Reader::getRoomId() const {
   return _reader.getDataField< ::uint32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -3860,6 +4224,194 @@ inline  ::globed::schema::main::RoomCreateFailedReason RoomCreateFailedMessage::
 inline void RoomCreateFailedMessage::Builder::setReason( ::globed::schema::main::RoomCreateFailedReason value) {
   _builder.setDataField< ::globed::schema::main::RoomCreateFailedReason>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t RoomListingInfo::Reader::getRoomId() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t RoomListingInfo::Builder::getRoomId() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void RoomListingInfo::Builder::setRoomId( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomListingInfo::Reader::hasRoomName() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool RoomListingInfo::Builder::hasRoomName() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader RoomListingInfo::Reader::getRoomName() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder RoomListingInfo::Builder::getRoomName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void RoomListingInfo::Builder::setRoomName( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder RoomListingInfo::Builder::initRoomName(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void RoomListingInfo::Builder::adoptRoomName(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> RoomListingInfo::Builder::disownRoomName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool RoomListingInfo::Reader::hasRoomOwner() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool RoomListingInfo::Builder::hasRoomOwner() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomPlayer::Reader RoomListingInfo::Reader::getRoomOwner() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayer>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomPlayer::Builder RoomListingInfo::Builder::getRoomOwner() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayer>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::RoomPlayer::Pipeline RoomListingInfo::Pipeline::getRoomOwner() {
+  return  ::globed::schema::main::RoomPlayer::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void RoomListingInfo::Builder::setRoomOwner( ::globed::schema::main::RoomPlayer::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayer>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomPlayer::Builder RoomListingInfo::Builder::initRoomOwner() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayer>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void RoomListingInfo::Builder::adoptRoomOwner(
+    ::capnp::Orphan< ::globed::schema::main::RoomPlayer>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayer>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomPlayer> RoomListingInfo::Builder::disownRoomOwner() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayer>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline  ::uint32_t RoomListingInfo::Reader::getPlayerCount() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t RoomListingInfo::Builder::getPlayerCount() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void RoomListingInfo::Builder::setPlayerCount( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomListingInfo::Reader::getHasPassword() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomListingInfo::Builder::getHasPassword() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS);
+}
+inline void RoomListingInfo::Builder::setHasPassword(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomListingInfo::Reader::hasSettings() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool RoomListingInfo::Builder::hasSettings() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomSettings::Reader RoomListingInfo::Reader::getSettings() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomSettings::Builder RoomListingInfo::Builder::getSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::RoomSettings::Pipeline RoomListingInfo::Pipeline::getSettings() {
+  return  ::globed::schema::main::RoomSettings::Pipeline(_typeless.getPointerField(2));
+}
+#endif  // !CAPNP_LITE
+inline void RoomListingInfo::Builder::setSettings( ::globed::schema::main::RoomSettings::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomSettings::Builder RoomListingInfo::Builder::initSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void RoomListingInfo::Builder::adoptSettings(
+    ::capnp::Orphan< ::globed::schema::main::RoomSettings>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> RoomListingInfo::Builder::disownSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline bool RoomListMessage::Reader::hasRooms() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool RoomListMessage::Builder::hasRooms() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Reader RoomListMessage::Reader::getRooms() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Builder RoomListMessage::Builder::getRooms() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void RoomListMessage::Builder::setRooms( ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Builder RoomListMessage::Builder::initRooms(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void RoomListMessage::Builder::adoptRooms(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>> RoomListMessage::Builder::disownRooms() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline  ::uint64_t JoinSessionMessage::Reader::getSessionId() const {
@@ -5036,6 +5588,114 @@ inline ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage> Message
   KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRequestRoomList() const {
+  return which() == Message::REQUEST_ROOM_LIST;
+}
+inline bool Message::Builder::isRequestRoomList() {
+  return which() == Message::REQUEST_ROOM_LIST;
+}
+inline bool Message::Reader::hasRequestRoomList() const {
+  if (which() != Message::REQUEST_ROOM_LIST) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRequestRoomList() {
+  if (which() != Message::REQUEST_ROOM_LIST) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RequestRoomListMessage::Reader Message::Reader::getRequestRoomList() const {
+  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RequestRoomListMessage::Builder Message::Builder::getRequestRoomList() {
+  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRequestRoomList( ::globed::schema::main::RequestRoomListMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RequestRoomListMessage::Builder Message::Builder::initRequestRoomList() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_LIST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRequestRoomList(
+    ::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage> Message::Builder::disownRequestRoomList() {
+  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomList() const {
+  return which() == Message::ROOM_LIST;
+}
+inline bool Message::Builder::isRoomList() {
+  return which() == Message::ROOM_LIST;
+}
+inline bool Message::Reader::hasRoomList() const {
+  if (which() != Message::ROOM_LIST) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomList() {
+  if (which() != Message::ROOM_LIST) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomListMessage::Reader Message::Reader::getRoomList() const {
+  KJ_IREQUIRE((which() == Message::ROOM_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomListMessage::Builder Message::Builder::getRoomList() {
+  KJ_IREQUIRE((which() == Message::ROOM_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomList( ::globed::schema::main::RoomListMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomListMessage::Builder Message::Builder::initRoomList() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_LIST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomList(
+    ::capnp::Orphan< ::globed::schema::main::RoomListMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomListMessage> Message::Builder::disownRoomList() {
+  KJ_IREQUIRE((which() == Message::ROOM_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

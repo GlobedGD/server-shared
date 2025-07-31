@@ -97,11 +97,14 @@ struct JoinRoomMessage {
     passcode @1 :UInt32;
 }
 
+struct RequestRoomListMessage {}
+
 struct RoomPlayer {
     accountData @0 :PlayerAccountData;
     cube @1 :Int16;
     color1 @2 :UInt16;
     color2 @3 :UInt16;
+    glowColor @5 :UInt16;
     session @4 :UInt64;
 }
 
@@ -129,10 +132,24 @@ enum RoomCreateFailedReason {
     invalidPasscode @2;
     invalidServer @3;
     serverDown @4;
+    inappropriateName @5;
 }
 
 struct RoomCreateFailedMessage {
     reason @0 :RoomCreateFailedReason;
+}
+
+struct RoomListingInfo {
+    roomId @0 :UInt32;
+    roomName @1 :Text;
+    roomOwner @2 :RoomPlayer;
+    playerCount @3 :UInt32;
+    hasPassword @4 :Bool;
+    settings @5 :RoomSettings;
+}
+
+struct RoomListMessage {
+    rooms @0 :List(RoomListingInfo);
 }
 
 # Session management messages
@@ -182,6 +199,7 @@ struct Message {
         joinRoom      @8 :JoinRoomMessage;
         leaveRoom     @9 :Void; # TODO (high): check if we can change this to a struct without breaking old clients
         checkRoomState @16 :Void;
+        requestRoomList @21 :RequestRoomListMessage;
 
         joinSession   @12 :JoinSessionMessage;
         leaveSession  @13 :LeaveSessionMessage;
@@ -196,6 +214,7 @@ struct Message {
         roomState     @11 :RoomStateMessage;
         roomJoinFailed @19 :RoomJoinFailedMessage;
         roomCreateFailed @20 :RoomCreateFailedMessage;
+        roomList      @22 :RoomListMessage;
 
         joinFailed    @14 :JoinFailedMessage;
         warpPlayer    @10 :WarpPlayerMessage;
