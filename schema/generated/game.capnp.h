@@ -101,7 +101,7 @@ struct LoginOkMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d1b22feb8db7bef2, 0, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(d1b22feb8db7bef2, 1, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -582,6 +582,8 @@ public:
   }
 #endif  // !CAPNP_LITE
 
+  inline  ::uint16_t getTickrate() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -609,6 +611,9 @@ public:
 #if !CAPNP_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
+
+  inline  ::uint16_t getTickrate();
+  inline void setTickrate( ::uint16_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -2362,6 +2367,20 @@ inline  ::uint32_t LoginUTokenAndJoinMessage::Builder::getPasscode() {
 inline void LoginUTokenAndJoinMessage::Builder::setPasscode( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t LoginOkMessage::Reader::getTickrate() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t LoginOkMessage::Builder::getTickrate() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setTickrate( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::game::LoginFailedReason LoginFailedMessage::Reader::getReason() const {

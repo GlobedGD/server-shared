@@ -22,6 +22,7 @@ struct LoginUTokenAndJoinMessage {
 }
 
 struct LoginOkMessage {
+    tickrate @0 :UInt16;
 }
 
 enum LoginFailedReason {
