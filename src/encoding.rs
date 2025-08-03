@@ -219,7 +219,7 @@ impl Display for EncodeMessageError {
 #[macro_export]
 #[doc(hidden)]
 macro_rules! encode_with_builder {
-    ($($schema:ident)::*, $srvr:expr, $builder:expr, $msg:ident => $code:expr) => {{
+    ($($schema:ident)::*, $srvr:expr, $estcap:expr, $builder:expr, $msg:ident => $code:expr) => {{
         use $($schema::)*{self as schema};
 
         let _res: Result<qunet::message::BufferKind, $crate::encoding::EncodeMessageError> = try {
@@ -238,7 +238,12 @@ macro_rules! encode_with_builder {
             let ser_size = capnp::serialize::compute_serialized_size_in_words(&$builder) * 8;
 
             #[cfg(debug_assertions)]
-            tracing::debug!("serialized size: {ser_size}");
+            {
+                let wasted_bytes = ser_size as usize - $estcap;
+                let wasted_percent = (wasted_bytes as f64 / $estcap as f64) * 100.0;
+
+                tracing::trace!("Encoding used {}/{} bytes ({wasted_percent:.1}% wasted) ({}:{})", ser_size, $estcap, file!(), line!());
+            }
 
             // the 4 here is for the varuint length prefix
             let mut buf = server.request_buffer(ser_size + 4);
@@ -267,7 +272,7 @@ macro_rules! encode_message_unsafe {
     ($($schema:ident)::*, $srvr:expr, $estcap:expr, $msg:ident => $code:expr) => {{
         let mut builder = $crate::encoding::CapnpAlloc::<$estcap>::new().into_builder();
 
-        $crate::encode_with_builder!($($schema)::*, $srvr, builder, $msg => $code)
+        $crate::encode_with_builder!($($schema)::*, $srvr, $estcap, builder, $msg => $code)
     }};
 }
 
@@ -278,19 +283,22 @@ macro_rules! encode_message_unsafe {
 macro_rules! encode_message_heap {
     ($($schema:ident)::*, $srvr:expr, $estcap:expr, $msg:ident => $code:expr) => {{
         let server = $srvr;
-        let mut buffer = server.request_buffer($estcap);
+        let estcap = $estcap;
+
+        let mut buffer = server.request_buffer(estcap);
 
         // safety: we just allocated a buffer of size $estcap
-        let wnd = unsafe { buffer.write_window($estcap).unwrap() };
-        debug_assert!(wnd.len() >= $estcap);
+        let wnd = unsafe { buffer.write_window(estcap).unwrap() };
+        debug_assert!(wnd.len() >= estcap);
 
         let mut builder = $crate::encoding::CapnpBorrowAlloc::new(wnd).into_builder();
 
-        $crate::encode_with_builder!($($schema)::*, server, builder, $msg => $code)
+        $crate::encode_with_builder!($($schema)::*, server, estcap, builder, $msg => $code)
     }};
 }
 
 /// Resolves to either `encode_message_unsafe!` or `encode_message_heap!` depending on the size of the allocation.
+/// Size must be a constant expression.
 #[macro_export]
 macro_rules! encode_message {
     ($($schema:ident)::*, $srvr:expr, $estcap:expr, $msg:ident => $code:expr) => {{
