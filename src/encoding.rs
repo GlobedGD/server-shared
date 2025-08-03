@@ -239,7 +239,7 @@ macro_rules! encode_with_builder {
 
             #[cfg(debug_assertions)]
             {
-                let wasted_bytes = ser_size as usize - $estcap;
+                let wasted_bytes = $estcap - ser_size as usize;
                 let wasted_percent = (wasted_bytes as f64 / $estcap as f64) * 100.0;
 
                 tracing::trace!("Encoding used {}/{} bytes ({wasted_percent:.1}% wasted) ({}:{})", ser_size, $estcap, file!(), line!());
