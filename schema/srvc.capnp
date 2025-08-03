@@ -9,8 +9,14 @@ struct LoginSrvMessage {
     data     @1 :Shared.GameServer;
 }
 
+struct ServerRole {
+    id       @0 :UInt8;
+    stringId @1 :Text;
+}
+
 struct LoginOkMessage {
     tokenKey @0 :Text;
+    roles    @1 :List(ServerRole);
 }
 
 struct LoginFailedMessage {

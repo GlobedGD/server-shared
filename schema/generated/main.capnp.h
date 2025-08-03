@@ -31,10 +31,12 @@ enum class LoginFailedReason_c74467e7c2ba2ab4: uint16_t {
   ARGON_NOT_SUPPORTED,
   ARGON_UNREACHABLE,
   ARGON_INTERNAL_ERROR,
+  INTERNAL_DB_ERROR,
 };
 CAPNP_DECLARE_ENUM(LoginFailedReason, c74467e7c2ba2ab4);
 CAPNP_DECLARE_SCHEMA(bbfb3e6266b46e00);
 CAPNP_DECLARE_SCHEMA(c0792171a7e24cec);
+CAPNP_DECLARE_SCHEMA(e94115bf16c4b5a8);
 CAPNP_DECLARE_SCHEMA(b90a50af13cffdeb);
 CAPNP_DECLARE_SCHEMA(f6f0f63e8a860c1c);
 CAPNP_DECLARE_SCHEMA(8eeeb2b3e84844c7);
@@ -64,6 +66,7 @@ enum class RoomCreateFailedReason_84e06a378efe2263: uint16_t {
 CAPNP_DECLARE_ENUM(RoomCreateFailedReason, 84e06a378efe2263);
 CAPNP_DECLARE_SCHEMA(ea1cad45b5cbffd4);
 CAPNP_DECLARE_SCHEMA(aebac2806ec82f8d);
+CAPNP_DECLARE_SCHEMA(dae9ec8d26c6d0b3);
 CAPNP_DECLARE_SCHEMA(d56d617651a514bf);
 CAPNP_DECLARE_SCHEMA(d29a1ce11a72e63b);
 CAPNP_DECLARE_SCHEMA(90a88382c0ae35d9);
@@ -159,7 +162,7 @@ struct LoginOkMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 0, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 0, 4)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -192,6 +195,21 @@ struct LoginRequiredMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(c0792171a7e24cec, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct BannedMessage {
+  BannedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(e94115bf16c4b5a8, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -382,6 +400,21 @@ struct RoomListingInfo {
   };
 };
 
+struct RoomBannedMessage {
+  RoomBannedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(dae9ec8d26c6d0b3, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct RoomListMessage {
   RoomListMessage() = delete;
 
@@ -506,6 +539,8 @@ struct Message {
     ROOM_CREATE_FAILED,
     REQUEST_ROOM_LIST,
     ROOM_LIST,
+    BANNED,
+    ROOM_BANNED,
   };
 
   struct _capnpPrivate {
@@ -919,6 +954,12 @@ public:
   inline bool hasServers() const;
   inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader getServers() const;
 
+  inline bool hasAllRoles() const;
+  inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader getAllRoles() const;
+
+  inline bool hasUserRoles() const;
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getUserRoles() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -960,6 +1001,21 @@ public:
   inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder initServers(unsigned int size);
   inline void adoptServers(::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>> disownServers();
+
+  inline bool hasAllRoles();
+  inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder getAllRoles();
+  inline void setAllRoles( ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder initAllRoles(unsigned int size);
+  inline void adoptAllRoles(::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>> disownAllRoles();
+
+  inline bool hasUserRoles();
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getUserRoles();
+  inline void setUserRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setUserRoles(::kj::ArrayPtr<const  ::uint8_t> value);
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initUserRoles(unsigned int size);
+  inline void adoptUserRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownUserRoles();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1131,6 +1187,92 @@ private:
 class LoginRequiredMessage::Pipeline {
 public:
   typedef LoginRequiredMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class BannedMessage::Reader {
+public:
+  typedef BannedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasReason() const;
+  inline  ::capnp::Text::Reader getReason() const;
+
+  inline  ::int64_t getExpiresAt() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class BannedMessage::Builder {
+public:
+  typedef BannedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasReason();
+  inline  ::capnp::Text::Builder getReason();
+  inline void setReason( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initReason(unsigned int size);
+  inline void adoptReason(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownReason();
+
+  inline  ::int64_t getExpiresAt();
+  inline void setExpiresAt( ::int64_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class BannedMessage::Pipeline {
+public:
+  typedef BannedMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -2271,6 +2413,92 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class RoomBannedMessage::Reader {
+public:
+  typedef RoomBannedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasReason() const;
+  inline  ::capnp::Text::Reader getReason() const;
+
+  inline  ::int64_t getExpiresAt() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class RoomBannedMessage::Builder {
+public:
+  typedef RoomBannedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasReason();
+  inline  ::capnp::Text::Builder getReason();
+  inline void setReason( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initReason(unsigned int size);
+  inline void adoptReason(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownReason();
+
+  inline  ::int64_t getExpiresAt();
+  inline void setExpiresAt( ::int64_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class RoomBannedMessage::Pipeline {
+public:
+  typedef RoomBannedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class RoomListMessage::Reader {
 public:
   typedef RoomListMessage Reads;
@@ -2845,6 +3073,14 @@ public:
   inline bool hasRoomList() const;
   inline  ::globed::schema::main::RoomListMessage::Reader getRoomList() const;
 
+  inline bool isBanned() const;
+  inline bool hasBanned() const;
+  inline  ::globed::schema::main::BannedMessage::Reader getBanned() const;
+
+  inline bool isRoomBanned() const;
+  inline bool hasRoomBanned() const;
+  inline  ::globed::schema::main::RoomBannedMessage::Reader getRoomBanned() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -3049,6 +3285,22 @@ public:
   inline  ::globed::schema::main::RoomListMessage::Builder initRoomList();
   inline void adoptRoomList(::capnp::Orphan< ::globed::schema::main::RoomListMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::RoomListMessage> disownRoomList();
+
+  inline bool isBanned();
+  inline bool hasBanned();
+  inline  ::globed::schema::main::BannedMessage::Builder getBanned();
+  inline void setBanned( ::globed::schema::main::BannedMessage::Reader value);
+  inline  ::globed::schema::main::BannedMessage::Builder initBanned();
+  inline void adoptBanned(::capnp::Orphan< ::globed::schema::main::BannedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::BannedMessage> disownBanned();
+
+  inline bool isRoomBanned();
+  inline bool hasRoomBanned();
+  inline  ::globed::schema::main::RoomBannedMessage::Builder getRoomBanned();
+  inline void setRoomBanned( ::globed::schema::main::RoomBannedMessage::Reader value);
+  inline  ::globed::schema::main::RoomBannedMessage::Builder initRoomBanned();
+  inline void adoptRoomBanned(::capnp::Orphan< ::globed::schema::main::RoomBannedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage> disownRoomBanned();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3460,6 +3712,78 @@ inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
+inline bool LoginOkMessage::Reader::hasAllRoles() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginOkMessage::Builder::hasAllRoles() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader LoginOkMessage::Reader::getAllRoles() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::getAllRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void LoginOkMessage::Builder::setAllRoles( ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::initAllRoles(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+}
+inline void LoginOkMessage::Builder::adoptAllRoles(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>> LoginOkMessage::Builder::disownAllRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline bool LoginOkMessage::Reader::hasUserRoles() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginOkMessage::Builder::hasUserRoles() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader LoginOkMessage::Reader::getUserRoles() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder LoginOkMessage::Builder::getUserRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+inline void LoginOkMessage::Builder::setUserRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+}
+inline void LoginOkMessage::Builder::setUserRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder LoginOkMessage::Builder::initUserRoles(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), size);
+}
+inline void LoginOkMessage::Builder::adoptUserRoles(
+    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> LoginOkMessage::Builder::disownUserRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+
 inline  ::globed::schema::main::LoginFailedReason LoginFailedMessage::Reader::getReason() const {
   return _reader.getDataField< ::globed::schema::main::LoginFailedReason>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -3506,6 +3830,54 @@ inline void LoginRequiredMessage::Builder::adoptArgonUrl(
 inline ::capnp::Orphan< ::capnp::Text> LoginRequiredMessage::Builder::disownArgonUrl() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool BannedMessage::Reader::hasReason() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool BannedMessage::Builder::hasReason() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader BannedMessage::Reader::getReason() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder BannedMessage::Builder::getReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void BannedMessage::Builder::setReason( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder BannedMessage::Builder::initReason(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void BannedMessage::Builder::adoptReason(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> BannedMessage::Builder::disownReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int64_t BannedMessage::Reader::getExpiresAt() const {
+  return _reader.getDataField< ::int64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int64_t BannedMessage::Builder::getExpiresAt() {
+  return _builder.getDataField< ::int64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void BannedMessage::Builder::setExpiresAt( ::int64_t value) {
+  _builder.setDataField< ::int64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool UpdateOwnDataMessage::Reader::hasIcons() const {
@@ -4378,6 +4750,54 @@ inline void RoomListingInfo::Builder::adoptSettings(
 inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> RoomListingInfo::Builder::disownSettings() {
   return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::disown(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline bool RoomBannedMessage::Reader::hasReason() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool RoomBannedMessage::Builder::hasReason() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader RoomBannedMessage::Reader::getReason() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder RoomBannedMessage::Builder::getReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void RoomBannedMessage::Builder::setReason( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder RoomBannedMessage::Builder::initReason(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void RoomBannedMessage::Builder::adoptReason(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> RoomBannedMessage::Builder::disownReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int64_t RoomBannedMessage::Reader::getExpiresAt() const {
+  return _reader.getDataField< ::int64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int64_t RoomBannedMessage::Builder::getExpiresAt() {
+  return _builder.getDataField< ::int64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void RoomBannedMessage::Builder::setExpiresAt( ::int64_t value) {
+  _builder.setDataField< ::int64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool RoomListMessage::Reader::hasRooms() const {
@@ -5696,6 +6116,114 @@ inline ::capnp::Orphan< ::globed::schema::main::RoomListMessage> Message::Builde
   KJ_IREQUIRE((which() == Message::ROOM_LIST),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isBanned() const {
+  return which() == Message::BANNED;
+}
+inline bool Message::Builder::isBanned() {
+  return which() == Message::BANNED;
+}
+inline bool Message::Reader::hasBanned() const {
+  if (which() != Message::BANNED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasBanned() {
+  if (which() != Message::BANNED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::BannedMessage::Reader Message::Reader::getBanned() const {
+  KJ_IREQUIRE((which() == Message::BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::BannedMessage::Builder Message::Builder::getBanned() {
+  KJ_IREQUIRE((which() == Message::BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setBanned( ::globed::schema::main::BannedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::BANNED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::BannedMessage::Builder Message::Builder::initBanned() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::BANNED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptBanned(
+    ::capnp::Orphan< ::globed::schema::main::BannedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::BANNED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::BannedMessage> Message::Builder::disownBanned() {
+  KJ_IREQUIRE((which() == Message::BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomBanned() const {
+  return which() == Message::ROOM_BANNED;
+}
+inline bool Message::Builder::isRoomBanned() {
+  return which() == Message::ROOM_BANNED;
+}
+inline bool Message::Reader::hasRoomBanned() const {
+  if (which() != Message::ROOM_BANNED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomBanned() {
+  if (which() != Message::ROOM_BANNED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomBannedMessage::Reader Message::Reader::getRoomBanned() const {
+  KJ_IREQUIRE((which() == Message::ROOM_BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomBannedMessage::Builder Message::Builder::getRoomBanned() {
+  KJ_IREQUIRE((which() == Message::ROOM_BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomBanned( ::globed::schema::main::RoomBannedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_BANNED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomBannedMessage::Builder Message::Builder::initRoomBanned() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_BANNED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomBanned(
+    ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_BANNED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage> Message::Builder::disownRoomBanned() {
+  KJ_IREQUIRE((which() == Message::ROOM_BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

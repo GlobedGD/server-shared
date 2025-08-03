@@ -39,6 +39,7 @@ struct PlayerDisplayData {
     userId    @1 :Int32;
     username  @2 :Text;
     icons     @3 :PlayerIconData;
+    roles     @4 :List(UInt8);
 }
 
 struct GameServer {
@@ -48,3 +49,10 @@ struct GameServer {
     name     @3 :Text;  # Human-readable name
     region   @4 :Text;  # Region string
 }
+
+struct UserRole {
+    stringId   @0 :Text;
+    icon       @1 :Text;
+    nameColor  @2 :Text;
+}
+

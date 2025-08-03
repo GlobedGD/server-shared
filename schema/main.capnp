@@ -35,7 +35,8 @@ struct LoginPlainMessage {
 struct LoginOkMessage {
     newToken @0 :Text;
     servers  @1 :List(Shared.GameServer);
-    # TODO: roles or something
+    allRoles @2 :List(Shared.UserRole);
+    userRoles @3 :List(UInt8);
 }
 
 enum LoginFailedReason {
@@ -44,6 +45,7 @@ enum LoginFailedReason {
     argonNotSupported   @2;
     argonUnreachable    @3;
     argonInternalError  @4;
+    internalDbError     @5;
 }
 
 struct LoginFailedMessage {
@@ -52,6 +54,11 @@ struct LoginFailedMessage {
 
 struct LoginRequiredMessage {
     argonUrl @0 :Text;
+}
+
+struct BannedMessage {
+    reason @0 :Text;
+    expiresAt @1 :Int64;
 }
 
 # General messages
@@ -148,6 +155,11 @@ struct RoomListingInfo {
     settings @5 :RoomSettings;
 }
 
+struct RoomBannedMessage {
+    reason @0 :Text;
+    expiresAt @1 :Int64;
+}
+
 struct RoomListMessage {
     rooms @0 :List(RoomListingInfo);
 }
@@ -208,12 +220,14 @@ struct Message {
         loginOk       @3 :LoginOkMessage;
         loginFailed   @4 :LoginFailedMessage;
         loginRequired @5 :LoginRequiredMessage;
+        banned        @23 :BannedMessage;
 
         playerCounts  @18 :PlayerCountsMessage;
 
         roomState     @11 :RoomStateMessage;
         roomJoinFailed @19 :RoomJoinFailedMessage;
         roomCreateFailed @20 :RoomCreateFailedMessage;
+        roomBanned    @24 :RoomBannedMessage;
         roomList      @22 :RoomListMessage;
 
         joinFailed    @14 :JoinFailedMessage;
