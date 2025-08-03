@@ -287,7 +287,9 @@ macro_rules! encode_message_unsafe {
 macro_rules! encode_message_heap {
     ($($schema:ident)::*, $srvr:expr, $estcap:expr, $msg:ident => $code:expr) => {{
         let server = $srvr;
-        let estcap = $estcap;
+
+        // round up to a multiple of 8
+        let estcap = ($estcap + 7) & !7;
 
         let mut buffer = server.request_buffer(estcap);
 
