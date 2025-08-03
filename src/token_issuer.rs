@@ -12,6 +12,7 @@ pub struct TokenData {
     pub account_id: i32,
     pub user_id: i32,
     pub username: heapless::String<16>,
+    pub roles_str: Option<Box<str>>,
 }
 
 #[derive(Debug, Error)]
@@ -48,7 +49,7 @@ impl TokenIssuer {
             .split_once('.')
             .ok_or(TokenValidationError::InvalidFormat)?;
 
-        let mut data_buf = [0u8; 64];
+        let mut data_buf = [0u8; 1024];
         let data_len = b64e.decode_slice(data, &mut data_buf)?;
         let data = &data_buf[..data_len];
 
@@ -76,11 +77,17 @@ impl TokenIssuer {
         let username = reader.read_string_u8()?;
         let username = heapless::String::from_str(username)
             .map_err(|_| TokenValidationError::UsernameTooLong)?;
+        let roles_str = reader.read_string_u16()?;
 
         Ok(TokenData {
             account_id,
             user_id,
             username,
+            roles_str: if !roles_str.is_empty() {
+                Some(roles_str.to_owned().into_boxed_str())
+            } else {
+                None
+            },
         })
     }
 
@@ -98,14 +105,21 @@ impl TokenIssuer {
         Ok(data)
     }
 
-    pub fn generate(&self, data: &TokenData) -> String {
+    pub fn generate(
+        &self,
+        account_id: i32,
+        user_id: i32,
+        username: &str,
+        roles_str: &str,
+    ) -> String {
         let mut buf = [0u8; 64];
         let mut writer = ByteWriter::new(&mut buf);
 
         writer.write_u8(1); // version
-        writer.write_i32(data.account_id);
-        writer.write_i32(data.user_id);
-        writer.write_string_u8(&data.username);
+        writer.write_i32(account_id);
+        writer.write_i32(user_id);
+        writer.write_string_u8(username);
+        writer.write_string_u16(roles_str);
 
         let data = writer.written();
 
