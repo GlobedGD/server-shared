@@ -37,6 +37,7 @@ struct LoginOkMessage {
     servers  @1 :List(Shared.GameServer);
     allRoles @2 :List(Shared.UserRole);
     userRoles @3 :List(UInt8);
+    isModerator @4 :Bool = false;
 }
 
 enum LoginFailedReason {
@@ -197,6 +198,97 @@ struct KickedMessage {
     message @1 :Text;
 }
 
+struct NoticeMessage {
+    senderId @0 :Int32;
+    senderName @1 :Text;
+    message @2 :Text;
+    canReply @3 :Bool = false;
+}
+
+# Admin messages
+
+struct AdminLoginMessage {
+    password @0 :Text;
+}
+
+struct AdminKickMessage {
+    accountId @0 :Int32;
+    message @1 :Text;
+}
+
+struct AdminNoticeMessage {
+    accountId @0 :Int32;
+    message @1 :Text;
+    canReply @2 :Bool = false;
+}
+
+struct AdminNoticeEveryoneMessage {
+    message @0 :Text;
+}
+
+struct AdminFetchUserMessage {
+    accountId @0 :Int32;
+}
+
+struct UserPunishment {
+    issuedBy @0 :Int32;
+    issuedAt @1 :Int64;
+    reason @2 :Text;
+    expiresAt @3 :Int64;
+}
+
+struct AdminFetchResponseMessage {
+    accountId @0 :Int32;
+    found @1 :Bool;
+    whitelisted @2 :Bool;
+    roles @3 :List(UInt8);
+    activeBan @4 :UserPunishment;
+    activeRoomBan @5 :UserPunishment;
+    activeMute @6 :UserPunishment;
+}
+
+struct AdminBanMessage {
+    accountId @0 :Int32;
+    reason @1 :Text;
+    expiresAt @2 :Int64 = 0; # 0 means permanent ban
+}
+
+struct AdminUnbanMessage {
+    accountId @0 :Int32;
+}
+
+struct AdminRoomBanMessage {
+    accountId @0 :Int32;
+    reason @1 :Text;
+    expiresAt @2 :Int64 = 0; # 0 means permanent ban
+}
+
+struct AdminRoomUnbanMessage {
+    accountId @0 :Int32;
+}
+
+# TODO mute
+
+struct AdminEditRolesMessage {
+    accountId @0 :Int32;
+    roles @1 :List(UInt8);
+}
+
+struct AdminSetPasswordMessage {
+    accountId @0 :Int32;
+    newPassword @1 :Text;
+}
+
+struct AdminUpdateUserMessage {
+    accountId @0 :Int32;
+    username @1 :Text;
+}
+
+struct AdminResultMessage {
+    success @0 :Bool;
+    error @1 :Text;
+}
+
 struct Message {
     union {
         # Client messages
@@ -216,6 +308,19 @@ struct Message {
         joinSession   @12 :JoinSessionMessage;
         leaveSession  @13 :LeaveSessionMessage;
 
+        adminLogin    @25 :AdminLoginMessage;
+        adminKick     @26 :AdminKickMessage;
+        adminNotice   @27 :AdminNoticeMessage;
+        adminNoticeEveryone @28 :AdminNoticeEveryoneMessage;
+        adminFetchUser @29 :AdminFetchUserMessage;
+        adminBan      @30 :AdminBanMessage;
+        adminUnban    @31 :AdminUnbanMessage;
+        adminRoomBan  @32 :AdminRoomBanMessage;
+        adminRoomUnban @33 :AdminRoomUnbanMessage;
+        adminEditRoles @34 :AdminEditRolesMessage;
+        adminSetPassword @35 :AdminSetPasswordMessage;
+        adminUpdateUser @39 :AdminUpdateUserMessage;
+
         # Server messages
         loginOk       @3 :LoginOkMessage;
         loginFailed   @4 :LoginFailedMessage;
@@ -234,5 +339,9 @@ struct Message {
         warpPlayer    @10 :WarpPlayerMessage;
 
         kicked        @15 :KickedMessage;
+        notice        @38 :NoticeMessage;
+
+        adminResult   @36 :AdminResultMessage;
+        adminFetchResponse @37 :AdminFetchResponseMessage;
     }
 }

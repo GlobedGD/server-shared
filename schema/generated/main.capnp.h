@@ -85,6 +85,22 @@ enum class KickReason_dd60476e8cb3a480: uint16_t {
 };
 CAPNP_DECLARE_ENUM(KickReason, dd60476e8cb3a480);
 CAPNP_DECLARE_SCHEMA(ad6874573952b8c9);
+CAPNP_DECLARE_SCHEMA(aae75eac1c000a68);
+CAPNP_DECLARE_SCHEMA(98be444f11a5df16);
+CAPNP_DECLARE_SCHEMA(945c6ba9031f6b45);
+CAPNP_DECLARE_SCHEMA(85af7e66f3f02a6b);
+CAPNP_DECLARE_SCHEMA(807e4e669ff643b1);
+CAPNP_DECLARE_SCHEMA(a2ab0121cd9f02f2);
+CAPNP_DECLARE_SCHEMA(bd8811afd7bca71b);
+CAPNP_DECLARE_SCHEMA(aeadaa76cd8a73fb);
+CAPNP_DECLARE_SCHEMA(f3e9ed6f52631d00);
+CAPNP_DECLARE_SCHEMA(d5b4a9451f06c093);
+CAPNP_DECLARE_SCHEMA(8091a4ca04e25d0a);
+CAPNP_DECLARE_SCHEMA(d57f5187bd5b3167);
+CAPNP_DECLARE_SCHEMA(8e6c5f1db63d3471);
+CAPNP_DECLARE_SCHEMA(d806796e0d483927);
+CAPNP_DECLARE_SCHEMA(cc3c33b6ddb6e1a4);
+CAPNP_DECLARE_SCHEMA(911c9aa5c4c5f520);
 CAPNP_DECLARE_SCHEMA(a55b5ef7374b3a21);
 
 }  // namespace schemas
@@ -162,7 +178,7 @@ struct LoginOkMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 0, 4)
+    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 1, 4)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -509,6 +525,246 @@ struct KickedMessage {
   };
 };
 
+struct NoticeMessage {
+  NoticeMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(aae75eac1c000a68, 1, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminLoginMessage {
+  AdminLoginMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(98be444f11a5df16, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminKickMessage {
+  AdminKickMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(945c6ba9031f6b45, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminNoticeMessage {
+  AdminNoticeMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(85af7e66f3f02a6b, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminNoticeEveryoneMessage {
+  AdminNoticeEveryoneMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(807e4e669ff643b1, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminFetchUserMessage {
+  AdminFetchUserMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(a2ab0121cd9f02f2, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct UserPunishment {
+  UserPunishment() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(bd8811afd7bca71b, 3, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminFetchResponseMessage {
+  AdminFetchResponseMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(aeadaa76cd8a73fb, 1, 4)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminBanMessage {
+  AdminBanMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(f3e9ed6f52631d00, 2, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminUnbanMessage {
+  AdminUnbanMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(d5b4a9451f06c093, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminRoomBanMessage {
+  AdminRoomBanMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(8091a4ca04e25d0a, 2, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminRoomUnbanMessage {
+  AdminRoomUnbanMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(d57f5187bd5b3167, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminEditRolesMessage {
+  AdminEditRolesMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(8e6c5f1db63d3471, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminSetPasswordMessage {
+  AdminSetPasswordMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(d806796e0d483927, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminUpdateUserMessage {
+  AdminUpdateUserMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(cc3c33b6ddb6e1a4, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminResultMessage {
+  AdminResultMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(911c9aa5c4c5f520, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct Message {
   Message() = delete;
 
@@ -541,6 +797,21 @@ struct Message {
     ROOM_LIST,
     BANNED,
     ROOM_BANNED,
+    ADMIN_LOGIN,
+    ADMIN_KICK,
+    ADMIN_NOTICE,
+    ADMIN_NOTICE_EVERYONE,
+    ADMIN_FETCH_USER,
+    ADMIN_BAN,
+    ADMIN_UNBAN,
+    ADMIN_ROOM_BAN,
+    ADMIN_ROOM_UNBAN,
+    ADMIN_EDIT_ROLES,
+    ADMIN_SET_PASSWORD,
+    ADMIN_RESULT,
+    ADMIN_FETCH_RESPONSE,
+    NOTICE,
+    ADMIN_UPDATE_USER,
   };
 
   struct _capnpPrivate {
@@ -960,6 +1231,8 @@ public:
   inline bool hasUserRoles() const;
   inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getUserRoles() const;
 
+  inline bool getIsModerator() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1016,6 +1289,9 @@ public:
   inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initUserRoles(unsigned int size);
   inline void adoptUserRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownUserRoles();
+
+  inline bool getIsModerator();
+  inline void setIsModerator(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -2965,6 +3241,1427 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class NoticeMessage::Reader {
+public:
+  typedef NoticeMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getSenderId() const;
+
+  inline bool hasSenderName() const;
+  inline  ::capnp::Text::Reader getSenderName() const;
+
+  inline bool hasMessage() const;
+  inline  ::capnp::Text::Reader getMessage() const;
+
+  inline bool getCanReply() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class NoticeMessage::Builder {
+public:
+  typedef NoticeMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getSenderId();
+  inline void setSenderId( ::int32_t value);
+
+  inline bool hasSenderName();
+  inline  ::capnp::Text::Builder getSenderName();
+  inline void setSenderName( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initSenderName(unsigned int size);
+  inline void adoptSenderName(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownSenderName();
+
+  inline bool hasMessage();
+  inline  ::capnp::Text::Builder getMessage();
+  inline void setMessage( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initMessage(unsigned int size);
+  inline void adoptMessage(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownMessage();
+
+  inline bool getCanReply();
+  inline void setCanReply(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class NoticeMessage::Pipeline {
+public:
+  typedef NoticeMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminLoginMessage::Reader {
+public:
+  typedef AdminLoginMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasPassword() const;
+  inline  ::capnp::Text::Reader getPassword() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminLoginMessage::Builder {
+public:
+  typedef AdminLoginMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasPassword();
+  inline  ::capnp::Text::Builder getPassword();
+  inline void setPassword( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initPassword(unsigned int size);
+  inline void adoptPassword(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownPassword();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminLoginMessage::Pipeline {
+public:
+  typedef AdminLoginMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminKickMessage::Reader {
+public:
+  typedef AdminKickMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool hasMessage() const;
+  inline  ::capnp::Text::Reader getMessage() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminKickMessage::Builder {
+public:
+  typedef AdminKickMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool hasMessage();
+  inline  ::capnp::Text::Builder getMessage();
+  inline void setMessage( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initMessage(unsigned int size);
+  inline void adoptMessage(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownMessage();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminKickMessage::Pipeline {
+public:
+  typedef AdminKickMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminNoticeMessage::Reader {
+public:
+  typedef AdminNoticeMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool hasMessage() const;
+  inline  ::capnp::Text::Reader getMessage() const;
+
+  inline bool getCanReply() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminNoticeMessage::Builder {
+public:
+  typedef AdminNoticeMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool hasMessage();
+  inline  ::capnp::Text::Builder getMessage();
+  inline void setMessage( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initMessage(unsigned int size);
+  inline void adoptMessage(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownMessage();
+
+  inline bool getCanReply();
+  inline void setCanReply(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminNoticeMessage::Pipeline {
+public:
+  typedef AdminNoticeMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminNoticeEveryoneMessage::Reader {
+public:
+  typedef AdminNoticeEveryoneMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasMessage() const;
+  inline  ::capnp::Text::Reader getMessage() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminNoticeEveryoneMessage::Builder {
+public:
+  typedef AdminNoticeEveryoneMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasMessage();
+  inline  ::capnp::Text::Builder getMessage();
+  inline void setMessage( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initMessage(unsigned int size);
+  inline void adoptMessage(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownMessage();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminNoticeEveryoneMessage::Pipeline {
+public:
+  typedef AdminNoticeEveryoneMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminFetchUserMessage::Reader {
+public:
+  typedef AdminFetchUserMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminFetchUserMessage::Builder {
+public:
+  typedef AdminFetchUserMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminFetchUserMessage::Pipeline {
+public:
+  typedef AdminFetchUserMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class UserPunishment::Reader {
+public:
+  typedef UserPunishment Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getIssuedBy() const;
+
+  inline  ::int64_t getIssuedAt() const;
+
+  inline bool hasReason() const;
+  inline  ::capnp::Text::Reader getReason() const;
+
+  inline  ::int64_t getExpiresAt() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class UserPunishment::Builder {
+public:
+  typedef UserPunishment Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getIssuedBy();
+  inline void setIssuedBy( ::int32_t value);
+
+  inline  ::int64_t getIssuedAt();
+  inline void setIssuedAt( ::int64_t value);
+
+  inline bool hasReason();
+  inline  ::capnp::Text::Builder getReason();
+  inline void setReason( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initReason(unsigned int size);
+  inline void adoptReason(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownReason();
+
+  inline  ::int64_t getExpiresAt();
+  inline void setExpiresAt( ::int64_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class UserPunishment::Pipeline {
+public:
+  typedef UserPunishment Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminFetchResponseMessage::Reader {
+public:
+  typedef AdminFetchResponseMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool getFound() const;
+
+  inline bool getWhitelisted() const;
+
+  inline bool hasRoles() const;
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getRoles() const;
+
+  inline bool hasActiveBan() const;
+  inline  ::globed::schema::main::UserPunishment::Reader getActiveBan() const;
+
+  inline bool hasActiveRoomBan() const;
+  inline  ::globed::schema::main::UserPunishment::Reader getActiveRoomBan() const;
+
+  inline bool hasActiveMute() const;
+  inline  ::globed::schema::main::UserPunishment::Reader getActiveMute() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminFetchResponseMessage::Builder {
+public:
+  typedef AdminFetchResponseMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool getFound();
+  inline void setFound(bool value);
+
+  inline bool getWhitelisted();
+  inline void setWhitelisted(bool value);
+
+  inline bool hasRoles();
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getRoles();
+  inline void setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setRoles(::kj::ArrayPtr<const  ::uint8_t> value);
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initRoles(unsigned int size);
+  inline void adoptRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownRoles();
+
+  inline bool hasActiveBan();
+  inline  ::globed::schema::main::UserPunishment::Builder getActiveBan();
+  inline void setActiveBan( ::globed::schema::main::UserPunishment::Reader value);
+  inline  ::globed::schema::main::UserPunishment::Builder initActiveBan();
+  inline void adoptActiveBan(::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> disownActiveBan();
+
+  inline bool hasActiveRoomBan();
+  inline  ::globed::schema::main::UserPunishment::Builder getActiveRoomBan();
+  inline void setActiveRoomBan( ::globed::schema::main::UserPunishment::Reader value);
+  inline  ::globed::schema::main::UserPunishment::Builder initActiveRoomBan();
+  inline void adoptActiveRoomBan(::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> disownActiveRoomBan();
+
+  inline bool hasActiveMute();
+  inline  ::globed::schema::main::UserPunishment::Builder getActiveMute();
+  inline void setActiveMute( ::globed::schema::main::UserPunishment::Reader value);
+  inline  ::globed::schema::main::UserPunishment::Builder initActiveMute();
+  inline void adoptActiveMute(::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> disownActiveMute();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminFetchResponseMessage::Pipeline {
+public:
+  typedef AdminFetchResponseMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::main::UserPunishment::Pipeline getActiveBan();
+  inline  ::globed::schema::main::UserPunishment::Pipeline getActiveRoomBan();
+  inline  ::globed::schema::main::UserPunishment::Pipeline getActiveMute();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminBanMessage::Reader {
+public:
+  typedef AdminBanMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool hasReason() const;
+  inline  ::capnp::Text::Reader getReason() const;
+
+  inline  ::int64_t getExpiresAt() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminBanMessage::Builder {
+public:
+  typedef AdminBanMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool hasReason();
+  inline  ::capnp::Text::Builder getReason();
+  inline void setReason( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initReason(unsigned int size);
+  inline void adoptReason(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownReason();
+
+  inline  ::int64_t getExpiresAt();
+  inline void setExpiresAt( ::int64_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminBanMessage::Pipeline {
+public:
+  typedef AdminBanMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminUnbanMessage::Reader {
+public:
+  typedef AdminUnbanMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminUnbanMessage::Builder {
+public:
+  typedef AdminUnbanMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminUnbanMessage::Pipeline {
+public:
+  typedef AdminUnbanMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminRoomBanMessage::Reader {
+public:
+  typedef AdminRoomBanMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool hasReason() const;
+  inline  ::capnp::Text::Reader getReason() const;
+
+  inline  ::int64_t getExpiresAt() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminRoomBanMessage::Builder {
+public:
+  typedef AdminRoomBanMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool hasReason();
+  inline  ::capnp::Text::Builder getReason();
+  inline void setReason( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initReason(unsigned int size);
+  inline void adoptReason(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownReason();
+
+  inline  ::int64_t getExpiresAt();
+  inline void setExpiresAt( ::int64_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminRoomBanMessage::Pipeline {
+public:
+  typedef AdminRoomBanMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminRoomUnbanMessage::Reader {
+public:
+  typedef AdminRoomUnbanMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminRoomUnbanMessage::Builder {
+public:
+  typedef AdminRoomUnbanMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminRoomUnbanMessage::Pipeline {
+public:
+  typedef AdminRoomUnbanMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminEditRolesMessage::Reader {
+public:
+  typedef AdminEditRolesMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool hasRoles() const;
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getRoles() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminEditRolesMessage::Builder {
+public:
+  typedef AdminEditRolesMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool hasRoles();
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getRoles();
+  inline void setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setRoles(::kj::ArrayPtr<const  ::uint8_t> value);
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initRoles(unsigned int size);
+  inline void adoptRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownRoles();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminEditRolesMessage::Pipeline {
+public:
+  typedef AdminEditRolesMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminSetPasswordMessage::Reader {
+public:
+  typedef AdminSetPasswordMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool hasNewPassword() const;
+  inline  ::capnp::Text::Reader getNewPassword() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminSetPasswordMessage::Builder {
+public:
+  typedef AdminSetPasswordMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool hasNewPassword();
+  inline  ::capnp::Text::Builder getNewPassword();
+  inline void setNewPassword( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initNewPassword(unsigned int size);
+  inline void adoptNewPassword(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownNewPassword();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminSetPasswordMessage::Pipeline {
+public:
+  typedef AdminSetPasswordMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminUpdateUserMessage::Reader {
+public:
+  typedef AdminUpdateUserMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool hasUsername() const;
+  inline  ::capnp::Text::Reader getUsername() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminUpdateUserMessage::Builder {
+public:
+  typedef AdminUpdateUserMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool hasUsername();
+  inline  ::capnp::Text::Builder getUsername();
+  inline void setUsername( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initUsername(unsigned int size);
+  inline void adoptUsername(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownUsername();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminUpdateUserMessage::Pipeline {
+public:
+  typedef AdminUpdateUserMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminResultMessage::Reader {
+public:
+  typedef AdminResultMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool getSuccess() const;
+
+  inline bool hasError() const;
+  inline  ::capnp::Text::Reader getError() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminResultMessage::Builder {
+public:
+  typedef AdminResultMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool getSuccess();
+  inline void setSuccess(bool value);
+
+  inline bool hasError();
+  inline  ::capnp::Text::Builder getError();
+  inline void setError( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initError(unsigned int size);
+  inline void adoptError(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownError();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminResultMessage::Pipeline {
+public:
+  typedef AdminResultMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class Message::Reader {
 public:
   typedef Message Reads;
@@ -3080,6 +4777,66 @@ public:
   inline bool isRoomBanned() const;
   inline bool hasRoomBanned() const;
   inline  ::globed::schema::main::RoomBannedMessage::Reader getRoomBanned() const;
+
+  inline bool isAdminLogin() const;
+  inline bool hasAdminLogin() const;
+  inline  ::globed::schema::main::AdminLoginMessage::Reader getAdminLogin() const;
+
+  inline bool isAdminKick() const;
+  inline bool hasAdminKick() const;
+  inline  ::globed::schema::main::AdminKickMessage::Reader getAdminKick() const;
+
+  inline bool isAdminNotice() const;
+  inline bool hasAdminNotice() const;
+  inline  ::globed::schema::main::AdminNoticeMessage::Reader getAdminNotice() const;
+
+  inline bool isAdminNoticeEveryone() const;
+  inline bool hasAdminNoticeEveryone() const;
+  inline  ::globed::schema::main::AdminNoticeEveryoneMessage::Reader getAdminNoticeEveryone() const;
+
+  inline bool isAdminFetchUser() const;
+  inline bool hasAdminFetchUser() const;
+  inline  ::globed::schema::main::AdminFetchUserMessage::Reader getAdminFetchUser() const;
+
+  inline bool isAdminBan() const;
+  inline bool hasAdminBan() const;
+  inline  ::globed::schema::main::AdminBanMessage::Reader getAdminBan() const;
+
+  inline bool isAdminUnban() const;
+  inline bool hasAdminUnban() const;
+  inline  ::globed::schema::main::AdminUnbanMessage::Reader getAdminUnban() const;
+
+  inline bool isAdminRoomBan() const;
+  inline bool hasAdminRoomBan() const;
+  inline  ::globed::schema::main::AdminRoomBanMessage::Reader getAdminRoomBan() const;
+
+  inline bool isAdminRoomUnban() const;
+  inline bool hasAdminRoomUnban() const;
+  inline  ::globed::schema::main::AdminRoomUnbanMessage::Reader getAdminRoomUnban() const;
+
+  inline bool isAdminEditRoles() const;
+  inline bool hasAdminEditRoles() const;
+  inline  ::globed::schema::main::AdminEditRolesMessage::Reader getAdminEditRoles() const;
+
+  inline bool isAdminSetPassword() const;
+  inline bool hasAdminSetPassword() const;
+  inline  ::globed::schema::main::AdminSetPasswordMessage::Reader getAdminSetPassword() const;
+
+  inline bool isAdminResult() const;
+  inline bool hasAdminResult() const;
+  inline  ::globed::schema::main::AdminResultMessage::Reader getAdminResult() const;
+
+  inline bool isAdminFetchResponse() const;
+  inline bool hasAdminFetchResponse() const;
+  inline  ::globed::schema::main::AdminFetchResponseMessage::Reader getAdminFetchResponse() const;
+
+  inline bool isNotice() const;
+  inline bool hasNotice() const;
+  inline  ::globed::schema::main::NoticeMessage::Reader getNotice() const;
+
+  inline bool isAdminUpdateUser() const;
+  inline bool hasAdminUpdateUser() const;
+  inline  ::globed::schema::main::AdminUpdateUserMessage::Reader getAdminUpdateUser() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -3301,6 +5058,126 @@ public:
   inline  ::globed::schema::main::RoomBannedMessage::Builder initRoomBanned();
   inline void adoptRoomBanned(::capnp::Orphan< ::globed::schema::main::RoomBannedMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage> disownRoomBanned();
+
+  inline bool isAdminLogin();
+  inline bool hasAdminLogin();
+  inline  ::globed::schema::main::AdminLoginMessage::Builder getAdminLogin();
+  inline void setAdminLogin( ::globed::schema::main::AdminLoginMessage::Reader value);
+  inline  ::globed::schema::main::AdminLoginMessage::Builder initAdminLogin();
+  inline void adoptAdminLogin(::capnp::Orphan< ::globed::schema::main::AdminLoginMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminLoginMessage> disownAdminLogin();
+
+  inline bool isAdminKick();
+  inline bool hasAdminKick();
+  inline  ::globed::schema::main::AdminKickMessage::Builder getAdminKick();
+  inline void setAdminKick( ::globed::schema::main::AdminKickMessage::Reader value);
+  inline  ::globed::schema::main::AdminKickMessage::Builder initAdminKick();
+  inline void adoptAdminKick(::capnp::Orphan< ::globed::schema::main::AdminKickMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminKickMessage> disownAdminKick();
+
+  inline bool isAdminNotice();
+  inline bool hasAdminNotice();
+  inline  ::globed::schema::main::AdminNoticeMessage::Builder getAdminNotice();
+  inline void setAdminNotice( ::globed::schema::main::AdminNoticeMessage::Reader value);
+  inline  ::globed::schema::main::AdminNoticeMessage::Builder initAdminNotice();
+  inline void adoptAdminNotice(::capnp::Orphan< ::globed::schema::main::AdminNoticeMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminNoticeMessage> disownAdminNotice();
+
+  inline bool isAdminNoticeEveryone();
+  inline bool hasAdminNoticeEveryone();
+  inline  ::globed::schema::main::AdminNoticeEveryoneMessage::Builder getAdminNoticeEveryone();
+  inline void setAdminNoticeEveryone( ::globed::schema::main::AdminNoticeEveryoneMessage::Reader value);
+  inline  ::globed::schema::main::AdminNoticeEveryoneMessage::Builder initAdminNoticeEveryone();
+  inline void adoptAdminNoticeEveryone(::capnp::Orphan< ::globed::schema::main::AdminNoticeEveryoneMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminNoticeEveryoneMessage> disownAdminNoticeEveryone();
+
+  inline bool isAdminFetchUser();
+  inline bool hasAdminFetchUser();
+  inline  ::globed::schema::main::AdminFetchUserMessage::Builder getAdminFetchUser();
+  inline void setAdminFetchUser( ::globed::schema::main::AdminFetchUserMessage::Reader value);
+  inline  ::globed::schema::main::AdminFetchUserMessage::Builder initAdminFetchUser();
+  inline void adoptAdminFetchUser(::capnp::Orphan< ::globed::schema::main::AdminFetchUserMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchUserMessage> disownAdminFetchUser();
+
+  inline bool isAdminBan();
+  inline bool hasAdminBan();
+  inline  ::globed::schema::main::AdminBanMessage::Builder getAdminBan();
+  inline void setAdminBan( ::globed::schema::main::AdminBanMessage::Reader value);
+  inline  ::globed::schema::main::AdminBanMessage::Builder initAdminBan();
+  inline void adoptAdminBan(::capnp::Orphan< ::globed::schema::main::AdminBanMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminBanMessage> disownAdminBan();
+
+  inline bool isAdminUnban();
+  inline bool hasAdminUnban();
+  inline  ::globed::schema::main::AdminUnbanMessage::Builder getAdminUnban();
+  inline void setAdminUnban( ::globed::schema::main::AdminUnbanMessage::Reader value);
+  inline  ::globed::schema::main::AdminUnbanMessage::Builder initAdminUnban();
+  inline void adoptAdminUnban(::capnp::Orphan< ::globed::schema::main::AdminUnbanMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminUnbanMessage> disownAdminUnban();
+
+  inline bool isAdminRoomBan();
+  inline bool hasAdminRoomBan();
+  inline  ::globed::schema::main::AdminRoomBanMessage::Builder getAdminRoomBan();
+  inline void setAdminRoomBan( ::globed::schema::main::AdminRoomBanMessage::Reader value);
+  inline  ::globed::schema::main::AdminRoomBanMessage::Builder initAdminRoomBan();
+  inline void adoptAdminRoomBan(::capnp::Orphan< ::globed::schema::main::AdminRoomBanMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminRoomBanMessage> disownAdminRoomBan();
+
+  inline bool isAdminRoomUnban();
+  inline bool hasAdminRoomUnban();
+  inline  ::globed::schema::main::AdminRoomUnbanMessage::Builder getAdminRoomUnban();
+  inline void setAdminRoomUnban( ::globed::schema::main::AdminRoomUnbanMessage::Reader value);
+  inline  ::globed::schema::main::AdminRoomUnbanMessage::Builder initAdminRoomUnban();
+  inline void adoptAdminRoomUnban(::capnp::Orphan< ::globed::schema::main::AdminRoomUnbanMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminRoomUnbanMessage> disownAdminRoomUnban();
+
+  inline bool isAdminEditRoles();
+  inline bool hasAdminEditRoles();
+  inline  ::globed::schema::main::AdminEditRolesMessage::Builder getAdminEditRoles();
+  inline void setAdminEditRoles( ::globed::schema::main::AdminEditRolesMessage::Reader value);
+  inline  ::globed::schema::main::AdminEditRolesMessage::Builder initAdminEditRoles();
+  inline void adoptAdminEditRoles(::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage> disownAdminEditRoles();
+
+  inline bool isAdminSetPassword();
+  inline bool hasAdminSetPassword();
+  inline  ::globed::schema::main::AdminSetPasswordMessage::Builder getAdminSetPassword();
+  inline void setAdminSetPassword( ::globed::schema::main::AdminSetPasswordMessage::Reader value);
+  inline  ::globed::schema::main::AdminSetPasswordMessage::Builder initAdminSetPassword();
+  inline void adoptAdminSetPassword(::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage> disownAdminSetPassword();
+
+  inline bool isAdminResult();
+  inline bool hasAdminResult();
+  inline  ::globed::schema::main::AdminResultMessage::Builder getAdminResult();
+  inline void setAdminResult( ::globed::schema::main::AdminResultMessage::Reader value);
+  inline  ::globed::schema::main::AdminResultMessage::Builder initAdminResult();
+  inline void adoptAdminResult(::capnp::Orphan< ::globed::schema::main::AdminResultMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminResultMessage> disownAdminResult();
+
+  inline bool isAdminFetchResponse();
+  inline bool hasAdminFetchResponse();
+  inline  ::globed::schema::main::AdminFetchResponseMessage::Builder getAdminFetchResponse();
+  inline void setAdminFetchResponse( ::globed::schema::main::AdminFetchResponseMessage::Reader value);
+  inline  ::globed::schema::main::AdminFetchResponseMessage::Builder initAdminFetchResponse();
+  inline void adoptAdminFetchResponse(::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage> disownAdminFetchResponse();
+
+  inline bool isNotice();
+  inline bool hasNotice();
+  inline  ::globed::schema::main::NoticeMessage::Builder getNotice();
+  inline void setNotice( ::globed::schema::main::NoticeMessage::Reader value);
+  inline  ::globed::schema::main::NoticeMessage::Builder initNotice();
+  inline void adoptNotice(::capnp::Orphan< ::globed::schema::main::NoticeMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::NoticeMessage> disownNotice();
+
+  inline bool isAdminUpdateUser();
+  inline bool hasAdminUpdateUser();
+  inline  ::globed::schema::main::AdminUpdateUserMessage::Builder getAdminUpdateUser();
+  inline void setAdminUpdateUser( ::globed::schema::main::AdminUpdateUserMessage::Reader value);
+  inline  ::globed::schema::main::AdminUpdateUserMessage::Builder initAdminUpdateUser();
+  inline void adoptAdminUpdateUser(::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage> disownAdminUpdateUser();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3782,6 +5659,20 @@ inline void LoginOkMessage::Builder::adoptUserRoles(
 inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> LoginOkMessage::Builder::disownUserRoles() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
       ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+
+inline bool LoginOkMessage::Reader::getIsModerator() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getIsModerator() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setIsModerator(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::main::LoginFailedReason LoginFailedMessage::Reader::getReason() const {
@@ -4920,6 +6811,915 @@ inline void KickedMessage::Builder::adoptMessage(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
 inline ::capnp::Orphan< ::capnp::Text> KickedMessage::Builder::disownMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t NoticeMessage::Reader::getSenderId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t NoticeMessage::Builder::getSenderId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void NoticeMessage::Builder::setSenderId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool NoticeMessage::Reader::hasSenderName() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool NoticeMessage::Builder::hasSenderName() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader NoticeMessage::Reader::getSenderName() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder NoticeMessage::Builder::getSenderName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void NoticeMessage::Builder::setSenderName( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder NoticeMessage::Builder::initSenderName(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void NoticeMessage::Builder::adoptSenderName(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> NoticeMessage::Builder::disownSenderName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool NoticeMessage::Reader::hasMessage() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool NoticeMessage::Builder::hasMessage() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader NoticeMessage::Reader::getMessage() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder NoticeMessage::Builder::getMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void NoticeMessage::Builder::setMessage( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder NoticeMessage::Builder::initMessage(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void NoticeMessage::Builder::adoptMessage(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> NoticeMessage::Builder::disownMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool NoticeMessage::Reader::getCanReply() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+
+inline bool NoticeMessage::Builder::getCanReply() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+inline void NoticeMessage::Builder::setCanReply(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminLoginMessage::Reader::hasPassword() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminLoginMessage::Builder::hasPassword() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminLoginMessage::Reader::getPassword() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminLoginMessage::Builder::getPassword() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminLoginMessage::Builder::setPassword( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminLoginMessage::Builder::initPassword(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminLoginMessage::Builder::adoptPassword(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminLoginMessage::Builder::disownPassword() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t AdminKickMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminKickMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminKickMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminKickMessage::Reader::hasMessage() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminKickMessage::Builder::hasMessage() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminKickMessage::Reader::getMessage() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminKickMessage::Builder::getMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminKickMessage::Builder::setMessage( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminKickMessage::Builder::initMessage(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminKickMessage::Builder::adoptMessage(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminKickMessage::Builder::disownMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t AdminNoticeMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminNoticeMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminNoticeMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminNoticeMessage::Reader::hasMessage() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminNoticeMessage::Builder::hasMessage() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminNoticeMessage::Reader::getMessage() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminNoticeMessage::Builder::getMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminNoticeMessage::Builder::setMessage( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminNoticeMessage::Builder::initMessage(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminNoticeMessage::Builder::adoptMessage(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminNoticeMessage::Builder::disownMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool AdminNoticeMessage::Reader::getCanReply() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+
+inline bool AdminNoticeMessage::Builder::getCanReply() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+inline void AdminNoticeMessage::Builder::setCanReply(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminNoticeEveryoneMessage::Reader::hasMessage() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminNoticeEveryoneMessage::Builder::hasMessage() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminNoticeEveryoneMessage::Reader::getMessage() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminNoticeEveryoneMessage::Builder::getMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminNoticeEveryoneMessage::Builder::setMessage( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminNoticeEveryoneMessage::Builder::initMessage(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminNoticeEveryoneMessage::Builder::adoptMessage(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminNoticeEveryoneMessage::Builder::disownMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t AdminFetchUserMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminFetchUserMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminFetchUserMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t UserPunishment::Reader::getIssuedBy() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t UserPunishment::Builder::getIssuedBy() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void UserPunishment::Builder::setIssuedBy( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int64_t UserPunishment::Reader::getIssuedAt() const {
+  return _reader.getDataField< ::int64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int64_t UserPunishment::Builder::getIssuedAt() {
+  return _builder.getDataField< ::int64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void UserPunishment::Builder::setIssuedAt( ::int64_t value) {
+  _builder.setDataField< ::int64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserPunishment::Reader::hasReason() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool UserPunishment::Builder::hasReason() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader UserPunishment::Reader::getReason() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder UserPunishment::Builder::getReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void UserPunishment::Builder::setReason( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder UserPunishment::Builder::initReason(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void UserPunishment::Builder::adoptReason(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> UserPunishment::Builder::disownReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int64_t UserPunishment::Reader::getExpiresAt() const {
+  return _reader.getDataField< ::int64_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int64_t UserPunishment::Builder::getExpiresAt() {
+  return _builder.getDataField< ::int64_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void UserPunishment::Builder::setExpiresAt( ::int64_t value) {
+  _builder.setDataField< ::int64_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t AdminFetchResponseMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminFetchResponseMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminFetchResponseMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminFetchResponseMessage::Reader::getFound() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+
+inline bool AdminFetchResponseMessage::Builder::getFound() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+inline void AdminFetchResponseMessage::Builder::setFound(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminFetchResponseMessage::Reader::getWhitelisted() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+}
+
+inline bool AdminFetchResponseMessage::Builder::getWhitelisted() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+}
+inline void AdminFetchResponseMessage::Builder::setWhitelisted(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminFetchResponseMessage::Reader::hasRoles() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminFetchResponseMessage::Builder::hasRoles() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader AdminFetchResponseMessage::Reader::getRoles() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder AdminFetchResponseMessage::Builder::getRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminFetchResponseMessage::Builder::setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void AdminFetchResponseMessage::Builder::setRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder AdminFetchResponseMessage::Builder::initRoles(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminFetchResponseMessage::Builder::adoptRoles(
+    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> AdminFetchResponseMessage::Builder::disownRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool AdminFetchResponseMessage::Reader::hasActiveBan() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminFetchResponseMessage::Builder::hasActiveBan() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UserPunishment::Reader AdminFetchResponseMessage::Reader::getActiveBan() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UserPunishment::Builder AdminFetchResponseMessage::Builder::getActiveBan() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::UserPunishment::Pipeline AdminFetchResponseMessage::Pipeline::getActiveBan() {
+  return  ::globed::schema::main::UserPunishment::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void AdminFetchResponseMessage::Builder::setActiveBan( ::globed::schema::main::UserPunishment::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UserPunishment::Builder AdminFetchResponseMessage::Builder::initActiveBan() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void AdminFetchResponseMessage::Builder::adoptActiveBan(
+    ::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> AdminFetchResponseMessage::Builder::disownActiveBan() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool AdminFetchResponseMessage::Reader::hasActiveRoomBan() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminFetchResponseMessage::Builder::hasActiveRoomBan() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UserPunishment::Reader AdminFetchResponseMessage::Reader::getActiveRoomBan() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UserPunishment::Builder AdminFetchResponseMessage::Builder::getActiveRoomBan() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::UserPunishment::Pipeline AdminFetchResponseMessage::Pipeline::getActiveRoomBan() {
+  return  ::globed::schema::main::UserPunishment::Pipeline(_typeless.getPointerField(2));
+}
+#endif  // !CAPNP_LITE
+inline void AdminFetchResponseMessage::Builder::setActiveRoomBan( ::globed::schema::main::UserPunishment::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UserPunishment::Builder AdminFetchResponseMessage::Builder::initActiveRoomBan() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void AdminFetchResponseMessage::Builder::adoptActiveRoomBan(
+    ::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> AdminFetchResponseMessage::Builder::disownActiveRoomBan() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline bool AdminFetchResponseMessage::Reader::hasActiveMute() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminFetchResponseMessage::Builder::hasActiveMute() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UserPunishment::Reader AdminFetchResponseMessage::Reader::getActiveMute() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_reader.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UserPunishment::Builder AdminFetchResponseMessage::Builder::getActiveMute() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::UserPunishment::Pipeline AdminFetchResponseMessage::Pipeline::getActiveMute() {
+  return  ::globed::schema::main::UserPunishment::Pipeline(_typeless.getPointerField(3));
+}
+#endif  // !CAPNP_LITE
+inline void AdminFetchResponseMessage::Builder::setActiveMute( ::globed::schema::main::UserPunishment::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::set(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UserPunishment::Builder AdminFetchResponseMessage::Builder::initActiveMute() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::init(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+inline void AdminFetchResponseMessage::Builder::adoptActiveMute(
+    ::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::adopt(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> AdminFetchResponseMessage::Builder::disownActiveMute() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::disown(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t AdminBanMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminBanMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminBanMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminBanMessage::Reader::hasReason() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminBanMessage::Builder::hasReason() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminBanMessage::Reader::getReason() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminBanMessage::Builder::getReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminBanMessage::Builder::setReason( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminBanMessage::Builder::initReason(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminBanMessage::Builder::adoptReason(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminBanMessage::Builder::disownReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int64_t AdminBanMessage::Reader::getExpiresAt() const {
+  return _reader.getDataField< ::int64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int64_t AdminBanMessage::Builder::getExpiresAt() {
+  return _builder.getDataField< ::int64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void AdminBanMessage::Builder::setExpiresAt( ::int64_t value) {
+  _builder.setDataField< ::int64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t AdminUnbanMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminUnbanMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminUnbanMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t AdminRoomBanMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminRoomBanMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminRoomBanMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminRoomBanMessage::Reader::hasReason() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminRoomBanMessage::Builder::hasReason() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminRoomBanMessage::Reader::getReason() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminRoomBanMessage::Builder::getReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminRoomBanMessage::Builder::setReason( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminRoomBanMessage::Builder::initReason(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminRoomBanMessage::Builder::adoptReason(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminRoomBanMessage::Builder::disownReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int64_t AdminRoomBanMessage::Reader::getExpiresAt() const {
+  return _reader.getDataField< ::int64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int64_t AdminRoomBanMessage::Builder::getExpiresAt() {
+  return _builder.getDataField< ::int64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void AdminRoomBanMessage::Builder::setExpiresAt( ::int64_t value) {
+  _builder.setDataField< ::int64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t AdminRoomUnbanMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminRoomUnbanMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminRoomUnbanMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t AdminEditRolesMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminEditRolesMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminEditRolesMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminEditRolesMessage::Reader::hasRoles() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminEditRolesMessage::Builder::hasRoles() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader AdminEditRolesMessage::Reader::getRoles() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder AdminEditRolesMessage::Builder::getRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminEditRolesMessage::Builder::setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void AdminEditRolesMessage::Builder::setRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder AdminEditRolesMessage::Builder::initRoles(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminEditRolesMessage::Builder::adoptRoles(
+    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> AdminEditRolesMessage::Builder::disownRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t AdminSetPasswordMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminSetPasswordMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminSetPasswordMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminSetPasswordMessage::Reader::hasNewPassword() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminSetPasswordMessage::Builder::hasNewPassword() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminSetPasswordMessage::Reader::getNewPassword() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminSetPasswordMessage::Builder::getNewPassword() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminSetPasswordMessage::Builder::setNewPassword( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminSetPasswordMessage::Builder::initNewPassword(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminSetPasswordMessage::Builder::adoptNewPassword(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminSetPasswordMessage::Builder::disownNewPassword() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t AdminUpdateUserMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminUpdateUserMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminUpdateUserMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminUpdateUserMessage::Reader::hasUsername() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminUpdateUserMessage::Builder::hasUsername() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminUpdateUserMessage::Reader::getUsername() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminUpdateUserMessage::Builder::getUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminUpdateUserMessage::Builder::setUsername( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminUpdateUserMessage::Builder::initUsername(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminUpdateUserMessage::Builder::adoptUsername(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminUpdateUserMessage::Builder::disownUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool AdminResultMessage::Reader::getSuccess() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline bool AdminResultMessage::Builder::getSuccess() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminResultMessage::Builder::setSuccess(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminResultMessage::Reader::hasError() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminResultMessage::Builder::hasError() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminResultMessage::Reader::getError() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminResultMessage::Builder::getError() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminResultMessage::Builder::setError( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminResultMessage::Builder::initError(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminResultMessage::Builder::adoptError(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminResultMessage::Builder::disownError() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
@@ -6224,6 +9024,816 @@ inline ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage> Message::Buil
   KJ_IREQUIRE((which() == Message::ROOM_BANNED),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminLogin() const {
+  return which() == Message::ADMIN_LOGIN;
+}
+inline bool Message::Builder::isAdminLogin() {
+  return which() == Message::ADMIN_LOGIN;
+}
+inline bool Message::Reader::hasAdminLogin() const {
+  if (which() != Message::ADMIN_LOGIN) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminLogin() {
+  if (which() != Message::ADMIN_LOGIN) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminLoginMessage::Reader Message::Reader::getAdminLogin() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_LOGIN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLoginMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminLoginMessage::Builder Message::Builder::getAdminLogin() {
+  KJ_IREQUIRE((which() == Message::ADMIN_LOGIN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLoginMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminLogin( ::globed::schema::main::AdminLoginMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_LOGIN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLoginMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminLoginMessage::Builder Message::Builder::initAdminLogin() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_LOGIN);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLoginMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminLogin(
+    ::capnp::Orphan< ::globed::schema::main::AdminLoginMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_LOGIN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLoginMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminLoginMessage> Message::Builder::disownAdminLogin() {
+  KJ_IREQUIRE((which() == Message::ADMIN_LOGIN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLoginMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminKick() const {
+  return which() == Message::ADMIN_KICK;
+}
+inline bool Message::Builder::isAdminKick() {
+  return which() == Message::ADMIN_KICK;
+}
+inline bool Message::Reader::hasAdminKick() const {
+  if (which() != Message::ADMIN_KICK) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminKick() {
+  if (which() != Message::ADMIN_KICK) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminKickMessage::Reader Message::Reader::getAdminKick() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_KICK),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminKickMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminKickMessage::Builder Message::Builder::getAdminKick() {
+  KJ_IREQUIRE((which() == Message::ADMIN_KICK),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminKickMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminKick( ::globed::schema::main::AdminKickMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_KICK);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminKickMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminKickMessage::Builder Message::Builder::initAdminKick() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_KICK);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminKickMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminKick(
+    ::capnp::Orphan< ::globed::schema::main::AdminKickMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_KICK);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminKickMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminKickMessage> Message::Builder::disownAdminKick() {
+  KJ_IREQUIRE((which() == Message::ADMIN_KICK),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminKickMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminNotice() const {
+  return which() == Message::ADMIN_NOTICE;
+}
+inline bool Message::Builder::isAdminNotice() {
+  return which() == Message::ADMIN_NOTICE;
+}
+inline bool Message::Reader::hasAdminNotice() const {
+  if (which() != Message::ADMIN_NOTICE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminNotice() {
+  if (which() != Message::ADMIN_NOTICE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminNoticeMessage::Reader Message::Reader::getAdminNotice() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_NOTICE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminNoticeMessage::Builder Message::Builder::getAdminNotice() {
+  KJ_IREQUIRE((which() == Message::ADMIN_NOTICE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminNotice( ::globed::schema::main::AdminNoticeMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_NOTICE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminNoticeMessage::Builder Message::Builder::initAdminNotice() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_NOTICE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminNotice(
+    ::capnp::Orphan< ::globed::schema::main::AdminNoticeMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_NOTICE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminNoticeMessage> Message::Builder::disownAdminNotice() {
+  KJ_IREQUIRE((which() == Message::ADMIN_NOTICE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminNoticeEveryone() const {
+  return which() == Message::ADMIN_NOTICE_EVERYONE;
+}
+inline bool Message::Builder::isAdminNoticeEveryone() {
+  return which() == Message::ADMIN_NOTICE_EVERYONE;
+}
+inline bool Message::Reader::hasAdminNoticeEveryone() const {
+  if (which() != Message::ADMIN_NOTICE_EVERYONE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminNoticeEveryone() {
+  if (which() != Message::ADMIN_NOTICE_EVERYONE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminNoticeEveryoneMessage::Reader Message::Reader::getAdminNoticeEveryone() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_NOTICE_EVERYONE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeEveryoneMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminNoticeEveryoneMessage::Builder Message::Builder::getAdminNoticeEveryone() {
+  KJ_IREQUIRE((which() == Message::ADMIN_NOTICE_EVERYONE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeEveryoneMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminNoticeEveryone( ::globed::schema::main::AdminNoticeEveryoneMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_NOTICE_EVERYONE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeEveryoneMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminNoticeEveryoneMessage::Builder Message::Builder::initAdminNoticeEveryone() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_NOTICE_EVERYONE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeEveryoneMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminNoticeEveryone(
+    ::capnp::Orphan< ::globed::schema::main::AdminNoticeEveryoneMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_NOTICE_EVERYONE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeEveryoneMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminNoticeEveryoneMessage> Message::Builder::disownAdminNoticeEveryone() {
+  KJ_IREQUIRE((which() == Message::ADMIN_NOTICE_EVERYONE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminNoticeEveryoneMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminFetchUser() const {
+  return which() == Message::ADMIN_FETCH_USER;
+}
+inline bool Message::Builder::isAdminFetchUser() {
+  return which() == Message::ADMIN_FETCH_USER;
+}
+inline bool Message::Reader::hasAdminFetchUser() const {
+  if (which() != Message::ADMIN_FETCH_USER) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminFetchUser() {
+  if (which() != Message::ADMIN_FETCH_USER) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminFetchUserMessage::Reader Message::Reader::getAdminFetchUser() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchUserMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminFetchUserMessage::Builder Message::Builder::getAdminFetchUser() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchUserMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminFetchUser( ::globed::schema::main::AdminFetchUserMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchUserMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminFetchUserMessage::Builder Message::Builder::initAdminFetchUser() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_USER);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchUserMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminFetchUser(
+    ::capnp::Orphan< ::globed::schema::main::AdminFetchUserMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchUserMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminFetchUserMessage> Message::Builder::disownAdminFetchUser() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchUserMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminBan() const {
+  return which() == Message::ADMIN_BAN;
+}
+inline bool Message::Builder::isAdminBan() {
+  return which() == Message::ADMIN_BAN;
+}
+inline bool Message::Reader::hasAdminBan() const {
+  if (which() != Message::ADMIN_BAN) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminBan() {
+  if (which() != Message::ADMIN_BAN) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminBanMessage::Reader Message::Reader::getAdminBan() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_BAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminBanMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminBanMessage::Builder Message::Builder::getAdminBan() {
+  KJ_IREQUIRE((which() == Message::ADMIN_BAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminBanMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminBan( ::globed::schema::main::AdminBanMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_BAN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminBanMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminBanMessage::Builder Message::Builder::initAdminBan() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_BAN);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminBanMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminBan(
+    ::capnp::Orphan< ::globed::schema::main::AdminBanMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_BAN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminBanMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminBanMessage> Message::Builder::disownAdminBan() {
+  KJ_IREQUIRE((which() == Message::ADMIN_BAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminBanMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminUnban() const {
+  return which() == Message::ADMIN_UNBAN;
+}
+inline bool Message::Builder::isAdminUnban() {
+  return which() == Message::ADMIN_UNBAN;
+}
+inline bool Message::Reader::hasAdminUnban() const {
+  if (which() != Message::ADMIN_UNBAN) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminUnban() {
+  if (which() != Message::ADMIN_UNBAN) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminUnbanMessage::Reader Message::Reader::getAdminUnban() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_UNBAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUnbanMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminUnbanMessage::Builder Message::Builder::getAdminUnban() {
+  KJ_IREQUIRE((which() == Message::ADMIN_UNBAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUnbanMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminUnban( ::globed::schema::main::AdminUnbanMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UNBAN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUnbanMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminUnbanMessage::Builder Message::Builder::initAdminUnban() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UNBAN);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUnbanMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminUnban(
+    ::capnp::Orphan< ::globed::schema::main::AdminUnbanMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UNBAN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUnbanMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminUnbanMessage> Message::Builder::disownAdminUnban() {
+  KJ_IREQUIRE((which() == Message::ADMIN_UNBAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUnbanMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminRoomBan() const {
+  return which() == Message::ADMIN_ROOM_BAN;
+}
+inline bool Message::Builder::isAdminRoomBan() {
+  return which() == Message::ADMIN_ROOM_BAN;
+}
+inline bool Message::Reader::hasAdminRoomBan() const {
+  if (which() != Message::ADMIN_ROOM_BAN) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminRoomBan() {
+  if (which() != Message::ADMIN_ROOM_BAN) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminRoomBanMessage::Reader Message::Reader::getAdminRoomBan() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_ROOM_BAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomBanMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminRoomBanMessage::Builder Message::Builder::getAdminRoomBan() {
+  KJ_IREQUIRE((which() == Message::ADMIN_ROOM_BAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomBanMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminRoomBan( ::globed::schema::main::AdminRoomBanMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_ROOM_BAN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomBanMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminRoomBanMessage::Builder Message::Builder::initAdminRoomBan() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_ROOM_BAN);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomBanMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminRoomBan(
+    ::capnp::Orphan< ::globed::schema::main::AdminRoomBanMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_ROOM_BAN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomBanMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminRoomBanMessage> Message::Builder::disownAdminRoomBan() {
+  KJ_IREQUIRE((which() == Message::ADMIN_ROOM_BAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomBanMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminRoomUnban() const {
+  return which() == Message::ADMIN_ROOM_UNBAN;
+}
+inline bool Message::Builder::isAdminRoomUnban() {
+  return which() == Message::ADMIN_ROOM_UNBAN;
+}
+inline bool Message::Reader::hasAdminRoomUnban() const {
+  if (which() != Message::ADMIN_ROOM_UNBAN) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminRoomUnban() {
+  if (which() != Message::ADMIN_ROOM_UNBAN) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminRoomUnbanMessage::Reader Message::Reader::getAdminRoomUnban() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_ROOM_UNBAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomUnbanMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminRoomUnbanMessage::Builder Message::Builder::getAdminRoomUnban() {
+  KJ_IREQUIRE((which() == Message::ADMIN_ROOM_UNBAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomUnbanMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminRoomUnban( ::globed::schema::main::AdminRoomUnbanMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_ROOM_UNBAN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomUnbanMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminRoomUnbanMessage::Builder Message::Builder::initAdminRoomUnban() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_ROOM_UNBAN);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomUnbanMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminRoomUnban(
+    ::capnp::Orphan< ::globed::schema::main::AdminRoomUnbanMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_ROOM_UNBAN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomUnbanMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminRoomUnbanMessage> Message::Builder::disownAdminRoomUnban() {
+  KJ_IREQUIRE((which() == Message::ADMIN_ROOM_UNBAN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminRoomUnbanMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminEditRoles() const {
+  return which() == Message::ADMIN_EDIT_ROLES;
+}
+inline bool Message::Builder::isAdminEditRoles() {
+  return which() == Message::ADMIN_EDIT_ROLES;
+}
+inline bool Message::Reader::hasAdminEditRoles() const {
+  if (which() != Message::ADMIN_EDIT_ROLES) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminEditRoles() {
+  if (which() != Message::ADMIN_EDIT_ROLES) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminEditRolesMessage::Reader Message::Reader::getAdminEditRoles() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_EDIT_ROLES),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminEditRolesMessage::Builder Message::Builder::getAdminEditRoles() {
+  KJ_IREQUIRE((which() == Message::ADMIN_EDIT_ROLES),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminEditRoles( ::globed::schema::main::AdminEditRolesMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_EDIT_ROLES);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminEditRolesMessage::Builder Message::Builder::initAdminEditRoles() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_EDIT_ROLES);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminEditRoles(
+    ::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_EDIT_ROLES);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage> Message::Builder::disownAdminEditRoles() {
+  KJ_IREQUIRE((which() == Message::ADMIN_EDIT_ROLES),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminSetPassword() const {
+  return which() == Message::ADMIN_SET_PASSWORD;
+}
+inline bool Message::Builder::isAdminSetPassword() {
+  return which() == Message::ADMIN_SET_PASSWORD;
+}
+inline bool Message::Reader::hasAdminSetPassword() const {
+  if (which() != Message::ADMIN_SET_PASSWORD) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminSetPassword() {
+  if (which() != Message::ADMIN_SET_PASSWORD) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminSetPasswordMessage::Reader Message::Reader::getAdminSetPassword() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_SET_PASSWORD),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminSetPasswordMessage::Builder Message::Builder::getAdminSetPassword() {
+  KJ_IREQUIRE((which() == Message::ADMIN_SET_PASSWORD),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminSetPassword( ::globed::schema::main::AdminSetPasswordMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_PASSWORD);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminSetPasswordMessage::Builder Message::Builder::initAdminSetPassword() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_PASSWORD);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminSetPassword(
+    ::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_PASSWORD);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage> Message::Builder::disownAdminSetPassword() {
+  KJ_IREQUIRE((which() == Message::ADMIN_SET_PASSWORD),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminResult() const {
+  return which() == Message::ADMIN_RESULT;
+}
+inline bool Message::Builder::isAdminResult() {
+  return which() == Message::ADMIN_RESULT;
+}
+inline bool Message::Reader::hasAdminResult() const {
+  if (which() != Message::ADMIN_RESULT) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminResult() {
+  if (which() != Message::ADMIN_RESULT) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminResultMessage::Reader Message::Reader::getAdminResult() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_RESULT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminResultMessage::Builder Message::Builder::getAdminResult() {
+  KJ_IREQUIRE((which() == Message::ADMIN_RESULT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminResult( ::globed::schema::main::AdminResultMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_RESULT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminResultMessage::Builder Message::Builder::initAdminResult() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_RESULT);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminResult(
+    ::capnp::Orphan< ::globed::schema::main::AdminResultMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_RESULT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminResultMessage> Message::Builder::disownAdminResult() {
+  KJ_IREQUIRE((which() == Message::ADMIN_RESULT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminFetchResponse() const {
+  return which() == Message::ADMIN_FETCH_RESPONSE;
+}
+inline bool Message::Builder::isAdminFetchResponse() {
+  return which() == Message::ADMIN_FETCH_RESPONSE;
+}
+inline bool Message::Reader::hasAdminFetchResponse() const {
+  if (which() != Message::ADMIN_FETCH_RESPONSE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminFetchResponse() {
+  if (which() != Message::ADMIN_FETCH_RESPONSE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminFetchResponseMessage::Reader Message::Reader::getAdminFetchResponse() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminFetchResponseMessage::Builder Message::Builder::getAdminFetchResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminFetchResponse( ::globed::schema::main::AdminFetchResponseMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminFetchResponseMessage::Builder Message::Builder::initAdminFetchResponse() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_RESPONSE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminFetchResponse(
+    ::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage> Message::Builder::disownAdminFetchResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isNotice() const {
+  return which() == Message::NOTICE;
+}
+inline bool Message::Builder::isNotice() {
+  return which() == Message::NOTICE;
+}
+inline bool Message::Reader::hasNotice() const {
+  if (which() != Message::NOTICE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasNotice() {
+  if (which() != Message::NOTICE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::NoticeMessage::Reader Message::Reader::getNotice() const {
+  KJ_IREQUIRE((which() == Message::NOTICE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::NoticeMessage::Builder Message::Builder::getNotice() {
+  KJ_IREQUIRE((which() == Message::NOTICE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setNotice( ::globed::schema::main::NoticeMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::NoticeMessage::Builder Message::Builder::initNotice() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptNotice(
+    ::capnp::Orphan< ::globed::schema::main::NoticeMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::NoticeMessage> Message::Builder::disownNotice() {
+  KJ_IREQUIRE((which() == Message::NOTICE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminUpdateUser() const {
+  return which() == Message::ADMIN_UPDATE_USER;
+}
+inline bool Message::Builder::isAdminUpdateUser() {
+  return which() == Message::ADMIN_UPDATE_USER;
+}
+inline bool Message::Reader::hasAdminUpdateUser() const {
+  if (which() != Message::ADMIN_UPDATE_USER) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminUpdateUser() {
+  if (which() != Message::ADMIN_UPDATE_USER) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminUpdateUserMessage::Reader Message::Reader::getAdminUpdateUser() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_UPDATE_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminUpdateUserMessage::Builder Message::Builder::getAdminUpdateUser() {
+  KJ_IREQUIRE((which() == Message::ADMIN_UPDATE_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminUpdateUser( ::globed::schema::main::AdminUpdateUserMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UPDATE_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminUpdateUserMessage::Builder Message::Builder::initAdminUpdateUser() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UPDATE_USER);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminUpdateUser(
+    ::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UPDATE_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage> Message::Builder::disownAdminUpdateUser() {
+  KJ_IREQUIRE((which() == Message::ADMIN_UPDATE_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

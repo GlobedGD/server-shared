@@ -1,10 +1,9 @@
 use std::path::Path;
 use tracing::{Level, level_filters::LevelFilter};
-use tracing_appender::{
-    non_blocking::{NonBlockingBuilder, WorkerGuard},
-    rolling,
-};
+use tracing_appender::{non_blocking::NonBlockingBuilder, rolling};
 use tracing_subscriber::{Registry, filter, fmt::Layer, layer::SubscriberExt};
+
+pub use tracing_appender::non_blocking::WorkerGuard;
 
 pub fn setup_logger(
     rolling: bool,
