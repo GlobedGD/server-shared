@@ -217,9 +217,12 @@ struct AdminKickMessage {
 }
 
 struct AdminNoticeMessage {
-    accountId @0 :Int32;
+    targetUser @0 :Text;
     message @1 :Text;
-    canReply @2 :Bool = false;
+    roomId @2 :UInt32;
+    levelId @3 :Int32;
+    canReply @4 :Bool = false;
+    showSender @5 :Bool = false;
 }
 
 struct AdminNoticeEveryoneMessage {

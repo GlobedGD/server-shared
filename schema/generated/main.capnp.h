@@ -578,7 +578,7 @@ struct AdminNoticeMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(85af7e66f3f02a6b, 1, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(85af7e66f3f02a6b, 2, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -3526,12 +3526,19 @@ public:
   }
 #endif  // !CAPNP_LITE
 
-  inline  ::int32_t getAccountId() const;
+  inline bool hasTargetUser() const;
+  inline  ::capnp::Text::Reader getTargetUser() const;
 
   inline bool hasMessage() const;
   inline  ::capnp::Text::Reader getMessage() const;
 
+  inline  ::uint32_t getRoomId() const;
+
+  inline  ::int32_t getLevelId() const;
+
   inline bool getCanReply() const;
+
+  inline bool getShowSender() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -3561,8 +3568,12 @@ public:
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
 
-  inline  ::int32_t getAccountId();
-  inline void setAccountId( ::int32_t value);
+  inline bool hasTargetUser();
+  inline  ::capnp::Text::Builder getTargetUser();
+  inline void setTargetUser( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initTargetUser(unsigned int size);
+  inline void adoptTargetUser(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownTargetUser();
 
   inline bool hasMessage();
   inline  ::capnp::Text::Builder getMessage();
@@ -3571,8 +3582,17 @@ public:
   inline void adoptMessage(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownMessage();
 
+  inline  ::uint32_t getRoomId();
+  inline void setRoomId( ::uint32_t value);
+
+  inline  ::int32_t getLevelId();
+  inline void setLevelId( ::int32_t value);
+
   inline bool getCanReply();
   inline void setCanReply(bool value);
+
+  inline bool getShowSender();
+  inline void setShowSender(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -6993,66 +7013,128 @@ inline ::capnp::Orphan< ::capnp::Text> AdminKickMessage::Builder::disownMessage(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline  ::int32_t AdminNoticeMessage::Reader::getAccountId() const {
-  return _reader.getDataField< ::int32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-
-inline  ::int32_t AdminNoticeMessage::Builder::getAccountId() {
-  return _builder.getDataField< ::int32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-inline void AdminNoticeMessage::Builder::setAccountId( ::int32_t value) {
-  _builder.setDataField< ::int32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool AdminNoticeMessage::Reader::hasMessage() const {
+inline bool AdminNoticeMessage::Reader::hasTargetUser() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline bool AdminNoticeMessage::Builder::hasMessage() {
+inline bool AdminNoticeMessage::Builder::hasTargetUser() {
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader AdminNoticeMessage::Reader::getMessage() const {
+inline  ::capnp::Text::Reader AdminNoticeMessage::Reader::getTargetUser() const {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::capnp::Text::Builder AdminNoticeMessage::Builder::getMessage() {
+inline  ::capnp::Text::Builder AdminNoticeMessage::Builder::getTargetUser() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void AdminNoticeMessage::Builder::setMessage( ::capnp::Text::Reader value) {
+inline void AdminNoticeMessage::Builder::setTargetUser( ::capnp::Text::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline  ::capnp::Text::Builder AdminNoticeMessage::Builder::initMessage(unsigned int size) {
+inline  ::capnp::Text::Builder AdminNoticeMessage::Builder::initTargetUser(unsigned int size) {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), size);
 }
-inline void AdminNoticeMessage::Builder::adoptMessage(
+inline void AdminNoticeMessage::Builder::adoptTargetUser(
     ::capnp::Orphan< ::capnp::Text>&& value) {
   ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> AdminNoticeMessage::Builder::disownMessage() {
+inline ::capnp::Orphan< ::capnp::Text> AdminNoticeMessage::Builder::disownTargetUser() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool AdminNoticeMessage::Reader::hasMessage() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminNoticeMessage::Builder::hasMessage() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader AdminNoticeMessage::Reader::getMessage() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminNoticeMessage::Builder::getMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void AdminNoticeMessage::Builder::setMessage( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminNoticeMessage::Builder::initMessage(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void AdminNoticeMessage::Builder::adoptMessage(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminNoticeMessage::Builder::disownMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline  ::uint32_t AdminNoticeMessage::Reader::getRoomId() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t AdminNoticeMessage::Builder::getRoomId() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminNoticeMessage::Builder::setRoomId( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t AdminNoticeMessage::Reader::getLevelId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminNoticeMessage::Builder::getLevelId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void AdminNoticeMessage::Builder::setLevelId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
 inline bool AdminNoticeMessage::Reader::getCanReply() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS);
 }
 
 inline bool AdminNoticeMessage::Builder::getCanReply() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS);
 }
 inline void AdminNoticeMessage::Builder::setCanReply(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminNoticeMessage::Reader::getShowSender() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<65>() * ::capnp::ELEMENTS);
+}
+
+inline bool AdminNoticeMessage::Builder::getShowSender() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<65>() * ::capnp::ELEMENTS);
+}
+inline void AdminNoticeMessage::Builder::setShowSender(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<65>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool AdminNoticeEveryoneMessage::Reader::hasMessage() const {
