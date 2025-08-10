@@ -250,6 +250,29 @@ struct AdminFetchResponseMessage {
     activeMute @6 :UserPunishment;
 }
 
+struct AdminFetchLogsMessage {
+    issuer @0 :Int32;
+    target @1 :Int32;
+    type @2 :Text;
+    before @3 :Int64;
+    after @4 :Int64;
+}
+
+struct AuditLog {
+    id @0 :Int32;
+    accountId @1 :Int32;
+    type @2 :Text;
+    reason @3 :Text;
+    expiresAt @4 :Int64;
+    issuedBy @5 :Int32;
+    issuedAt @6 :Int64;
+}
+
+struct AdminLogsResponseMessage {
+    logs @0 :List(AuditLog);
+    accounts @1 :List(PlayerAccountData);
+}
+
 struct AdminBanMessage {
     accountId @0 :Int32;
     reason @1 :Text;
@@ -316,6 +339,7 @@ struct Message {
         adminNotice   @27 :AdminNoticeMessage;
         adminNoticeEveryone @28 :AdminNoticeEveryoneMessage;
         adminFetchUser @29 :AdminFetchUserMessage;
+        adminFetchLogs @40 :AdminFetchLogsMessage;
         adminBan      @30 :AdminBanMessage;
         adminUnban    @31 :AdminUnbanMessage;
         adminRoomBan  @32 :AdminRoomBanMessage;
@@ -346,5 +370,6 @@ struct Message {
 
         adminResult   @36 :AdminResultMessage;
         adminFetchResponse @37 :AdminFetchResponseMessage;
+        adminLogsResponse @41 :AdminLogsResponseMessage;
     }
 }
