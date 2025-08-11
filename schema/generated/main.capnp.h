@@ -2658,6 +2658,8 @@ public:
   }
 #endif  // !CAPNP_LITE
 
+  inline  ::uint16_t getTeamId() const;
+
   inline  ::uint32_t getColor() const;
 
 private:
@@ -2687,6 +2689,9 @@ public:
 #if !CAPNP_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
+
+  inline  ::uint16_t getTeamId();
+  inline void setTeamId( ::uint16_t value);
 
   inline  ::uint32_t getColor();
   inline void setColor( ::uint32_t value);
@@ -7676,18 +7681,32 @@ inline void DeleteTeamMessage::Builder::setTeamId( ::uint16_t value) {
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
+inline  ::uint16_t UpdateTeamMessage::Reader::getTeamId() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t UpdateTeamMessage::Builder::getTeamId() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void UpdateTeamMessage::Builder::setTeamId( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
 inline  ::uint32_t UpdateTeamMessage::Reader::getColor() const {
   return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
 
 inline  ::uint32_t UpdateTeamMessage::Builder::getColor() {
   return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
 inline void UpdateTeamMessage::Builder::setColor( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool TeamCreationResultMessage::Reader::getSuccess() const {

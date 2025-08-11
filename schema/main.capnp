@@ -122,7 +122,8 @@ struct DeleteTeamMessage {
 }
 
 struct UpdateTeamMessage {
-    color @0 :UInt32;
+    teamId @0 :UInt16;
+    color  @1 :UInt32;
 }
 
 struct GetTeamMembersMessage {}
