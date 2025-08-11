@@ -2972,7 +2972,7 @@ public:
 #endif  // !CAPNP_LITE
 
   inline bool hasMembers() const;
-  inline  ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>::Reader getMembers() const;
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getMembers() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -3003,11 +3003,12 @@ public:
 #endif  // !CAPNP_LITE
 
   inline bool hasMembers();
-  inline  ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>::Builder getMembers();
-  inline void setMembers( ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>::Builder initMembers(unsigned int size);
-  inline void adoptMembers(::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>> disownMembers();
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getMembers();
+  inline void setMembers( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setMembers(::kj::ArrayPtr<const  ::int32_t> value);
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initMembers(unsigned int size);
+  inline void adoptMembers(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownMembers();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -7705,29 +7706,33 @@ inline bool TeamMembersMessage::Builder::hasMembers() {
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>::Reader TeamMembersMessage::Reader::getMembers() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader TeamMembersMessage::Reader::getMembers() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>::Builder TeamMembersMessage::Builder::getMembers() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder TeamMembersMessage::Builder::getMembers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void TeamMembersMessage::Builder::setMembers( ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+inline void TeamMembersMessage::Builder::setMembers( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline  ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>::Builder TeamMembersMessage::Builder::initMembers(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+inline void TeamMembersMessage::Builder::setMembers(::kj::ArrayPtr<const  ::int32_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder TeamMembersMessage::Builder::initMembers(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), size);
 }
 inline void TeamMembersMessage::Builder::adoptMembers(
-    ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+    ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>> TeamMembersMessage::Builder::disownMembers() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomPlayer,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> TeamMembersMessage::Builder::disownMembers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

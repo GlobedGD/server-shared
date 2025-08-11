@@ -140,7 +140,7 @@ struct RoomPlayer {
 }
 
 struct TeamMembersMessage {
-    members @0 :List(RoomPlayer);
+    members @0 :List(Int32);
 }
 
 struct RoomStateMessage {
