@@ -2053,6 +2053,8 @@ public:
 
   inline  ::uint8_t getServerId() const;
 
+  inline bool getTeams() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2110,6 +2112,9 @@ public:
 
   inline  ::uint8_t getServerId();
   inline void setServerId( ::uint8_t value);
+
+  inline bool getTeams();
+  inline void setTeams(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -7374,6 +7379,20 @@ inline  ::uint8_t RoomSettings::Builder::getServerId() {
 inline void RoomSettings::Builder::setServerId( ::uint8_t value) {
   _builder.setDataField< ::uint8_t>(
       ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getTeams() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getTeams() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setTeams(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool CreateRoomMessage::Reader::hasName() const {

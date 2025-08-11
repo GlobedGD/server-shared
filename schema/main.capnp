@@ -88,6 +88,7 @@ struct RoomSettings {
     privateInvites @3 :Bool = false;
     isFollower @4 :Bool = false;
     levelIntegrity @8 :Bool = false;
+    teams @10 :Bool = false;
 
     collision @5 :Bool = false;
     twoPlayerMode @6 :Bool = false;
