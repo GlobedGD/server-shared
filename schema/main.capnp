@@ -107,13 +107,40 @@ struct JoinRoomMessage {
 
 struct RequestRoomListMessage {}
 
+struct AssignTeamMessage {
+    accountId @0 :Int32;
+    teamId @1 :UInt16;
+}
+
+struct CreateTeamMessage {}
+
+struct DeleteTeamMessage {
+    teamId @0 :UInt16;
+}
+
+struct GetTeamMembersMessage {}
+
+struct TeamCreationResultMessage {
+    success @0 :Bool;
+    teamCount @1 :UInt16;
+}
+
+struct TeamChangedMessage {
+    teamId @0 :UInt16;
+}
+
 struct RoomPlayer {
     accountData @0 :PlayerAccountData;
     cube @1 :Int16;
     color1 @2 :UInt16;
     color2 @3 :UInt16;
-    glowColor @5 :UInt16;
-    session @4 :UInt64;
+    glowColor @4 :UInt16;
+    session @5 :UInt64;
+    teamId @6 :UInt16;
+}
+
+struct TeamMembersMessage {
+    members @0 :List(RoomPlayer);
 }
 
 struct RoomStateMessage {
@@ -122,6 +149,7 @@ struct RoomStateMessage {
     roomName @2 :Text;
     players @3 :List(RoomPlayer); # optional field
     settings @4 :RoomSettings;
+    teams @5 :List(UInt32);
 }
 
 enum RoomJoinFailedReason {
@@ -205,6 +233,10 @@ struct NoticeMessage {
     canReply @3 :Bool = false;
 }
 
+struct WarnMessage {
+    message @0 :Text;
+}
+
 # Admin messages
 
 struct AdminLoginMessage {
@@ -256,16 +288,17 @@ struct AdminFetchLogsMessage {
     type @2 :Text;
     before @3 :Int64;
     after @4 :Int64;
+    page @5 :UInt32;
 }
 
 struct AuditLog {
     id @0 :Int32;
     accountId @1 :Int32;
-    type @2 :Text;
-    reason @3 :Text;
-    expiresAt @4 :Int64;
-    issuedBy @5 :Int32;
-    issuedAt @6 :Int64;
+    targetAccountId @2 :Int32;
+    type @3 :Text;
+    timestamp @4 :Int64;
+    expiresAt @5 :Int64;
+    message @6 :Text;
 }
 
 struct AdminLogsResponseMessage {
@@ -330,6 +363,10 @@ struct Message {
         leaveRoom     @9 :Void; # TODO (high): check if we can change this to a struct without breaking old clients
         checkRoomState @16 :Void;
         requestRoomList @21 :RequestRoomListMessage;
+        assignTeam    @42 :AssignTeamMessage;
+        createTeam    @43 :CreateTeamMessage;
+        deleteTeam    @44 :DeleteTeamMessage;
+        getTeamMembers @48 :GetTeamMembersMessage;
 
         joinSession   @12 :JoinSessionMessage;
         leaveSession  @13 :LeaveSessionMessage;
@@ -361,12 +398,16 @@ struct Message {
         roomCreateFailed @20 :RoomCreateFailedMessage;
         roomBanned    @24 :RoomBannedMessage;
         roomList      @22 :RoomListMessage;
+        teamCreationResult @46 :TeamCreationResultMessage;
+        teamChanged   @47 :TeamChangedMessage;
+        teamMembers   @49 :TeamMembersMessage;
 
         joinFailed    @14 :JoinFailedMessage;
         warpPlayer    @10 :WarpPlayerMessage;
 
         kicked        @15 :KickedMessage;
         notice        @38 :NoticeMessage;
+        warn          @45 :WarnMessage;
 
         adminResult   @36 :AdminResultMessage;
         adminFetchResponse @37 :AdminFetchResponseMessage;
