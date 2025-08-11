@@ -121,6 +121,10 @@ struct DeleteTeamMessage {
     teamId @0 :UInt16;
 }
 
+struct UpdateTeamMessage {
+    color @0 :UInt32;
+}
+
 struct GetTeamMembersMessage {}
 
 struct TeamCreationResultMessage {
@@ -369,6 +373,7 @@ struct Message {
         assignTeam    @42 :AssignTeamMessage;
         createTeam    @43 :CreateTeamMessage;
         deleteTeam    @44 :DeleteTeamMessage;
+        updateTeam    @50 :UpdateTeamMessage;
         getTeamMembers @48 :GetTeamMembersMessage;
 
         joinSession   @12 :JoinSessionMessage;
