@@ -113,7 +113,9 @@ struct AssignTeamMessage {
     teamId @1 :UInt16;
 }
 
-struct CreateTeamMessage {}
+struct CreateTeamMessage {
+    color @0 :UInt32;
+}
 
 struct DeleteTeamMessage {
     teamId @0 :UInt16;

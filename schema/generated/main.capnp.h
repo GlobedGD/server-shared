@@ -371,7 +371,7 @@ struct CreateTeamMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(9255f17560996ebf, 0, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(9255f17560996ebf, 1, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -2489,6 +2489,8 @@ public:
   }
 #endif  // !CAPNP_LITE
 
+  inline  ::uint32_t getColor() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2516,6 +2518,9 @@ public:
 #if !CAPNP_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getColor();
+  inline void setColor( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -7536,6 +7541,20 @@ inline  ::uint16_t AssignTeamMessage::Builder::getTeamId() {
 inline void AssignTeamMessage::Builder::setTeamId( ::uint16_t value) {
   _builder.setDataField< ::uint16_t>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t CreateTeamMessage::Reader::getColor() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t CreateTeamMessage::Builder::getColor() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void CreateTeamMessage::Builder::setColor( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint16_t DeleteTeamMessage::Reader::getTeamId() const {
