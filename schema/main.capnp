@@ -150,6 +150,7 @@ struct RoomPlayer {
 
 struct TeamMembersMessage {
     members @0 :List(Int32);
+    teamIds @1 :List(UInt8);
 }
 
 struct RoomStateMessage {
@@ -159,6 +160,10 @@ struct RoomStateMessage {
     players @3 :List(RoomPlayer); # optional field
     settings @4 :RoomSettings;
     teams @5 :List(UInt32);
+}
+
+struct TeamsUpdatedMessage {
+    teams @0 :List(UInt32);
 }
 
 enum RoomJoinFailedReason {
@@ -411,6 +416,7 @@ struct Message {
         teamCreationResult @46 :TeamCreationResultMessage;
         teamChanged   @47 :TeamChangedMessage;
         teamMembers   @49 :TeamMembersMessage;
+        teamsUpdated  @51 :TeamsUpdatedMessage;
 
         joinFailed    @14 :JoinFailedMessage;
         warpPlayer    @10 :WarpPlayerMessage;

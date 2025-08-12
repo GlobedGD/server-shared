@@ -54,6 +54,7 @@ CAPNP_DECLARE_SCHEMA(c3594139526425cd);
 CAPNP_DECLARE_SCHEMA(da80ce7d00b0d262);
 CAPNP_DECLARE_SCHEMA(c2c08e4fc6a797b6);
 CAPNP_DECLARE_SCHEMA(ccb001c4c4eb3e03);
+CAPNP_DECLARE_SCHEMA(b4e1d4b92dce90f4);
 CAPNP_DECLARE_SCHEMA(e8b80e1d2395f44a);
 enum class RoomJoinFailedReason_e8b80e1d2395f44a: uint16_t {
   NOT_FOUND,
@@ -477,7 +478,7 @@ struct TeamMembersMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(c2c08e4fc6a797b6, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(c2c08e4fc6a797b6, 0, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -493,6 +494,21 @@ struct RoomStateMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(ccb001c4c4eb3e03, 1, 4)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct TeamsUpdatedMessage {
+  TeamsUpdatedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(b4e1d4b92dce90f4, 0, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1015,6 +1031,7 @@ struct Message {
     GET_TEAM_MEMBERS,
     TEAM_MEMBERS,
     UPDATE_TEAM,
+    TEAMS_UPDATED,
   };
 
   struct _capnpPrivate {
@@ -3087,6 +3104,9 @@ public:
   inline bool hasMembers() const;
   inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getMembers() const;
 
+  inline bool hasTeamIds() const;
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getTeamIds() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -3122,6 +3142,14 @@ public:
   inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initMembers(unsigned int size);
   inline void adoptMembers(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownMembers();
+
+  inline bool hasTeamIds();
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getTeamIds();
+  inline void setTeamIds( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setTeamIds(::kj::ArrayPtr<const  ::uint8_t> value);
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initTeamIds(unsigned int size);
+  inline void adoptTeamIds(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownTeamIds();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3264,6 +3292,88 @@ public:
       : _typeless(kj::mv(typeless)) {}
 
   inline  ::globed::schema::main::RoomSettings::Pipeline getSettings();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class TeamsUpdatedMessage::Reader {
+public:
+  typedef TeamsUpdatedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasTeams() const;
+  inline  ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Reader getTeams() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class TeamsUpdatedMessage::Builder {
+public:
+  typedef TeamsUpdatedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasTeams();
+  inline  ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Builder getTeams();
+  inline void setTeams( ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setTeams(::kj::ArrayPtr<const  ::uint32_t> value);
+  inline  ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Builder initTeams(unsigned int size);
+  inline void adoptTeams(::capnp::Orphan< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>> disownTeams();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class TeamsUpdatedMessage::Pipeline {
+public:
+  typedef TeamsUpdatedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -6149,6 +6259,10 @@ public:
   inline bool hasUpdateTeam() const;
   inline  ::globed::schema::main::UpdateTeamMessage::Reader getUpdateTeam() const;
 
+  inline bool isTeamsUpdated() const;
+  inline bool hasTeamsUpdated() const;
+  inline  ::globed::schema::main::TeamsUpdatedMessage::Reader getTeamsUpdated() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -6577,6 +6691,14 @@ public:
   inline  ::globed::schema::main::UpdateTeamMessage::Builder initUpdateTeam();
   inline void adoptUpdateTeam(::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage> disownUpdateTeam();
+
+  inline bool isTeamsUpdated();
+  inline bool hasTeamsUpdated();
+  inline  ::globed::schema::main::TeamsUpdatedMessage::Builder getTeamsUpdated();
+  inline void setTeamsUpdated( ::globed::schema::main::TeamsUpdatedMessage::Reader value);
+  inline  ::globed::schema::main::TeamsUpdatedMessage::Builder initTeamsUpdated();
+  inline void adoptTeamsUpdated(::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage> disownTeamsUpdated();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -7931,6 +8053,44 @@ inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> Te
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool TeamMembersMessage::Reader::hasTeamIds() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool TeamMembersMessage::Builder::hasTeamIds() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader TeamMembersMessage::Reader::getTeamIds() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder TeamMembersMessage::Builder::getTeamIds() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void TeamMembersMessage::Builder::setTeamIds( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline void TeamMembersMessage::Builder::setTeamIds(::kj::ArrayPtr<const  ::uint8_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder TeamMembersMessage::Builder::initTeamIds(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void TeamMembersMessage::Builder::adoptTeamIds(
+    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> TeamMembersMessage::Builder::disownTeamIds() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
 inline  ::uint32_t RoomStateMessage::Reader::getRoomId() const {
   return _reader.getDataField< ::uint32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -8102,6 +8262,44 @@ inline void RoomStateMessage::Builder::adoptTeams(
 inline ::capnp::Orphan< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>> RoomStateMessage::Builder::disownTeams() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
       ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+
+inline bool TeamsUpdatedMessage::Reader::hasTeams() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool TeamsUpdatedMessage::Builder::hasTeams() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Reader TeamsUpdatedMessage::Reader::getTeams() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Builder TeamsUpdatedMessage::Builder::getTeams() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void TeamsUpdatedMessage::Builder::setTeams( ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void TeamsUpdatedMessage::Builder::setTeams(::kj::ArrayPtr<const  ::uint32_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Builder TeamsUpdatedMessage::Builder::initTeams(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void TeamsUpdatedMessage::Builder::adoptTeams(
+    ::capnp::Orphan< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>> TeamsUpdatedMessage::Builder::disownTeams() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline  ::globed::schema::main::RoomJoinFailedReason RoomJoinFailedMessage::Reader::getReason() const {
@@ -12477,6 +12675,60 @@ inline ::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage> Message::Buil
   KJ_IREQUIRE((which() == Message::UPDATE_TEAM),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isTeamsUpdated() const {
+  return which() == Message::TEAMS_UPDATED;
+}
+inline bool Message::Builder::isTeamsUpdated() {
+  return which() == Message::TEAMS_UPDATED;
+}
+inline bool Message::Reader::hasTeamsUpdated() const {
+  if (which() != Message::TEAMS_UPDATED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasTeamsUpdated() {
+  if (which() != Message::TEAMS_UPDATED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::TeamsUpdatedMessage::Reader Message::Reader::getTeamsUpdated() const {
+  KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::TeamsUpdatedMessage::Builder Message::Builder::getTeamsUpdated() {
+  KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setTeamsUpdated( ::globed::schema::main::TeamsUpdatedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAMS_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::TeamsUpdatedMessage::Builder Message::Builder::initTeamsUpdated() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAMS_UPDATED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptTeamsUpdated(
+    ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAMS_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage> Message::Builder::disownTeamsUpdated() {
+  KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
