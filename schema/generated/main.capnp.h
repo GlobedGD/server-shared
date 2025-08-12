@@ -771,7 +771,7 @@ struct AdminFetchUserMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(a2ab0121cd9f02f2, 1, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(a2ab0121cd9f02f2, 0, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -801,7 +801,7 @@ struct AdminFetchResponseMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(aeadaa76cd8a73fb, 1, 4)
+    CAPNP_DECLARE_STRUCT_HEADER(aeadaa76cd8a73fb, 2, 4)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -4762,7 +4762,8 @@ public:
   }
 #endif  // !CAPNP_LITE
 
-  inline  ::int32_t getAccountId() const;
+  inline bool hasQuery() const;
+  inline  ::capnp::Text::Reader getQuery() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -4792,8 +4793,12 @@ public:
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
 
-  inline  ::int32_t getAccountId();
-  inline void setAccountId( ::int32_t value);
+  inline bool hasQuery();
+  inline  ::capnp::Text::Builder getQuery();
+  inline void setQuery( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initQuery(unsigned int size);
+  inline void adoptQuery(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownQuery();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4952,6 +4957,8 @@ public:
   inline bool hasActiveMute() const;
   inline  ::globed::schema::main::UserPunishment::Reader getActiveMute() const;
 
+  inline  ::uint32_t getPunishmentCount() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -5017,6 +5024,9 @@ public:
   inline  ::globed::schema::main::UserPunishment::Builder initActiveMute();
   inline void adoptActiveMute(::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> disownActiveMute();
+
+  inline  ::uint32_t getPunishmentCount();
+  inline void setPunishmentCount( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -9026,18 +9036,38 @@ inline ::capnp::Orphan< ::capnp::Text> AdminNoticeEveryoneMessage::Builder::diso
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline  ::int32_t AdminFetchUserMessage::Reader::getAccountId() const {
-  return _reader.getDataField< ::int32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+inline bool AdminFetchUserMessage::Reader::hasQuery() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-
-inline  ::int32_t AdminFetchUserMessage::Builder::getAccountId() {
-  return _builder.getDataField< ::int32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+inline bool AdminFetchUserMessage::Builder::hasQuery() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline void AdminFetchUserMessage::Builder::setAccountId( ::int32_t value) {
-  _builder.setDataField< ::int32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+inline  ::capnp::Text::Reader AdminFetchUserMessage::Reader::getQuery() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder AdminFetchUserMessage::Builder::getQuery() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminFetchUserMessage::Builder::setQuery( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder AdminFetchUserMessage::Builder::initQuery(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminFetchUserMessage::Builder::adoptQuery(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> AdminFetchUserMessage::Builder::disownQuery() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline  ::int32_t UserPunishment::Reader::getIssuedBy() const {
@@ -9311,6 +9341,20 @@ inline void AdminFetchResponseMessage::Builder::adoptActiveMute(
 inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> AdminFetchResponseMessage::Builder::disownActiveMute() {
   return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::disown(_builder.getPointerField(
       ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+
+inline  ::uint32_t AdminFetchResponseMessage::Reader::getPunishmentCount() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t AdminFetchResponseMessage::Builder::getPunishmentCount() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void AdminFetchResponseMessage::Builder::setPunishmentCount( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::int32_t AdminFetchLogsMessage::Reader::getIssuer() const {

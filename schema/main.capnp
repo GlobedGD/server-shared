@@ -276,7 +276,7 @@ struct AdminNoticeEveryoneMessage {
 }
 
 struct AdminFetchUserMessage {
-    accountId @0 :Int32;
+    query @0 :Text;
 }
 
 struct UserPunishment {
@@ -294,6 +294,7 @@ struct AdminFetchResponseMessage {
     activeBan @4 :UserPunishment;
     activeRoomBan @5 :UserPunishment;
     activeMute @6 :UserPunishment;
+    punishmentCount @7 :UInt32;
 }
 
 struct AdminFetchLogsMessage {
