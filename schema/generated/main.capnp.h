@@ -2072,6 +2072,8 @@ public:
 
   inline bool getTeams() const;
 
+  inline bool getLockedTeams() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2132,6 +2134,9 @@ public:
 
   inline bool getTeams();
   inline void setTeams(bool value);
+
+  inline bool getLockedTeams();
+  inline void setLockedTeams(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -7508,6 +7513,20 @@ inline bool RoomSettings::Builder::getTeams() {
 inline void RoomSettings::Builder::setTeams(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getLockedTeams() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getLockedTeams() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setLockedTeams(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool CreateRoomMessage::Reader::hasName() const {
