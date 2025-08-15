@@ -103,6 +103,8 @@ CAPNP_DECLARE_SCHEMA(807e4e669ff643b1);
 CAPNP_DECLARE_SCHEMA(a2ab0121cd9f02f2);
 CAPNP_DECLARE_SCHEMA(bd8811afd7bca71b);
 CAPNP_DECLARE_SCHEMA(aeadaa76cd8a73fb);
+CAPNP_DECLARE_SCHEMA(b778faa471a4fa3b);
+CAPNP_DECLARE_SCHEMA(a37d9373872b3e96);
 CAPNP_DECLARE_SCHEMA(ff741da91232584c);
 CAPNP_DECLARE_SCHEMA(a6d8ce6fbce7dccb);
 CAPNP_DECLARE_SCHEMA(b1efeff4fd3fa28d);
@@ -113,6 +115,7 @@ CAPNP_DECLARE_SCHEMA(d57f5187bd5b3167);
 CAPNP_DECLARE_SCHEMA(8e6c5f1db63d3471);
 CAPNP_DECLARE_SCHEMA(d806796e0d483927);
 CAPNP_DECLARE_SCHEMA(cc3c33b6ddb6e1a4);
+CAPNP_DECLARE_SCHEMA(ea67ae6a66745db6);
 CAPNP_DECLARE_SCHEMA(911c9aa5c4c5f520);
 CAPNP_DECLARE_SCHEMA(a55b5ef7374b3a21);
 
@@ -808,6 +811,36 @@ struct AdminFetchResponseMessage {
   };
 };
 
+struct FetchedMod {
+  FetchedMod() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(b778faa471a4fa3b, 2, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminFetchModsResponseMessage {
+  AdminFetchModsResponseMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(a37d9373872b3e96, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct AdminFetchLogsMessage {
   AdminFetchLogsMessage() = delete;
 
@@ -951,7 +984,22 @@ struct AdminUpdateUserMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(cc3c33b6ddb6e1a4, 1, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(cc3c33b6ddb6e1a4, 2, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct AdminFetchModsMessage {
+  AdminFetchModsMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(ea67ae6a66745db6, 0, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1032,6 +1080,8 @@ struct Message {
     TEAM_MEMBERS,
     UPDATE_TEAM,
     TEAMS_UPDATED,
+    ADMIN_FETCH_MODS,
+    ADMIN_FETCH_MODS_RESPONSE,
   };
 
   struct _capnpPrivate {
@@ -5057,6 +5107,193 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class FetchedMod::Reader {
+public:
+  typedef FetchedMod Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool hasUsername() const;
+  inline  ::capnp::Text::Reader getUsername() const;
+
+  inline  ::int16_t getCube() const;
+
+  inline  ::uint16_t getColor1() const;
+
+  inline  ::uint16_t getColor2() const;
+
+  inline  ::uint16_t getGlowColor() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class FetchedMod::Builder {
+public:
+  typedef FetchedMod Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool hasUsername();
+  inline  ::capnp::Text::Builder getUsername();
+  inline void setUsername( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initUsername(unsigned int size);
+  inline void adoptUsername(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownUsername();
+
+  inline  ::int16_t getCube();
+  inline void setCube( ::int16_t value);
+
+  inline  ::uint16_t getColor1();
+  inline void setColor1( ::uint16_t value);
+
+  inline  ::uint16_t getColor2();
+  inline void setColor2( ::uint16_t value);
+
+  inline  ::uint16_t getGlowColor();
+  inline void setGlowColor( ::uint16_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class FetchedMod::Pipeline {
+public:
+  typedef FetchedMod Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminFetchModsResponseMessage::Reader {
+public:
+  typedef AdminFetchModsResponseMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasUsers() const;
+  inline  ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>::Reader getUsers() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminFetchModsResponseMessage::Builder {
+public:
+  typedef AdminFetchModsResponseMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasUsers();
+  inline  ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>::Builder getUsers();
+  inline void setUsers( ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>::Builder initUsers(unsigned int size);
+  inline void adoptUsers(::capnp::Orphan< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>> disownUsers();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminFetchModsResponseMessage::Pipeline {
+public:
+  typedef AdminFetchModsResponseMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class AdminFetchLogsMessage::Reader {
 public:
   typedef AdminFetchLogsMessage Reads;
@@ -5899,6 +6136,14 @@ public:
   inline bool hasUsername() const;
   inline  ::capnp::Text::Reader getUsername() const;
 
+  inline  ::int16_t getCube() const;
+
+  inline  ::uint16_t getColor1() const;
+
+  inline  ::uint16_t getColor2() const;
+
+  inline  ::uint16_t getGlowColor() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -5937,6 +6182,18 @@ public:
   inline void adoptUsername(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownUsername();
 
+  inline  ::int16_t getCube();
+  inline void setCube( ::int16_t value);
+
+  inline  ::uint16_t getColor1();
+  inline void setColor1( ::uint16_t value);
+
+  inline  ::uint16_t getColor2();
+  inline void setColor2( ::uint16_t value);
+
+  inline  ::uint16_t getGlowColor();
+  inline void setGlowColor( ::uint16_t value);
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -5950,6 +6207,77 @@ private:
 class AdminUpdateUserMessage::Pipeline {
 public:
   typedef AdminUpdateUserMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class AdminFetchModsMessage::Reader {
+public:
+  typedef AdminFetchModsMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminFetchModsMessage::Builder {
+public:
+  typedef AdminFetchModsMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminFetchModsMessage::Pipeline {
+public:
+  typedef AdminFetchModsMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -6272,6 +6600,14 @@ public:
   inline bool isTeamsUpdated() const;
   inline bool hasTeamsUpdated() const;
   inline  ::globed::schema::main::TeamsUpdatedMessage::Reader getTeamsUpdated() const;
+
+  inline bool isAdminFetchMods() const;
+  inline bool hasAdminFetchMods() const;
+  inline  ::globed::schema::main::AdminFetchModsMessage::Reader getAdminFetchMods() const;
+
+  inline bool isAdminFetchModsResponse() const;
+  inline bool hasAdminFetchModsResponse() const;
+  inline  ::globed::schema::main::AdminFetchModsResponseMessage::Reader getAdminFetchModsResponse() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -6709,6 +7045,22 @@ public:
   inline  ::globed::schema::main::TeamsUpdatedMessage::Builder initTeamsUpdated();
   inline void adoptTeamsUpdated(::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage> disownTeamsUpdated();
+
+  inline bool isAdminFetchMods();
+  inline bool hasAdminFetchMods();
+  inline  ::globed::schema::main::AdminFetchModsMessage::Builder getAdminFetchMods();
+  inline void setAdminFetchMods( ::globed::schema::main::AdminFetchModsMessage::Reader value);
+  inline  ::globed::schema::main::AdminFetchModsMessage::Builder initAdminFetchMods();
+  inline void adoptAdminFetchMods(::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage> disownAdminFetchMods();
+
+  inline bool isAdminFetchModsResponse();
+  inline bool hasAdminFetchModsResponse();
+  inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder getAdminFetchModsResponse();
+  inline void setAdminFetchModsResponse( ::globed::schema::main::AdminFetchModsResponseMessage::Reader value);
+  inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder initAdminFetchModsResponse();
+  inline void adoptAdminFetchModsResponse(::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage> disownAdminFetchModsResponse();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -9357,6 +9709,144 @@ inline void AdminFetchResponseMessage::Builder::setPunishmentCount( ::uint32_t v
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
+inline  ::int32_t FetchedMod::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t FetchedMod::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void FetchedMod::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool FetchedMod::Reader::hasUsername() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool FetchedMod::Builder::hasUsername() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader FetchedMod::Reader::getUsername() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder FetchedMod::Builder::getUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void FetchedMod::Builder::setUsername( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder FetchedMod::Builder::initUsername(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void FetchedMod::Builder::adoptUsername(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> FetchedMod::Builder::disownUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int16_t FetchedMod::Reader::getCube() const {
+  return _reader.getDataField< ::int16_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int16_t FetchedMod::Builder::getCube() {
+  return _builder.getDataField< ::int16_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void FetchedMod::Builder::setCube( ::int16_t value) {
+  _builder.setDataField< ::int16_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t FetchedMod::Reader::getColor1() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t FetchedMod::Builder::getColor1() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void FetchedMod::Builder::setColor1( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t FetchedMod::Reader::getColor2() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t FetchedMod::Builder::getColor2() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void FetchedMod::Builder::setColor2( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t FetchedMod::Reader::getGlowColor() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t FetchedMod::Builder::getGlowColor() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+inline void FetchedMod::Builder::setGlowColor( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminFetchModsResponseMessage::Reader::hasUsers() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool AdminFetchModsResponseMessage::Builder::hasUsers() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>::Reader AdminFetchModsResponseMessage::Reader::getUsers() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>::Builder AdminFetchModsResponseMessage::Builder::getUsers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void AdminFetchModsResponseMessage::Builder::setUsers( ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>::Builder AdminFetchModsResponseMessage::Builder::initUsers(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void AdminFetchModsResponseMessage::Builder::adoptUsers(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>> AdminFetchModsResponseMessage::Builder::disownUsers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::FetchedMod,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline  ::int32_t AdminFetchLogsMessage::Reader::getIssuer() const {
   return _reader.getDataField< ::int32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -9965,6 +10455,62 @@ inline void AdminUpdateUserMessage::Builder::adoptUsername(
 inline ::capnp::Orphan< ::capnp::Text> AdminUpdateUserMessage::Builder::disownUsername() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int16_t AdminUpdateUserMessage::Reader::getCube() const {
+  return _reader.getDataField< ::int16_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int16_t AdminUpdateUserMessage::Builder::getCube() {
+  return _builder.getDataField< ::int16_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void AdminUpdateUserMessage::Builder::setCube( ::int16_t value) {
+  _builder.setDataField< ::int16_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t AdminUpdateUserMessage::Reader::getColor1() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t AdminUpdateUserMessage::Builder::getColor1() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void AdminUpdateUserMessage::Builder::setColor1( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t AdminUpdateUserMessage::Reader::getColor2() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t AdminUpdateUserMessage::Builder::getColor2() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void AdminUpdateUserMessage::Builder::setColor2( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t AdminUpdateUserMessage::Reader::getGlowColor() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t AdminUpdateUserMessage::Builder::getGlowColor() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+inline void AdminUpdateUserMessage::Builder::setGlowColor( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool AdminResultMessage::Reader::getSuccess() const {
@@ -12773,6 +13319,114 @@ inline ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage> Message::Bu
   KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminFetchMods() const {
+  return which() == Message::ADMIN_FETCH_MODS;
+}
+inline bool Message::Builder::isAdminFetchMods() {
+  return which() == Message::ADMIN_FETCH_MODS;
+}
+inline bool Message::Reader::hasAdminFetchMods() const {
+  if (which() != Message::ADMIN_FETCH_MODS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminFetchMods() {
+  if (which() != Message::ADMIN_FETCH_MODS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminFetchModsMessage::Reader Message::Reader::getAdminFetchMods() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminFetchModsMessage::Builder Message::Builder::getAdminFetchMods() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminFetchMods( ::globed::schema::main::AdminFetchModsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminFetchModsMessage::Builder Message::Builder::initAdminFetchMods() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminFetchMods(
+    ::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage> Message::Builder::disownAdminFetchMods() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminFetchModsResponse() const {
+  return which() == Message::ADMIN_FETCH_MODS_RESPONSE;
+}
+inline bool Message::Builder::isAdminFetchModsResponse() {
+  return which() == Message::ADMIN_FETCH_MODS_RESPONSE;
+}
+inline bool Message::Reader::hasAdminFetchModsResponse() const {
+  if (which() != Message::ADMIN_FETCH_MODS_RESPONSE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminFetchModsResponse() {
+  if (which() != Message::ADMIN_FETCH_MODS_RESPONSE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminFetchModsResponseMessage::Reader Message::Reader::getAdminFetchModsResponse() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder Message::Builder::getAdminFetchModsResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminFetchModsResponse( ::globed::schema::main::AdminFetchModsResponseMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder Message::Builder::initAdminFetchModsResponse() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS_RESPONSE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminFetchModsResponse(
+    ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage> Message::Builder::disownAdminFetchModsResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

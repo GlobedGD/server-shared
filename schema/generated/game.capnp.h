@@ -47,6 +47,8 @@ CAPNP_DECLARE_SCHEMA(f3df92cfd07ba2ea);
 CAPNP_DECLARE_SCHEMA(f5b211f1db0defbc);
 CAPNP_DECLARE_SCHEMA(f3e0f84d2138b356);
 CAPNP_DECLARE_SCHEMA(ee95a98b84cdb612);
+CAPNP_DECLARE_SCHEMA(a5e1158db5d33982);
+CAPNP_DECLARE_SCHEMA(a66df788476d46df);
 CAPNP_DECLARE_SCHEMA(c8a95e9766c5920c);
 enum class KickReason_c8a95e9766c5920c: uint16_t {
   CUSTOM,
@@ -313,6 +315,36 @@ struct UpdateIconsMessage {
   };
 };
 
+struct LevelScript {
+  LevelScript() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(a5e1158db5d33982, 0, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct SendLevelScriptMessage {
+  SendLevelScriptMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(a66df788476d46df, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 typedef ::capnp::schemas::KickReason_c8a95e9766c5920c KickReason;
 
 struct KickedMessage {
@@ -349,6 +381,7 @@ struct Message {
     LEVEL_DATA,
     KICKED,
     UPDATE_ICONS,
+    SEND_LEVEL_SCRIPT,
   };
 
   struct _capnpPrivate {
@@ -1862,6 +1895,178 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class LevelScript::Reader {
+public:
+  typedef LevelScript Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasContent() const;
+  inline  ::capnp::Text::Reader getContent() const;
+
+  inline bool hasFilename() const;
+  inline  ::capnp::Text::Reader getFilename() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class LevelScript::Builder {
+public:
+  typedef LevelScript Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasContent();
+  inline  ::capnp::Text::Builder getContent();
+  inline void setContent( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initContent(unsigned int size);
+  inline void adoptContent(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownContent();
+
+  inline bool hasFilename();
+  inline  ::capnp::Text::Builder getFilename();
+  inline void setFilename( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initFilename(unsigned int size);
+  inline void adoptFilename(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownFilename();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class LevelScript::Pipeline {
+public:
+  typedef LevelScript Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class SendLevelScriptMessage::Reader {
+public:
+  typedef SendLevelScriptMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasScripts() const;
+  inline  ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>::Reader getScripts() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class SendLevelScriptMessage::Builder {
+public:
+  typedef SendLevelScriptMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasScripts();
+  inline  ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>::Builder getScripts();
+  inline void setScripts( ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>::Builder initScripts(unsigned int size);
+  inline void adoptScripts(::capnp::Orphan< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>> disownScripts();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class SendLevelScriptMessage::Pipeline {
+public:
+  typedef SendLevelScriptMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class KickedMessage::Reader {
 public:
   typedef KickedMessage Reads;
@@ -2014,6 +2219,10 @@ public:
   inline bool hasUpdateIcons() const;
   inline  ::globed::schema::game::UpdateIconsMessage::Reader getUpdateIcons() const;
 
+  inline bool isSendLevelScript() const;
+  inline bool hasSendLevelScript() const;
+  inline  ::globed::schema::game::SendLevelScriptMessage::Reader getSendLevelScript() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2138,6 +2347,14 @@ public:
   inline  ::globed::schema::game::UpdateIconsMessage::Builder initUpdateIcons();
   inline void adoptUpdateIcons(::capnp::Orphan< ::globed::schema::game::UpdateIconsMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::UpdateIconsMessage> disownUpdateIcons();
+
+  inline bool isSendLevelScript();
+  inline bool hasSendLevelScript();
+  inline  ::globed::schema::game::SendLevelScriptMessage::Builder getSendLevelScript();
+  inline void setSendLevelScript( ::globed::schema::game::SendLevelScriptMessage::Reader value);
+  inline  ::globed::schema::game::SendLevelScriptMessage::Builder initSendLevelScript();
+  inline void adoptSendLevelScript(::capnp::Orphan< ::globed::schema::game::SendLevelScriptMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::SendLevelScriptMessage> disownSendLevelScript();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3312,6 +3529,108 @@ inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> UpdateIconsMes
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool LevelScript::Reader::hasContent() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool LevelScript::Builder::hasContent() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader LevelScript::Reader::getContent() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder LevelScript::Builder::getContent() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void LevelScript::Builder::setContent( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder LevelScript::Builder::initContent(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void LevelScript::Builder::adoptContent(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> LevelScript::Builder::disownContent() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool LevelScript::Reader::hasFilename() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool LevelScript::Builder::hasFilename() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader LevelScript::Reader::getFilename() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder LevelScript::Builder::getFilename() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void LevelScript::Builder::setFilename( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder LevelScript::Builder::initFilename(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void LevelScript::Builder::adoptFilename(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> LevelScript::Builder::disownFilename() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool SendLevelScriptMessage::Reader::hasScripts() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool SendLevelScriptMessage::Builder::hasScripts() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>::Reader SendLevelScriptMessage::Reader::getScripts() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>::Builder SendLevelScriptMessage::Builder::getScripts() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void SendLevelScriptMessage::Builder::setScripts( ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>::Builder SendLevelScriptMessage::Builder::initScripts(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void SendLevelScriptMessage::Builder::adoptScripts(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>> SendLevelScriptMessage::Builder::disownScripts() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::LevelScript,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline  ::globed::schema::game::KickReason KickedMessage::Reader::getReason() const {
   return _reader.getDataField< ::globed::schema::game::KickReason>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -4014,6 +4333,60 @@ inline ::capnp::Orphan< ::globed::schema::game::UpdateIconsMessage> Message::Bui
   KJ_IREQUIRE((which() == Message::UPDATE_ICONS),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateIconsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isSendLevelScript() const {
+  return which() == Message::SEND_LEVEL_SCRIPT;
+}
+inline bool Message::Builder::isSendLevelScript() {
+  return which() == Message::SEND_LEVEL_SCRIPT;
+}
+inline bool Message::Reader::hasSendLevelScript() const {
+  if (which() != Message::SEND_LEVEL_SCRIPT) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasSendLevelScript() {
+  if (which() != Message::SEND_LEVEL_SCRIPT) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::SendLevelScriptMessage::Reader Message::Reader::getSendLevelScript() const {
+  KJ_IREQUIRE((which() == Message::SEND_LEVEL_SCRIPT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::SendLevelScriptMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::SendLevelScriptMessage::Builder Message::Builder::getSendLevelScript() {
+  KJ_IREQUIRE((which() == Message::SEND_LEVEL_SCRIPT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::SendLevelScriptMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setSendLevelScript( ::globed::schema::game::SendLevelScriptMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SEND_LEVEL_SCRIPT);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::SendLevelScriptMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::SendLevelScriptMessage::Builder Message::Builder::initSendLevelScript() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SEND_LEVEL_SCRIPT);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::SendLevelScriptMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptSendLevelScript(
+    ::capnp::Orphan< ::globed::schema::game::SendLevelScriptMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SEND_LEVEL_SCRIPT);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::SendLevelScriptMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::SendLevelScriptMessage> Message::Builder::disownSendLevelScript() {
+  KJ_IREQUIRE((which() == Message::SEND_LEVEL_SCRIPT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::SendLevelScriptMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

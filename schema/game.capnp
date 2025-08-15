@@ -130,6 +130,15 @@ struct UpdateIconsMessage {
     icons @0 :Shared.PlayerIconData;
 }
 
+struct LevelScript {
+    content @0 :Text;
+    filename @1 :Text;
+}
+
+struct SendLevelScriptMessage {
+    scripts @0 :List(LevelScript);
+}
+
 enum KickReason {
     custom @0;
     duplicateLogin @1;
@@ -149,6 +158,7 @@ struct Message {
         leaveSession       @5 :LeaveSessionMessage;
         playerData         @6 :PlayerDataMessage;
         updateIcons        @11 :UpdateIconsMessage;
+        sendLevelScript    @12 :SendLevelScriptMessage;
 
         # Server messages
         loginOk            @1 :LoginOkMessage;

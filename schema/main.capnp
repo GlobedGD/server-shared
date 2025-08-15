@@ -297,6 +297,19 @@ struct AdminFetchResponseMessage {
     punishmentCount @7 :UInt32;
 }
 
+struct FetchedMod {
+    accountId @0 :Int32;
+    username @1 :Text;
+    cube @2 :Int16;
+    color1 @3 :UInt16;
+    color2 @4 :UInt16;
+    glowColor @5 :UInt16;
+}
+
+struct AdminFetchModsResponseMessage {
+    users @0 :List(FetchedMod);
+}
+
 struct AdminFetchLogsMessage {
     issuer @0 :Int32;
     target @1 :Int32;
@@ -356,7 +369,13 @@ struct AdminSetPasswordMessage {
 struct AdminUpdateUserMessage {
     accountId @0 :Int32;
     username @1 :Text;
+    cube @2 :Int16;
+    color1 @3 :UInt16;
+    color2 @4 :UInt16;
+    glowColor @5 :UInt16;
 }
+
+struct AdminFetchModsMessage {}
 
 struct AdminResultMessage {
     success @0 :Bool;
@@ -400,6 +419,7 @@ struct Message {
         adminEditRoles @34 :AdminEditRolesMessage;
         adminSetPassword @35 :AdminSetPasswordMessage;
         adminUpdateUser @39 :AdminUpdateUserMessage;
+        adminFetchMods @52 :AdminFetchModsMessage;
 
         # Server messages
         loginOk       @3 :LoginOkMessage;
@@ -428,6 +448,7 @@ struct Message {
 
         adminResult   @36 :AdminResultMessage;
         adminFetchResponse @37 :AdminFetchResponseMessage;
+        adminFetchModsResponse @53 :AdminFetchModsResponseMessage;
         adminLogsResponse @41 :AdminLogsResponseMessage;
     }
 }
