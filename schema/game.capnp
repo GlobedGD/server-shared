@@ -133,6 +133,8 @@ struct UpdateIconsMessage {
 struct LevelScript {
     content @0 :Text;
     filename @1 :Text;
+    main @2 :Bool;
+    signature @3 :List(UInt8);
 }
 
 struct SendLevelScriptMessage {

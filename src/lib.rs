@@ -24,6 +24,7 @@ pub mod data;
 pub mod encoding;
 pub mod logging;
 pub mod schema;
+pub mod hmac_signer;
 mod session_id;
 pub mod token_issuer;
 

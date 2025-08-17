@@ -4,8 +4,10 @@ use base64::{Engine, engine::general_purpose::URL_SAFE_NO_PAD as b64e};
 use qunet::buffers::{ByteReader, ByteReaderError, ByteWriter};
 use thiserror::Error;
 
+use crate::hmac_signer::HmacSigner;
+
 pub struct TokenIssuer {
-    secret_key: [u8; 32],
+    signer: HmacSigner,
 }
 
 pub struct TokenData {
@@ -35,12 +37,8 @@ pub enum TokenValidationError {
 
 impl TokenIssuer {
     pub fn new(secret_key: &str) -> Result<Self, &'static str> {
-        let mut authtoken_secret_key = [0u8; 32];
-        hex::decode_to_slice(secret_key, &mut authtoken_secret_key)
-            .map_err(|_| "invalid secret key format, expected a 256-bit hex string")?;
-
         Ok(Self {
-            secret_key: authtoken_secret_key,
+            signer: HmacSigner::new(secret_key)?,
         })
     }
 
@@ -59,8 +57,7 @@ impl TokenIssuer {
             return Err(TokenValidationError::InvalidSignature);
         }
 
-        let valid = blake3::keyed_hash(&self.secret_key, data) == blake3::Hash::from_bytes(sig_buf);
-        if !valid {
+        if !self.signer.validate(data, sig_buf) {
             return Err(TokenValidationError::InvalidSignature);
         }
 
@@ -126,10 +123,7 @@ impl TokenIssuer {
         // sign the token
         let mut sig_buf = [0u8; 43]; // 32 / 3 * 4 + (32 % 3) + 1 for some reason??
         let sig_len = b64e
-            .encode_slice(
-                blake3::keyed_hash(&self.secret_key, data).as_bytes(),
-                &mut sig_buf,
-            )
+            .encode_slice(self.signer.sign(data), &mut sig_buf)
             .expect("b64 encoded signature must be exactly 42 bytes long");
 
         assert_eq!(

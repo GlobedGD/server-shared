@@ -28,6 +28,7 @@ struct LoginFailedMessage {
 struct NotifyRoomCreatedMessage {
     roomId @0 :UInt32;
     passcode @1 :UInt32;
+    owner @2 :Int32;
 }
 
 struct NotifyRoomDeletedMessage {
