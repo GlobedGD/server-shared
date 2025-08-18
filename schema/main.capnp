@@ -62,6 +62,10 @@ struct BannedMessage {
     expiresAt @1 :Int64;
 }
 
+struct ServersChangedMessage {
+    servers @0 :List(Shared.GameServer);
+}
+
 # General messages
 
 struct UpdateOwnDataMessage {
@@ -426,6 +430,7 @@ struct Message {
         loginFailed   @4 :LoginFailedMessage;
         loginRequired @5 :LoginRequiredMessage;
         banned        @23 :BannedMessage;
+        serversChanged @54 :ServersChangedMessage;
 
         playerCounts  @18 :PlayerCountsMessage;
 

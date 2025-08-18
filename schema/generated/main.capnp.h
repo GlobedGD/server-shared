@@ -37,6 +37,7 @@ CAPNP_DECLARE_ENUM(LoginFailedReason, c74467e7c2ba2ab4);
 CAPNP_DECLARE_SCHEMA(bbfb3e6266b46e00);
 CAPNP_DECLARE_SCHEMA(c0792171a7e24cec);
 CAPNP_DECLARE_SCHEMA(e94115bf16c4b5a8);
+CAPNP_DECLARE_SCHEMA(8292c7927f0e291e);
 CAPNP_DECLARE_SCHEMA(b90a50af13cffdeb);
 CAPNP_DECLARE_SCHEMA(f6f0f63e8a860c1c);
 CAPNP_DECLARE_SCHEMA(8eeeb2b3e84844c7);
@@ -242,6 +243,21 @@ struct BannedMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(e94115bf16c4b5a8, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct ServersChangedMessage {
+  ServersChangedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(8292c7927f0e291e, 0, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1082,6 +1098,7 @@ struct Message {
     TEAMS_UPDATED,
     ADMIN_FETCH_MODS,
     ADMIN_FETCH_MODS_RESPONSE,
+    SERVERS_CHANGED,
   };
 
   struct _capnpPrivate {
@@ -1819,6 +1836,87 @@ private:
 class BannedMessage::Pipeline {
 public:
   typedef BannedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class ServersChangedMessage::Reader {
+public:
+  typedef ServersChangedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasServers() const;
+  inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader getServers() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class ServersChangedMessage::Builder {
+public:
+  typedef ServersChangedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasServers();
+  inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder getServers();
+  inline void setServers( ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder initServers(unsigned int size);
+  inline void adoptServers(::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>> disownServers();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class ServersChangedMessage::Pipeline {
+public:
+  typedef ServersChangedMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -6609,6 +6707,10 @@ public:
   inline bool hasAdminFetchModsResponse() const;
   inline  ::globed::schema::main::AdminFetchModsResponseMessage::Reader getAdminFetchModsResponse() const;
 
+  inline bool isServersChanged() const;
+  inline bool hasServersChanged() const;
+  inline  ::globed::schema::main::ServersChangedMessage::Reader getServersChanged() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -7061,6 +7163,14 @@ public:
   inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder initAdminFetchModsResponse();
   inline void adoptAdminFetchModsResponse(::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage> disownAdminFetchModsResponse();
+
+  inline bool isServersChanged();
+  inline bool hasServersChanged();
+  inline  ::globed::schema::main::ServersChangedMessage::Builder getServersChanged();
+  inline void setServersChanged( ::globed::schema::main::ServersChangedMessage::Reader value);
+  inline  ::globed::schema::main::ServersChangedMessage::Builder initServersChanged();
+  inline void adoptServersChanged(::capnp::Orphan< ::globed::schema::main::ServersChangedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::ServersChangedMessage> disownServersChanged();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -7652,6 +7762,40 @@ inline  ::int64_t BannedMessage::Builder::getExpiresAt() {
 inline void BannedMessage::Builder::setExpiresAt( ::int64_t value) {
   _builder.setDataField< ::int64_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool ServersChangedMessage::Reader::hasServers() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool ServersChangedMessage::Builder::hasServers() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader ServersChangedMessage::Reader::getServers() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder ServersChangedMessage::Builder::getServers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void ServersChangedMessage::Builder::setServers( ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder ServersChangedMessage::Builder::initServers(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void ServersChangedMessage::Builder::adoptServers(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>> ServersChangedMessage::Builder::disownServers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline bool UpdateOwnDataMessage::Reader::hasIcons() const {
@@ -13427,6 +13571,60 @@ inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage> M
   KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isServersChanged() const {
+  return which() == Message::SERVERS_CHANGED;
+}
+inline bool Message::Builder::isServersChanged() {
+  return which() == Message::SERVERS_CHANGED;
+}
+inline bool Message::Reader::hasServersChanged() const {
+  if (which() != Message::SERVERS_CHANGED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasServersChanged() {
+  if (which() != Message::SERVERS_CHANGED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::ServersChangedMessage::Reader Message::Reader::getServersChanged() const {
+  KJ_IREQUIRE((which() == Message::SERVERS_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::ServersChangedMessage::Builder Message::Builder::getServersChanged() {
+  KJ_IREQUIRE((which() == Message::SERVERS_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setServersChanged( ::globed::schema::main::ServersChangedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SERVERS_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::ServersChangedMessage::Builder Message::Builder::initServersChanged() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SERVERS_CHANGED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptServersChanged(
+    ::capnp::Orphan< ::globed::schema::main::ServersChangedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SERVERS_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::ServersChangedMessage> Message::Builder::disownServersChanged() {
+  KJ_IREQUIRE((which() == Message::SERVERS_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
