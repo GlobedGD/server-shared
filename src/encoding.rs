@@ -249,8 +249,8 @@ macro_rules! encode_with_builder {
                 }
             }
 
-            // the 4 here is for the varuint length prefix
-            let mut buf = server.request_buffer(ser_size + 4);
+            // the constant here is added for the varuint length prefix (4) and for potential packing overhead (4)
+            let mut buf = server.request_buffer(ser_size + 8);
 
             let mut tmp_len_buf = [0u8; 4];
             let mut len_buf = qunet::buffers::ByteWriter::new(&mut tmp_len_buf);
