@@ -43,6 +43,7 @@ CAPNP_DECLARE_SCHEMA(920467072fa8ce3c);
 CAPNP_DECLARE_SCHEMA(ea51b18e3e4bdda6);
 CAPNP_DECLARE_SCHEMA(98e7cf6452ead0d1);
 CAPNP_DECLARE_SCHEMA(8c81bcb5b34031b2);
+CAPNP_DECLARE_SCHEMA(cf89bb52472b08d4);
 CAPNP_DECLARE_SCHEMA(f3df92cfd07ba2ea);
 CAPNP_DECLARE_SCHEMA(f5b211f1db0defbc);
 CAPNP_DECLARE_SCHEMA(f3e0f84d2138b356);
@@ -213,9 +214,11 @@ struct PlayerData {
   enum Which: uint16_t {
     DUAL,
     SINGLE,
+    CULLED,
   };
   struct Dual;
   struct Single;
+  struct Culled;
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(ea51b18e3e4bdda6, 2, 2)
@@ -255,6 +258,21 @@ struct PlayerData::Single {
   };
 };
 
+struct PlayerData::Culled {
+  Culled() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(cf89bb52472b08d4, 2, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct Event {
   Event() = delete;
 
@@ -278,7 +296,7 @@ struct PlayerDataMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(f5b211f1db0defbc, 0, 3)
+    CAPNP_DECLARE_STRUCT_HEADER(f5b211f1db0defbc, 2, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -293,7 +311,7 @@ struct LevelDataMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 0, 4)
+    CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 0, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1241,6 +1259,9 @@ public:
 
   inline  ::uint16_t getPercentage() const;
 
+  inline bool isCulled() const;
+  inline typename Culled::Reader getCulled() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1310,6 +1331,10 @@ public:
 
   inline  ::uint16_t getPercentage();
   inline void setPercentage( ::uint16_t value);
+
+  inline bool isCulled();
+  inline typename Culled::Builder getCulled();
+  inline typename Culled::Builder initCulled();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1512,6 +1537,82 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class PlayerData::Culled::Reader {
+public:
+  typedef Culled Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::capnp::Void getNothing() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PlayerData::Culled::Builder {
+public:
+  typedef Culled Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::capnp::Void getNothing();
+  inline void setNothing( ::capnp::Void value = ::capnp::VOID);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PlayerData::Culled::Pipeline {
+public:
+  typedef Culled Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class Event::Reader {
 public:
   typedef Event Reads;
@@ -1624,6 +1725,12 @@ public:
   inline bool hasEvents() const;
   inline  ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>::Reader getEvents() const;
 
+  inline float getCameraX() const;
+
+  inline float getCameraY() const;
+
+  inline float getCameraRadius() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1674,6 +1781,15 @@ public:
   inline void adoptEvents(::capnp::Orphan< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>> disownEvents();
 
+  inline float getCameraX();
+  inline void setCameraX(float value);
+
+  inline float getCameraY();
+  inline void setCameraY(float value);
+
+  inline float getCameraRadius();
+  inline void setCameraRadius(float value);
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -1721,9 +1837,6 @@ public:
   inline bool hasPlayers() const;
   inline  ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Reader getPlayers() const;
 
-  inline bool hasCulled() const;
-  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getCulled() const;
-
   inline bool hasDisplayDatas() const;
   inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Reader getDisplayDatas() const;
 
@@ -1764,14 +1877,6 @@ public:
   inline  ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>::Builder initPlayers(unsigned int size);
   inline void adoptPlayers(::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::capnp::Kind::STRUCT>> disownPlayers();
-
-  inline bool hasCulled();
-  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getCulled();
-  inline void setCulled( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
-  inline void setCulled(::kj::ArrayPtr<const  ::int32_t> value);
-  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initCulled(unsigned int size);
-  inline void adoptCulled(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownCulled();
 
   inline bool hasDisplayDatas();
   inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Builder getDisplayDatas();
@@ -3090,6 +3195,27 @@ inline void PlayerData::Builder::setPercentage( ::uint16_t value) {
       ::capnp::bounded<7>() * ::capnp::ELEMENTS, value);
 }
 
+inline bool PlayerData::Reader::isCulled() const {
+  return which() == PlayerData::CULLED;
+}
+inline bool PlayerData::Builder::isCulled() {
+  return which() == PlayerData::CULLED;
+}
+inline typename PlayerData::Culled::Reader PlayerData::Reader::getCulled() const {
+  KJ_IREQUIRE((which() == PlayerData::CULLED),
+              "Must check which() before get()ing a union member.");
+  return typename PlayerData::Culled::Reader(_reader);
+}
+inline typename PlayerData::Culled::Builder PlayerData::Builder::getCulled() {
+  KJ_IREQUIRE((which() == PlayerData::CULLED),
+              "Must check which() before get()ing a union member.");
+  return typename PlayerData::Culled::Builder(_builder);
+}
+inline typename PlayerData::Culled::Builder PlayerData::Builder::initCulled() {
+  _builder.setDataField<PlayerData::Which>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS, PlayerData::CULLED);
+  return typename PlayerData::Culled::Builder(_builder);
+}
 inline bool PlayerData::Dual::Reader::hasPlayer1() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -3205,6 +3331,20 @@ inline void PlayerData::Single::Builder::adoptPlayer1(
 inline ::capnp::Orphan< ::globed::schema::game::PlayerObjectData> PlayerData::Single::Builder::disownPlayer1() {
   return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerObjectData>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::capnp::Void PlayerData::Culled::Reader::getNothing() const {
+  return _reader.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::capnp::Void PlayerData::Culled::Builder::getNothing() {
+  return _builder.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void PlayerData::Culled::Builder::setNothing( ::capnp::Void value) {
+  _builder.setDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint16_t Event::Reader::getType() const {
@@ -3366,6 +3506,48 @@ inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::Event,  ::capnp::
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
+inline float PlayerDataMessage::Reader::getCameraX() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline float PlayerDataMessage::Builder::getCameraX() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void PlayerDataMessage::Builder::setCameraX(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline float PlayerDataMessage::Reader::getCameraY() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline float PlayerDataMessage::Builder::getCameraY() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void PlayerDataMessage::Builder::setCameraY(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline float PlayerDataMessage::Reader::getCameraRadius() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline float PlayerDataMessage::Builder::getCameraRadius() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void PlayerDataMessage::Builder::setCameraRadius(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
 inline bool LevelDataMessage::Reader::hasPlayers() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -3400,110 +3582,72 @@ inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerData,  ::ca
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline bool LevelDataMessage::Reader::hasCulled() const {
-  return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
-}
-inline bool LevelDataMessage::Builder::hasCulled() {
-  return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
-}
-inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader LevelDataMessage::Reader::getCulled() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder LevelDataMessage::Builder::getCulled() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-inline void LevelDataMessage::Builder::setCulled( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
-}
-inline void LevelDataMessage::Builder::setCulled(::kj::ArrayPtr<const  ::int32_t> value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
-}
-inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder LevelDataMessage::Builder::initCulled(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
-}
-inline void LevelDataMessage::Builder::adoptCulled(
-    ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> LevelDataMessage::Builder::disownCulled() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-
 inline bool LevelDataMessage::Reader::hasDisplayDatas() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
 }
 inline bool LevelDataMessage::Builder::hasDisplayDatas() {
   return !_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
 }
 inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Reader LevelDataMessage::Reader::getDisplayDatas() const {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Builder LevelDataMessage::Builder::getDisplayDatas() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 inline void LevelDataMessage::Builder::setDisplayDatas( ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
 }
 inline  ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>::Builder LevelDataMessage::Builder::initDisplayDatas(unsigned int size) {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
 }
 inline void LevelDataMessage::Builder::adoptDisplayDatas(
     ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>&& value) {
   ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
 }
 inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>> LevelDataMessage::Builder::disownDisplayDatas() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::PlayerDisplayData,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline bool LevelDataMessage::Reader::hasEvents() const {
   return !_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
 inline bool LevelDataMessage::Builder::hasEvents() {
   return !_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
 inline  ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>::Reader LevelDataMessage::Reader::getEvents() const {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 inline  ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>::Builder LevelDataMessage::Builder::getEvents() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 inline void LevelDataMessage::Builder::setEvents( ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
 }
 inline  ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>::Builder LevelDataMessage::Builder::initEvents(unsigned int size) {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), size);
+      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
 }
 inline void LevelDataMessage::Builder::adoptEvents(
     ::capnp::Orphan< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>>&& value) {
   ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
 }
 inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>> LevelDataMessage::Builder::disownEvents() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::Event,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
 inline bool UpdateIconsMessage::Reader::hasIcons() const {

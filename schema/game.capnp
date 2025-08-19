@@ -102,6 +102,10 @@ struct PlayerData {
             player1 @12 :PlayerObjectData;
         }
 
+        culled :group {
+            nothing @14 :Void;
+        }
+
         # TODO: more complete data for spectator
     }
 }
@@ -115,13 +119,15 @@ struct PlayerDataMessage {
     data @0 :PlayerData;
     dataRequests @1 :List(Int32);
     events @2 :List(Event);
+    cameraX @3 :Float32;
+    cameraY @4 :Float32;
+    cameraRadius @5 :Float32;
 }
 
 struct LevelDataMessage {
     players @0 :List(PlayerData);
-    culled  @1 :List(Int32); # Account IDs of players that were culled
-    displayDatas @2 :List(Shared.PlayerDisplayData);
-    events @3 :List(Event);
+    displayDatas @1 :List(Shared.PlayerDisplayData);
+    events @2 :List(Event);
 }
 
 # Misc
