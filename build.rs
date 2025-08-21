@@ -8,6 +8,10 @@ fn generate_for(name: &str) {
 }
 
 fn main() {
+    if std::env::var("SERVER_SHARED_PREBUILT_DATA").is_ok() {
+        return;
+    }
+
     generate_for("shared");
 
     if std::env::var("CARGO_FEATURE_MAIN").is_ok() {
