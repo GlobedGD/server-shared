@@ -57,6 +57,7 @@ enum class KickReason_c8a95e9766c5920c: uint16_t {
 };
 CAPNP_DECLARE_ENUM(KickReason, c8a95e9766c5920c);
 CAPNP_DECLARE_SCHEMA(b42ff33e56f21298);
+CAPNP_DECLARE_SCHEMA(d2d77b5d2f998da1);
 CAPNP_DECLARE_SCHEMA(ee430f29eef52d4e);
 
 }  // namespace schemas
@@ -380,6 +381,21 @@ struct KickedMessage {
   };
 };
 
+struct ScriptLogsMessage {
+  ScriptLogsMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(d2d77b5d2f998da1, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct Message {
   Message() = delete;
 
@@ -400,6 +416,7 @@ struct Message {
     KICKED,
     UPDATE_ICONS,
     SEND_LEVEL_SCRIPT,
+    SCRIPT_LOGS,
   };
 
   struct _capnpPrivate {
@@ -2274,6 +2291,88 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class ScriptLogsMessage::Reader {
+public:
+  typedef ScriptLogsMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasLogs() const;
+  inline  ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Reader getLogs() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class ScriptLogsMessage::Builder {
+public:
+  typedef ScriptLogsMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasLogs();
+  inline  ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Builder getLogs();
+  inline void setLogs( ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Reader value);
+  inline void setLogs(::kj::ArrayPtr<const  ::capnp::Text::Reader> value);
+  inline  ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Builder initLogs(unsigned int size);
+  inline void adoptLogs(::capnp::Orphan< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>> disownLogs();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class ScriptLogsMessage::Pipeline {
+public:
+  typedef ScriptLogsMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class Message::Reader {
 public:
   typedef Message Reads;
@@ -2343,6 +2442,10 @@ public:
   inline bool isSendLevelScript() const;
   inline bool hasSendLevelScript() const;
   inline  ::globed::schema::game::SendLevelScriptMessage::Reader getSendLevelScript() const;
+
+  inline bool isScriptLogs() const;
+  inline bool hasScriptLogs() const;
+  inline  ::globed::schema::game::ScriptLogsMessage::Reader getScriptLogs() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -2476,6 +2579,14 @@ public:
   inline  ::globed::schema::game::SendLevelScriptMessage::Builder initSendLevelScript();
   inline void adoptSendLevelScript(::capnp::Orphan< ::globed::schema::game::SendLevelScriptMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::SendLevelScriptMessage> disownSendLevelScript();
+
+  inline bool isScriptLogs();
+  inline bool hasScriptLogs();
+  inline  ::globed::schema::game::ScriptLogsMessage::Builder getScriptLogs();
+  inline void setScriptLogs( ::globed::schema::game::ScriptLogsMessage::Reader value);
+  inline  ::globed::schema::game::ScriptLogsMessage::Builder initScriptLogs();
+  inline void adoptScriptLogs(::capnp::Orphan< ::globed::schema::game::ScriptLogsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::ScriptLogsMessage> disownScriptLogs();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3891,6 +4002,44 @@ inline ::capnp::Orphan< ::capnp::Text> KickedMessage::Builder::disownMessage() {
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool ScriptLogsMessage::Reader::hasLogs() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool ScriptLogsMessage::Builder::hasLogs() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Reader ScriptLogsMessage::Reader::getLogs() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Builder ScriptLogsMessage::Builder::getLogs() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void ScriptLogsMessage::Builder::setLogs( ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void ScriptLogsMessage::Builder::setLogs(::kj::ArrayPtr<const  ::capnp::Text::Reader> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Builder ScriptLogsMessage::Builder::initLogs(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void ScriptLogsMessage::Builder::adoptLogs(
+    ::capnp::Orphan< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>> ScriptLogsMessage::Builder::disownLogs() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline  ::globed::schema::game::Message::Which Message::Reader::which() const {
   return _reader.getDataField<Which>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -4599,6 +4748,60 @@ inline ::capnp::Orphan< ::globed::schema::game::SendLevelScriptMessage> Message:
   KJ_IREQUIRE((which() == Message::SEND_LEVEL_SCRIPT),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::SendLevelScriptMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isScriptLogs() const {
+  return which() == Message::SCRIPT_LOGS;
+}
+inline bool Message::Builder::isScriptLogs() {
+  return which() == Message::SCRIPT_LOGS;
+}
+inline bool Message::Reader::hasScriptLogs() const {
+  if (which() != Message::SCRIPT_LOGS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasScriptLogs() {
+  if (which() != Message::SCRIPT_LOGS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::ScriptLogsMessage::Reader Message::Reader::getScriptLogs() const {
+  KJ_IREQUIRE((which() == Message::SCRIPT_LOGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ScriptLogsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::ScriptLogsMessage::Builder Message::Builder::getScriptLogs() {
+  KJ_IREQUIRE((which() == Message::SCRIPT_LOGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ScriptLogsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setScriptLogs( ::globed::schema::game::ScriptLogsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SCRIPT_LOGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::ScriptLogsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::ScriptLogsMessage::Builder Message::Builder::initScriptLogs() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SCRIPT_LOGS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ScriptLogsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptScriptLogs(
+    ::capnp::Orphan< ::globed::schema::game::ScriptLogsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SCRIPT_LOGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::ScriptLogsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::ScriptLogsMessage> Message::Builder::disownScriptLogs() {
+  KJ_IREQUIRE((which() == Message::SCRIPT_LOGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ScriptLogsMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

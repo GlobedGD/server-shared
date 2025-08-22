@@ -28,6 +28,7 @@ struct LoginOkMessage {
 enum LoginFailedReason {
     invalidUserToken @0;
     centralServerUnreachable @1;
+    
 }
 
 struct LoginFailedMessage {
@@ -157,6 +158,10 @@ struct KickedMessage {
     message @1 :Text;
 }
 
+struct ScriptLogsMessage {
+    logs @0 :List(Text);
+}
+
 struct Message {
     union {
         # Client messages
@@ -175,5 +180,6 @@ struct Message {
         joinSessionFailed  @8 :JoinSessionFailedMessage;
         levelData          @9 :LevelDataMessage;
         kicked             @10 :KickedMessage;
+        scriptLogs         @13 :ScriptLogsMessage;
     }
 }

@@ -47,6 +47,7 @@ enum LoginFailedReason {
     argonUnreachable    @3;
     argonInternalError  @4;
     internalDbError     @5;
+    invalidAccountData  @6;
 }
 
 struct LoginFailedMessage {
