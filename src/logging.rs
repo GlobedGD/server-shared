@@ -5,28 +5,33 @@ use tracing_subscriber::{Layer as _, Registry, filter, fmt::Layer, layer::Subscr
 
 pub use tracing_appender::non_blocking::WorkerGuard;
 
-pub fn setup_logger(
-    rolling: bool,
-    directory: impl AsRef<Path>,
-    file_name_prefix: impl AsRef<Path>,
-    level: &str,
-    file_enabled: bool,
-) -> (WorkerGuard, WorkerGuard) {
-    // Setup log level filter
-    let log_level = match level.to_lowercase().as_str() {
+fn parse_filter(level: &str) -> LevelFilter {
+    match level.to_lowercase().as_str() {
         "error" => LevelFilter::ERROR,
         "warn" => LevelFilter::WARN,
         "info" => LevelFilter::INFO,
         "debug" => LevelFilter::DEBUG,
         "trace" => LevelFilter::TRACE,
         _ => LevelFilter::INFO,
-    };
+    }
+}
+
+pub fn setup_logger(
+    rolling: bool,
+    directory: impl AsRef<Path>,
+    file_name_prefix: impl AsRef<Path>,
+    console_level: &str,
+    file_level: &str,
+    file_enabled: bool,
+) -> (WorkerGuard, WorkerGuard) {
+    // Setup log level filter
+    let console_level = parse_filter(console_level);
+    let file_level = parse_filter(file_level);
 
     let filter = filter::Targets::new()
         .with_target("sqlx", Level::WARN)
         .with_target("tokio", Level::WARN)
-        .with_target("runtime", Level::WARN)
-        .with_default(log_level);
+        .with_target("runtime", Level::WARN);
 
     // Create file appender
     let appender = if rolling {
@@ -50,7 +55,7 @@ pub fn setup_logger(
 
     let stdout_layer = Layer::default()
         .with_writer(nb_stdout)
-        .with_filter(filter.clone());
+        .with_filter(filter.clone().with_default(console_level));
 
     #[cfg(feature = "tokio_tracing")]
     let console_layer = console_subscriber::spawn();
@@ -64,7 +69,7 @@ pub fn setup_logger(
         let file_layer = Layer::default()
             .with_writer(nb_file)
             .with_ansi(false)
-            .with_filter(filter);
+            .with_filter(filter.clone().with_default(file_level));
 
         let subscriber = subscriber.with(file_layer);
 

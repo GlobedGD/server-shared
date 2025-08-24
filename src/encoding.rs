@@ -161,6 +161,8 @@ macro_rules! decode_message_match {
 
             match message.which().map_err(|_| $crate::encoding::DataDecodeError::InvalidDiscriminant)? {
                 $(schema::message::Which::$variant(msg) => {
+                    tracing::trace!("got message {}", stringify!($variant));
+
                     let $msg_var = msg._maybe_into_result()?;
                     $($t)*
                 })*
