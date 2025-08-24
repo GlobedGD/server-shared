@@ -24,6 +24,8 @@ pub fn setup_logger(
 
     let filter = filter::Targets::new()
         .with_target("sqlx", Level::WARN)
+        .with_target("tokio", Level::WARN)
+        .with_target("runtime", Level::WARN)
         .with_default(log_level);
 
     // Create file appender
