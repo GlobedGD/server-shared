@@ -1,7 +1,7 @@
 use std::path::Path;
 use tracing::{Level, level_filters::LevelFilter};
 use tracing_appender::{non_blocking::NonBlockingBuilder, rolling};
-use tracing_subscriber::{Registry, filter, fmt::Layer, layer::SubscriberExt};
+use tracing_subscriber::{Layer as _, Registry, filter, fmt::Layer, layer::SubscriberExt};
 
 pub use tracing_appender::non_blocking::WorkerGuard;
 
@@ -46,12 +46,24 @@ pub fn setup_logger(
         .buffered_lines_limit(8192)
         .finish(std::io::stdout());
 
-    let stdout_layer = Layer::default().with_writer(nb_stdout);
+    let stdout_layer = Layer::default()
+        .with_writer(nb_stdout)
+        .with_filter(filter.clone());
 
-    let subscriber = Registry::default().with(filter).with(stdout_layer);
+    #[cfg(feature = "tokio_tracing")]
+    let console_layer = console_subscriber::spawn();
+
+    let subscriber = Registry::default().with(stdout_layer);
+
+    #[cfg(feature = "tokio_tracing")]
+    let subscriber = subscriber.with(console_layer);
 
     if file_enabled {
-        let file_layer = Layer::default().with_writer(nb_file).with_ansi(false);
+        let file_layer = Layer::default()
+            .with_writer(nb_file)
+            .with_ansi(false)
+            .with_filter(filter);
+
         let subscriber = subscriber.with(file_layer);
 
         tracing::subscriber::set_global_default(subscriber)

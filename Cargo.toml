@@ -20,6 +20,7 @@ blake3 = "1.8.2"
 heapless = "0.8.0"
 hex = "0.4.3"
 hmac = "0.12.1"
+console-subscriber = { version = "0.4.1", features = ["parking_lot"] }
 
 
 [build-dependencies]
@@ -31,3 +32,4 @@ main = []
 game = []
 srvc = []
 all = ["main", "game", "srvc"]
+tokio_tracing = []
