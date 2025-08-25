@@ -389,7 +389,7 @@ struct ScriptLogsMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d2d77b5d2f998da1, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(d2d77b5d2f998da1, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -2311,6 +2311,8 @@ public:
   inline bool hasLogs() const;
   inline  ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Reader getLogs() const;
 
+  inline float getRamUsage() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2346,6 +2348,9 @@ public:
   inline  ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>::Builder initLogs(unsigned int size);
   inline void adoptLogs(::capnp::Orphan< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>> disownLogs();
+
+  inline float getRamUsage();
+  inline void setRamUsage(float value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4038,6 +4043,20 @@ inline void ScriptLogsMessage::Builder::adoptLogs(
 inline ::capnp::Orphan< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>> ScriptLogsMessage::Builder::disownLogs() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Text,  ::capnp::Kind::BLOB>>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline float ScriptLogsMessage::Reader::getRamUsage() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline float ScriptLogsMessage::Builder::getRamUsage() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void ScriptLogsMessage::Builder::setRamUsage(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::game::Message::Which Message::Reader::which() const {

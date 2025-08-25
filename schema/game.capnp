@@ -28,7 +28,6 @@ struct LoginOkMessage {
 enum LoginFailedReason {
     invalidUserToken @0;
     centralServerUnreachable @1;
-    
 }
 
 struct LoginFailedMessage {
@@ -160,6 +159,7 @@ struct KickedMessage {
 
 struct ScriptLogsMessage {
     logs @0 :List(Text);
+    ramUsage @1 :Float32;
 }
 
 struct Message {

@@ -9,6 +9,7 @@ fn generate_for(name: &str) {
 
 fn main() {
     println!("cargo:rerun-if-env-changed=SERVER_SHARED_PREBUILT_DATA");
+    println!("cargo:rerun-if-changed=schema");
 
     if std::env::var("SERVER_SHARED_PREBUILT_DATA").is_ok() {
         return;
