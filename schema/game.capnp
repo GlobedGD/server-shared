@@ -118,7 +118,7 @@ struct Event {
 struct PlayerDataMessage {
     data @0 :PlayerData;
     dataRequests @1 :List(Int32);
-    events @2 :List(Event);
+    eventData @2 :Data;
     cameraX @3 :Float32;
     cameraY @4 :Float32;
     cameraRadius @5 :Float32;
@@ -127,7 +127,7 @@ struct PlayerDataMessage {
 struct LevelDataMessage {
     players @0 :List(PlayerData);
     displayDatas @1 :List(Shared.PlayerDisplayData);
-    events @2 :List(Event);
+    eventData @2 :Data;
 }
 
 # Misc
@@ -140,7 +140,7 @@ struct LevelScript {
     content @0 :Text;
     filename @1 :Text;
     main @2 :Bool;
-    signature @3 :List(UInt8);
+    signature @3 :Data;
 }
 
 struct SendLevelScriptMessage {

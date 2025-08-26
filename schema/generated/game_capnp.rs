@@ -4063,11 +4063,11 @@ pub mod player_data_message {
       !self.reader.get_pointer_field(1).is_null()
     }
     #[inline]
-    pub fn get_events(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::game_capnp::event::Owned>> {
+    pub fn get_event_data(self) -> ::capnp::Result<::capnp::data::Reader<'a>> {
       ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
     }
     #[inline]
-    pub fn has_events(&self) -> bool {
+    pub fn has_event_data(&self) -> bool {
       !self.reader.get_pointer_field(2).is_null()
     }
     #[inline]
@@ -4169,19 +4169,19 @@ pub mod player_data_message {
       !self.builder.is_pointer_field_null(1)
     }
     #[inline]
-    pub fn get_events(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::game_capnp::event::Owned>> {
+    pub fn get_event_data(self) -> ::capnp::Result<::capnp::data::Builder<'a>> {
       ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_events(&mut self, value: ::capnp::struct_list::Reader<'_,crate::game_capnp::event::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(2), value, false)
+    pub fn set_event_data(&mut self, value: ::capnp::data::Reader<'_>)  {
+      self.builder.reborrow().get_pointer_field(2).set_data(value);
     }
     #[inline]
-    pub fn init_events(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::game_capnp::event::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), size)
+    pub fn init_event_data(self, size: u32) -> ::capnp::data::Builder<'a> {
+      self.builder.get_pointer_field(2).init_data(size)
     }
     #[inline]
-    pub fn has_events(&self) -> bool {
+    pub fn has_event_data(&self) -> bool {
       !self.builder.is_pointer_field_null(2)
     }
     #[inline]
@@ -4222,14 +4222,14 @@ pub mod player_data_message {
     }
   }
   mod _private {
-    pub static ENCODED_NODE: [::capnp::Word; 119] = [
+    pub static ENCODED_NODE: [::capnp::Word; 116] = [
       ::capnp::word(0, 0, 0, 0, 6, 0, 6, 0),
       ::capnp::word(188, 239, 13, 219, 241, 17, 178, 245),
       ::capnp::word(11, 0, 0, 0, 1, 0, 2, 0),
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(3, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(238, 8, 0, 0, 177, 9, 0, 0),
+      ::capnp::word(238, 8, 0, 0, 173, 9, 0, 0),
       ::capnp::word(21, 0, 0, 0, 234, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -4259,31 +4259,31 @@ pub mod player_data_message {
       ::capnp::word(2, 0, 0, 0, 2, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 2, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(181, 0, 0, 0, 58, 0, 0, 0),
+      ::capnp::word(181, 0, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(176, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(204, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(180, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(192, 0, 0, 0, 2, 0, 1, 0),
       ::capnp::word(3, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 3, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(201, 0, 0, 0, 66, 0, 0, 0),
+      ::capnp::word(189, 0, 0, 0, 66, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(196, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(208, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(184, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(196, 0, 0, 0, 2, 0, 1, 0),
       ::capnp::word(4, 0, 0, 0, 1, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 4, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(205, 0, 0, 0, 66, 0, 0, 0),
+      ::capnp::word(193, 0, 0, 0, 66, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(200, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(212, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(188, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(200, 0, 0, 0, 2, 0, 1, 0),
       ::capnp::word(5, 0, 0, 0, 2, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 5, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(209, 0, 0, 0, 106, 0, 0, 0),
+      ::capnp::word(197, 0, 0, 0, 106, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(208, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(220, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(196, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(208, 0, 0, 0, 2, 0, 1, 0),
       ::capnp::word(100, 97, 116, 97, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(166, 221, 75, 62, 142, 177, 81, 234),
@@ -4305,16 +4305,13 @@ pub mod player_data_message {
       ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(101, 118, 101, 110, 116, 115, 0, 0),
-      ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(101, 118, 101, 110, 116, 68, 97, 116),
+      ::capnp::word(97, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(234, 162, 123, 208, 207, 146, 223, 243),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(99, 97, 109, 101, 114, 97, 88, 0),
@@ -4347,7 +4344,7 @@ pub mod player_data_message {
       match index {
         0 => <crate::game_capnp::player_data::Owned as ::capnp::introspect::Introspect>::introspect(),
         1 => <::capnp::primitive_list::Owned<i32> as ::capnp::introspect::Introspect>::introspect(),
-        2 => <::capnp::struct_list::Owned<crate::game_capnp::event::Owned> as ::capnp::introspect::Introspect>::introspect(),
+        2 => <::capnp::data::Owned as ::capnp::introspect::Introspect>::introspect(),
         3 => <f32 as ::capnp::introspect::Introspect>::introspect(),
         4 => <f32 as ::capnp::introspect::Introspect>::introspect(),
         5 => <f32 as ::capnp::introspect::Introspect>::introspect(),
@@ -4448,11 +4445,11 @@ pub mod level_data_message {
       !self.reader.get_pointer_field(1).is_null()
     }
     #[inline]
-    pub fn get_events(self) -> ::capnp::Result<::capnp::struct_list::Reader<'a,crate::game_capnp::event::Owned>> {
+    pub fn get_event_data(self) -> ::capnp::Result<::capnp::data::Reader<'a>> {
       ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
     }
     #[inline]
-    pub fn has_events(&self) -> bool {
+    pub fn has_event_data(&self) -> bool {
       !self.reader.get_pointer_field(2).is_null()
     }
   }
@@ -4542,19 +4539,19 @@ pub mod level_data_message {
       !self.builder.is_pointer_field_null(1)
     }
     #[inline]
-    pub fn get_events(self) -> ::capnp::Result<::capnp::struct_list::Builder<'a,crate::game_capnp::event::Owned>> {
+    pub fn get_event_data(self) -> ::capnp::Result<::capnp::data::Builder<'a>> {
       ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_events(&mut self, value: ::capnp::struct_list::Reader<'_,crate::game_capnp::event::Owned>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(2), value, false)
+    pub fn set_event_data(&mut self, value: ::capnp::data::Reader<'_>)  {
+      self.builder.reborrow().get_pointer_field(2).set_data(value);
     }
     #[inline]
-    pub fn init_events(self, size: u32) -> ::capnp::struct_list::Builder<'a,crate::game_capnp::event::Owned> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), size)
+    pub fn init_event_data(self, size: u32) -> ::capnp::data::Builder<'a> {
+      self.builder.get_pointer_field(2).init_data(size)
     }
     #[inline]
-    pub fn has_events(&self) -> bool {
+    pub fn has_event_data(&self) -> bool {
       !self.builder.is_pointer_field_null(2)
     }
   }
@@ -4568,14 +4565,14 @@ pub mod level_data_message {
   impl Pipeline  {
   }
   mod _private {
-    pub static ENCODED_NODE: [::capnp::Word; 77] = [
+    pub static ENCODED_NODE: [::capnp::Word; 74] = [
       ::capnp::word(0, 0, 0, 0, 6, 0, 6, 0),
       ::capnp::word(86, 179, 56, 33, 77, 248, 224, 243),
       ::capnp::word(11, 0, 0, 0, 1, 0, 0, 0),
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(3, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(179, 9, 0, 0, 65, 10, 0, 0),
+      ::capnp::word(175, 9, 0, 0, 57, 10, 0, 0),
       ::capnp::word(21, 0, 0, 0, 226, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -4605,10 +4602,10 @@ pub mod level_data_message {
       ::capnp::word(2, 0, 0, 0, 2, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 2, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(113, 0, 0, 0, 58, 0, 0, 0),
+      ::capnp::word(113, 0, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(108, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(136, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(112, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(124, 0, 0, 0, 2, 0, 1, 0),
       ::capnp::word(112, 108, 97, 121, 101, 114, 115, 0),
       ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -4634,16 +4631,13 @@ pub mod level_data_message {
       ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(101, 118, 101, 110, 116, 115, 0, 0),
-      ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(101, 118, 101, 110, 116, 68, 97, 116),
+      ::capnp::word(97, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(234, 162, 123, 208, 207, 146, 223, 243),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
     ];
@@ -4651,7 +4645,7 @@ pub mod level_data_message {
       match index {
         0 => <::capnp::struct_list::Owned<crate::game_capnp::player_data::Owned> as ::capnp::introspect::Introspect>::introspect(),
         1 => <::capnp::struct_list::Owned<crate::shared_capnp::player_display_data::Owned> as ::capnp::introspect::Introspect>::introspect(),
-        2 => <::capnp::struct_list::Owned<crate::game_capnp::event::Owned> as ::capnp::introspect::Introspect>::introspect(),
+        2 => <::capnp::data::Owned as ::capnp::introspect::Introspect>::introspect(),
         _ => ::capnp::introspect::panic_invalid_field_index(index),
       }
     }
@@ -4831,7 +4825,7 @@ pub mod update_icons_message {
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(75, 10, 0, 0, 141, 10, 0, 0),
+      ::capnp::word(67, 10, 0, 0, 133, 10, 0, 0),
       ::capnp::word(21, 0, 0, 0, 242, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -4964,7 +4958,7 @@ pub mod level_script {
       self.reader.get_bool_field(0)
     }
     #[inline]
-    pub fn get_signature(self) -> ::capnp::Result<::capnp::primitive_list::Reader<'a,u8>> {
+    pub fn get_signature(self) -> ::capnp::Result<::capnp::data::Reader<'a>> {
       ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
     }
     #[inline]
@@ -5066,16 +5060,16 @@ pub mod level_script {
       self.builder.set_bool_field(0, value);
     }
     #[inline]
-    pub fn get_signature(self) -> ::capnp::Result<::capnp::primitive_list::Builder<'a,u8>> {
+    pub fn get_signature(self) -> ::capnp::Result<::capnp::data::Builder<'a>> {
       ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
     }
     #[inline]
-    pub fn set_signature(&mut self, value: impl ::capnp::traits::SetterInput<::capnp::primitive_list::Owned<u8>>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(2), value, false)
+    pub fn set_signature(&mut self, value: ::capnp::data::Reader<'_>)  {
+      self.builder.reborrow().get_pointer_field(2).set_data(value);
     }
     #[inline]
-    pub fn init_signature(self, size: u32) -> ::capnp::primitive_list::Builder<'a,u8> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), size)
+    pub fn init_signature(self, size: u32) -> ::capnp::data::Builder<'a> {
+      self.builder.get_pointer_field(2).init_data(size)
     }
     #[inline]
     pub fn has_signature(&self) -> bool {
@@ -5092,14 +5086,14 @@ pub mod level_script {
   impl Pipeline  {
   }
   mod _private {
-    pub static ENCODED_NODE: [::capnp::Word; 84] = [
+    pub static ENCODED_NODE: [::capnp::Word; 80] = [
       ::capnp::word(0, 0, 0, 0, 6, 0, 6, 0),
       ::capnp::word(130, 57, 211, 181, 141, 21, 225, 165),
       ::capnp::word(11, 0, 0, 0, 1, 0, 1, 0),
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(3, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(143, 10, 0, 0, 4, 11, 0, 0),
+      ::capnp::word(135, 10, 0, 0, 245, 10, 0, 0),
       ::capnp::word(21, 0, 0, 0, 186, 0, 0, 0),
       ::capnp::word(29, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -5138,7 +5132,7 @@ pub mod level_script {
       ::capnp::word(113, 0, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(112, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(140, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(124, 0, 0, 0, 2, 0, 1, 0),
       ::capnp::word(99, 111, 110, 116, 101, 110, 116, 0),
       ::capnp::word(12, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -5166,15 +5160,11 @@ pub mod level_script {
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(115, 105, 103, 110, 97, 116, 117, 114),
       ::capnp::word(101, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(6, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
     ];
@@ -5183,7 +5173,7 @@ pub mod level_script {
         0 => <::capnp::text::Owned as ::capnp::introspect::Introspect>::introspect(),
         1 => <::capnp::text::Owned as ::capnp::introspect::Introspect>::introspect(),
         2 => <bool as ::capnp::introspect::Introspect>::introspect(),
-        3 => <::capnp::primitive_list::Owned<u8> as ::capnp::introspect::Introspect>::introspect(),
+        3 => <::capnp::data::Owned as ::capnp::introspect::Introspect>::introspect(),
         _ => ::capnp::introspect::panic_invalid_field_index(index),
       }
     }
@@ -5360,7 +5350,7 @@ pub mod send_level_script_message {
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(6, 11, 0, 0, 74, 11, 0, 0),
+      ::capnp::word(247, 10, 0, 0, 59, 11, 0, 0),
       ::capnp::word(21, 0, 0, 0, 18, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -5454,7 +5444,7 @@ pub static ENCODED_NODE: [::capnp::Word; 27] = [
   ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
   ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
   ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-  ::capnp::word(76, 11, 0, 0, 133, 11, 0, 0),
+  ::capnp::word(61, 11, 0, 0, 118, 11, 0, 0),
   ::capnp::word(21, 0, 0, 0, 178, 0, 0, 0),
   ::capnp::word(29, 0, 0, 0, 7, 0, 0, 0),
   ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -5650,7 +5640,7 @@ pub mod kicked_message {
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(135, 11, 0, 0, 208, 11, 0, 0),
+      ::capnp::word(120, 11, 0, 0, 193, 11, 0, 0),
       ::capnp::word(21, 0, 0, 0, 202, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -5886,7 +5876,7 @@ pub mod script_logs_message {
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(210, 11, 0, 0, 33, 12, 0, 0),
+      ::capnp::word(195, 11, 0, 0, 18, 12, 0, 0),
       ::capnp::word(21, 0, 0, 0, 234, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -6525,7 +6515,7 @@ pub mod message {
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(1, 0, 7, 0, 0, 0, 14, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(35, 12, 0, 0, 81, 15, 0, 0),
+      ::capnp::word(20, 12, 0, 0, 66, 15, 0, 0),
       ::capnp::word(21, 0, 0, 0, 154, 0, 0, 0),
       ::capnp::word(29, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
