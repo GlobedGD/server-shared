@@ -19,12 +19,14 @@ struct LoginUTokenMessage {
     accountId @0 :Int32;
     token @1 :Text;
     icons @2 :Shared.PlayerIconData;
+    uident @3 :Data;
 }
 
 struct LoginArgonMessage {
     accountId @0 :Int32;
     token @1 :Text;
     icons @2 :Shared.PlayerIconData;
+    uident @3 :Data;
 }
 
 struct LoginPlainMessage {

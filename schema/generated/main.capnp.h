@@ -151,7 +151,7 @@ struct LoginUTokenMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b5eb5fe04349279e, 1, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(b5eb5fe04349279e, 1, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -166,7 +166,7 @@ struct LoginArgonMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b99e020791d89dd4, 1, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(b99e020791d89dd4, 1, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1228,6 +1228,9 @@ public:
   inline bool hasIcons() const;
   inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
+  inline bool hasUident() const;
+  inline  ::capnp::Data::Reader getUident() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1272,6 +1275,13 @@ public:
   inline  ::globed::schema::shared::PlayerIconData::Builder initIcons();
   inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
   inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
+
+  inline bool hasUident();
+  inline  ::capnp::Data::Builder getUident();
+  inline void setUident( ::capnp::Data::Reader value);
+  inline  ::capnp::Data::Builder initUident(unsigned int size);
+  inline void adoptUident(::capnp::Orphan< ::capnp::Data>&& value);
+  inline ::capnp::Orphan< ::capnp::Data> disownUident();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1325,6 +1335,9 @@ public:
   inline bool hasIcons() const;
   inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
+  inline bool hasUident() const;
+  inline  ::capnp::Data::Reader getUident() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1369,6 +1382,13 @@ public:
   inline  ::globed::schema::shared::PlayerIconData::Builder initIcons();
   inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
   inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
+
+  inline bool hasUident();
+  inline  ::capnp::Data::Builder getUident();
+  inline void setUident( ::capnp::Data::Reader value);
+  inline  ::capnp::Data::Builder initUident(unsigned int size);
+  inline void adoptUident(::capnp::Orphan< ::capnp::Data>&& value);
+  inline ::capnp::Orphan< ::capnp::Data> disownUident();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -7350,6 +7370,40 @@ inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> LoginUTokenMes
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
+inline bool LoginUTokenMessage::Reader::hasUident() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginUTokenMessage::Builder::hasUident() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Data::Reader LoginUTokenMessage::Reader::getUident() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Data::Builder LoginUTokenMessage::Builder::getUident() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void LoginUTokenMessage::Builder::setUident( ::capnp::Data::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Data::Builder LoginUTokenMessage::Builder::initUident(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+}
+inline void LoginUTokenMessage::Builder::adoptUident(
+    ::capnp::Orphan< ::capnp::Data>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Data> LoginUTokenMessage::Builder::disownUident() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
 inline  ::int32_t LoginArgonMessage::Reader::getAccountId() const {
   return _reader.getDataField< ::int32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -7435,6 +7489,40 @@ inline void LoginArgonMessage::Builder::adoptIcons(
 inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> LoginArgonMessage::Builder::disownIcons() {
   return ::capnp::_::PointerHelpers< ::globed::schema::shared::PlayerIconData>::disown(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool LoginArgonMessage::Reader::hasUident() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginArgonMessage::Builder::hasUident() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Data::Reader LoginArgonMessage::Reader::getUident() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Data::Builder LoginArgonMessage::Builder::getUident() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void LoginArgonMessage::Builder::setUident( ::capnp::Data::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Data::Builder LoginArgonMessage::Builder::initUident(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+}
+inline void LoginArgonMessage::Builder::adoptUident(
+    ::capnp::Orphan< ::capnp::Data>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Data> LoginArgonMessage::Builder::disownUident() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
 inline bool LoginPlainMessage::Reader::hasData() const {
