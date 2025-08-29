@@ -1,4 +1,7 @@
-use std::str::FromStr;
+use std::{
+    str::FromStr,
+    time::{Duration, SystemTime, UNIX_EPOCH},
+};
 
 use base64::{Engine, engine::general_purpose::URL_SAFE_NO_PAD as b64e};
 use qunet::buffers::{ByteReader, ByteReaderError, ByteWriter};
@@ -8,6 +11,7 @@ use crate::hmac_signer::HmacSigner;
 
 pub struct TokenIssuer {
     signer: HmacSigner,
+    token_expiry: Duration,
 }
 
 pub struct TokenData {
@@ -33,12 +37,15 @@ pub enum TokenValidationError {
     InvalidSignature,
     #[error("Account ID mismatch")]
     AccountMismatch,
+    #[error("Token expired")]
+    Expired,
 }
 
 impl TokenIssuer {
-    pub fn new(secret_key: &str) -> Result<Self, &'static str> {
+    pub fn new(secret_key: &str, token_expiry: Duration) -> Result<Self, &'static str> {
         Ok(Self {
             signer: HmacSigner::new(secret_key)?,
+            token_expiry,
         })
     }
 
@@ -65,16 +72,27 @@ impl TokenIssuer {
         let mut reader = ByteReader::new(data);
         let version = reader.read_u8()?;
 
-        if version != 1 {
+        if version != 2 {
             return Err(TokenValidationError::UnsupportedVersion(version));
         }
 
+        let issued_at = reader.read_i64()?;
         let account_id = reader.read_i32()?;
         let user_id = reader.read_i32()?;
         let username = reader.read_string_u8()?;
         let username = heapless::String::from_str(username)
             .map_err(|_| TokenValidationError::UsernameTooLong)?;
         let roles_str = reader.read_string_u16()?;
+
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs() as i64;
+        let expires_at = issued_at + self.token_expiry.as_secs() as i64;
+
+        if now < issued_at || now > expires_at {
+            return Err(TokenValidationError::Expired);
+        }
 
         Ok(TokenData {
             account_id,
@@ -112,7 +130,13 @@ impl TokenIssuer {
         let mut buf = [0u8; 64];
         let mut writer = ByteWriter::new(&mut buf);
 
-        writer.write_u8(1); // version
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs() as i64;
+
+        writer.write_u8(2); // version
+        writer.write_i64(now); // issued at
         writer.write_i32(account_id);
         writer.write_i32(user_id);
         writer.write_string_u8(username);

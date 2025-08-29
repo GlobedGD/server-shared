@@ -16,8 +16,9 @@ struct ServerRole {
 
 struct LoginOkMessage {
     tokenKey @0 :Text;
-    scriptKey @2 :Text;
+    tokenExpiry @3 :UInt64;
     roles    @1 :List(ServerRole);
+    scriptKey @2 :Text;
 }
 
 struct LoginFailedMessage {
