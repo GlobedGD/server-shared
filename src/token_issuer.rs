@@ -14,6 +14,7 @@ pub struct TokenIssuer {
     token_expiry: Duration,
 }
 
+#[derive(Clone)]
 pub struct TokenData {
     pub account_id: i32,
     pub user_id: i32,
