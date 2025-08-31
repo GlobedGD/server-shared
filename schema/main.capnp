@@ -136,6 +136,17 @@ struct UpdateTeamMessage {
 
 struct GetTeamMembersMessage {}
 
+enum RoomOwnerActionType {
+    banUser @0;
+    kickUser @1;
+    closeRoom @2;
+}
+
+struct RoomOwnerActionMessage {
+    type @0 :RoomOwnerActionType;
+    target @1 :Int32;
+}
+
 struct TeamCreationResultMessage {
     success @0 :Bool;
     teamCount @1 :UInt16;
@@ -177,6 +188,7 @@ enum RoomJoinFailedReason {
     notFound @0;
     invalidPasscode @1;
     full @2;
+    banned @3;
 }
 
 struct RoomJoinFailedMessage {
@@ -409,6 +421,7 @@ struct Message {
         deleteTeam    @44 :DeleteTeamMessage;
         updateTeam    @50 :UpdateTeamMessage;
         getTeamMembers @48 :GetTeamMembersMessage;
+        roomOwnerAction @55 :RoomOwnerActionMessage;
 
         joinSession   @12 :JoinSessionMessage;
         leaveSession  @13 :LeaveSessionMessage;

@@ -129,6 +129,12 @@ pub enum DataDecodeError {
     ValidationFailed,
 }
 
+impl From<capnp::NotInSchema> for DataDecodeError {
+    fn from(_: capnp::NotInSchema) -> Self {
+        Self::InvalidDiscriminant
+    }
+}
+
 #[macro_export]
 macro_rules! decode_message_match {
     ($($schema:ident)::*, $srvr:expr, $data:expr, $unpacked_data:ident, {$($variant:ident($msg_var:ident) => {  $($t:tt)* }),* $(,)?}) => {{
