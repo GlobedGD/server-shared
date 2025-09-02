@@ -59,12 +59,14 @@ enum class RoomOwnerActionType_8d66f9fc39526e6f: uint16_t {
 };
 CAPNP_DECLARE_ENUM(RoomOwnerActionType, 8d66f9fc39526e6f);
 CAPNP_DECLARE_SCHEMA(eb7ef953c325008a);
+CAPNP_DECLARE_SCHEMA(80f80ad20817b082);
 CAPNP_DECLARE_SCHEMA(9ec3ab1a6e918576);
 CAPNP_DECLARE_SCHEMA(c3594139526425cd);
 CAPNP_DECLARE_SCHEMA(da80ce7d00b0d262);
 CAPNP_DECLARE_SCHEMA(c2c08e4fc6a797b6);
 CAPNP_DECLARE_SCHEMA(ccb001c4c4eb3e03);
 CAPNP_DECLARE_SCHEMA(b4e1d4b92dce90f4);
+CAPNP_DECLARE_SCHEMA(b3edccb737efb57f);
 CAPNP_DECLARE_SCHEMA(e8b80e1d2395f44a);
 enum class RoomJoinFailedReason_e8b80e1d2395f44a: uint16_t {
   NOT_FOUND,
@@ -471,6 +473,21 @@ struct RoomOwnerActionMessage {
   };
 };
 
+struct UpdateRoomSettingsMessage {
+  UpdateRoomSettingsMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(80f80ad20817b082, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct TeamCreationResultMessage {
   TeamCreationResultMessage() = delete;
 
@@ -555,6 +572,21 @@ struct TeamsUpdatedMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(b4e1d4b92dce90f4, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct RoomSettingsUpdatedMessage {
+  RoomSettingsUpdatedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(b3edccb737efb57f, 0, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1127,6 +1159,8 @@ struct Message {
     ADMIN_FETCH_MODS_RESPONSE,
     SERVERS_CHANGED,
     ROOM_OWNER_ACTION,
+    UPDATE_ROOM_SETTINGS,
+    ROOM_SETTINGS_UPDATED,
   };
 
   struct _capnpPrivate {
@@ -3092,6 +3126,88 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class UpdateRoomSettingsMessage::Reader {
+public:
+  typedef UpdateRoomSettingsMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasSettings() const;
+  inline  ::globed::schema::main::RoomSettings::Reader getSettings() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class UpdateRoomSettingsMessage::Builder {
+public:
+  typedef UpdateRoomSettingsMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasSettings();
+  inline  ::globed::schema::main::RoomSettings::Builder getSettings();
+  inline void setSettings( ::globed::schema::main::RoomSettings::Reader value);
+  inline  ::globed::schema::main::RoomSettings::Builder initSettings();
+  inline void adoptSettings(::capnp::Orphan< ::globed::schema::main::RoomSettings>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> disownSettings();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class UpdateRoomSettingsMessage::Pipeline {
+public:
+  typedef UpdateRoomSettingsMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::main::RoomSettings::Pipeline getSettings();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class TeamCreationResultMessage::Reader {
 public:
   typedef TeamCreationResultMessage Reads;
@@ -3651,6 +3767,88 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class RoomSettingsUpdatedMessage::Reader {
+public:
+  typedef RoomSettingsUpdatedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasSettings() const;
+  inline  ::globed::schema::main::RoomSettings::Reader getSettings() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class RoomSettingsUpdatedMessage::Builder {
+public:
+  typedef RoomSettingsUpdatedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasSettings();
+  inline  ::globed::schema::main::RoomSettings::Builder getSettings();
+  inline void setSettings( ::globed::schema::main::RoomSettings::Reader value);
+  inline  ::globed::schema::main::RoomSettings::Builder initSettings();
+  inline void adoptSettings(::capnp::Orphan< ::globed::schema::main::RoomSettings>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> disownSettings();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class RoomSettingsUpdatedMessage::Pipeline {
+public:
+  typedef RoomSettingsUpdatedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::main::RoomSettings::Pipeline getSettings();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -6844,6 +7042,14 @@ public:
   inline bool hasRoomOwnerAction() const;
   inline  ::globed::schema::main::RoomOwnerActionMessage::Reader getRoomOwnerAction() const;
 
+  inline bool isUpdateRoomSettings() const;
+  inline bool hasUpdateRoomSettings() const;
+  inline  ::globed::schema::main::UpdateRoomSettingsMessage::Reader getUpdateRoomSettings() const;
+
+  inline bool isRoomSettingsUpdated() const;
+  inline bool hasRoomSettingsUpdated() const;
+  inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Reader getRoomSettingsUpdated() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -7312,6 +7518,22 @@ public:
   inline  ::globed::schema::main::RoomOwnerActionMessage::Builder initRoomOwnerAction();
   inline void adoptRoomOwnerAction(::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage> disownRoomOwnerAction();
+
+  inline bool isUpdateRoomSettings();
+  inline bool hasUpdateRoomSettings();
+  inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder getUpdateRoomSettings();
+  inline void setUpdateRoomSettings( ::globed::schema::main::UpdateRoomSettingsMessage::Reader value);
+  inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder initUpdateRoomSettings();
+  inline void adoptUpdateRoomSettings(::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage> disownUpdateRoomSettings();
+
+  inline bool isRoomSettingsUpdated();
+  inline bool hasRoomSettingsUpdated();
+  inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder getRoomSettingsUpdated();
+  inline void setRoomSettingsUpdated( ::globed::schema::main::RoomSettingsUpdatedMessage::Reader value);
+  inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder initRoomSettingsUpdated();
+  inline void adoptRoomSettingsUpdated(::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage> disownRoomSettingsUpdated();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -8593,6 +8815,45 @@ inline void RoomOwnerActionMessage::Builder::setTarget( ::int32_t value) {
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
+inline bool UpdateRoomSettingsMessage::Reader::hasSettings() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool UpdateRoomSettingsMessage::Builder::hasSettings() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomSettings::Reader UpdateRoomSettingsMessage::Reader::getSettings() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomSettings::Builder UpdateRoomSettingsMessage::Builder::getSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::RoomSettings::Pipeline UpdateRoomSettingsMessage::Pipeline::getSettings() {
+  return  ::globed::schema::main::RoomSettings::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void UpdateRoomSettingsMessage::Builder::setSettings( ::globed::schema::main::RoomSettings::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomSettings::Builder UpdateRoomSettingsMessage::Builder::initSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void UpdateRoomSettingsMessage::Builder::adoptSettings(
+    ::capnp::Orphan< ::globed::schema::main::RoomSettings>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> UpdateRoomSettingsMessage::Builder::disownSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline bool TeamCreationResultMessage::Reader::getSuccess() const {
   return _reader.getDataField<bool>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -9042,6 +9303,45 @@ inline void TeamsUpdatedMessage::Builder::adoptTeams(
 }
 inline ::capnp::Orphan< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>> TeamsUpdatedMessage::Builder::disownTeams() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool RoomSettingsUpdatedMessage::Reader::hasSettings() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool RoomSettingsUpdatedMessage::Builder::hasSettings() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomSettings::Reader RoomSettingsUpdatedMessage::Reader::getSettings() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomSettings::Builder RoomSettingsUpdatedMessage::Builder::getSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::RoomSettings::Pipeline RoomSettingsUpdatedMessage::Pipeline::getSettings() {
+  return  ::globed::schema::main::RoomSettings::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void RoomSettingsUpdatedMessage::Builder::setSettings( ::globed::schema::main::RoomSettings::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomSettings::Builder RoomSettingsUpdatedMessage::Builder::initSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void RoomSettingsUpdatedMessage::Builder::adoptSettings(
+    ::capnp::Orphan< ::globed::schema::main::RoomSettings>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> RoomSettingsUpdatedMessage::Builder::disownSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
@@ -13916,6 +14216,114 @@ inline ::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage> Message:
   KJ_IREQUIRE((which() == Message::ROOM_OWNER_ACTION),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isUpdateRoomSettings() const {
+  return which() == Message::UPDATE_ROOM_SETTINGS;
+}
+inline bool Message::Builder::isUpdateRoomSettings() {
+  return which() == Message::UPDATE_ROOM_SETTINGS;
+}
+inline bool Message::Reader::hasUpdateRoomSettings() const {
+  if (which() != Message::UPDATE_ROOM_SETTINGS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUpdateRoomSettings() {
+  if (which() != Message::UPDATE_ROOM_SETTINGS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UpdateRoomSettingsMessage::Reader Message::Reader::getUpdateRoomSettings() const {
+  KJ_IREQUIRE((which() == Message::UPDATE_ROOM_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder Message::Builder::getUpdateRoomSettings() {
+  KJ_IREQUIRE((which() == Message::UPDATE_ROOM_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUpdateRoomSettings( ::globed::schema::main::UpdateRoomSettingsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ROOM_SETTINGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder Message::Builder::initUpdateRoomSettings() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ROOM_SETTINGS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUpdateRoomSettings(
+    ::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ROOM_SETTINGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage> Message::Builder::disownUpdateRoomSettings() {
+  KJ_IREQUIRE((which() == Message::UPDATE_ROOM_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomSettingsUpdated() const {
+  return which() == Message::ROOM_SETTINGS_UPDATED;
+}
+inline bool Message::Builder::isRoomSettingsUpdated() {
+  return which() == Message::ROOM_SETTINGS_UPDATED;
+}
+inline bool Message::Reader::hasRoomSettingsUpdated() const {
+  if (which() != Message::ROOM_SETTINGS_UPDATED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomSettingsUpdated() {
+  if (which() != Message::ROOM_SETTINGS_UPDATED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Reader Message::Reader::getRoomSettingsUpdated() const {
+  KJ_IREQUIRE((which() == Message::ROOM_SETTINGS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder Message::Builder::getRoomSettingsUpdated() {
+  KJ_IREQUIRE((which() == Message::ROOM_SETTINGS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomSettingsUpdated( ::globed::schema::main::RoomSettingsUpdatedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_SETTINGS_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder Message::Builder::initRoomSettingsUpdated() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_SETTINGS_UPDATED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomSettingsUpdated(
+    ::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_SETTINGS_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage> Message::Builder::disownRoomSettingsUpdated() {
+  KJ_IREQUIRE((which() == Message::ROOM_SETTINGS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

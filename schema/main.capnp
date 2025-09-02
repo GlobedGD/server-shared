@@ -147,6 +147,10 @@ struct RoomOwnerActionMessage {
     target @1 :Int32;
 }
 
+struct UpdateRoomSettingsMessage {
+    settings @0 :RoomSettings;
+}
+
 struct TeamCreationResultMessage {
     success @0 :Bool;
     teamCount @1 :UInt16;
@@ -175,13 +179,17 @@ struct RoomStateMessage {
     roomId @0 : UInt32;
     roomOwner @1 :Int32;
     roomName @2 :Text;
-    players @3 :List(RoomPlayer); # optional field
+    players @3 :List(RoomPlayer);
     settings @4 :RoomSettings;
     teams @5 :List(UInt32);
 }
 
 struct TeamsUpdatedMessage {
     teams @0 :List(UInt32);
+}
+
+struct RoomSettingsUpdatedMessage {
+    settings @0 :RoomSettings;
 }
 
 enum RoomJoinFailedReason {
@@ -422,6 +430,7 @@ struct Message {
         updateTeam    @50 :UpdateTeamMessage;
         getTeamMembers @48 :GetTeamMembersMessage;
         roomOwnerAction @55 :RoomOwnerActionMessage;
+        updateRoomSettings @56 :UpdateRoomSettingsMessage;
 
         joinSession   @12 :JoinSessionMessage;
         leaveSession  @13 :LeaveSessionMessage;
@@ -459,6 +468,7 @@ struct Message {
         teamChanged   @47 :TeamChangedMessage;
         teamMembers   @49 :TeamMembersMessage;
         teamsUpdated  @51 :TeamsUpdatedMessage;
+        roomSettingsUpdated @57 :RoomSettingsUpdatedMessage;
 
         joinFailed    @14 :JoinFailedMessage;
         warpPlayer    @10 :WarpPlayerMessage;
