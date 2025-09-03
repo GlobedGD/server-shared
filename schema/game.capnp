@@ -19,6 +19,7 @@ struct LoginUTokenAndJoinMessage {
     icons @2 :Shared.PlayerIconData;
     sessionId @3 :UInt64;
     passcode  @4 :UInt32;
+    platformer @5 :Bool;
 }
 
 struct LoginOkMessage {
@@ -39,6 +40,7 @@ struct LoginFailedMessage {
 struct JoinSessionMessage {
     sessionId @0 :UInt64;
     passcode  @1 :UInt32;
+    platformer @2 :Bool;
 }
 
 struct JoinSessionOkMessage {

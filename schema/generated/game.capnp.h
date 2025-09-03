@@ -90,7 +90,7 @@ struct LoginUTokenAndJoinMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b5df2f02ff01e1a4, 2, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(b5df2f02ff01e1a4, 3, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -555,6 +555,8 @@ public:
 
   inline  ::uint32_t getPasscode() const;
 
+  inline bool getPlatformer() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -605,6 +607,9 @@ public:
 
   inline  ::uint32_t getPasscode();
   inline void setPasscode( ::uint32_t value);
+
+  inline bool getPlatformer();
+  inline void setPlatformer(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -806,6 +811,8 @@ public:
 
   inline  ::uint32_t getPasscode() const;
 
+  inline bool getPlatformer() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -839,6 +846,9 @@ public:
 
   inline  ::uint32_t getPasscode();
   inline void setPasscode( ::uint32_t value);
+
+  inline bool getPlatformer();
+  inline void setPlatformer(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -2822,6 +2832,20 @@ inline void LoginUTokenAndJoinMessage::Builder::setPasscode( ::uint32_t value) {
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
+inline bool LoginUTokenAndJoinMessage::Reader::getPlatformer() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<128>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginUTokenAndJoinMessage::Builder::getPlatformer() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<128>() * ::capnp::ELEMENTS);
+}
+inline void LoginUTokenAndJoinMessage::Builder::setPlatformer(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<128>() * ::capnp::ELEMENTS, value);
+}
+
 inline  ::uint16_t LoginOkMessage::Reader::getTickrate() const {
   return _reader.getDataField< ::uint16_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -2876,6 +2900,20 @@ inline  ::uint32_t JoinSessionMessage::Builder::getPasscode() {
 inline void JoinSessionMessage::Builder::setPasscode( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool JoinSessionMessage::Reader::getPlatformer() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<96>() * ::capnp::ELEMENTS);
+}
+
+inline bool JoinSessionMessage::Builder::getPlatformer() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<96>() * ::capnp::ELEMENTS);
+}
+inline void JoinSessionMessage::Builder::setPlatformer(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<96>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint64_t JoinSessionOkMessage::Reader::getSessionId() const {
