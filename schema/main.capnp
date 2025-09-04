@@ -80,11 +80,6 @@ struct RequestPlayerCountsMessage {
     levels @0 :List(UInt64);
 }
 
-struct PlayerCountsMessage {
-    levelIds @0 :List(UInt64);
-    counts @1 :List(UInt16);
-}
-
 # Room management messages
 
 struct RoomSettings {
@@ -112,6 +107,10 @@ struct CreateRoomMessage {
 struct JoinRoomMessage {
     roomId @0 :UInt32;
     passcode @1 :UInt32;
+}
+
+struct RequestRoomPlayersMessage {
+    nameFilter @0 :Text;
 }
 
 struct RequestRoomListMessage {}
@@ -184,6 +183,10 @@ struct RoomStateMessage {
     teams @5 :List(UInt32);
 }
 
+struct RoomPlayersMessage {
+    players @0 :List(RoomPlayer);
+}
+
 struct TeamsUpdatedMessage {
     teams @0 :List(UInt32);
 }
@@ -234,13 +237,15 @@ struct RoomListMessage {
     rooms @0 :List(RoomListingInfo);
 }
 
-# Session management messages
+# Misc general messages
 
 struct JoinSessionMessage {
     sessionId @0 :UInt64;
 }
 
 struct LeaveSessionMessage {}
+
+struct RequestLevelListMessage {}
 
 enum JoinSessionFailedReason {
     invalidRoom @0;
@@ -253,6 +258,16 @@ struct JoinFailedMessage {
 
 struct WarpPlayerMessage {
     session @0 :UInt64;
+}
+
+struct PlayerCountsMessage {
+    levelIds @0 :List(UInt64);
+    counts @1 :List(UInt16);
+}
+
+struct LevelListMessage {
+    levelIds @0 :List(UInt64);
+    playerCounts @1 :List(UInt16);
 }
 
 # Misc
@@ -423,6 +438,7 @@ struct Message {
         joinRoom      @8 :JoinRoomMessage;
         leaveRoom     @9 :Void; # TODO (high): check if we can change this to a struct without breaking old clients
         checkRoomState @16 :Void;
+        requestRoomPlayers  @60 :RequestRoomPlayersMessage;
         requestRoomList @21 :RequestRoomListMessage;
         assignTeam    @42 :AssignTeamMessage;
         createTeam    @43 :CreateTeamMessage;
@@ -434,6 +450,7 @@ struct Message {
 
         joinSession   @12 :JoinSessionMessage;
         leaveSession  @13 :LeaveSessionMessage;
+        requestLevelList @58 :RequestLevelListMessage;
 
         adminLogin    @25 :AdminLoginMessage;
         adminKick     @26 :AdminKickMessage;
@@ -457,9 +474,8 @@ struct Message {
         banned        @23 :BannedMessage;
         serversChanged @54 :ServersChangedMessage;
 
-        playerCounts  @18 :PlayerCountsMessage;
-
         roomState     @11 :RoomStateMessage;
+        roomPlayers   @61 :RoomPlayersMessage;
         roomJoinFailed @19 :RoomJoinFailedMessage;
         roomCreateFailed @20 :RoomCreateFailedMessage;
         roomBanned    @24 :RoomBannedMessage;
@@ -472,6 +488,8 @@ struct Message {
 
         joinFailed    @14 :JoinFailedMessage;
         warpPlayer    @10 :WarpPlayerMessage;
+        playerCounts  @18 :PlayerCountsMessage;
+        levelList     @59 :LevelListMessage;
 
         kicked        @15 :KickedMessage;
         notice        @38 :NoticeMessage;
