@@ -109,6 +109,10 @@ struct JoinRoomMessage {
     passcode @1 :UInt32;
 }
 
+struct JoinRoomByTokenMessage {
+    token @0 :UInt64;
+}
+
 struct RequestRoomPlayersMessage {
     nameFilter @0 :Text;
 }
@@ -148,6 +152,10 @@ struct RoomOwnerActionMessage {
 
 struct UpdateRoomSettingsMessage {
     settings @0 :RoomSettings;
+}
+
+struct InvitePlayerMessage {
+    player @0 :Int32;
 }
 
 struct TeamCreationResultMessage {
@@ -235,6 +243,15 @@ struct RoomBannedMessage {
 
 struct RoomListMessage {
     rooms @0 :List(RoomListingInfo);
+}
+
+struct InvitedMessage {
+    invitedBy @0 :PlayerAccountData;
+    token @1 :UInt64;
+}
+
+struct InviteTokenCreatedMessage {
+    token @0 :UInt64;
 }
 
 # Misc general messages
@@ -459,6 +476,7 @@ struct Message {
 
         createRoom    @7 :CreateRoomMessage;
         joinRoom      @8 :JoinRoomMessage;
+        joinRoomByToken @64 :JoinRoomByTokenMessage;
         leaveRoom     @9 :Void; # TODO (high): check if we can change this to a struct without breaking old clients
         checkRoomState @16 :Void;
         requestRoomPlayers  @60 :RequestRoomPlayersMessage;
@@ -470,6 +488,7 @@ struct Message {
         getTeamMembers @48 :GetTeamMembersMessage;
         roomOwnerAction @55 :RoomOwnerActionMessage;
         updateRoomSettings @56 :UpdateRoomSettingsMessage;
+        invitePlayer @65 :InvitePlayerMessage;
 
         joinSession   @12 :JoinSessionMessage;
         leaveSession  @13 :LeaveSessionMessage;
@@ -510,6 +529,8 @@ struct Message {
         teamMembers   @49 :TeamMembersMessage;
         teamsUpdated  @51 :TeamsUpdatedMessage;
         roomSettingsUpdated @57 :RoomSettingsUpdatedMessage;
+        invited       @66 :InvitedMessage;
+        inviteTokenCreated @67 :InviteTokenCreatedMessage;
 
         joinFailed    @14 :JoinFailedMessage;
         warpPlayer    @10 :WarpPlayerMessage;
