@@ -113,6 +113,10 @@ CAPNP_DECLARE_ENUM(KickReason, dd60476e8cb3a480);
 CAPNP_DECLARE_SCHEMA(ad6874573952b8c9);
 CAPNP_DECLARE_SCHEMA(aae75eac1c000a68);
 CAPNP_DECLARE_SCHEMA(8c0515d61d5278e4);
+CAPNP_DECLARE_SCHEMA(97cffa48ab55b2fe);
+CAPNP_DECLARE_SCHEMA(b7ae5d2b46a5be12);
+CAPNP_DECLARE_SCHEMA(fb427144ace97fd2);
+CAPNP_DECLARE_SCHEMA(ea965cdb4b2334d9);
 CAPNP_DECLARE_SCHEMA(98be444f11a5df16);
 CAPNP_DECLARE_SCHEMA(945c6ba9031f6b45);
 CAPNP_DECLARE_SCHEMA(85af7e66f3f02a6b);
@@ -845,6 +849,66 @@ struct WarnMessage {
   };
 };
 
+struct FetchCreditsMessage {
+  FetchCreditsMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(97cffa48ab55b2fe, 0, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct CreditsUser {
+  CreditsUser() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(b7ae5d2b46a5be12, 2, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct CreditsCategory {
+  CreditsCategory() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(fb427144ace97fd2, 0, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct CreditsMessage {
+  CreditsMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(ea965cdb4b2334d9, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct AdminLoginMessage {
   AdminLoginMessage() = delete;
 
@@ -1229,6 +1293,8 @@ struct Message {
     LEVEL_LIST,
     REQUEST_ROOM_PLAYERS,
     ROOM_PLAYERS,
+    FETCH_CREDITS,
+    CREDITS,
   };
 
   struct _capnpPrivate {
@@ -5255,6 +5321,375 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class FetchCreditsMessage::Reader {
+public:
+  typedef FetchCreditsMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class FetchCreditsMessage::Builder {
+public:
+  typedef FetchCreditsMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class FetchCreditsMessage::Pipeline {
+public:
+  typedef FetchCreditsMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class CreditsUser::Reader {
+public:
+  typedef CreditsUser Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline  ::int32_t getUserId() const;
+
+  inline bool hasUsername() const;
+  inline  ::capnp::Text::Reader getUsername() const;
+
+  inline bool hasDisplayName() const;
+  inline  ::capnp::Text::Reader getDisplayName() const;
+
+  inline  ::int16_t getCube() const;
+
+  inline  ::uint16_t getColor1() const;
+
+  inline  ::uint16_t getColor2() const;
+
+  inline  ::uint16_t getGlowColor() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class CreditsUser::Builder {
+public:
+  typedef CreditsUser Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline  ::int32_t getUserId();
+  inline void setUserId( ::int32_t value);
+
+  inline bool hasUsername();
+  inline  ::capnp::Text::Builder getUsername();
+  inline void setUsername( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initUsername(unsigned int size);
+  inline void adoptUsername(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownUsername();
+
+  inline bool hasDisplayName();
+  inline  ::capnp::Text::Builder getDisplayName();
+  inline void setDisplayName( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initDisplayName(unsigned int size);
+  inline void adoptDisplayName(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownDisplayName();
+
+  inline  ::int16_t getCube();
+  inline void setCube( ::int16_t value);
+
+  inline  ::uint16_t getColor1();
+  inline void setColor1( ::uint16_t value);
+
+  inline  ::uint16_t getColor2();
+  inline void setColor2( ::uint16_t value);
+
+  inline  ::uint16_t getGlowColor();
+  inline void setGlowColor( ::uint16_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class CreditsUser::Pipeline {
+public:
+  typedef CreditsUser Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class CreditsCategory::Reader {
+public:
+  typedef CreditsCategory Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasName() const;
+  inline  ::capnp::Text::Reader getName() const;
+
+  inline bool hasUsers() const;
+  inline  ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>::Reader getUsers() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class CreditsCategory::Builder {
+public:
+  typedef CreditsCategory Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasName();
+  inline  ::capnp::Text::Builder getName();
+  inline void setName( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initName(unsigned int size);
+  inline void adoptName(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownName();
+
+  inline bool hasUsers();
+  inline  ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>::Builder getUsers();
+  inline void setUsers( ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>::Builder initUsers(unsigned int size);
+  inline void adoptUsers(::capnp::Orphan< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>> disownUsers();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class CreditsCategory::Pipeline {
+public:
+  typedef CreditsCategory Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class CreditsMessage::Reader {
+public:
+  typedef CreditsMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasCategories() const;
+  inline  ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>::Reader getCategories() const;
+
+  inline bool getUnavailable() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class CreditsMessage::Builder {
+public:
+  typedef CreditsMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasCategories();
+  inline  ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>::Builder getCategories();
+  inline void setCategories( ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>::Builder initCategories(unsigned int size);
+  inline void adoptCategories(::capnp::Orphan< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>> disownCategories();
+
+  inline bool getUnavailable();
+  inline void setUnavailable(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class CreditsMessage::Pipeline {
+public:
+  typedef CreditsMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class AdminLoginMessage::Reader {
 public:
   typedef AdminLoginMessage Reads;
@@ -7460,6 +7895,14 @@ public:
   inline bool hasRoomPlayers() const;
   inline  ::globed::schema::main::RoomPlayersMessage::Reader getRoomPlayers() const;
 
+  inline bool isFetchCredits() const;
+  inline bool hasFetchCredits() const;
+  inline  ::globed::schema::main::FetchCreditsMessage::Reader getFetchCredits() const;
+
+  inline bool isCredits() const;
+  inline bool hasCredits() const;
+  inline  ::globed::schema::main::CreditsMessage::Reader getCredits() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -7976,6 +8419,22 @@ public:
   inline  ::globed::schema::main::RoomPlayersMessage::Builder initRoomPlayers();
   inline void adoptRoomPlayers(::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage> disownRoomPlayers();
+
+  inline bool isFetchCredits();
+  inline bool hasFetchCredits();
+  inline  ::globed::schema::main::FetchCreditsMessage::Builder getFetchCredits();
+  inline void setFetchCredits( ::globed::schema::main::FetchCreditsMessage::Reader value);
+  inline  ::globed::schema::main::FetchCreditsMessage::Builder initFetchCredits();
+  inline void adoptFetchCredits(::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage> disownFetchCredits();
+
+  inline bool isCredits();
+  inline bool hasCredits();
+  inline  ::globed::schema::main::CreditsMessage::Builder getCredits();
+  inline void setCredits( ::globed::schema::main::CreditsMessage::Reader value);
+  inline  ::globed::schema::main::CreditsMessage::Builder initCredits();
+  inline void adoptCredits(::capnp::Orphan< ::globed::schema::main::CreditsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::CreditsMessage> disownCredits();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -10413,6 +10872,274 @@ inline void WarnMessage::Builder::adoptMessage(
 inline ::capnp::Orphan< ::capnp::Text> WarnMessage::Builder::disownMessage() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t CreditsUser::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t CreditsUser::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void CreditsUser::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t CreditsUser::Reader::getUserId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t CreditsUser::Builder::getUserId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void CreditsUser::Builder::setUserId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool CreditsUser::Reader::hasUsername() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool CreditsUser::Builder::hasUsername() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader CreditsUser::Reader::getUsername() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder CreditsUser::Builder::getUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void CreditsUser::Builder::setUsername( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder CreditsUser::Builder::initUsername(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void CreditsUser::Builder::adoptUsername(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> CreditsUser::Builder::disownUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool CreditsUser::Reader::hasDisplayName() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool CreditsUser::Builder::hasDisplayName() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader CreditsUser::Reader::getDisplayName() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder CreditsUser::Builder::getDisplayName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void CreditsUser::Builder::setDisplayName( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder CreditsUser::Builder::initDisplayName(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void CreditsUser::Builder::adoptDisplayName(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> CreditsUser::Builder::disownDisplayName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline  ::int16_t CreditsUser::Reader::getCube() const {
+  return _reader.getDataField< ::int16_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int16_t CreditsUser::Builder::getCube() {
+  return _builder.getDataField< ::int16_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void CreditsUser::Builder::setCube( ::int16_t value) {
+  _builder.setDataField< ::int16_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t CreditsUser::Reader::getColor1() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t CreditsUser::Builder::getColor1() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+inline void CreditsUser::Builder::setColor1( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t CreditsUser::Reader::getColor2() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t CreditsUser::Builder::getColor2() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+inline void CreditsUser::Builder::setColor2( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t CreditsUser::Reader::getGlowColor() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t CreditsUser::Builder::getGlowColor() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+inline void CreditsUser::Builder::setGlowColor( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool CreditsCategory::Reader::hasName() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool CreditsCategory::Builder::hasName() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader CreditsCategory::Reader::getName() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder CreditsCategory::Builder::getName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void CreditsCategory::Builder::setName( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder CreditsCategory::Builder::initName(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void CreditsCategory::Builder::adoptName(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> CreditsCategory::Builder::disownName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool CreditsCategory::Reader::hasUsers() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool CreditsCategory::Builder::hasUsers() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>::Reader CreditsCategory::Reader::getUsers() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>::Builder CreditsCategory::Builder::getUsers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void CreditsCategory::Builder::setUsers( ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>::Builder CreditsCategory::Builder::initUsers(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void CreditsCategory::Builder::adoptUsers(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>> CreditsCategory::Builder::disownUsers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsUser,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool CreditsMessage::Reader::hasCategories() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool CreditsMessage::Builder::hasCategories() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>::Reader CreditsMessage::Reader::getCategories() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>::Builder CreditsMessage::Builder::getCategories() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void CreditsMessage::Builder::setCategories( ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>::Builder CreditsMessage::Builder::initCategories(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void CreditsMessage::Builder::adoptCategories(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>> CreditsMessage::Builder::disownCategories() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::CreditsCategory,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool CreditsMessage::Reader::getUnavailable() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline bool CreditsMessage::Builder::getUnavailable() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void CreditsMessage::Builder::setUnavailable(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool AdminLoginMessage::Reader::hasPassword() const {
@@ -15126,6 +15853,114 @@ inline ::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage> Message::Bui
   KJ_IREQUIRE((which() == Message::ROOM_PLAYERS),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isFetchCredits() const {
+  return which() == Message::FETCH_CREDITS;
+}
+inline bool Message::Builder::isFetchCredits() {
+  return which() == Message::FETCH_CREDITS;
+}
+inline bool Message::Reader::hasFetchCredits() const {
+  if (which() != Message::FETCH_CREDITS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasFetchCredits() {
+  if (which() != Message::FETCH_CREDITS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::FetchCreditsMessage::Reader Message::Reader::getFetchCredits() const {
+  KJ_IREQUIRE((which() == Message::FETCH_CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::FetchCreditsMessage::Builder Message::Builder::getFetchCredits() {
+  KJ_IREQUIRE((which() == Message::FETCH_CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setFetchCredits( ::globed::schema::main::FetchCreditsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_CREDITS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::FetchCreditsMessage::Builder Message::Builder::initFetchCredits() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_CREDITS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptFetchCredits(
+    ::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_CREDITS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage> Message::Builder::disownFetchCredits() {
+  KJ_IREQUIRE((which() == Message::FETCH_CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isCredits() const {
+  return which() == Message::CREDITS;
+}
+inline bool Message::Builder::isCredits() {
+  return which() == Message::CREDITS;
+}
+inline bool Message::Reader::hasCredits() const {
+  if (which() != Message::CREDITS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasCredits() {
+  if (which() != Message::CREDITS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::CreditsMessage::Reader Message::Reader::getCredits() const {
+  KJ_IREQUIRE((which() == Message::CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::CreditsMessage::Builder Message::Builder::getCredits() {
+  KJ_IREQUIRE((which() == Message::CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setCredits( ::globed::schema::main::CreditsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREDITS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::CreditsMessage::Builder Message::Builder::initCredits() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREDITS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptCredits(
+    ::capnp::Orphan< ::globed::schema::main::CreditsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREDITS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::CreditsMessage> Message::Builder::disownCredits() {
+  KJ_IREQUIRE((which() == Message::CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

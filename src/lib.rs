@@ -1,4 +1,4 @@
-#![feature(associated_type_defaults)]
+#![feature(associated_type_defaults, downcast_unchecked)]
 
 #[cfg(feature = "main")]
 #[allow(warnings)]
@@ -22,10 +22,12 @@ pub(crate) mod shared_capnp;
 pub mod config;
 pub mod data;
 pub mod encoding;
+pub mod hmac_signer;
 pub mod logging;
 pub mod schema;
-pub mod hmac_signer;
 mod session_id;
 pub mod token_issuer;
+mod typemap;
 
 pub use session_id::SessionId;
+pub use typemap::TypeMap;

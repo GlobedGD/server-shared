@@ -293,6 +293,29 @@ struct WarnMessage {
     message @0 :Text;
 }
 
+struct FetchCreditsMessage {}
+
+struct CreditsUser {
+    accountId @0 :Int32;
+    userId @1 :Int32;
+    username @2 :Text;
+    displayName @3 :Text;
+    cube @4 :Int16;
+    color1 @5 :UInt16;
+    color2 @6 :UInt16;
+    glowColor @7 :UInt16;
+}
+
+struct CreditsCategory {
+    name @0 :Text;
+    users @1 :List(CreditsUser);
+}
+
+struct CreditsMessage {
+    categories @0 :List(CreditsCategory);
+    unavailable @1 :Bool;
+}
+
 # Admin messages
 
 struct AdminLoginMessage {
@@ -467,6 +490,8 @@ struct Message {
         adminUpdateUser @39 :AdminUpdateUserMessage;
         adminFetchMods @52 :AdminFetchModsMessage;
 
+        fetchCredits @62 :FetchCreditsMessage;
+
         # Server messages
         loginOk       @3 :LoginOkMessage;
         loginFailed   @4 :LoginFailedMessage;
@@ -499,5 +524,7 @@ struct Message {
         adminFetchResponse @37 :AdminFetchResponseMessage;
         adminFetchModsResponse @53 :AdminFetchModsResponseMessage;
         adminLogsResponse @41 :AdminLogsResponseMessage;
+
+        credits @63 : CreditsMessage;
     }
 }

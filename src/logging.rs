@@ -31,7 +31,10 @@ pub fn setup_logger(
     let filter = filter::Targets::new()
         .with_target("sqlx", Level::WARN)
         .with_target("tokio", Level::WARN)
-        .with_target("runtime", Level::WARN);
+        .with_target("runtime", Level::WARN)
+        .with_target("serenity", Level::WARN)
+        .with_target("h2", Level::WARN)
+        .with_target("hyper", Level::WARN);
 
     // Create file appender
     let appender = if rolling {
