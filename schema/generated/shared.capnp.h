@@ -18,6 +18,7 @@ CAPNP_BEGIN_HEADER
 namespace capnp {
 namespace schemas {
 
+CAPNP_DECLARE_SCHEMA(beba0d0a238aeaf6);
 CAPNP_DECLARE_SCHEMA(c71ad48a4a77aafa);
 enum class IconType_c71ad48a4a77aafa: uint16_t {
   UNKNOWN,
@@ -43,6 +44,21 @@ CAPNP_DECLARE_SCHEMA(a7af61db45598ea4);
 namespace globed {
 namespace schema {
 namespace shared {
+
+struct SpecialUserData {
+  SpecialUserData() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(beba0d0a238aeaf6, 0, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
 
 typedef ::capnp::schemas::IconType_c71ad48a4a77aafa IconType;
 
@@ -107,6 +123,98 @@ struct UserRole {
 };
 
 // =======================================================================================
+
+class SpecialUserData::Reader {
+public:
+  typedef SpecialUserData Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasRoles() const;
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getRoles() const;
+
+  inline bool hasNameColor() const;
+  inline  ::capnp::Data::Reader getNameColor() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class SpecialUserData::Builder {
+public:
+  typedef SpecialUserData Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasRoles();
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getRoles();
+  inline void setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setRoles(::kj::ArrayPtr<const  ::uint8_t> value);
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initRoles(unsigned int size);
+  inline void adoptRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownRoles();
+
+  inline bool hasNameColor();
+  inline  ::capnp::Data::Builder getNameColor();
+  inline void setNameColor( ::capnp::Data::Reader value);
+  inline  ::capnp::Data::Builder initNameColor(unsigned int size);
+  inline void adoptNameColor(::capnp::Orphan< ::capnp::Data>&& value);
+  inline ::capnp::Orphan< ::capnp::Data> disownNameColor();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class SpecialUserData::Pipeline {
+public:
+  typedef SpecialUserData Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
 
 class PlayerIconData::Reader {
 public:
@@ -281,8 +389,8 @@ public:
   inline bool hasIcons() const;
   inline  ::globed::schema::shared::PlayerIconData::Reader getIcons() const;
 
-  inline bool hasRoles() const;
-  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getRoles() const;
+  inline bool hasSpecialData() const;
+  inline  ::globed::schema::shared::SpecialUserData::Reader getSpecialData() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -332,13 +440,12 @@ public:
   inline void adoptIcons(::capnp::Orphan< ::globed::schema::shared::PlayerIconData>&& value);
   inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> disownIcons();
 
-  inline bool hasRoles();
-  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getRoles();
-  inline void setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
-  inline void setRoles(::kj::ArrayPtr<const  ::uint8_t> value);
-  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initRoles(unsigned int size);
-  inline void adoptRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownRoles();
+  inline bool hasSpecialData();
+  inline  ::globed::schema::shared::SpecialUserData::Builder getSpecialData();
+  inline void setSpecialData( ::globed::schema::shared::SpecialUserData::Reader value);
+  inline  ::globed::schema::shared::SpecialUserData::Builder initSpecialData();
+  inline void adoptSpecialData(::capnp::Orphan< ::globed::schema::shared::SpecialUserData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::SpecialUserData> disownSpecialData();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -359,6 +466,7 @@ public:
       : _typeless(kj::mv(typeless)) {}
 
   inline  ::globed::schema::shared::PlayerIconData::Pipeline getIcons();
+  inline  ::globed::schema::shared::SpecialUserData::Pipeline getSpecialData();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -507,7 +615,7 @@ public:
   inline  ::capnp::Text::Reader getIcon() const;
 
   inline bool hasNameColor() const;
-  inline  ::capnp::Text::Reader getNameColor() const;
+  inline  ::capnp::Data::Reader getNameColor() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -552,11 +660,11 @@ public:
   inline ::capnp::Orphan< ::capnp::Text> disownIcon();
 
   inline bool hasNameColor();
-  inline  ::capnp::Text::Builder getNameColor();
-  inline void setNameColor( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initNameColor(unsigned int size);
-  inline void adoptNameColor(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownNameColor();
+  inline  ::capnp::Data::Builder getNameColor();
+  inline void setNameColor( ::capnp::Data::Reader value);
+  inline  ::capnp::Data::Builder initNameColor(unsigned int size);
+  inline void adoptNameColor(::capnp::Orphan< ::capnp::Data>&& value);
+  inline ::capnp::Orphan< ::capnp::Data> disownNameColor();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -585,6 +693,78 @@ private:
 #endif  // !CAPNP_LITE
 
 // =======================================================================================
+
+inline bool SpecialUserData::Reader::hasRoles() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool SpecialUserData::Builder::hasRoles() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader SpecialUserData::Reader::getRoles() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder SpecialUserData::Builder::getRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void SpecialUserData::Builder::setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void SpecialUserData::Builder::setRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder SpecialUserData::Builder::initRoles(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void SpecialUserData::Builder::adoptRoles(
+    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> SpecialUserData::Builder::disownRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool SpecialUserData::Reader::hasNameColor() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool SpecialUserData::Builder::hasNameColor() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Data::Reader SpecialUserData::Reader::getNameColor() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Data::Builder SpecialUserData::Builder::getNameColor() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void SpecialUserData::Builder::setNameColor( ::capnp::Data::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Data::Builder SpecialUserData::Builder::initNameColor(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void SpecialUserData::Builder::adoptNameColor(
+    ::capnp::Orphan< ::capnp::Data>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Data> SpecialUserData::Builder::disownNameColor() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
 
 inline  ::int16_t PlayerIconData::Reader::getCube() const {
   return _reader.getDataField< ::int16_t>(
@@ -897,41 +1077,42 @@ inline ::capnp::Orphan< ::globed::schema::shared::PlayerIconData> PlayerDisplayD
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
-inline bool PlayerDisplayData::Reader::hasRoles() const {
+inline bool PlayerDisplayData::Reader::hasSpecialData() const {
   return !_reader.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
-inline bool PlayerDisplayData::Builder::hasRoles() {
+inline bool PlayerDisplayData::Builder::hasSpecialData() {
   return !_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader PlayerDisplayData::Reader::getRoles() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+inline  ::globed::schema::shared::SpecialUserData::Reader PlayerDisplayData::Reader::getSpecialData() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SpecialUserData>::get(_reader.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
-inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerDisplayData::Builder::getRoles() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+inline  ::globed::schema::shared::SpecialUserData::Builder PlayerDisplayData::Builder::getSpecialData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SpecialUserData>::get(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
-inline void PlayerDisplayData::Builder::setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::SpecialUserData::Pipeline PlayerDisplayData::Pipeline::getSpecialData() {
+  return  ::globed::schema::shared::SpecialUserData::Pipeline(_typeless.getPointerField(2));
+}
+#endif  // !CAPNP_LITE
+inline void PlayerDisplayData::Builder::setSpecialData( ::globed::schema::shared::SpecialUserData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::SpecialUserData>::set(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS), value);
 }
-inline void PlayerDisplayData::Builder::setRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+inline  ::globed::schema::shared::SpecialUserData::Builder PlayerDisplayData::Builder::initSpecialData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SpecialUserData>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
-inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerDisplayData::Builder::initRoles(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
-}
-inline void PlayerDisplayData::Builder::adoptRoles(
-    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+inline void PlayerDisplayData::Builder::adoptSpecialData(
+    ::capnp::Orphan< ::globed::schema::shared::SpecialUserData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::SpecialUserData>::adopt(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> PlayerDisplayData::Builder::disownRoles() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+inline ::capnp::Orphan< ::globed::schema::shared::SpecialUserData> PlayerDisplayData::Builder::disownSpecialData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SpecialUserData>::disown(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
@@ -1161,29 +1342,29 @@ inline bool UserRole::Builder::hasNameColor() {
   return !_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader UserRole::Reader::getNameColor() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+inline  ::capnp::Data::Reader UserRole::Reader::getNameColor() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
-inline  ::capnp::Text::Builder UserRole::Builder::getNameColor() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+inline  ::capnp::Data::Builder UserRole::Builder::getNameColor() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
-inline void UserRole::Builder::setNameColor( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+inline void UserRole::Builder::setNameColor( ::capnp::Data::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS), value);
 }
-inline  ::capnp::Text::Builder UserRole::Builder::initNameColor(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+inline  ::capnp::Data::Builder UserRole::Builder::initNameColor(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS), size);
 }
 inline void UserRole::Builder::adoptNameColor(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+    ::capnp::Orphan< ::capnp::Data>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> UserRole::Builder::disownNameColor() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+inline ::capnp::Orphan< ::capnp::Data> UserRole::Builder::disownNameColor() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 

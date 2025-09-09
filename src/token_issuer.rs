@@ -7,7 +7,7 @@ use base64::{Engine, engine::general_purpose::URL_SAFE_NO_PAD as b64e};
 use qunet::buffers::{ByteReader, ByteReaderError, ByteWriter};
 use thiserror::Error;
 
-use crate::hmac_signer::HmacSigner;
+use crate::{MultiColor, MultiColorDecodeError, hmac_signer::HmacSigner};
 
 pub struct TokenIssuer {
     signer: HmacSigner,
@@ -20,6 +20,7 @@ pub struct TokenData {
     pub user_id: i32,
     pub username: heapless::String<16>,
     pub roles_str: Option<Box<str>>,
+    pub name_color: Option<MultiColor>,
 }
 
 #[derive(Debug, Error)]
@@ -40,6 +41,8 @@ pub enum TokenValidationError {
     AccountMismatch,
     #[error("Token expired")]
     Expired,
+    #[error("Failed to decode name color: {0}")]
+    InvalidNameColor(#[from] MultiColorDecodeError),
 }
 
 impl TokenIssuer {
@@ -55,7 +58,7 @@ impl TokenIssuer {
             .split_once('.')
             .ok_or(TokenValidationError::InvalidFormat)?;
 
-        let mut data_buf = [0u8; 1024];
+        let mut data_buf = [0u8; 512];
         let data_len = b64e.decode_slice(data, &mut data_buf)?;
         let data = &data_buf[..data_len];
 
@@ -73,7 +76,7 @@ impl TokenIssuer {
         let mut reader = ByteReader::new(data);
         let version = reader.read_u8()?;
 
-        if version != 2 {
+        if version != 3 {
             return Err(TokenValidationError::UnsupportedVersion(version));
         }
 
@@ -84,6 +87,17 @@ impl TokenIssuer {
         let username = heapless::String::from_str(username)
             .map_err(|_| TokenValidationError::UsernameTooLong)?;
         let roles_str = reader.read_string_u16()?;
+        let roles_str = if !roles_str.is_empty() {
+            Some(roles_str.to_owned().into_boxed_str())
+        } else {
+            None
+        };
+
+        let name_color = if reader.read_bool()? {
+            Some(MultiColor::decode(&mut reader)?)
+        } else {
+            None
+        };
 
         let now = SystemTime::now()
             .duration_since(UNIX_EPOCH)
@@ -99,11 +113,8 @@ impl TokenIssuer {
             account_id,
             user_id,
             username,
-            roles_str: if !roles_str.is_empty() {
-                Some(roles_str.to_owned().into_boxed_str())
-            } else {
-                None
-            },
+            roles_str,
+            name_color,
         })
     }
 
@@ -127,8 +138,9 @@ impl TokenIssuer {
         user_id: i32,
         username: &str,
         roles_str: &str,
+        name_color: Option<&MultiColor>,
     ) -> String {
-        let mut buf = [0u8; 64];
+        let mut buf = [0u8; 512];
         let mut writer = ByteWriter::new(&mut buf);
 
         let now = SystemTime::now()
@@ -136,12 +148,19 @@ impl TokenIssuer {
             .unwrap()
             .as_secs() as i64;
 
-        writer.write_u8(2); // version
+        writer.write_u8(3); // version
         writer.write_i64(now); // issued at
         writer.write_i32(account_id);
         writer.write_i32(user_id);
         writer.write_string_u8(username);
         writer.write_string_u16(roles_str);
+
+        if let Some(nc) = name_color {
+            writer.write_bool(true);
+            nc.encode(&mut writer);
+        } else {
+            writer.write_bool(false);
+        }
 
         let data = writer.written();
 
@@ -156,10 +175,10 @@ impl TokenIssuer {
             "b64 encoded signature must be exactly 42 bytes long"
         );
 
-        let mut data_buf = [0u8; 128];
+        let mut data_buf = [0u8; 512];
         let data_len = b64e
             .encode_slice(data, &mut data_buf)
-            .expect("b64 encoded data must fit in 128 bytes");
+            .expect("b64 encoded data must fit in 512 bytes");
 
         format!(
             "{}.{}",

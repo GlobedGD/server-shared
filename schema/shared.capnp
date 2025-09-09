@@ -3,6 +3,11 @@
 using Cxx = import "/capnp/c++.capnp";
 $Cxx.namespace("globed::schema::shared");
 
+struct SpecialUserData {
+    roles @0 :List(UInt8); # can be empty
+    nameColor @1 :Data;    # optional
+}
+
 enum IconType {
     unknown @0;
     cube    @1;
@@ -39,7 +44,7 @@ struct PlayerDisplayData {
     userId    @1 :Int32;
     username  @2 :Text;
     icons     @3 :PlayerIconData;
-    roles     @4 :List(UInt8);
+    specialData @4 :SpecialUserData;
 }
 
 struct GameServer {
@@ -53,6 +58,6 @@ struct GameServer {
 struct UserRole {
     stringId   @0 :Text;
     icon       @1 :Text;
-    nameColor  @2 :Text;
+    nameColor  @2 :Data;
 }
 

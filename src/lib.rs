@@ -24,10 +24,12 @@ pub mod data;
 pub mod encoding;
 pub mod hmac_signer;
 pub mod logging;
+mod multi_color;
 pub mod schema;
 mod session_id;
 pub mod token_issuer;
 mod typemap;
 
+pub use multi_color::*;
 pub use session_id::SessionId;
 pub use typemap::TypeMap;

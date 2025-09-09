@@ -39,7 +39,10 @@ struct LoginOkMessage {
     servers  @1 :List(Shared.GameServer);
     allRoles @2 :List(Shared.UserRole);
     userRoles @3 :List(UInt8);
+    nameColor @7 :Data;
     isModerator @4 :Bool = false;
+    canBan @5 :Bool = false;
+    canSetPassword @6 :Bool = false;
 }
 
 enum LoginFailedReason {
@@ -78,6 +81,10 @@ struct UpdateOwnDataMessage {
 
 struct RequestPlayerCountsMessage {
     levels @0 :List(UInt64);
+}
+
+struct RequestGlobalPlayerListMessage {
+    nameFilter @0 :Text;
 }
 
 # Room management messages
@@ -175,6 +182,15 @@ struct RoomPlayer {
     glowColor @4 :UInt16;
     session @5 :UInt64;
     teamId @6 :UInt16;
+    specialData @7 :Shared.SpecialUserData;
+}
+
+struct MinimalRoomPlayer {
+    accountData @0 :PlayerAccountData;
+    cube @1 :Int16;
+    color1 @2 :UInt16;
+    color2 @3 :UInt16;
+    glowColor @4 :UInt16;
 }
 
 struct TeamMembersMessage {
@@ -280,6 +296,10 @@ struct WarpPlayerMessage {
 struct PlayerCountsMessage {
     levelIds @0 :List(UInt64);
     counts @1 :List(UInt16);
+}
+
+struct GlobalPlayersMessage {
+    players @0 :List(MinimalRoomPlayer);
 }
 
 struct LevelListMessage {
@@ -436,7 +456,15 @@ struct AdminRoomUnbanMessage {
     accountId @0 :Int32;
 }
 
-# TODO mute
+struct AdminMuteMessage {
+    accountId @0 :Int32;
+    reason @1 :Text;
+    expiresAt @2 :Int64 = 0; # 0 means permanent mute
+}
+
+struct AdminUnmuteMessage {
+    accountId @0 :Int32;
+}
 
 struct AdminEditRolesMessage {
     accountId @0 :Int32;
@@ -467,85 +495,89 @@ struct AdminResultMessage {
 struct Message {
     union {
         # Client messages
-        loginUToken   @0 :LoginUTokenMessage;
-        loginArgon    @1 :LoginArgonMessage;
-        loginPlain    @2 :LoginPlainMessage;
+        loginUToken                 @0 :LoginUTokenMessage;
+        loginArgon                  @1 :LoginArgonMessage;
+        loginPlain                  @2 :LoginPlainMessage;
 
-        updateOwnData @6 :UpdateOwnDataMessage;
-        requestPlayerCounts @17 :RequestPlayerCountsMessage;
+        updateOwnData               @6 :UpdateOwnDataMessage;
+        requestPlayerCounts         @17 :RequestPlayerCountsMessage;
+        requestGlobalPlayerList     @68 :RequestGlobalPlayerListMessage;
 
-        createRoom    @7 :CreateRoomMessage;
-        joinRoom      @8 :JoinRoomMessage;
-        joinRoomByToken @64 :JoinRoomByTokenMessage;
-        leaveRoom     @9 :Void; # TODO (high): check if we can change this to a struct without breaking old clients
-        checkRoomState @16 :Void;
-        requestRoomPlayers  @60 :RequestRoomPlayersMessage;
-        requestRoomList @21 :RequestRoomListMessage;
-        assignTeam    @42 :AssignTeamMessage;
-        createTeam    @43 :CreateTeamMessage;
-        deleteTeam    @44 :DeleteTeamMessage;
-        updateTeam    @50 :UpdateTeamMessage;
-        getTeamMembers @48 :GetTeamMembersMessage;
-        roomOwnerAction @55 :RoomOwnerActionMessage;
-        updateRoomSettings @56 :UpdateRoomSettingsMessage;
-        invitePlayer @65 :InvitePlayerMessage;
+        createRoom                  @7 :CreateRoomMessage;
+        joinRoom                    @8 :JoinRoomMessage;
+        joinRoomByToken             @64 :JoinRoomByTokenMessage;
+        leaveRoom                   @9 :Void; # TODO (high): check if we can change this to a struct without breaking old clients
+        checkRoomState              @16 :Void;
+        requestRoomPlayers          @60 :RequestRoomPlayersMessage;
+        requestRoomList             @21 :RequestRoomListMessage;
+        assignTeam                  @42 :AssignTeamMessage;
+        createTeam                  @43 :CreateTeamMessage;
+        deleteTeam                  @44 :DeleteTeamMessage;
+        updateTeam                  @50 :UpdateTeamMessage;
+        getTeamMembers              @48 :GetTeamMembersMessage;
+        roomOwnerAction             @55 :RoomOwnerActionMessage;
+        updateRoomSettings          @56 :UpdateRoomSettingsMessage;
+        invitePlayer                @65 :InvitePlayerMessage;
 
-        joinSession   @12 :JoinSessionMessage;
-        leaveSession  @13 :LeaveSessionMessage;
-        requestLevelList @58 :RequestLevelListMessage;
+        joinSession                 @12 :JoinSessionMessage;
+        leaveSession                @13 :LeaveSessionMessage;
+        requestLevelList            @58 :RequestLevelListMessage;
 
-        adminLogin    @25 :AdminLoginMessage;
-        adminKick     @26 :AdminKickMessage;
-        adminNotice   @27 :AdminNoticeMessage;
-        adminNoticeEveryone @28 :AdminNoticeEveryoneMessage;
-        adminFetchUser @29 :AdminFetchUserMessage;
-        adminFetchLogs @40 :AdminFetchLogsMessage;
-        adminBan      @30 :AdminBanMessage;
-        adminUnban    @31 :AdminUnbanMessage;
-        adminRoomBan  @32 :AdminRoomBanMessage;
-        adminRoomUnban @33 :AdminRoomUnbanMessage;
-        adminEditRoles @34 :AdminEditRolesMessage;
-        adminSetPassword @35 :AdminSetPasswordMessage;
-        adminUpdateUser @39 :AdminUpdateUserMessage;
-        adminFetchMods @52 :AdminFetchModsMessage;
+        adminLogin                  @25 :AdminLoginMessage;
+        adminKick                   @26 :AdminKickMessage;
+        adminNotice                 @27 :AdminNoticeMessage;
+        adminNoticeEveryone         @28 :AdminNoticeEveryoneMessage;
+        adminFetchUser              @29 :AdminFetchUserMessage;
+        adminFetchLogs              @40 :AdminFetchLogsMessage;
+        adminBan                    @30 :AdminBanMessage;
+        adminUnban                  @31 :AdminUnbanMessage;
+        adminRoomBan                @32 :AdminRoomBanMessage;
+        adminRoomUnban              @33 :AdminRoomUnbanMessage;
+        adminMute                   @70 :AdminMuteMessage;
+        adminUnmute                 @71 :AdminUnmuteMessage;
+        adminEditRoles              @34 :AdminEditRolesMessage;
+        adminSetPassword            @35 :AdminSetPasswordMessage;
+        adminUpdateUser             @39 :AdminUpdateUserMessage;
+        adminFetchMods              @52 :AdminFetchModsMessage;
 
-        fetchCredits @62 :FetchCreditsMessage;
+        fetchCredits                @62 :FetchCreditsMessage;
 
         # Server messages
-        loginOk       @3 :LoginOkMessage;
-        loginFailed   @4 :LoginFailedMessage;
-        loginRequired @5 :LoginRequiredMessage;
-        banned        @23 :BannedMessage;
-        serversChanged @54 :ServersChangedMessage;
+        loginOk                     @3 :LoginOkMessage;
+        loginFailed                 @4 :LoginFailedMessage;
+        loginRequired               @5 :LoginRequiredMessage;
+        banned                      @23 :BannedMessage;
+        serversChanged              @54 :ServersChangedMessage;
 
-        roomState     @11 :RoomStateMessage;
-        roomPlayers   @61 :RoomPlayersMessage;
-        roomJoinFailed @19 :RoomJoinFailedMessage;
-        roomCreateFailed @20 :RoomCreateFailedMessage;
-        roomBanned    @24 :RoomBannedMessage;
-        roomList      @22 :RoomListMessage;
-        teamCreationResult @46 :TeamCreationResultMessage;
-        teamChanged   @47 :TeamChangedMessage;
-        teamMembers   @49 :TeamMembersMessage;
-        teamsUpdated  @51 :TeamsUpdatedMessage;
-        roomSettingsUpdated @57 :RoomSettingsUpdatedMessage;
-        invited       @66 :InvitedMessage;
-        inviteTokenCreated @67 :InviteTokenCreatedMessage;
+        roomState                   @11 :RoomStateMessage;
+        roomPlayers                 @61 :RoomPlayersMessage;
+        roomJoinFailed              @19 :RoomJoinFailedMessage;
+        roomCreateFailed            @20 :RoomCreateFailedMessage;
+        roomBanned                  @24 :RoomBannedMessage;
+        roomList                    @22 :RoomListMessage;
+        teamCreationResult          @46 :TeamCreationResultMessage;
+        teamChanged                 @47 :TeamChangedMessage;
+        teamMembers                 @49 :TeamMembersMessage;
+        teamsUpdated                @51 :TeamsUpdatedMessage;
+        roomSettingsUpdated         @57 :RoomSettingsUpdatedMessage;
+        invited                     @66 :InvitedMessage;
+        inviteTokenCreated          @67 :InviteTokenCreatedMessage;
 
-        joinFailed    @14 :JoinFailedMessage;
-        warpPlayer    @10 :WarpPlayerMessage;
-        playerCounts  @18 :PlayerCountsMessage;
-        levelList     @59 :LevelListMessage;
+        joinFailed                  @14 :JoinFailedMessage;
+        warpPlayer                  @10 :WarpPlayerMessage;
+        playerCounts                @18 :PlayerCountsMessage;
+        globalPlayers               @69 :GlobalPlayersMessage;
+        levelList                   @59 :LevelListMessage;
 
-        kicked        @15 :KickedMessage;
-        notice        @38 :NoticeMessage;
-        warn          @45 :WarnMessage;
+        kicked                      @15 :KickedMessage;
+        notice                      @38 :NoticeMessage;
+        warn                        @45 :WarnMessage;
 
-        adminResult   @36 :AdminResultMessage;
-        adminFetchResponse @37 :AdminFetchResponseMessage;
-        adminFetchModsResponse @53 :AdminFetchModsResponseMessage;
-        adminLogsResponse @41 :AdminLogsResponseMessage;
+        adminResult                 @36 :AdminResultMessage;
+        adminFetchResponse          @37 :AdminFetchResponseMessage;
+        adminFetchModsResponse      @53 :AdminFetchModsResponseMessage;
+        adminLogsResponse           @41 :AdminLogsResponseMessage;
 
-        credits @63 : CreditsMessage;
+        credits                     @63 : CreditsMessage;
     }
 }
