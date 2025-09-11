@@ -41,6 +41,13 @@ struct RoomCreatedAckMessage {
     roomId @0 :UInt32;
 }
 
+# misc
+
+struct NotifyUserDataMessage {
+    accountId @0 :Int32;
+    muted @1 :Bool;
+}
+
 struct Message {
     union {
         # Game server messages
@@ -52,5 +59,6 @@ struct Message {
         loginFailed @2 :LoginFailedMessage;
         notifyRoomCreated @3 :NotifyRoomCreatedMessage;
         notifyRoomDeleted @4 :NotifyRoomDeletedMessage;
+        notifyUserData    @6 :NotifyUserDataMessage;
     }
 }
