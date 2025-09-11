@@ -45,7 +45,7 @@ struct RoomCreatedAckMessage {
 
 struct NotifyUserDataMessage {
     accountId @0 :Int32;
-    muted @1 :Bool;
+    canUseVoice @1 :Bool;
 }
 
 struct Message {
