@@ -40,9 +40,13 @@ struct LoginOkMessage {
     allRoles @2 :List(Shared.UserRole);
     userRoles @3 :List(UInt8);
     nameColor @7 :Data;
-    isModerator @4 :Bool = false;
-    canBan @5 :Bool = false;
-    canSetPassword @6 :Bool = false;
+    isModerator @4 :Bool;
+    canMute @11 :Bool;
+    canBan @5 :Bool;
+    canSetPassword @6 :Bool;
+    canEditRoles @8 :Bool;
+    canSendFeatures @9 :Bool;
+    canRateFeatures @10 :Bool;
 }
 
 enum LoginFailedReason {
@@ -353,6 +357,29 @@ struct CreditsMessage {
     unavailable @1 :Bool;
 }
 
+struct GetDiscordLinkStateMessage {}
+
+struct SetDiscordPairingStateMessage {
+    state @0 :Bool;
+}
+
+struct DiscordLinkConfirmMessage {
+    id @0 :UInt64;
+    accept @1 :Bool;
+}
+
+struct DiscordLinkStateMessage {
+    id @0 :UInt64;
+    username @1 :Text;
+    avatarUrl @2 :Text;
+}
+
+struct DiscordLinkAttemptMessage {
+    id @0 :UInt64;
+    username @1 :Text;
+    avatarUrl @2 :Text;
+}
+
 # Admin messages
 
 struct AdminLoginMessage {
@@ -541,6 +568,9 @@ struct Message {
         adminFetchMods              @52 :AdminFetchModsMessage;
 
         fetchCredits                @62 :FetchCreditsMessage;
+        getDiscordLinkState         @72 :GetDiscordLinkStateMessage;
+        setDiscordPairingState      @75 :SetDiscordPairingStateMessage;
+        discordLinkConfirm          @76 :DiscordLinkConfirmMessage;
 
         # Server messages
         loginOk                     @3 :LoginOkMessage;
@@ -578,6 +608,8 @@ struct Message {
         adminFetchModsResponse      @53 :AdminFetchModsResponseMessage;
         adminLogsResponse           @41 :AdminLogsResponseMessage;
 
-        credits                     @63 : CreditsMessage;
+        credits                     @63 :CreditsMessage;
+        discordLinkState            @73 :DiscordLinkStateMessage;
+        discordLinkAttempt          @74 :DiscordLinkAttemptMessage;
     }
 }

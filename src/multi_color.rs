@@ -110,7 +110,7 @@ impl MultiColor {
         if s.contains('>') {
             Ok(Self::Tinting(Self::parse_separated_color_str(s, '>')?))
         } else if s.contains('|') {
-            Ok(Self::Tinting(Self::parse_separated_color_str(s, '|')?))
+            Ok(Self::Gradient(Self::parse_separated_color_str(s, '|')?))
         } else {
             match RGBColor::from_hex_string(s) {
                 Some(c) => Ok(Self::Static(c)),

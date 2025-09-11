@@ -124,6 +124,11 @@ CAPNP_DECLARE_SCHEMA(97cffa48ab55b2fe);
 CAPNP_DECLARE_SCHEMA(b7ae5d2b46a5be12);
 CAPNP_DECLARE_SCHEMA(fb427144ace97fd2);
 CAPNP_DECLARE_SCHEMA(ea965cdb4b2334d9);
+CAPNP_DECLARE_SCHEMA(d6449c2dd0e1c888);
+CAPNP_DECLARE_SCHEMA(ed7f151440678799);
+CAPNP_DECLARE_SCHEMA(d0b534d0fb2c4228);
+CAPNP_DECLARE_SCHEMA(f22826a27d7e0863);
+CAPNP_DECLARE_SCHEMA(eaa4eda829518a91);
 CAPNP_DECLARE_SCHEMA(98be444f11a5df16);
 CAPNP_DECLARE_SCHEMA(945c6ba9031f6b45);
 CAPNP_DECLARE_SCHEMA(85af7e66f3f02a6b);
@@ -1023,6 +1028,81 @@ struct CreditsMessage {
   };
 };
 
+struct GetDiscordLinkStateMessage {
+  GetDiscordLinkStateMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(d6449c2dd0e1c888, 0, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct SetDiscordPairingStateMessage {
+  SetDiscordPairingStateMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(ed7f151440678799, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct DiscordLinkConfirmMessage {
+  DiscordLinkConfirmMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(d0b534d0fb2c4228, 2, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct DiscordLinkStateMessage {
+  DiscordLinkStateMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(f22826a27d7e0863, 1, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct DiscordLinkAttemptMessage {
+  DiscordLinkAttemptMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(eaa4eda829518a91, 1, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct AdminLoginMessage {
   AdminLoginMessage() = delete;
 
@@ -1447,6 +1527,11 @@ struct Message {
     GLOBAL_PLAYERS,
     ADMIN_MUTE,
     ADMIN_UNMUTE,
+    GET_DISCORD_LINK_STATE,
+    DISCORD_LINK_STATE,
+    DISCORD_LINK_ATTEMPT,
+    SET_DISCORD_PAIRING_STATE,
+    DISCORD_LINK_CONFIRM,
   };
 
   struct _capnpPrivate {
@@ -1895,6 +1980,14 @@ public:
   inline bool hasNameColor() const;
   inline  ::capnp::Data::Reader getNameColor() const;
 
+  inline bool getCanEditRoles() const;
+
+  inline bool getCanSendFeatures() const;
+
+  inline bool getCanRateFeatures() const;
+
+  inline bool getCanMute() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1967,6 +2060,18 @@ public:
   inline  ::capnp::Data::Builder initNameColor(unsigned int size);
   inline void adoptNameColor(::capnp::Orphan< ::capnp::Data>&& value);
   inline ::capnp::Orphan< ::capnp::Data> disownNameColor();
+
+  inline bool getCanEditRoles();
+  inline void setCanEditRoles(bool value);
+
+  inline bool getCanSendFeatures();
+  inline void setCanSendFeatures(bool value);
+
+  inline bool getCanRateFeatures();
+  inline void setCanRateFeatures(bool value);
+
+  inline bool getCanMute();
+  inline void setCanMute(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -6452,6 +6557,426 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class GetDiscordLinkStateMessage::Reader {
+public:
+  typedef GetDiscordLinkStateMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class GetDiscordLinkStateMessage::Builder {
+public:
+  typedef GetDiscordLinkStateMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class GetDiscordLinkStateMessage::Pipeline {
+public:
+  typedef GetDiscordLinkStateMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class SetDiscordPairingStateMessage::Reader {
+public:
+  typedef SetDiscordPairingStateMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool getState() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class SetDiscordPairingStateMessage::Builder {
+public:
+  typedef SetDiscordPairingStateMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool getState();
+  inline void setState(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class SetDiscordPairingStateMessage::Pipeline {
+public:
+  typedef SetDiscordPairingStateMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class DiscordLinkConfirmMessage::Reader {
+public:
+  typedef DiscordLinkConfirmMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId() const;
+
+  inline bool getAccept() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class DiscordLinkConfirmMessage::Builder {
+public:
+  typedef DiscordLinkConfirmMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId();
+  inline void setId( ::uint64_t value);
+
+  inline bool getAccept();
+  inline void setAccept(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class DiscordLinkConfirmMessage::Pipeline {
+public:
+  typedef DiscordLinkConfirmMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class DiscordLinkStateMessage::Reader {
+public:
+  typedef DiscordLinkStateMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId() const;
+
+  inline bool hasUsername() const;
+  inline  ::capnp::Text::Reader getUsername() const;
+
+  inline bool hasAvatarUrl() const;
+  inline  ::capnp::Text::Reader getAvatarUrl() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class DiscordLinkStateMessage::Builder {
+public:
+  typedef DiscordLinkStateMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId();
+  inline void setId( ::uint64_t value);
+
+  inline bool hasUsername();
+  inline  ::capnp::Text::Builder getUsername();
+  inline void setUsername( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initUsername(unsigned int size);
+  inline void adoptUsername(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownUsername();
+
+  inline bool hasAvatarUrl();
+  inline  ::capnp::Text::Builder getAvatarUrl();
+  inline void setAvatarUrl( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initAvatarUrl(unsigned int size);
+  inline void adoptAvatarUrl(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownAvatarUrl();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class DiscordLinkStateMessage::Pipeline {
+public:
+  typedef DiscordLinkStateMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class DiscordLinkAttemptMessage::Reader {
+public:
+  typedef DiscordLinkAttemptMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId() const;
+
+  inline bool hasUsername() const;
+  inline  ::capnp::Text::Reader getUsername() const;
+
+  inline bool hasAvatarUrl() const;
+  inline  ::capnp::Text::Reader getAvatarUrl() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class DiscordLinkAttemptMessage::Builder {
+public:
+  typedef DiscordLinkAttemptMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId();
+  inline void setId( ::uint64_t value);
+
+  inline bool hasUsername();
+  inline  ::capnp::Text::Builder getUsername();
+  inline void setUsername( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initUsername(unsigned int size);
+  inline void adoptUsername(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownUsername();
+
+  inline bool hasAvatarUrl();
+  inline  ::capnp::Text::Builder getAvatarUrl();
+  inline void setAvatarUrl( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initAvatarUrl(unsigned int size);
+  inline void adoptAvatarUrl(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownAvatarUrl();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class DiscordLinkAttemptMessage::Pipeline {
+public:
+  typedef DiscordLinkAttemptMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class AdminLoginMessage::Reader {
 public:
   typedef AdminLoginMessage Reads;
@@ -8864,6 +9389,26 @@ public:
   inline bool hasAdminUnmute() const;
   inline  ::globed::schema::main::AdminUnmuteMessage::Reader getAdminUnmute() const;
 
+  inline bool isGetDiscordLinkState() const;
+  inline bool hasGetDiscordLinkState() const;
+  inline  ::globed::schema::main::GetDiscordLinkStateMessage::Reader getGetDiscordLinkState() const;
+
+  inline bool isDiscordLinkState() const;
+  inline bool hasDiscordLinkState() const;
+  inline  ::globed::schema::main::DiscordLinkStateMessage::Reader getDiscordLinkState() const;
+
+  inline bool isDiscordLinkAttempt() const;
+  inline bool hasDiscordLinkAttempt() const;
+  inline  ::globed::schema::main::DiscordLinkAttemptMessage::Reader getDiscordLinkAttempt() const;
+
+  inline bool isSetDiscordPairingState() const;
+  inline bool hasSetDiscordPairingState() const;
+  inline  ::globed::schema::main::SetDiscordPairingStateMessage::Reader getSetDiscordPairingState() const;
+
+  inline bool isDiscordLinkConfirm() const;
+  inline bool hasDiscordLinkConfirm() const;
+  inline  ::globed::schema::main::DiscordLinkConfirmMessage::Reader getDiscordLinkConfirm() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -9460,6 +10005,46 @@ public:
   inline  ::globed::schema::main::AdminUnmuteMessage::Builder initAdminUnmute();
   inline void adoptAdminUnmute(::capnp::Orphan< ::globed::schema::main::AdminUnmuteMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::AdminUnmuteMessage> disownAdminUnmute();
+
+  inline bool isGetDiscordLinkState();
+  inline bool hasGetDiscordLinkState();
+  inline  ::globed::schema::main::GetDiscordLinkStateMessage::Builder getGetDiscordLinkState();
+  inline void setGetDiscordLinkState( ::globed::schema::main::GetDiscordLinkStateMessage::Reader value);
+  inline  ::globed::schema::main::GetDiscordLinkStateMessage::Builder initGetDiscordLinkState();
+  inline void adoptGetDiscordLinkState(::capnp::Orphan< ::globed::schema::main::GetDiscordLinkStateMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::GetDiscordLinkStateMessage> disownGetDiscordLinkState();
+
+  inline bool isDiscordLinkState();
+  inline bool hasDiscordLinkState();
+  inline  ::globed::schema::main::DiscordLinkStateMessage::Builder getDiscordLinkState();
+  inline void setDiscordLinkState( ::globed::schema::main::DiscordLinkStateMessage::Reader value);
+  inline  ::globed::schema::main::DiscordLinkStateMessage::Builder initDiscordLinkState();
+  inline void adoptDiscordLinkState(::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage> disownDiscordLinkState();
+
+  inline bool isDiscordLinkAttempt();
+  inline bool hasDiscordLinkAttempt();
+  inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder getDiscordLinkAttempt();
+  inline void setDiscordLinkAttempt( ::globed::schema::main::DiscordLinkAttemptMessage::Reader value);
+  inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder initDiscordLinkAttempt();
+  inline void adoptDiscordLinkAttempt(::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage> disownDiscordLinkAttempt();
+
+  inline bool isSetDiscordPairingState();
+  inline bool hasSetDiscordPairingState();
+  inline  ::globed::schema::main::SetDiscordPairingStateMessage::Builder getSetDiscordPairingState();
+  inline void setSetDiscordPairingState( ::globed::schema::main::SetDiscordPairingStateMessage::Reader value);
+  inline  ::globed::schema::main::SetDiscordPairingStateMessage::Builder initSetDiscordPairingState();
+  inline void adoptSetDiscordPairingState(::capnp::Orphan< ::globed::schema::main::SetDiscordPairingStateMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::SetDiscordPairingStateMessage> disownSetDiscordPairingState();
+
+  inline bool isDiscordLinkConfirm();
+  inline bool hasDiscordLinkConfirm();
+  inline  ::globed::schema::main::DiscordLinkConfirmMessage::Builder getDiscordLinkConfirm();
+  inline void setDiscordLinkConfirm( ::globed::schema::main::DiscordLinkConfirmMessage::Reader value);
+  inline  ::globed::schema::main::DiscordLinkConfirmMessage::Builder initDiscordLinkConfirm();
+  inline void adoptDiscordLinkConfirm(::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage> disownDiscordLinkConfirm();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -10085,6 +10670,62 @@ inline void LoginOkMessage::Builder::adoptNameColor(
 inline ::capnp::Orphan< ::capnp::Data> LoginOkMessage::Builder::disownNameColor() {
   return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
       ::capnp::bounded<4>() * ::capnp::POINTERS));
+}
+
+inline bool LoginOkMessage::Reader::getCanEditRoles() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanEditRoles() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanEditRoles(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::getCanSendFeatures() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanSendFeatures() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanSendFeatures(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::getCanRateFeatures() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanRateFeatures() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanRateFeatures(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::getCanMute() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanMute() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanMute(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::main::LoginFailedReason LoginFailedMessage::Reader::getReason() const {
@@ -12524,6 +13165,212 @@ inline bool CreditsMessage::Builder::getUnavailable() {
 inline void CreditsMessage::Builder::setUnavailable(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool SetDiscordPairingStateMessage::Reader::getState() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline bool SetDiscordPairingStateMessage::Builder::getState() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void SetDiscordPairingStateMessage::Builder::setState(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint64_t DiscordLinkConfirmMessage::Reader::getId() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t DiscordLinkConfirmMessage::Builder::getId() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void DiscordLinkConfirmMessage::Builder::setId( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool DiscordLinkConfirmMessage::Reader::getAccept() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS);
+}
+
+inline bool DiscordLinkConfirmMessage::Builder::getAccept() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS);
+}
+inline void DiscordLinkConfirmMessage::Builder::setAccept(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint64_t DiscordLinkStateMessage::Reader::getId() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t DiscordLinkStateMessage::Builder::getId() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void DiscordLinkStateMessage::Builder::setId( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool DiscordLinkStateMessage::Reader::hasUsername() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool DiscordLinkStateMessage::Builder::hasUsername() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader DiscordLinkStateMessage::Reader::getUsername() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder DiscordLinkStateMessage::Builder::getUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void DiscordLinkStateMessage::Builder::setUsername( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder DiscordLinkStateMessage::Builder::initUsername(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void DiscordLinkStateMessage::Builder::adoptUsername(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> DiscordLinkStateMessage::Builder::disownUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool DiscordLinkStateMessage::Reader::hasAvatarUrl() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool DiscordLinkStateMessage::Builder::hasAvatarUrl() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader DiscordLinkStateMessage::Reader::getAvatarUrl() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder DiscordLinkStateMessage::Builder::getAvatarUrl() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void DiscordLinkStateMessage::Builder::setAvatarUrl( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder DiscordLinkStateMessage::Builder::initAvatarUrl(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void DiscordLinkStateMessage::Builder::adoptAvatarUrl(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> DiscordLinkStateMessage::Builder::disownAvatarUrl() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline  ::uint64_t DiscordLinkAttemptMessage::Reader::getId() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t DiscordLinkAttemptMessage::Builder::getId() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void DiscordLinkAttemptMessage::Builder::setId( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool DiscordLinkAttemptMessage::Reader::hasUsername() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool DiscordLinkAttemptMessage::Builder::hasUsername() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader DiscordLinkAttemptMessage::Reader::getUsername() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder DiscordLinkAttemptMessage::Builder::getUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void DiscordLinkAttemptMessage::Builder::setUsername( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder DiscordLinkAttemptMessage::Builder::initUsername(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void DiscordLinkAttemptMessage::Builder::adoptUsername(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> DiscordLinkAttemptMessage::Builder::disownUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool DiscordLinkAttemptMessage::Reader::hasAvatarUrl() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool DiscordLinkAttemptMessage::Builder::hasAvatarUrl() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader DiscordLinkAttemptMessage::Reader::getAvatarUrl() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder DiscordLinkAttemptMessage::Builder::getAvatarUrl() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void DiscordLinkAttemptMessage::Builder::setAvatarUrl( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder DiscordLinkAttemptMessage::Builder::initAvatarUrl(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void DiscordLinkAttemptMessage::Builder::adoptAvatarUrl(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> DiscordLinkAttemptMessage::Builder::disownAvatarUrl() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline bool AdminLoginMessage::Reader::hasPassword() const {
@@ -17853,6 +18700,276 @@ inline ::capnp::Orphan< ::globed::schema::main::AdminUnmuteMessage> Message::Bui
   KJ_IREQUIRE((which() == Message::ADMIN_UNMUTE),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUnmuteMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isGetDiscordLinkState() const {
+  return which() == Message::GET_DISCORD_LINK_STATE;
+}
+inline bool Message::Builder::isGetDiscordLinkState() {
+  return which() == Message::GET_DISCORD_LINK_STATE;
+}
+inline bool Message::Reader::hasGetDiscordLinkState() const {
+  if (which() != Message::GET_DISCORD_LINK_STATE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasGetDiscordLinkState() {
+  if (which() != Message::GET_DISCORD_LINK_STATE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::GetDiscordLinkStateMessage::Reader Message::Reader::getGetDiscordLinkState() const {
+  KJ_IREQUIRE((which() == Message::GET_DISCORD_LINK_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetDiscordLinkStateMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::GetDiscordLinkStateMessage::Builder Message::Builder::getGetDiscordLinkState() {
+  KJ_IREQUIRE((which() == Message::GET_DISCORD_LINK_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetDiscordLinkStateMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setGetDiscordLinkState( ::globed::schema::main::GetDiscordLinkStateMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_DISCORD_LINK_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::GetDiscordLinkStateMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::GetDiscordLinkStateMessage::Builder Message::Builder::initGetDiscordLinkState() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_DISCORD_LINK_STATE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetDiscordLinkStateMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptGetDiscordLinkState(
+    ::capnp::Orphan< ::globed::schema::main::GetDiscordLinkStateMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_DISCORD_LINK_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::GetDiscordLinkStateMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::GetDiscordLinkStateMessage> Message::Builder::disownGetDiscordLinkState() {
+  KJ_IREQUIRE((which() == Message::GET_DISCORD_LINK_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetDiscordLinkStateMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isDiscordLinkState() const {
+  return which() == Message::DISCORD_LINK_STATE;
+}
+inline bool Message::Builder::isDiscordLinkState() {
+  return which() == Message::DISCORD_LINK_STATE;
+}
+inline bool Message::Reader::hasDiscordLinkState() const {
+  if (which() != Message::DISCORD_LINK_STATE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasDiscordLinkState() {
+  if (which() != Message::DISCORD_LINK_STATE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::DiscordLinkStateMessage::Reader Message::Reader::getDiscordLinkState() const {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::DiscordLinkStateMessage::Builder Message::Builder::getDiscordLinkState() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setDiscordLinkState( ::globed::schema::main::DiscordLinkStateMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::DiscordLinkStateMessage::Builder Message::Builder::initDiscordLinkState() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_STATE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptDiscordLinkState(
+    ::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage> Message::Builder::disownDiscordLinkState() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isDiscordLinkAttempt() const {
+  return which() == Message::DISCORD_LINK_ATTEMPT;
+}
+inline bool Message::Builder::isDiscordLinkAttempt() {
+  return which() == Message::DISCORD_LINK_ATTEMPT;
+}
+inline bool Message::Reader::hasDiscordLinkAttempt() const {
+  if (which() != Message::DISCORD_LINK_ATTEMPT) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasDiscordLinkAttempt() {
+  if (which() != Message::DISCORD_LINK_ATTEMPT) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::DiscordLinkAttemptMessage::Reader Message::Reader::getDiscordLinkAttempt() const {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_ATTEMPT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder Message::Builder::getDiscordLinkAttempt() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_ATTEMPT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setDiscordLinkAttempt( ::globed::schema::main::DiscordLinkAttemptMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_ATTEMPT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder Message::Builder::initDiscordLinkAttempt() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_ATTEMPT);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptDiscordLinkAttempt(
+    ::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_ATTEMPT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage> Message::Builder::disownDiscordLinkAttempt() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_ATTEMPT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isSetDiscordPairingState() const {
+  return which() == Message::SET_DISCORD_PAIRING_STATE;
+}
+inline bool Message::Builder::isSetDiscordPairingState() {
+  return which() == Message::SET_DISCORD_PAIRING_STATE;
+}
+inline bool Message::Reader::hasSetDiscordPairingState() const {
+  if (which() != Message::SET_DISCORD_PAIRING_STATE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasSetDiscordPairingState() {
+  if (which() != Message::SET_DISCORD_PAIRING_STATE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::SetDiscordPairingStateMessage::Reader Message::Reader::getSetDiscordPairingState() const {
+  KJ_IREQUIRE((which() == Message::SET_DISCORD_PAIRING_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::SetDiscordPairingStateMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::SetDiscordPairingStateMessage::Builder Message::Builder::getSetDiscordPairingState() {
+  KJ_IREQUIRE((which() == Message::SET_DISCORD_PAIRING_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::SetDiscordPairingStateMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setSetDiscordPairingState( ::globed::schema::main::SetDiscordPairingStateMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SET_DISCORD_PAIRING_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::SetDiscordPairingStateMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::SetDiscordPairingStateMessage::Builder Message::Builder::initSetDiscordPairingState() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SET_DISCORD_PAIRING_STATE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::SetDiscordPairingStateMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptSetDiscordPairingState(
+    ::capnp::Orphan< ::globed::schema::main::SetDiscordPairingStateMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SET_DISCORD_PAIRING_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::SetDiscordPairingStateMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::SetDiscordPairingStateMessage> Message::Builder::disownSetDiscordPairingState() {
+  KJ_IREQUIRE((which() == Message::SET_DISCORD_PAIRING_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::SetDiscordPairingStateMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isDiscordLinkConfirm() const {
+  return which() == Message::DISCORD_LINK_CONFIRM;
+}
+inline bool Message::Builder::isDiscordLinkConfirm() {
+  return which() == Message::DISCORD_LINK_CONFIRM;
+}
+inline bool Message::Reader::hasDiscordLinkConfirm() const {
+  if (which() != Message::DISCORD_LINK_CONFIRM) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasDiscordLinkConfirm() {
+  if (which() != Message::DISCORD_LINK_CONFIRM) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::DiscordLinkConfirmMessage::Reader Message::Reader::getDiscordLinkConfirm() const {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_CONFIRM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkConfirmMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::DiscordLinkConfirmMessage::Builder Message::Builder::getDiscordLinkConfirm() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_CONFIRM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkConfirmMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setDiscordLinkConfirm( ::globed::schema::main::DiscordLinkConfirmMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_CONFIRM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkConfirmMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::DiscordLinkConfirmMessage::Builder Message::Builder::initDiscordLinkConfirm() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_CONFIRM);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkConfirmMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptDiscordLinkConfirm(
+    ::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_CONFIRM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkConfirmMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage> Message::Builder::disownDiscordLinkConfirm() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_CONFIRM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkConfirmMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
