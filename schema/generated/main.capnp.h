@@ -39,6 +39,7 @@ CAPNP_DECLARE_SCHEMA(bbfb3e6266b46e00);
 CAPNP_DECLARE_SCHEMA(c0792171a7e24cec);
 CAPNP_DECLARE_SCHEMA(e94115bf16c4b5a8);
 CAPNP_DECLARE_SCHEMA(8292c7927f0e291e);
+CAPNP_DECLARE_SCHEMA(f2ba4cb8b539c421);
 CAPNP_DECLARE_SCHEMA(b90a50af13cffdeb);
 CAPNP_DECLARE_SCHEMA(f6f0f63e8a860c1c);
 CAPNP_DECLARE_SCHEMA(88b44ebc59a79dec);
@@ -292,6 +293,21 @@ struct ServersChangedMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(8292c7927f0e291e, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct UserDataChangedMessage {
+  UserDataChangedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(f2ba4cb8b539c421, 1, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1532,6 +1548,7 @@ struct Message {
     DISCORD_LINK_ATTEMPT,
     SET_DISCORD_PAIRING_STATE,
     DISCORD_LINK_CONFIRM,
+    USER_DATA_CHANGED,
   };
 
   struct _capnpPrivate {
@@ -2410,6 +2427,133 @@ private:
 class ServersChangedMessage::Pipeline {
 public:
   typedef ServersChangedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class UserDataChangedMessage::Reader {
+public:
+  typedef UserDataChangedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasRoles() const;
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getRoles() const;
+
+  inline bool hasNameColor() const;
+  inline  ::capnp::Data::Reader getNameColor() const;
+
+  inline bool getIsModerator() const;
+
+  inline bool getCanMute() const;
+
+  inline bool getCanBan() const;
+
+  inline bool getCanSetPassword() const;
+
+  inline bool getCanEditRoles() const;
+
+  inline bool getCanSendFeatures() const;
+
+  inline bool getCanRateFeatures() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class UserDataChangedMessage::Builder {
+public:
+  typedef UserDataChangedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasRoles();
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getRoles();
+  inline void setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setRoles(::kj::ArrayPtr<const  ::uint8_t> value);
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initRoles(unsigned int size);
+  inline void adoptRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownRoles();
+
+  inline bool hasNameColor();
+  inline  ::capnp::Data::Builder getNameColor();
+  inline void setNameColor( ::capnp::Data::Reader value);
+  inline  ::capnp::Data::Builder initNameColor(unsigned int size);
+  inline void adoptNameColor(::capnp::Orphan< ::capnp::Data>&& value);
+  inline ::capnp::Orphan< ::capnp::Data> disownNameColor();
+
+  inline bool getIsModerator();
+  inline void setIsModerator(bool value);
+
+  inline bool getCanMute();
+  inline void setCanMute(bool value);
+
+  inline bool getCanBan();
+  inline void setCanBan(bool value);
+
+  inline bool getCanSetPassword();
+  inline void setCanSetPassword(bool value);
+
+  inline bool getCanEditRoles();
+  inline void setCanEditRoles(bool value);
+
+  inline bool getCanSendFeatures();
+  inline void setCanSendFeatures(bool value);
+
+  inline bool getCanRateFeatures();
+  inline void setCanRateFeatures(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class UserDataChangedMessage::Pipeline {
+public:
+  typedef UserDataChangedMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -9409,6 +9553,10 @@ public:
   inline bool hasDiscordLinkConfirm() const;
   inline  ::globed::schema::main::DiscordLinkConfirmMessage::Reader getDiscordLinkConfirm() const;
 
+  inline bool isUserDataChanged() const;
+  inline bool hasUserDataChanged() const;
+  inline  ::globed::schema::main::UserDataChangedMessage::Reader getUserDataChanged() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -10045,6 +10193,14 @@ public:
   inline  ::globed::schema::main::DiscordLinkConfirmMessage::Builder initDiscordLinkConfirm();
   inline void adoptDiscordLinkConfirm(::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage> disownDiscordLinkConfirm();
+
+  inline bool isUserDataChanged();
+  inline bool hasUserDataChanged();
+  inline  ::globed::schema::main::UserDataChangedMessage::Builder getUserDataChanged();
+  inline void setUserDataChanged( ::globed::schema::main::UserDataChangedMessage::Reader value);
+  inline  ::globed::schema::main::UserDataChangedMessage::Builder initUserDataChanged();
+  inline void adoptUserDataChanged(::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage> disownUserDataChanged();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -10856,6 +11012,176 @@ inline void ServersChangedMessage::Builder::adoptServers(
 inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>> ServersChangedMessage::Builder::disownServers() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool UserDataChangedMessage::Reader::hasRoles() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool UserDataChangedMessage::Builder::hasRoles() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader UserDataChangedMessage::Reader::getRoles() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder UserDataChangedMessage::Builder::getRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void UserDataChangedMessage::Builder::setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void UserDataChangedMessage::Builder::setRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder UserDataChangedMessage::Builder::initRoles(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void UserDataChangedMessage::Builder::adoptRoles(
+    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> UserDataChangedMessage::Builder::disownRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool UserDataChangedMessage::Reader::hasNameColor() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool UserDataChangedMessage::Builder::hasNameColor() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Data::Reader UserDataChangedMessage::Reader::getNameColor() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Data::Builder UserDataChangedMessage::Builder::getNameColor() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void UserDataChangedMessage::Builder::setNameColor( ::capnp::Data::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Data::Builder UserDataChangedMessage::Builder::initNameColor(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void UserDataChangedMessage::Builder::adoptNameColor(
+    ::capnp::Orphan< ::capnp::Data>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Data> UserDataChangedMessage::Builder::disownNameColor() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool UserDataChangedMessage::Reader::getIsModerator() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserDataChangedMessage::Builder::getIsModerator() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void UserDataChangedMessage::Builder::setIsModerator(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserDataChangedMessage::Reader::getCanMute() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserDataChangedMessage::Builder::getCanMute() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void UserDataChangedMessage::Builder::setCanMute(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserDataChangedMessage::Reader::getCanBan() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserDataChangedMessage::Builder::getCanBan() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void UserDataChangedMessage::Builder::setCanBan(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserDataChangedMessage::Reader::getCanSetPassword() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserDataChangedMessage::Builder::getCanSetPassword() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void UserDataChangedMessage::Builder::setCanSetPassword(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserDataChangedMessage::Reader::getCanEditRoles() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserDataChangedMessage::Builder::getCanEditRoles() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void UserDataChangedMessage::Builder::setCanEditRoles(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserDataChangedMessage::Reader::getCanSendFeatures() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserDataChangedMessage::Builder::getCanSendFeatures() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+inline void UserDataChangedMessage::Builder::setCanSendFeatures(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserDataChangedMessage::Reader::getCanRateFeatures() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserDataChangedMessage::Builder::getCanRateFeatures() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+inline void UserDataChangedMessage::Builder::setCanRateFeatures(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool UpdateOwnDataMessage::Reader::hasIcons() const {
@@ -18970,6 +19296,60 @@ inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage> Messa
   KJ_IREQUIRE((which() == Message::DISCORD_LINK_CONFIRM),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkConfirmMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isUserDataChanged() const {
+  return which() == Message::USER_DATA_CHANGED;
+}
+inline bool Message::Builder::isUserDataChanged() {
+  return which() == Message::USER_DATA_CHANGED;
+}
+inline bool Message::Reader::hasUserDataChanged() const {
+  if (which() != Message::USER_DATA_CHANGED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUserDataChanged() {
+  if (which() != Message::USER_DATA_CHANGED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UserDataChangedMessage::Reader Message::Reader::getUserDataChanged() const {
+  KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UserDataChangedMessage::Builder Message::Builder::getUserDataChanged() {
+  KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUserDataChanged( ::globed::schema::main::UserDataChangedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_DATA_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UserDataChangedMessage::Builder Message::Builder::initUserDataChanged() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_DATA_CHANGED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUserDataChanged(
+    ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_DATA_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage> Message::Builder::disownUserDataChanged() {
+  KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

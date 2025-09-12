@@ -191,6 +191,15 @@ impl MultiColor {
 
         b64e.encode(writer.written())
     }
+
+    pub fn encoded_len(&self) -> usize {
+        let common = 1;
+
+        match self {
+            Self::Static(_) => common + 3,
+            Self::Tinting(c) | Self::Gradient(c) => common + c.len() * 3,
+        }
+    }
 }
 
 struct MultiColorVisitor;

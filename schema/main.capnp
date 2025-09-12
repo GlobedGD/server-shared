@@ -76,6 +76,18 @@ struct ServersChangedMessage {
     servers @0 :List(Shared.GameServer);
 }
 
+struct UserDataChangedMessage {
+    roles @0 :List(UInt8);
+    nameColor @1 :Data;
+    isModerator @2 :Bool;
+    canMute @3 :Bool;
+    canBan @4 :Bool;
+    canSetPassword @5 :Bool;
+    canEditRoles @6 :Bool;
+    canSendFeatures @7 :Bool;
+    canRateFeatures @8 :Bool;
+}
+
 # General messages
 
 struct UpdateOwnDataMessage {
@@ -578,6 +590,7 @@ struct Message {
         loginRequired               @5 :LoginRequiredMessage;
         banned                      @23 :BannedMessage;
         serversChanged              @54 :ServersChangedMessage;
+        userDataChanged             @77 :UserDataChangedMessage;
 
         roomState                   @11 :RoomStateMessage;
         roomPlayers                 @61 :RoomPlayersMessage;
