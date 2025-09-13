@@ -149,6 +149,10 @@ struct SendLevelScriptMessage {
     scripts @0 :List(LevelScript);
 }
 
+struct VoiceDataMessage {
+    frames @0 :List(Data);
+}
+
 enum KickReason {
     custom @0;
     duplicateLogin @1;
@@ -164,6 +168,11 @@ struct ScriptLogsMessage {
     ramUsage @1 :Float32;
 }
 
+struct VoiceBroadcastMessage {
+    accountId @0 :Int32;
+    frames @1 :List(Data);
+}
+
 struct Message {
     union {
         # Client messages
@@ -171,17 +180,21 @@ struct Message {
         loginUTokenAndJoin @3 :LoginUTokenAndJoinMessage;
         joinSession        @4 :JoinSessionMessage;
         leaveSession       @5 :LeaveSessionMessage;
+
         playerData         @6 :PlayerDataMessage;
         updateIcons        @11 :UpdateIconsMessage;
         sendLevelScript    @12 :SendLevelScriptMessage;
+        voiceData          @14 :VoiceDataMessage;
 
         # Server messages
         loginOk            @1 :LoginOkMessage;
         loginFailed        @2 :LoginFailedMessage;
         joinSessionOk      @7 :JoinSessionOkMessage;
         joinSessionFailed  @8 :JoinSessionFailedMessage;
+
         levelData          @9 :LevelDataMessage;
         kicked             @10 :KickedMessage;
         scriptLogs         @13 :ScriptLogsMessage;
+        voiceBroadcast     @15 :VoiceBroadcastMessage;
     }
 }

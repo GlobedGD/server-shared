@@ -50,6 +50,7 @@ CAPNP_DECLARE_SCHEMA(f3e0f84d2138b356);
 CAPNP_DECLARE_SCHEMA(ee95a98b84cdb612);
 CAPNP_DECLARE_SCHEMA(a5e1158db5d33982);
 CAPNP_DECLARE_SCHEMA(a66df788476d46df);
+CAPNP_DECLARE_SCHEMA(931b0abb37c2eb2e);
 CAPNP_DECLARE_SCHEMA(c8a95e9766c5920c);
 enum class KickReason_c8a95e9766c5920c: uint16_t {
   CUSTOM,
@@ -58,6 +59,7 @@ enum class KickReason_c8a95e9766c5920c: uint16_t {
 CAPNP_DECLARE_ENUM(KickReason, c8a95e9766c5920c);
 CAPNP_DECLARE_SCHEMA(b42ff33e56f21298);
 CAPNP_DECLARE_SCHEMA(d2d77b5d2f998da1);
+CAPNP_DECLARE_SCHEMA(be5fa37583693d04);
 CAPNP_DECLARE_SCHEMA(ee430f29eef52d4e);
 
 }  // namespace schemas
@@ -364,6 +366,21 @@ struct SendLevelScriptMessage {
   };
 };
 
+struct VoiceDataMessage {
+  VoiceDataMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(931b0abb37c2eb2e, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 typedef ::capnp::schemas::KickReason_c8a95e9766c5920c KickReason;
 
 struct KickedMessage {
@@ -396,6 +413,21 @@ struct ScriptLogsMessage {
   };
 };
 
+struct VoiceBroadcastMessage {
+  VoiceBroadcastMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(be5fa37583693d04, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct Message {
   Message() = delete;
 
@@ -417,6 +449,8 @@ struct Message {
     UPDATE_ICONS,
     SEND_LEVEL_SCRIPT,
     SCRIPT_LOGS,
+    VOICE_DATA,
+    VOICE_BROADCAST,
   };
 
   struct _capnpPrivate {
@@ -2214,6 +2248,88 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class VoiceDataMessage::Reader {
+public:
+  typedef VoiceDataMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasFrames() const;
+  inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Reader getFrames() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class VoiceDataMessage::Builder {
+public:
+  typedef VoiceDataMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasFrames();
+  inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Builder getFrames();
+  inline void setFrames( ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Reader value);
+  inline void setFrames(::kj::ArrayPtr<const  ::capnp::Data::Reader> value);
+  inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Builder initFrames(unsigned int size);
+  inline void adoptFrames(::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>> disownFrames();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class VoiceDataMessage::Pipeline {
+public:
+  typedef VoiceDataMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class KickedMessage::Reader {
 public:
   typedef KickedMessage Reads;
@@ -2387,6 +2503,93 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class VoiceBroadcastMessage::Reader {
+public:
+  typedef VoiceBroadcastMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool hasFrames() const;
+  inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Reader getFrames() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class VoiceBroadcastMessage::Builder {
+public:
+  typedef VoiceBroadcastMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool hasFrames();
+  inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Builder getFrames();
+  inline void setFrames( ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Reader value);
+  inline void setFrames(::kj::ArrayPtr<const  ::capnp::Data::Reader> value);
+  inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Builder initFrames(unsigned int size);
+  inline void adoptFrames(::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>> disownFrames();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class VoiceBroadcastMessage::Pipeline {
+public:
+  typedef VoiceBroadcastMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class Message::Reader {
 public:
   typedef Message Reads;
@@ -2460,6 +2663,14 @@ public:
   inline bool isScriptLogs() const;
   inline bool hasScriptLogs() const;
   inline  ::globed::schema::game::ScriptLogsMessage::Reader getScriptLogs() const;
+
+  inline bool isVoiceData() const;
+  inline bool hasVoiceData() const;
+  inline  ::globed::schema::game::VoiceDataMessage::Reader getVoiceData() const;
+
+  inline bool isVoiceBroadcast() const;
+  inline bool hasVoiceBroadcast() const;
+  inline  ::globed::schema::game::VoiceBroadcastMessage::Reader getVoiceBroadcast() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -2601,6 +2812,22 @@ public:
   inline  ::globed::schema::game::ScriptLogsMessage::Builder initScriptLogs();
   inline void adoptScriptLogs(::capnp::Orphan< ::globed::schema::game::ScriptLogsMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::ScriptLogsMessage> disownScriptLogs();
+
+  inline bool isVoiceData();
+  inline bool hasVoiceData();
+  inline  ::globed::schema::game::VoiceDataMessage::Builder getVoiceData();
+  inline void setVoiceData( ::globed::schema::game::VoiceDataMessage::Reader value);
+  inline  ::globed::schema::game::VoiceDataMessage::Builder initVoiceData();
+  inline void adoptVoiceData(::capnp::Orphan< ::globed::schema::game::VoiceDataMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::VoiceDataMessage> disownVoiceData();
+
+  inline bool isVoiceBroadcast();
+  inline bool hasVoiceBroadcast();
+  inline  ::globed::schema::game::VoiceBroadcastMessage::Builder getVoiceBroadcast();
+  inline void setVoiceBroadcast( ::globed::schema::game::VoiceBroadcastMessage::Reader value);
+  inline  ::globed::schema::game::VoiceBroadcastMessage::Builder initVoiceBroadcast();
+  inline void adoptVoiceBroadcast(::capnp::Orphan< ::globed::schema::game::VoiceBroadcastMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::VoiceBroadcastMessage> disownVoiceBroadcast();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3992,6 +4219,44 @@ inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::LevelScript,  ::c
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool VoiceDataMessage::Reader::hasFrames() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool VoiceDataMessage::Builder::hasFrames() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Reader VoiceDataMessage::Reader::getFrames() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Builder VoiceDataMessage::Builder::getFrames() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void VoiceDataMessage::Builder::setFrames( ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void VoiceDataMessage::Builder::setFrames(::kj::ArrayPtr<const  ::capnp::Data::Reader> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Builder VoiceDataMessage::Builder::initFrames(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void VoiceDataMessage::Builder::adoptFrames(
+    ::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>> VoiceDataMessage::Builder::disownFrames() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline  ::globed::schema::game::KickReason KickedMessage::Reader::getReason() const {
   return _reader.getDataField< ::globed::schema::game::KickReason>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -4090,6 +4355,58 @@ inline float ScriptLogsMessage::Builder::getRamUsage() {
 inline void ScriptLogsMessage::Builder::setRamUsage(float value) {
   _builder.setDataField<float>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t VoiceBroadcastMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t VoiceBroadcastMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void VoiceBroadcastMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool VoiceBroadcastMessage::Reader::hasFrames() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool VoiceBroadcastMessage::Builder::hasFrames() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Reader VoiceBroadcastMessage::Reader::getFrames() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Builder VoiceBroadcastMessage::Builder::getFrames() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void VoiceBroadcastMessage::Builder::setFrames( ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void VoiceBroadcastMessage::Builder::setFrames(::kj::ArrayPtr<const  ::capnp::Data::Reader> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>::Builder VoiceBroadcastMessage::Builder::initFrames(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void VoiceBroadcastMessage::Builder::adoptFrames(
+    ::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>> VoiceBroadcastMessage::Builder::disownFrames() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline  ::globed::schema::game::Message::Which Message::Reader::which() const {
@@ -4854,6 +5171,114 @@ inline ::capnp::Orphan< ::globed::schema::game::ScriptLogsMessage> Message::Buil
   KJ_IREQUIRE((which() == Message::SCRIPT_LOGS),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::ScriptLogsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isVoiceData() const {
+  return which() == Message::VOICE_DATA;
+}
+inline bool Message::Builder::isVoiceData() {
+  return which() == Message::VOICE_DATA;
+}
+inline bool Message::Reader::hasVoiceData() const {
+  if (which() != Message::VOICE_DATA) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasVoiceData() {
+  if (which() != Message::VOICE_DATA) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::VoiceDataMessage::Reader Message::Reader::getVoiceData() const {
+  KJ_IREQUIRE((which() == Message::VOICE_DATA),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceDataMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::VoiceDataMessage::Builder Message::Builder::getVoiceData() {
+  KJ_IREQUIRE((which() == Message::VOICE_DATA),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceDataMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setVoiceData( ::globed::schema::game::VoiceDataMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::VOICE_DATA);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceDataMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::VoiceDataMessage::Builder Message::Builder::initVoiceData() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::VOICE_DATA);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceDataMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptVoiceData(
+    ::capnp::Orphan< ::globed::schema::game::VoiceDataMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::VOICE_DATA);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceDataMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::VoiceDataMessage> Message::Builder::disownVoiceData() {
+  KJ_IREQUIRE((which() == Message::VOICE_DATA),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceDataMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isVoiceBroadcast() const {
+  return which() == Message::VOICE_BROADCAST;
+}
+inline bool Message::Builder::isVoiceBroadcast() {
+  return which() == Message::VOICE_BROADCAST;
+}
+inline bool Message::Reader::hasVoiceBroadcast() const {
+  if (which() != Message::VOICE_BROADCAST) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasVoiceBroadcast() {
+  if (which() != Message::VOICE_BROADCAST) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::VoiceBroadcastMessage::Reader Message::Reader::getVoiceBroadcast() const {
+  KJ_IREQUIRE((which() == Message::VOICE_BROADCAST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceBroadcastMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::VoiceBroadcastMessage::Builder Message::Builder::getVoiceBroadcast() {
+  KJ_IREQUIRE((which() == Message::VOICE_BROADCAST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceBroadcastMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setVoiceBroadcast( ::globed::schema::game::VoiceBroadcastMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::VOICE_BROADCAST);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceBroadcastMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::VoiceBroadcastMessage::Builder Message::Builder::initVoiceBroadcast() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::VOICE_BROADCAST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceBroadcastMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptVoiceBroadcast(
+    ::capnp::Orphan< ::globed::schema::game::VoiceBroadcastMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::VOICE_BROADCAST);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceBroadcastMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::VoiceBroadcastMessage> Message::Builder::disownVoiceBroadcast() {
+  KJ_IREQUIRE((which() == Message::VOICE_BROADCAST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceBroadcastMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
