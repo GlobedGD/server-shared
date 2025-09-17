@@ -654,7 +654,7 @@ struct RoomStateMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(ccb001c4c4eb3e03, 1, 4)
+    CAPNP_DECLARE_STRUCT_HEADER(ccb001c4c4eb3e03, 2, 4)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -4492,6 +4492,8 @@ public:
   inline bool hasTeams() const;
   inline  ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Reader getTeams() const;
 
+  inline  ::uint32_t getPasscode() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -4554,6 +4556,9 @@ public:
   inline  ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>::Builder initTeams(unsigned int size);
   inline void adoptTeams(::capnp::Orphan< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>> disownTeams();
+
+  inline  ::uint32_t getPasscode();
+  inline void setPasscode( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -12375,6 +12380,20 @@ inline void RoomStateMessage::Builder::adoptTeams(
 inline ::capnp::Orphan< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>> RoomStateMessage::Builder::disownTeams() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::uint32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
       ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+
+inline  ::uint32_t RoomStateMessage::Reader::getPasscode() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t RoomStateMessage::Builder::getPasscode() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void RoomStateMessage::Builder::setPasscode( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool RoomPlayersMessage::Reader::hasPlayers() const {
