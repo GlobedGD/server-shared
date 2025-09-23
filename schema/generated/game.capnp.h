@@ -39,6 +39,7 @@ enum class JoinSessionFailedReason_dff86b3bb0c6c45f: uint16_t {
 CAPNP_DECLARE_ENUM(JoinSessionFailedReason, dff86b3bb0c6c45f);
 CAPNP_DECLARE_SCHEMA(d0220b919cc3f7e9);
 CAPNP_DECLARE_SCHEMA(ab51fdae26ff1d81);
+CAPNP_DECLARE_SCHEMA(d6d14ce809fc7c4d);
 CAPNP_DECLARE_SCHEMA(920467072fa8ce3c);
 CAPNP_DECLARE_SCHEMA(ea51b18e3e4bdda6);
 CAPNP_DECLARE_SCHEMA(98e7cf6452ead0d1);
@@ -193,6 +194,21 @@ struct LeaveSessionMessage {
   };
 };
 
+struct ExtendedPlayerData {
+  ExtendedPlayerData() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(d6d14ce809fc7c4d, 4, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct PlayerObjectData {
   PlayerObjectData() = delete;
 
@@ -201,7 +217,7 @@ struct PlayerObjectData {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(920467072fa8ce3c, 2, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(920467072fa8ce3c, 2, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1133,6 +1149,117 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class ExtendedPlayerData::Reader {
+public:
+  typedef ExtendedPlayerData Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline float getVelocityX() const;
+
+  inline float getVelocityY() const;
+
+  inline bool getAccelerating() const;
+
+  inline float getAcceleration() const;
+
+  inline float getFallStartY() const;
+
+  inline bool getIsOnGround2() const;
+
+  inline float getGravityMod() const;
+
+  inline float getGravity() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class ExtendedPlayerData::Builder {
+public:
+  typedef ExtendedPlayerData Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline float getVelocityX();
+  inline void setVelocityX(float value);
+
+  inline float getVelocityY();
+  inline void setVelocityY(float value);
+
+  inline bool getAccelerating();
+  inline void setAccelerating(bool value);
+
+  inline float getAcceleration();
+  inline void setAcceleration(float value);
+
+  inline float getFallStartY();
+  inline void setFallStartY(float value);
+
+  inline bool getIsOnGround2();
+  inline void setIsOnGround2(bool value);
+
+  inline float getGravityMod();
+  inline void setGravityMod(float value);
+
+  inline float getGravity();
+  inline void setGravity(float value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class ExtendedPlayerData::Pipeline {
+public:
+  typedef ExtendedPlayerData Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class PlayerObjectData::Reader {
 public:
   typedef PlayerObjectData Reads;
@@ -1177,6 +1304,9 @@ public:
   inline bool getIsRotating() const;
 
   inline bool getIsSideways() const;
+
+  inline bool hasExtData() const;
+  inline  ::globed::schema::game::ExtendedPlayerData::Reader getExtData() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1248,6 +1378,13 @@ public:
   inline bool getIsSideways();
   inline void setIsSideways(bool value);
 
+  inline bool hasExtData();
+  inline  ::globed::schema::game::ExtendedPlayerData::Builder getExtData();
+  inline void setExtData( ::globed::schema::game::ExtendedPlayerData::Reader value);
+  inline  ::globed::schema::game::ExtendedPlayerData::Builder initExtData();
+  inline void adoptExtData(::capnp::Orphan< ::globed::schema::game::ExtendedPlayerData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::ExtendedPlayerData> disownExtData();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -1266,6 +1403,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::globed::schema::game::ExtendedPlayerData::Pipeline getExtData();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -3171,6 +3309,118 @@ inline void JoinSessionFailedMessage::Builder::setReason( ::globed::schema::game
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
+inline float ExtendedPlayerData::Reader::getVelocityX() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline float ExtendedPlayerData::Builder::getVelocityX() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setVelocityX(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline float ExtendedPlayerData::Reader::getVelocityY() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline float ExtendedPlayerData::Builder::getVelocityY() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setVelocityY(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool ExtendedPlayerData::Reader::getAccelerating() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS);
+}
+
+inline bool ExtendedPlayerData::Builder::getAccelerating() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setAccelerating(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<64>() * ::capnp::ELEMENTS, value);
+}
+
+inline float ExtendedPlayerData::Reader::getAcceleration() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline float ExtendedPlayerData::Builder::getAcceleration() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setAcceleration(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
+inline float ExtendedPlayerData::Reader::getFallStartY() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline float ExtendedPlayerData::Builder::getFallStartY() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setFallStartY(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool ExtendedPlayerData::Reader::getIsOnGround2() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<65>() * ::capnp::ELEMENTS);
+}
+
+inline bool ExtendedPlayerData::Builder::getIsOnGround2() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<65>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setIsOnGround2(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<65>() * ::capnp::ELEMENTS, value);
+}
+
+inline float ExtendedPlayerData::Reader::getGravityMod() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+
+inline float ExtendedPlayerData::Builder::getGravityMod() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setGravityMod(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
+}
+
+inline float ExtendedPlayerData::Reader::getGravity() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+
+inline float ExtendedPlayerData::Builder::getGravity() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setGravity(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
+}
+
 inline float PlayerObjectData::Reader::getPositionX() const {
   return _reader.getDataField<float>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -3365,6 +3615,45 @@ inline bool PlayerObjectData::Builder::getIsSideways() {
 inline void PlayerObjectData::Builder::setIsSideways(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<121>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::hasExtData() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerObjectData::Builder::hasExtData() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::ExtendedPlayerData::Reader PlayerObjectData::Reader::getExtData() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ExtendedPlayerData>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::ExtendedPlayerData::Builder PlayerObjectData::Builder::getExtData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ExtendedPlayerData>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::game::ExtendedPlayerData::Pipeline PlayerObjectData::Pipeline::getExtData() {
+  return  ::globed::schema::game::ExtendedPlayerData::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void PlayerObjectData::Builder::setExtData( ::globed::schema::game::ExtendedPlayerData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::ExtendedPlayerData>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::ExtendedPlayerData::Builder PlayerObjectData::Builder::initExtData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ExtendedPlayerData>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void PlayerObjectData::Builder::adoptExtData(
+    ::capnp::Orphan< ::globed::schema::game::ExtendedPlayerData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::ExtendedPlayerData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::ExtendedPlayerData> PlayerObjectData::Builder::disownExtData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ExtendedPlayerData>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline  ::globed::schema::game::PlayerData::Which PlayerData::Reader::which() const {

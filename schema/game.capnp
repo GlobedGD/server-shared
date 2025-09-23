@@ -61,6 +61,17 @@ struct LeaveSessionMessage {
 
 # Player data messages
 
+struct ExtendedPlayerData {
+    velocityX @0 :Float32;
+    velocityY @1 :Float32;
+    accelerating @2 :Bool;
+    acceleration @3 :Float32;
+    fallStartY @4 :Float32;
+    isOnGround2 @5 :Bool;
+    gravityMod @6 :Float32;
+    gravity    @7 :Float32;
+}
+
 struct PlayerObjectData { # aka SpecificIconData in globed v1
     positionX @0 :Float32;
     positionY @1 :Float32;
@@ -77,6 +88,8 @@ struct PlayerObjectData { # aka SpecificIconData in globed v1
     isFalling     @11 :Bool;
     isRotating    @12 :Bool;
     isSideways    @13 :Bool;
+
+    extData       @14 :ExtendedPlayerData;
 }
 
 struct PlayerData {
@@ -107,8 +120,6 @@ struct PlayerData {
         culled :group {
             nothing @14 :Void;
         }
-
-        # TODO: more complete data for spectator
     }
 }
 
