@@ -1182,6 +1182,8 @@ public:
 
   inline float getGravity() const;
 
+  inline bool getTouchedPad() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1233,6 +1235,9 @@ public:
 
   inline float getGravity();
   inline void setGravity(float value);
+
+  inline bool getTouchedPad();
+  inline void setTouchedPad(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3419,6 +3424,20 @@ inline float ExtendedPlayerData::Builder::getGravity() {
 inline void ExtendedPlayerData::Builder::setGravity(float value) {
   _builder.setDataField<float>(
       ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool ExtendedPlayerData::Reader::getTouchedPad() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<66>() * ::capnp::ELEMENTS);
+}
+
+inline bool ExtendedPlayerData::Builder::getTouchedPad() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<66>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setTouchedPad(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<66>() * ::capnp::ELEMENTS, value);
 }
 
 inline float PlayerObjectData::Reader::getPositionX() const {
