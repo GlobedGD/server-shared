@@ -128,8 +128,12 @@ CAPNP_DECLARE_SCHEMA(ea965cdb4b2334d9);
 CAPNP_DECLARE_SCHEMA(d6449c2dd0e1c888);
 CAPNP_DECLARE_SCHEMA(ed7f151440678799);
 CAPNP_DECLARE_SCHEMA(d0b534d0fb2c4228);
+CAPNP_DECLARE_SCHEMA(b268f4798c74eac3);
+CAPNP_DECLARE_SCHEMA(9c5cf60c8ccf185e);
 CAPNP_DECLARE_SCHEMA(f22826a27d7e0863);
 CAPNP_DECLARE_SCHEMA(eaa4eda829518a91);
+CAPNP_DECLARE_SCHEMA(daae1a3c80e59eb4);
+CAPNP_DECLARE_SCHEMA(e806d85d4b1d84da);
 CAPNP_DECLARE_SCHEMA(98be444f11a5df16);
 CAPNP_DECLARE_SCHEMA(945c6ba9031f6b45);
 CAPNP_DECLARE_SCHEMA(85af7e66f3f02a6b);
@@ -1089,6 +1093,36 @@ struct DiscordLinkConfirmMessage {
   };
 };
 
+struct GetFeaturedListMessage {
+  GetFeaturedListMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(b268f4798c74eac3, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct SendFeaturedLevelMessage {
+  SendFeaturedLevelMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(9c5cf60c8ccf185e, 2, 3)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct DiscordLinkStateMessage {
   DiscordLinkStateMessage() = delete;
 
@@ -1113,6 +1147,36 @@ struct DiscordLinkAttemptMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(eaa4eda829518a91, 1, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct FeaturedLevelMessage {
+  FeaturedLevelMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(daae1a3c80e59eb4, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct FeaturedListMessage {
+  FeaturedListMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(e806d85d4b1d84da, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1549,6 +1613,11 @@ struct Message {
     SET_DISCORD_PAIRING_STATE,
     DISCORD_LINK_CONFIRM,
     USER_DATA_CHANGED,
+    GET_FEATURED_LEVEL,
+    GET_FEATURED_LIST,
+    SEND_FEATURED_LEVEL,
+    FEATURED_LEVEL,
+    FEATURED_LIST,
   };
 
   struct _capnpPrivate {
@@ -2005,6 +2074,8 @@ public:
 
   inline bool getCanMute() const;
 
+  inline  ::int32_t getFeaturedLevel() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2089,6 +2160,9 @@ public:
 
   inline bool getCanMute();
   inline void setCanMute(bool value);
+
+  inline  ::int32_t getFeaturedLevel();
+  inline void setFeaturedLevel( ::int32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -6934,6 +7008,203 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class GetFeaturedListMessage::Reader {
+public:
+  typedef GetFeaturedListMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getPage() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class GetFeaturedListMessage::Builder {
+public:
+  typedef GetFeaturedListMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getPage();
+  inline void setPage( ::uint32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class GetFeaturedListMessage::Pipeline {
+public:
+  typedef GetFeaturedListMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class SendFeaturedLevelMessage::Reader {
+public:
+  typedef SendFeaturedLevelMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getLevelId() const;
+
+  inline bool hasLevelName() const;
+  inline  ::capnp::Text::Reader getLevelName() const;
+
+  inline  ::int32_t getAuthorId() const;
+
+  inline bool hasAutorName() const;
+  inline  ::capnp::Text::Reader getAutorName() const;
+
+  inline  ::uint8_t getRateTier() const;
+
+  inline bool hasNote() const;
+  inline  ::capnp::Text::Reader getNote() const;
+
+  inline bool getQueue() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class SendFeaturedLevelMessage::Builder {
+public:
+  typedef SendFeaturedLevelMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getLevelId();
+  inline void setLevelId( ::int32_t value);
+
+  inline bool hasLevelName();
+  inline  ::capnp::Text::Builder getLevelName();
+  inline void setLevelName( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initLevelName(unsigned int size);
+  inline void adoptLevelName(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownLevelName();
+
+  inline  ::int32_t getAuthorId();
+  inline void setAuthorId( ::int32_t value);
+
+  inline bool hasAutorName();
+  inline  ::capnp::Text::Builder getAutorName();
+  inline void setAutorName( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initAutorName(unsigned int size);
+  inline void adoptAutorName(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownAutorName();
+
+  inline  ::uint8_t getRateTier();
+  inline void setRateTier( ::uint8_t value);
+
+  inline bool hasNote();
+  inline  ::capnp::Text::Builder getNote();
+  inline void setNote( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initNote(unsigned int size);
+  inline void adoptNote(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownNote();
+
+  inline bool getQueue();
+  inline void setQueue(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class SendFeaturedLevelMessage::Pipeline {
+public:
+  typedef SendFeaturedLevelMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class DiscordLinkStateMessage::Reader {
 public:
   typedef DiscordLinkStateMessage Reads;
@@ -7113,6 +7384,174 @@ private:
 class DiscordLinkAttemptMessage::Pipeline {
 public:
   typedef DiscordLinkAttemptMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class FeaturedLevelMessage::Reader {
+public:
+  typedef FeaturedLevelMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getLevelId() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class FeaturedLevelMessage::Builder {
+public:
+  typedef FeaturedLevelMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getLevelId();
+  inline void setLevelId( ::int32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class FeaturedLevelMessage::Pipeline {
+public:
+  typedef FeaturedLevelMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class FeaturedListMessage::Reader {
+public:
+  typedef FeaturedListMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasLevels() const;
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getLevels() const;
+
+  inline  ::uint32_t getPage() const;
+
+  inline  ::uint32_t getTotalPages() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class FeaturedListMessage::Builder {
+public:
+  typedef FeaturedListMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasLevels();
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getLevels();
+  inline void setLevels( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setLevels(::kj::ArrayPtr<const  ::int32_t> value);
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initLevels(unsigned int size);
+  inline void adoptLevels(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownLevels();
+
+  inline  ::uint32_t getPage();
+  inline void setPage( ::uint32_t value);
+
+  inline  ::uint32_t getTotalPages();
+  inline void setTotalPages( ::uint32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class FeaturedListMessage::Pipeline {
+public:
+  typedef FeaturedListMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -9562,6 +10001,25 @@ public:
   inline bool hasUserDataChanged() const;
   inline  ::globed::schema::main::UserDataChangedMessage::Reader getUserDataChanged() const;
 
+  inline bool isGetFeaturedLevel() const;
+  inline  ::capnp::Void getGetFeaturedLevel() const;
+
+  inline bool isGetFeaturedList() const;
+  inline bool hasGetFeaturedList() const;
+  inline  ::globed::schema::main::GetFeaturedListMessage::Reader getGetFeaturedList() const;
+
+  inline bool isSendFeaturedLevel() const;
+  inline bool hasSendFeaturedLevel() const;
+  inline  ::globed::schema::main::SendFeaturedLevelMessage::Reader getSendFeaturedLevel() const;
+
+  inline bool isFeaturedLevel() const;
+  inline bool hasFeaturedLevel() const;
+  inline  ::globed::schema::main::FeaturedLevelMessage::Reader getFeaturedLevel() const;
+
+  inline bool isFeaturedList() const;
+  inline bool hasFeaturedList() const;
+  inline  ::globed::schema::main::FeaturedListMessage::Reader getFeaturedList() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -10206,6 +10664,42 @@ public:
   inline  ::globed::schema::main::UserDataChangedMessage::Builder initUserDataChanged();
   inline void adoptUserDataChanged(::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage> disownUserDataChanged();
+
+  inline bool isGetFeaturedLevel();
+  inline  ::capnp::Void getGetFeaturedLevel();
+  inline void setGetFeaturedLevel( ::capnp::Void value = ::capnp::VOID);
+
+  inline bool isGetFeaturedList();
+  inline bool hasGetFeaturedList();
+  inline  ::globed::schema::main::GetFeaturedListMessage::Builder getGetFeaturedList();
+  inline void setGetFeaturedList( ::globed::schema::main::GetFeaturedListMessage::Reader value);
+  inline  ::globed::schema::main::GetFeaturedListMessage::Builder initGetFeaturedList();
+  inline void adoptGetFeaturedList(::capnp::Orphan< ::globed::schema::main::GetFeaturedListMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::GetFeaturedListMessage> disownGetFeaturedList();
+
+  inline bool isSendFeaturedLevel();
+  inline bool hasSendFeaturedLevel();
+  inline  ::globed::schema::main::SendFeaturedLevelMessage::Builder getSendFeaturedLevel();
+  inline void setSendFeaturedLevel( ::globed::schema::main::SendFeaturedLevelMessage::Reader value);
+  inline  ::globed::schema::main::SendFeaturedLevelMessage::Builder initSendFeaturedLevel();
+  inline void adoptSendFeaturedLevel(::capnp::Orphan< ::globed::schema::main::SendFeaturedLevelMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::SendFeaturedLevelMessage> disownSendFeaturedLevel();
+
+  inline bool isFeaturedLevel();
+  inline bool hasFeaturedLevel();
+  inline  ::globed::schema::main::FeaturedLevelMessage::Builder getFeaturedLevel();
+  inline void setFeaturedLevel( ::globed::schema::main::FeaturedLevelMessage::Reader value);
+  inline  ::globed::schema::main::FeaturedLevelMessage::Builder initFeaturedLevel();
+  inline void adoptFeaturedLevel(::capnp::Orphan< ::globed::schema::main::FeaturedLevelMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::FeaturedLevelMessage> disownFeaturedLevel();
+
+  inline bool isFeaturedList();
+  inline bool hasFeaturedList();
+  inline  ::globed::schema::main::FeaturedListMessage::Builder getFeaturedList();
+  inline void setFeaturedList( ::globed::schema::main::FeaturedListMessage::Reader value);
+  inline  ::globed::schema::main::FeaturedListMessage::Builder initFeaturedList();
+  inline void adoptFeaturedList(::capnp::Orphan< ::globed::schema::main::FeaturedListMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::FeaturedListMessage> disownFeaturedList();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -10887,6 +11381,20 @@ inline bool LoginOkMessage::Builder::getCanMute() {
 inline void LoginOkMessage::Builder::setCanMute(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t LoginOkMessage::Reader::getFeaturedLevel() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t LoginOkMessage::Builder::getFeaturedLevel() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setFeaturedLevel( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::main::LoginFailedReason LoginFailedMessage::Reader::getReason() const {
@@ -13554,6 +14062,178 @@ inline void DiscordLinkConfirmMessage::Builder::setAccept(bool value) {
       ::capnp::bounded<64>() * ::capnp::ELEMENTS, value);
 }
 
+inline  ::uint32_t GetFeaturedListMessage::Reader::getPage() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t GetFeaturedListMessage::Builder::getPage() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void GetFeaturedListMessage::Builder::setPage( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t SendFeaturedLevelMessage::Reader::getLevelId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t SendFeaturedLevelMessage::Builder::getLevelId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void SendFeaturedLevelMessage::Builder::setLevelId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool SendFeaturedLevelMessage::Reader::hasLevelName() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool SendFeaturedLevelMessage::Builder::hasLevelName() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader SendFeaturedLevelMessage::Reader::getLevelName() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::getLevelName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void SendFeaturedLevelMessage::Builder::setLevelName( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::initLevelName(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void SendFeaturedLevelMessage::Builder::adoptLevelName(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> SendFeaturedLevelMessage::Builder::disownLevelName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t SendFeaturedLevelMessage::Reader::getAuthorId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t SendFeaturedLevelMessage::Builder::getAuthorId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void SendFeaturedLevelMessage::Builder::setAuthorId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool SendFeaturedLevelMessage::Reader::hasAutorName() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool SendFeaturedLevelMessage::Builder::hasAutorName() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader SendFeaturedLevelMessage::Reader::getAutorName() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::getAutorName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void SendFeaturedLevelMessage::Builder::setAutorName( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::initAutorName(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void SendFeaturedLevelMessage::Builder::adoptAutorName(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> SendFeaturedLevelMessage::Builder::disownAutorName() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline  ::uint8_t SendFeaturedLevelMessage::Reader::getRateTier() const {
+  return _reader.getDataField< ::uint8_t>(
+      ::capnp::bounded<8>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint8_t SendFeaturedLevelMessage::Builder::getRateTier() {
+  return _builder.getDataField< ::uint8_t>(
+      ::capnp::bounded<8>() * ::capnp::ELEMENTS);
+}
+inline void SendFeaturedLevelMessage::Builder::setRateTier( ::uint8_t value) {
+  _builder.setDataField< ::uint8_t>(
+      ::capnp::bounded<8>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool SendFeaturedLevelMessage::Reader::hasNote() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool SendFeaturedLevelMessage::Builder::hasNote() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader SendFeaturedLevelMessage::Reader::getNote() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::getNote() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void SendFeaturedLevelMessage::Builder::setNote( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::initNote(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+}
+inline void SendFeaturedLevelMessage::Builder::adoptNote(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> SendFeaturedLevelMessage::Builder::disownNote() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline bool SendFeaturedLevelMessage::Reader::getQueue() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<72>() * ::capnp::ELEMENTS);
+}
+
+inline bool SendFeaturedLevelMessage::Builder::getQueue() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<72>() * ::capnp::ELEMENTS);
+}
+inline void SendFeaturedLevelMessage::Builder::setQueue(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<72>() * ::capnp::ELEMENTS, value);
+}
+
 inline  ::uint64_t DiscordLinkStateMessage::Reader::getId() const {
   return _reader.getDataField< ::uint64_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -13716,6 +14396,86 @@ inline void DiscordLinkAttemptMessage::Builder::adoptAvatarUrl(
 inline ::capnp::Orphan< ::capnp::Text> DiscordLinkAttemptMessage::Builder::disownAvatarUrl() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t FeaturedLevelMessage::Reader::getLevelId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t FeaturedLevelMessage::Builder::getLevelId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void FeaturedLevelMessage::Builder::setLevelId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool FeaturedListMessage::Reader::hasLevels() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool FeaturedListMessage::Builder::hasLevels() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader FeaturedListMessage::Reader::getLevels() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::getLevels() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void FeaturedListMessage::Builder::setLevels( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void FeaturedListMessage::Builder::setLevels(::kj::ArrayPtr<const  ::int32_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::initLevels(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void FeaturedListMessage::Builder::adoptLevels(
+    ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> FeaturedListMessage::Builder::disownLevels() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::uint32_t FeaturedListMessage::Reader::getPage() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t FeaturedListMessage::Builder::getPage() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void FeaturedListMessage::Builder::setPage( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t FeaturedListMessage::Reader::getTotalPages() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t FeaturedListMessage::Builder::getTotalPages() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void FeaturedListMessage::Builder::setTotalPages( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool AdminLoginMessage::Reader::hasPassword() const {
@@ -19369,6 +20129,248 @@ inline ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage> Message:
   KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isGetFeaturedLevel() const {
+  return which() == Message::GET_FEATURED_LEVEL;
+}
+inline bool Message::Builder::isGetFeaturedLevel() {
+  return which() == Message::GET_FEATURED_LEVEL;
+}
+inline  ::capnp::Void Message::Reader::getGetFeaturedLevel() const {
+  KJ_IREQUIRE((which() == Message::GET_FEATURED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return _reader.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::capnp::Void Message::Builder::getGetFeaturedLevel() {
+  KJ_IREQUIRE((which() == Message::GET_FEATURED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return _builder.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void Message::Builder::setGetFeaturedLevel( ::capnp::Void value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_FEATURED_LEVEL);
+  _builder.setDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool Message::Reader::isGetFeaturedList() const {
+  return which() == Message::GET_FEATURED_LIST;
+}
+inline bool Message::Builder::isGetFeaturedList() {
+  return which() == Message::GET_FEATURED_LIST;
+}
+inline bool Message::Reader::hasGetFeaturedList() const {
+  if (which() != Message::GET_FEATURED_LIST) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasGetFeaturedList() {
+  if (which() != Message::GET_FEATURED_LIST) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::GetFeaturedListMessage::Reader Message::Reader::getGetFeaturedList() const {
+  KJ_IREQUIRE((which() == Message::GET_FEATURED_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetFeaturedListMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::GetFeaturedListMessage::Builder Message::Builder::getGetFeaturedList() {
+  KJ_IREQUIRE((which() == Message::GET_FEATURED_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetFeaturedListMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setGetFeaturedList( ::globed::schema::main::GetFeaturedListMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_FEATURED_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::GetFeaturedListMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::GetFeaturedListMessage::Builder Message::Builder::initGetFeaturedList() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_FEATURED_LIST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetFeaturedListMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptGetFeaturedList(
+    ::capnp::Orphan< ::globed::schema::main::GetFeaturedListMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_FEATURED_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::GetFeaturedListMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::GetFeaturedListMessage> Message::Builder::disownGetFeaturedList() {
+  KJ_IREQUIRE((which() == Message::GET_FEATURED_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetFeaturedListMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isSendFeaturedLevel() const {
+  return which() == Message::SEND_FEATURED_LEVEL;
+}
+inline bool Message::Builder::isSendFeaturedLevel() {
+  return which() == Message::SEND_FEATURED_LEVEL;
+}
+inline bool Message::Reader::hasSendFeaturedLevel() const {
+  if (which() != Message::SEND_FEATURED_LEVEL) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasSendFeaturedLevel() {
+  if (which() != Message::SEND_FEATURED_LEVEL) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::SendFeaturedLevelMessage::Reader Message::Reader::getSendFeaturedLevel() const {
+  KJ_IREQUIRE((which() == Message::SEND_FEATURED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::SendFeaturedLevelMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::SendFeaturedLevelMessage::Builder Message::Builder::getSendFeaturedLevel() {
+  KJ_IREQUIRE((which() == Message::SEND_FEATURED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::SendFeaturedLevelMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setSendFeaturedLevel( ::globed::schema::main::SendFeaturedLevelMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SEND_FEATURED_LEVEL);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::SendFeaturedLevelMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::SendFeaturedLevelMessage::Builder Message::Builder::initSendFeaturedLevel() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SEND_FEATURED_LEVEL);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::SendFeaturedLevelMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptSendFeaturedLevel(
+    ::capnp::Orphan< ::globed::schema::main::SendFeaturedLevelMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SEND_FEATURED_LEVEL);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::SendFeaturedLevelMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::SendFeaturedLevelMessage> Message::Builder::disownSendFeaturedLevel() {
+  KJ_IREQUIRE((which() == Message::SEND_FEATURED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::SendFeaturedLevelMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isFeaturedLevel() const {
+  return which() == Message::FEATURED_LEVEL;
+}
+inline bool Message::Builder::isFeaturedLevel() {
+  return which() == Message::FEATURED_LEVEL;
+}
+inline bool Message::Reader::hasFeaturedLevel() const {
+  if (which() != Message::FEATURED_LEVEL) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasFeaturedLevel() {
+  if (which() != Message::FEATURED_LEVEL) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::FeaturedLevelMessage::Reader Message::Reader::getFeaturedLevel() const {
+  KJ_IREQUIRE((which() == Message::FEATURED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedLevelMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::FeaturedLevelMessage::Builder Message::Builder::getFeaturedLevel() {
+  KJ_IREQUIRE((which() == Message::FEATURED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedLevelMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setFeaturedLevel( ::globed::schema::main::FeaturedLevelMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FEATURED_LEVEL);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedLevelMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::FeaturedLevelMessage::Builder Message::Builder::initFeaturedLevel() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FEATURED_LEVEL);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedLevelMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptFeaturedLevel(
+    ::capnp::Orphan< ::globed::schema::main::FeaturedLevelMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FEATURED_LEVEL);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedLevelMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::FeaturedLevelMessage> Message::Builder::disownFeaturedLevel() {
+  KJ_IREQUIRE((which() == Message::FEATURED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedLevelMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isFeaturedList() const {
+  return which() == Message::FEATURED_LIST;
+}
+inline bool Message::Builder::isFeaturedList() {
+  return which() == Message::FEATURED_LIST;
+}
+inline bool Message::Reader::hasFeaturedList() const {
+  if (which() != Message::FEATURED_LIST) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasFeaturedList() {
+  if (which() != Message::FEATURED_LIST) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::FeaturedListMessage::Reader Message::Reader::getFeaturedList() const {
+  KJ_IREQUIRE((which() == Message::FEATURED_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedListMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::FeaturedListMessage::Builder Message::Builder::getFeaturedList() {
+  KJ_IREQUIRE((which() == Message::FEATURED_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedListMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setFeaturedList( ::globed::schema::main::FeaturedListMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FEATURED_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedListMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::FeaturedListMessage::Builder Message::Builder::initFeaturedList() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FEATURED_LIST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedListMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptFeaturedList(
+    ::capnp::Orphan< ::globed::schema::main::FeaturedListMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FEATURED_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedListMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::FeaturedListMessage> Message::Builder::disownFeaturedList() {
+  KJ_IREQUIRE((which() == Message::FEATURED_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedListMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

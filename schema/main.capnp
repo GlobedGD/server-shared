@@ -47,6 +47,8 @@ struct LoginOkMessage {
     canEditRoles @8 :Bool;
     canSendFeatures @9 :Bool;
     canRateFeatures @10 :Bool;
+
+    featuredLevel @12 :Int32;
 }
 
 enum LoginFailedReason {
@@ -381,6 +383,20 @@ struct DiscordLinkConfirmMessage {
     accept @1 :Bool;
 }
 
+struct GetFeaturedListMessage {
+    page @0 :UInt32;
+}
+
+struct SendFeaturedLevelMessage {
+    levelId     @0 :Int32;
+    levelName   @1 :Text;
+    authorId    @2 :Int32;
+    autorName   @3 :Text;
+    rateTier    @4 :UInt8;
+    note        @5 :Text;
+    queue       @6 :Bool;
+}
+
 struct DiscordLinkStateMessage {
     id @0 :UInt64;
     username @1 :Text;
@@ -391,6 +407,16 @@ struct DiscordLinkAttemptMessage {
     id @0 :UInt64;
     username @1 :Text;
     avatarUrl @2 :Text;
+}
+
+struct FeaturedLevelMessage {
+    levelId  @0 :Int32;
+}
+
+struct FeaturedListMessage {
+    levels @0 :List(Int32);
+    page @1 :UInt32;
+    totalPages @2 :UInt32;
 }
 
 # Admin messages
@@ -534,7 +560,8 @@ struct AdminResultMessage {
 
 struct Message {
     union {
-        # Client messages
+        ### Client messages
+
         loginUToken                 @0 :LoginUTokenMessage;
         loginArgon                  @1 :LoginArgonMessage;
         loginPlain                  @2 :LoginPlainMessage;
@@ -584,8 +611,16 @@ struct Message {
         getDiscordLinkState         @72 :GetDiscordLinkStateMessage;
         setDiscordPairingState      @75 :SetDiscordPairingStateMessage;
         discordLinkConfirm          @76 :DiscordLinkConfirmMessage;
+        getFeaturedLevel            @78 :Void;
+        getFeaturedList             @79 :GetFeaturedListMessage;
+        sendFeaturedLevel           @80 :SendFeaturedLevelMessage;
 
-        # Server messages
+
+
+        ### Server messages
+
+
+
         loginOk                     @3 :LoginOkMessage;
         loginFailed                 @4 :LoginFailedMessage;
         loginRequired               @5 :LoginRequiredMessage;
@@ -625,5 +660,7 @@ struct Message {
         credits                     @63 :CreditsMessage;
         discordLinkState            @73 :DiscordLinkStateMessage;
         discordLinkAttempt          @74 :DiscordLinkAttemptMessage;
+        featuredLevel               @81 :FeaturedLevelMessage;
+        featuredList                @82 :FeaturedListMessage;
     }
 }
