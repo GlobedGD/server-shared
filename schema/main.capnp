@@ -391,7 +391,7 @@ struct SendFeaturedLevelMessage {
     levelId     @0 :Int32;
     levelName   @1 :Text;
     authorId    @2 :Int32;
-    autorName   @3 :Text;
+    authorName   @3 :Text;
     rateTier    @4 :UInt8;
     note        @5 :Text;
     queue       @6 :Bool;
