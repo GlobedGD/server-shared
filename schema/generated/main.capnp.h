@@ -7108,8 +7108,8 @@ public:
 
   inline  ::int32_t getAuthorId() const;
 
-  inline bool hasAutorName() const;
-  inline  ::capnp::Text::Reader getAutorName() const;
+  inline bool hasAuthorName() const;
+  inline  ::capnp::Text::Reader getAuthorName() const;
 
   inline  ::uint8_t getRateTier() const;
 
@@ -7159,12 +7159,12 @@ public:
   inline  ::int32_t getAuthorId();
   inline void setAuthorId( ::int32_t value);
 
-  inline bool hasAutorName();
-  inline  ::capnp::Text::Builder getAutorName();
-  inline void setAutorName( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initAutorName(unsigned int size);
-  inline void adoptAutorName(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownAutorName();
+  inline bool hasAuthorName();
+  inline  ::capnp::Text::Builder getAuthorName();
+  inline void setAuthorName( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initAuthorName(unsigned int size);
+  inline void adoptAuthorName(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownAuthorName();
 
   inline  ::uint8_t getRateTier();
   inline void setRateTier( ::uint8_t value);
@@ -14138,36 +14138,36 @@ inline void SendFeaturedLevelMessage::Builder::setAuthorId( ::int32_t value) {
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool SendFeaturedLevelMessage::Reader::hasAutorName() const {
+inline bool SendFeaturedLevelMessage::Reader::hasAuthorName() const {
   return !_reader.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
 }
-inline bool SendFeaturedLevelMessage::Builder::hasAutorName() {
+inline bool SendFeaturedLevelMessage::Builder::hasAuthorName() {
   return !_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader SendFeaturedLevelMessage::Reader::getAutorName() const {
+inline  ::capnp::Text::Reader SendFeaturedLevelMessage::Reader::getAuthorName() const {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
-inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::getAutorName() {
+inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::getAuthorName() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
-inline void SendFeaturedLevelMessage::Builder::setAutorName( ::capnp::Text::Reader value) {
+inline void SendFeaturedLevelMessage::Builder::setAuthorName( ::capnp::Text::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS), value);
 }
-inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::initAutorName(unsigned int size) {
+inline  ::capnp::Text::Builder SendFeaturedLevelMessage::Builder::initAuthorName(unsigned int size) {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS), size);
 }
-inline void SendFeaturedLevelMessage::Builder::adoptAutorName(
+inline void SendFeaturedLevelMessage::Builder::adoptAuthorName(
     ::capnp::Orphan< ::capnp::Text>&& value) {
   ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> SendFeaturedLevelMessage::Builder::disownAutorName() {
+inline ::capnp::Orphan< ::capnp::Text> SendFeaturedLevelMessage::Builder::disownAuthorName() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
