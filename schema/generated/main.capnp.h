@@ -234,7 +234,7 @@ struct LoginOkMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 1, 5)
+    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 2, 5)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1161,7 +1161,7 @@ struct FeaturedLevelMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(daae1a3c80e59eb4, 1, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(daae1a3c80e59eb4, 2, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1176,7 +1176,7 @@ struct FeaturedListMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e806d85d4b1d84da, 1, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(e806d85d4b1d84da, 1, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -2076,6 +2076,10 @@ public:
 
   inline  ::int32_t getFeaturedLevel() const;
 
+  inline  ::uint8_t getFeaturedLevelTier() const;
+
+  inline  ::uint32_t getFeaturedLevelEdition() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2163,6 +2167,12 @@ public:
 
   inline  ::int32_t getFeaturedLevel();
   inline void setFeaturedLevel( ::int32_t value);
+
+  inline  ::uint8_t getFeaturedLevelTier();
+  inline void setFeaturedLevelTier( ::uint8_t value);
+
+  inline  ::uint32_t getFeaturedLevelEdition();
+  inline void setFeaturedLevelEdition( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -7416,6 +7426,10 @@ public:
 
   inline  ::int32_t getLevelId() const;
 
+  inline  ::uint8_t getRateTier() const;
+
+  inline  ::uint32_t getEdition() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -7446,6 +7460,12 @@ public:
 
   inline  ::int32_t getLevelId();
   inline void setLevelId( ::int32_t value);
+
+  inline  ::uint8_t getRateTier();
+  inline void setRateTier( ::uint8_t value);
+
+  inline  ::uint32_t getEdition();
+  inline void setEdition( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -7490,8 +7510,11 @@ public:
   }
 #endif  // !CAPNP_LITE
 
-  inline bool hasLevels() const;
-  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getLevels() const;
+  inline bool hasLevelIds() const;
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getLevelIds() const;
+
+  inline bool hasRateTiers() const;
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getRateTiers() const;
 
   inline  ::uint32_t getPage() const;
 
@@ -7525,13 +7548,21 @@ public:
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
 
-  inline bool hasLevels();
-  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getLevels();
-  inline void setLevels( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
-  inline void setLevels(::kj::ArrayPtr<const  ::int32_t> value);
-  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initLevels(unsigned int size);
-  inline void adoptLevels(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownLevels();
+  inline bool hasLevelIds();
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getLevelIds();
+  inline void setLevelIds( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setLevelIds(::kj::ArrayPtr<const  ::int32_t> value);
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initLevelIds(unsigned int size);
+  inline void adoptLevelIds(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownLevelIds();
+
+  inline bool hasRateTiers();
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getRateTiers();
+  inline void setRateTiers( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setRateTiers(::kj::ArrayPtr<const  ::uint8_t> value);
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initRateTiers(unsigned int size);
+  inline void adoptRateTiers(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownRateTiers();
 
   inline  ::uint32_t getPage();
   inline void setPage( ::uint32_t value);
@@ -11397,6 +11428,34 @@ inline void LoginOkMessage::Builder::setFeaturedLevel( ::int32_t value) {
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
+inline  ::uint8_t LoginOkMessage::Reader::getFeaturedLevelTier() const {
+  return _reader.getDataField< ::uint8_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint8_t LoginOkMessage::Builder::getFeaturedLevelTier() {
+  return _builder.getDataField< ::uint8_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setFeaturedLevelTier( ::uint8_t value) {
+  _builder.setDataField< ::uint8_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t LoginOkMessage::Reader::getFeaturedLevelEdition() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t LoginOkMessage::Builder::getFeaturedLevelEdition() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setFeaturedLevelEdition( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
 inline  ::globed::schema::main::LoginFailedReason LoginFailedMessage::Reader::getReason() const {
   return _reader.getDataField< ::globed::schema::main::LoginFailedReason>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -14412,42 +14471,108 @@ inline void FeaturedLevelMessage::Builder::setLevelId( ::int32_t value) {
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool FeaturedListMessage::Reader::hasLevels() const {
+inline  ::uint8_t FeaturedLevelMessage::Reader::getRateTier() const {
+  return _reader.getDataField< ::uint8_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint8_t FeaturedLevelMessage::Builder::getRateTier() {
+  return _builder.getDataField< ::uint8_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void FeaturedLevelMessage::Builder::setRateTier( ::uint8_t value) {
+  _builder.setDataField< ::uint8_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t FeaturedLevelMessage::Reader::getEdition() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t FeaturedLevelMessage::Builder::getEdition() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void FeaturedLevelMessage::Builder::setEdition( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool FeaturedListMessage::Reader::hasLevelIds() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline bool FeaturedListMessage::Builder::hasLevels() {
+inline bool FeaturedListMessage::Builder::hasLevelIds() {
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader FeaturedListMessage::Reader::getLevels() const {
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader FeaturedListMessage::Reader::getLevelIds() const {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::getLevels() {
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::getLevelIds() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void FeaturedListMessage::Builder::setLevels( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+inline void FeaturedListMessage::Builder::setLevelIds( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline void FeaturedListMessage::Builder::setLevels(::kj::ArrayPtr<const  ::int32_t> value) {
+inline void FeaturedListMessage::Builder::setLevelIds(::kj::ArrayPtr<const  ::int32_t> value) {
   ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::initLevels(unsigned int size) {
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::initLevelIds(unsigned int size) {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), size);
 }
-inline void FeaturedListMessage::Builder::adoptLevels(
+inline void FeaturedListMessage::Builder::adoptLevelIds(
     ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
   ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> FeaturedListMessage::Builder::disownLevels() {
+inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> FeaturedListMessage::Builder::disownLevelIds() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool FeaturedListMessage::Reader::hasRateTiers() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool FeaturedListMessage::Builder::hasRateTiers() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader FeaturedListMessage::Reader::getRateTiers() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::getRateTiers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void FeaturedListMessage::Builder::setRateTiers( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline void FeaturedListMessage::Builder::setRateTiers(::kj::ArrayPtr<const  ::uint8_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::initRateTiers(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void FeaturedListMessage::Builder::adoptRateTiers(
+    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> FeaturedListMessage::Builder::disownRateTiers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline  ::uint32_t FeaturedListMessage::Reader::getPage() const {

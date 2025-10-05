@@ -49,6 +49,8 @@ struct LoginOkMessage {
     canRateFeatures @10 :Bool;
 
     featuredLevel @12 :Int32;
+    featuredLevelTier @13 :UInt8;
+    featuredLevelEdition @14 :UInt32;
 }
 
 enum LoginFailedReason {
@@ -411,12 +413,16 @@ struct DiscordLinkAttemptMessage {
 
 struct FeaturedLevelMessage {
     levelId  @0 :Int32;
+    rateTier @1 :UInt8;
+    edition  @2 :UInt32;
 }
 
 struct FeaturedListMessage {
-    levels @0 :List(Int32);
-    page @1 :UInt32;
-    totalPages @2 :UInt32;
+    levelIds @0 :List(Int32);
+    rateTiers @1 :List(UInt8);
+
+    page @2 :UInt32;
+    totalPages @3 :UInt32;
 }
 
 # Admin messages
