@@ -425,6 +425,10 @@ struct FeaturedListMessage {
     totalPages @3 :UInt32;
 }
 
+struct FetchUserMessage {
+	accountId @0 :Int32;
+}
+
 # Admin messages
 
 struct AdminLoginMessage {
