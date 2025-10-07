@@ -429,6 +429,12 @@ struct FetchUserMessage {
 	accountId @0 :Int32;
 }
 
+struct FetchUserResponseMessage {
+    accountId @0 :Int32;
+    found @1 :Bool;
+    roles @2 :List(UInt8);
+}
+
 # Admin messages
 
 struct AdminLoginMessage {
@@ -625,7 +631,7 @@ struct Message {
         getFeaturedList             @79 :GetFeaturedListMessage;
         sendFeaturedLevel           @80 :SendFeaturedLevelMessage;
 
-
+        fetchUser                   @83 :FetchUserMessage;
 
         ### Server messages
 
@@ -673,6 +679,6 @@ struct Message {
         featuredLevel               @81 :FeaturedLevelMessage;
         featuredList                @82 :FeaturedListMessage;
 
-        fetchUser                   @83 :FetchUserMessage;
+		fetchUserResponse           @84 :FetchUserResponseMessage; 
     }
 }

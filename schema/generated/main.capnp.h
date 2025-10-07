@@ -135,6 +135,7 @@ CAPNP_DECLARE_SCHEMA(eaa4eda829518a91);
 CAPNP_DECLARE_SCHEMA(daae1a3c80e59eb4);
 CAPNP_DECLARE_SCHEMA(e806d85d4b1d84da);
 CAPNP_DECLARE_SCHEMA(a9bfdaabb1cd622b);
+CAPNP_DECLARE_SCHEMA(f459bbbdbeb7d573);
 CAPNP_DECLARE_SCHEMA(98be444f11a5df16);
 CAPNP_DECLARE_SCHEMA(945c6ba9031f6b45);
 CAPNP_DECLARE_SCHEMA(85af7e66f3f02a6b);
@@ -1199,6 +1200,21 @@ struct FetchUserMessage {
   };
 };
 
+struct FetchUserResponseMessage {
+  FetchUserResponseMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(f459bbbdbeb7d573, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct AdminLoginMessage {
   AdminLoginMessage() = delete;
 
@@ -1635,6 +1651,7 @@ struct Message {
     FEATURED_LEVEL,
     FEATURED_LIST,
     FETCH_USER,
+    FETCH_USER_RESPONSE,
   };
 
   struct _capnpPrivate {
@@ -7689,6 +7706,98 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class FetchUserResponseMessage::Reader {
+public:
+  typedef FetchUserResponseMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool getFound() const;
+
+  inline bool hasRoles() const;
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getRoles() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class FetchUserResponseMessage::Builder {
+public:
+  typedef FetchUserResponseMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool getFound();
+  inline void setFound(bool value);
+
+  inline bool hasRoles();
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getRoles();
+  inline void setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setRoles(::kj::ArrayPtr<const  ::uint8_t> value);
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initRoles(unsigned int size);
+  inline void adoptRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownRoles();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class FetchUserResponseMessage::Pipeline {
+public:
+  typedef FetchUserResponseMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class AdminLoginMessage::Reader {
 public:
   typedef AdminLoginMessage Reads;
@@ -10148,6 +10257,10 @@ public:
   inline bool hasFetchUser() const;
   inline  ::globed::schema::main::FetchUserMessage::Reader getFetchUser() const;
 
+  inline bool isFetchUserResponse() const;
+  inline bool hasFetchUserResponse() const;
+  inline  ::globed::schema::main::FetchUserResponseMessage::Reader getFetchUserResponse() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -10836,6 +10949,14 @@ public:
   inline  ::globed::schema::main::FetchUserMessage::Builder initFetchUser();
   inline void adoptFetchUser(::capnp::Orphan< ::globed::schema::main::FetchUserMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::FetchUserMessage> disownFetchUser();
+
+  inline bool isFetchUserResponse();
+  inline bool hasFetchUserResponse();
+  inline  ::globed::schema::main::FetchUserResponseMessage::Builder getFetchUserResponse();
+  inline void setFetchUserResponse( ::globed::schema::main::FetchUserResponseMessage::Reader value);
+  inline  ::globed::schema::main::FetchUserResponseMessage::Builder initFetchUserResponse();
+  inline void adoptFetchUserResponse(::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> disownFetchUserResponse();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -14720,6 +14841,72 @@ inline  ::int32_t FetchUserMessage::Builder::getAccountId() {
 inline void FetchUserMessage::Builder::setAccountId( ::int32_t value) {
   _builder.setDataField< ::int32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t FetchUserResponseMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t FetchUserResponseMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void FetchUserResponseMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool FetchUserResponseMessage::Reader::getFound() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+
+inline bool FetchUserResponseMessage::Builder::getFound() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+inline void FetchUserResponseMessage::Builder::setFound(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool FetchUserResponseMessage::Reader::hasRoles() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool FetchUserResponseMessage::Builder::hasRoles() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader FetchUserResponseMessage::Reader::getRoles() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder FetchUserResponseMessage::Builder::getRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void FetchUserResponseMessage::Builder::setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void FetchUserResponseMessage::Builder::setRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder FetchUserResponseMessage::Builder::initRoles(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void FetchUserResponseMessage::Builder::adoptRoles(
+    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> FetchUserResponseMessage::Builder::disownRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline bool AdminLoginMessage::Reader::hasPassword() const {
@@ -20669,6 +20856,60 @@ inline ::capnp::Orphan< ::globed::schema::main::FetchUserMessage> Message::Build
   KJ_IREQUIRE((which() == Message::FETCH_USER),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isFetchUserResponse() const {
+  return which() == Message::FETCH_USER_RESPONSE;
+}
+inline bool Message::Builder::isFetchUserResponse() {
+  return which() == Message::FETCH_USER_RESPONSE;
+}
+inline bool Message::Reader::hasFetchUserResponse() const {
+  if (which() != Message::FETCH_USER_RESPONSE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasFetchUserResponse() {
+  if (which() != Message::FETCH_USER_RESPONSE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::FetchUserResponseMessage::Reader Message::Reader::getFetchUserResponse() const {
+  KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::FetchUserResponseMessage::Builder Message::Builder::getFetchUserResponse() {
+  KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setFetchUserResponse( ::globed::schema::main::FetchUserResponseMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::FetchUserResponseMessage::Builder Message::Builder::initFetchUserResponse() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER_RESPONSE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptFetchUserResponse(
+    ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> Message::Builder::disownFetchUserResponse() {
+  KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
