@@ -672,5 +672,7 @@ struct Message {
         discordLinkAttempt          @74 :DiscordLinkAttemptMessage;
         featuredLevel               @81 :FeaturedLevelMessage;
         featuredList                @82 :FeaturedListMessage;
+
+        fetchUser                   @83 :FetchUserMessage;
     }
 }

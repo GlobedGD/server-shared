@@ -1634,6 +1634,7 @@ struct Message {
     SEND_FEATURED_LEVEL,
     FEATURED_LEVEL,
     FEATURED_LIST,
+    FETCH_USER,
   };
 
   struct _capnpPrivate {
@@ -10143,6 +10144,10 @@ public:
   inline bool hasFeaturedList() const;
   inline  ::globed::schema::main::FeaturedListMessage::Reader getFeaturedList() const;
 
+  inline bool isFetchUser() const;
+  inline bool hasFetchUser() const;
+  inline  ::globed::schema::main::FetchUserMessage::Reader getFetchUser() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -10823,6 +10828,14 @@ public:
   inline  ::globed::schema::main::FeaturedListMessage::Builder initFeaturedList();
   inline void adoptFeaturedList(::capnp::Orphan< ::globed::schema::main::FeaturedListMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::FeaturedListMessage> disownFeaturedList();
+
+  inline bool isFetchUser();
+  inline bool hasFetchUser();
+  inline  ::globed::schema::main::FetchUserMessage::Builder getFetchUser();
+  inline void setFetchUser( ::globed::schema::main::FetchUserMessage::Reader value);
+  inline  ::globed::schema::main::FetchUserMessage::Builder initFetchUser();
+  inline void adoptFetchUser(::capnp::Orphan< ::globed::schema::main::FetchUserMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::FetchUserMessage> disownFetchUser();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -20602,6 +20615,60 @@ inline ::capnp::Orphan< ::globed::schema::main::FeaturedListMessage> Message::Bu
   KJ_IREQUIRE((which() == Message::FEATURED_LIST),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::FeaturedListMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isFetchUser() const {
+  return which() == Message::FETCH_USER;
+}
+inline bool Message::Builder::isFetchUser() {
+  return which() == Message::FETCH_USER;
+}
+inline bool Message::Reader::hasFetchUser() const {
+  if (which() != Message::FETCH_USER) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasFetchUser() {
+  if (which() != Message::FETCH_USER) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::FetchUserMessage::Reader Message::Reader::getFetchUser() const {
+  KJ_IREQUIRE((which() == Message::FETCH_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::FetchUserMessage::Builder Message::Builder::getFetchUser() {
+  KJ_IREQUIRE((which() == Message::FETCH_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setFetchUser( ::globed::schema::main::FetchUserMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::FetchUserMessage::Builder Message::Builder::initFetchUser() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptFetchUser(
+    ::capnp::Orphan< ::globed::schema::main::FetchUserMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::FetchUserMessage> Message::Builder::disownFetchUser() {
+  KJ_IREQUIRE((which() == Message::FETCH_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
