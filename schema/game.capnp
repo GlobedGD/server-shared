@@ -185,6 +185,10 @@ struct VoiceBroadcastMessage {
     frames @1 :List(Data);
 }
 
+struct ChatNotPermittedMessage {
+
+}
+
 struct Message {
     union {
         # Client messages
@@ -208,5 +212,6 @@ struct Message {
         kicked             @10 :KickedMessage;
         scriptLogs         @13 :ScriptLogsMessage;
         voiceBroadcast     @15 :VoiceBroadcastMessage;
+        chatNotPermitted   @16 :ChatNotPermittedMessage;
     }
 }
