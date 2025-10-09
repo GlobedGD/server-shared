@@ -61,6 +61,7 @@ CAPNP_DECLARE_ENUM(KickReason, c8a95e9766c5920c);
 CAPNP_DECLARE_SCHEMA(b42ff33e56f21298);
 CAPNP_DECLARE_SCHEMA(d2d77b5d2f998da1);
 CAPNP_DECLARE_SCHEMA(be5fa37583693d04);
+CAPNP_DECLARE_SCHEMA(dea093f0d56cacfb);
 CAPNP_DECLARE_SCHEMA(ee430f29eef52d4e);
 
 }  // namespace schemas
@@ -444,6 +445,21 @@ struct VoiceBroadcastMessage {
   };
 };
 
+struct ChatNotPermittedMessage {
+  ChatNotPermittedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(dea093f0d56cacfb, 0, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct Message {
   Message() = delete;
 
@@ -467,6 +483,7 @@ struct Message {
     SCRIPT_LOGS,
     VOICE_DATA,
     VOICE_BROADCAST,
+    CHAT_NOT_PERMITTED,
   };
 
   struct _capnpPrivate {
@@ -2733,6 +2750,77 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class ChatNotPermittedMessage::Reader {
+public:
+  typedef ChatNotPermittedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class ChatNotPermittedMessage::Builder {
+public:
+  typedef ChatNotPermittedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class ChatNotPermittedMessage::Pipeline {
+public:
+  typedef ChatNotPermittedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class Message::Reader {
 public:
   typedef Message Reads;
@@ -2814,6 +2902,10 @@ public:
   inline bool isVoiceBroadcast() const;
   inline bool hasVoiceBroadcast() const;
   inline  ::globed::schema::game::VoiceBroadcastMessage::Reader getVoiceBroadcast() const;
+
+  inline bool isChatNotPermitted() const;
+  inline bool hasChatNotPermitted() const;
+  inline  ::globed::schema::game::ChatNotPermittedMessage::Reader getChatNotPermitted() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -2971,6 +3063,14 @@ public:
   inline  ::globed::schema::game::VoiceBroadcastMessage::Builder initVoiceBroadcast();
   inline void adoptVoiceBroadcast(::capnp::Orphan< ::globed::schema::game::VoiceBroadcastMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::VoiceBroadcastMessage> disownVoiceBroadcast();
+
+  inline bool isChatNotPermitted();
+  inline bool hasChatNotPermitted();
+  inline  ::globed::schema::game::ChatNotPermittedMessage::Builder getChatNotPermitted();
+  inline void setChatNotPermitted( ::globed::schema::game::ChatNotPermittedMessage::Reader value);
+  inline  ::globed::schema::game::ChatNotPermittedMessage::Builder initChatNotPermitted();
+  inline void adoptChatNotPermitted(::capnp::Orphan< ::globed::schema::game::ChatNotPermittedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::ChatNotPermittedMessage> disownChatNotPermitted();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -5587,6 +5687,60 @@ inline ::capnp::Orphan< ::globed::schema::game::VoiceBroadcastMessage> Message::
   KJ_IREQUIRE((which() == Message::VOICE_BROADCAST),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::VoiceBroadcastMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isChatNotPermitted() const {
+  return which() == Message::CHAT_NOT_PERMITTED;
+}
+inline bool Message::Builder::isChatNotPermitted() {
+  return which() == Message::CHAT_NOT_PERMITTED;
+}
+inline bool Message::Reader::hasChatNotPermitted() const {
+  if (which() != Message::CHAT_NOT_PERMITTED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasChatNotPermitted() {
+  if (which() != Message::CHAT_NOT_PERMITTED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::ChatNotPermittedMessage::Reader Message::Reader::getChatNotPermitted() const {
+  KJ_IREQUIRE((which() == Message::CHAT_NOT_PERMITTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ChatNotPermittedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::ChatNotPermittedMessage::Builder Message::Builder::getChatNotPermitted() {
+  KJ_IREQUIRE((which() == Message::CHAT_NOT_PERMITTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ChatNotPermittedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setChatNotPermitted( ::globed::schema::game::ChatNotPermittedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CHAT_NOT_PERMITTED);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::ChatNotPermittedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::ChatNotPermittedMessage::Builder Message::Builder::initChatNotPermitted() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CHAT_NOT_PERMITTED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ChatNotPermittedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptChatNotPermitted(
+    ::capnp::Orphan< ::globed::schema::game::ChatNotPermittedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CHAT_NOT_PERMITTED);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::ChatNotPermittedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::ChatNotPermittedMessage> Message::Builder::disownChatNotPermitted() {
+  KJ_IREQUIRE((which() == Message::CHAT_NOT_PERMITTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::ChatNotPermittedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
