@@ -76,6 +76,11 @@ struct BannedMessage {
     expiresAt @1 :Int64;
 }
 
+struct MutedMessage {
+    reason @0 :Text;
+    expiresAt @1 :Int64;
+}
+
 struct ServersChangedMessage {
     servers @0 :List(Shared.GameServer);
 }
@@ -641,6 +646,7 @@ struct Message {
         loginFailed                 @4 :LoginFailedMessage;
         loginRequired               @5 :LoginRequiredMessage;
         banned                      @23 :BannedMessage;
+        muted                       @85 :MutedMessage;
         serversChanged              @54 :ServersChangedMessage;
         userDataChanged             @77 :UserDataChangedMessage;
 
@@ -679,6 +685,6 @@ struct Message {
         featuredLevel               @81 :FeaturedLevelMessage;
         featuredList                @82 :FeaturedListMessage;
 
-		fetchUserResponse           @84 :FetchUserResponseMessage; 
+		fetchUserResponse           @84 :FetchUserResponseMessage;
     }
 }

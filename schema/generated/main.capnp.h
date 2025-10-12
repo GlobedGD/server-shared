@@ -38,6 +38,7 @@ CAPNP_DECLARE_ENUM(LoginFailedReason, c74467e7c2ba2ab4);
 CAPNP_DECLARE_SCHEMA(bbfb3e6266b46e00);
 CAPNP_DECLARE_SCHEMA(c0792171a7e24cec);
 CAPNP_DECLARE_SCHEMA(e94115bf16c4b5a8);
+CAPNP_DECLARE_SCHEMA(c0fd900f5110bc32);
 CAPNP_DECLARE_SCHEMA(8292c7927f0e291e);
 CAPNP_DECLARE_SCHEMA(f2ba4cb8b539c421);
 CAPNP_DECLARE_SCHEMA(b90a50af13cffdeb);
@@ -284,6 +285,21 @@ struct BannedMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(e94115bf16c4b5a8, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct MutedMessage {
+  MutedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(c0fd900f5110bc32, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1652,6 +1668,7 @@ struct Message {
     FEATURED_LIST,
     FETCH_USER,
     FETCH_USER_RESPONSE,
+    MUTED,
   };
 
   struct _capnpPrivate {
@@ -2464,6 +2481,92 @@ private:
 class BannedMessage::Pipeline {
 public:
   typedef BannedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class MutedMessage::Reader {
+public:
+  typedef MutedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasReason() const;
+  inline  ::capnp::Text::Reader getReason() const;
+
+  inline  ::int64_t getExpiresAt() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class MutedMessage::Builder {
+public:
+  typedef MutedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasReason();
+  inline  ::capnp::Text::Builder getReason();
+  inline void setReason( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initReason(unsigned int size);
+  inline void adoptReason(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownReason();
+
+  inline  ::int64_t getExpiresAt();
+  inline void setExpiresAt( ::int64_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class MutedMessage::Pipeline {
+public:
+  typedef MutedMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -10261,6 +10364,10 @@ public:
   inline bool hasFetchUserResponse() const;
   inline  ::globed::schema::main::FetchUserResponseMessage::Reader getFetchUserResponse() const;
 
+  inline bool isMuted() const;
+  inline bool hasMuted() const;
+  inline  ::globed::schema::main::MutedMessage::Reader getMuted() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -10957,6 +11064,14 @@ public:
   inline  ::globed::schema::main::FetchUserResponseMessage::Builder initFetchUserResponse();
   inline void adoptFetchUserResponse(::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> disownFetchUserResponse();
+
+  inline bool isMuted();
+  inline bool hasMuted();
+  inline  ::globed::schema::main::MutedMessage::Builder getMuted();
+  inline void setMuted( ::globed::schema::main::MutedMessage::Reader value);
+  inline  ::globed::schema::main::MutedMessage::Builder initMuted();
+  inline void adoptMuted(::capnp::Orphan< ::globed::schema::main::MutedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::MutedMessage> disownMuted();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -11774,6 +11889,54 @@ inline  ::int64_t BannedMessage::Builder::getExpiresAt() {
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
 inline void BannedMessage::Builder::setExpiresAt( ::int64_t value) {
+  _builder.setDataField< ::int64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool MutedMessage::Reader::hasReason() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool MutedMessage::Builder::hasReason() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader MutedMessage::Reader::getReason() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder MutedMessage::Builder::getReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void MutedMessage::Builder::setReason( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder MutedMessage::Builder::initReason(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void MutedMessage::Builder::adoptReason(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> MutedMessage::Builder::disownReason() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int64_t MutedMessage::Reader::getExpiresAt() const {
+  return _reader.getDataField< ::int64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int64_t MutedMessage::Builder::getExpiresAt() {
+  return _builder.getDataField< ::int64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void MutedMessage::Builder::setExpiresAt( ::int64_t value) {
   _builder.setDataField< ::int64_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
@@ -20910,6 +21073,60 @@ inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> Messag
   KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isMuted() const {
+  return which() == Message::MUTED;
+}
+inline bool Message::Builder::isMuted() {
+  return which() == Message::MUTED;
+}
+inline bool Message::Reader::hasMuted() const {
+  if (which() != Message::MUTED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasMuted() {
+  if (which() != Message::MUTED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::MutedMessage::Reader Message::Reader::getMuted() const {
+  KJ_IREQUIRE((which() == Message::MUTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::MutedMessage::Builder Message::Builder::getMuted() {
+  KJ_IREQUIRE((which() == Message::MUTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setMuted( ::globed::schema::main::MutedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::MUTED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::MutedMessage::Builder Message::Builder::initMuted() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::MUTED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptMuted(
+    ::capnp::Orphan< ::globed::schema::main::MutedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::MUTED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::MutedMessage> Message::Builder::disownMuted() {
+  KJ_IREQUIRE((which() == Message::MUTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
