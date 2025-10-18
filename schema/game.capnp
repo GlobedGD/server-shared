@@ -11,12 +11,12 @@ struct LoginMessage {
     accountId @0 :Int32;
     token @1 :Text;
     icons @2 :Shared.PlayerIconData;
-    settings @6 :Shared.UserSettings;
+    settings @3 :Shared.UserSettings;
 
     # optional fields
-    sessionId @3 :UInt64;
-    passcode  @4 :UInt32;
-    platformer @5 :Bool;
+    sessionId @4 :UInt64;
+    passcode  @5 :UInt32;
+    platformer @6 :Bool;
 }
 
 struct LoginOkMessage {
@@ -95,24 +95,24 @@ struct PlayerData {
     timestamp   @1 :Float32;
     frameNumber @2 :UInt8;
     deathCount  @3 :UInt8;
-    percentage  @13 :UInt16;
+    percentage  @4 :UInt16;
 
-    isDead        @4 :Bool;
-    isPaused      @5 :Bool;
-    isPracticing  @6 :Bool;
-    isInEditor    @7 :Bool;
-    isEditorBuilding @8 :Bool;
-    isLastDeathReal @9 :Bool;
+    isDead        @5 :Bool;
+    isPaused      @6 :Bool;
+    isPracticing  @7 :Bool;
+    isInEditor    @8 :Bool;
+    isEditorBuilding @9 :Bool;
+    isLastDeathReal @10 :Bool;
 
     # TODO: measure if there is a better, more compact way to lay this out
     union {
         dual :group {
-            player1 @10 :PlayerObjectData;
-            player2 @11 :PlayerObjectData;
+            player1 @11 :PlayerObjectData;
+            player2 @12 :PlayerObjectData;
         }
 
         single :group {
-            player1 @12 :PlayerObjectData;
+            player1 @13 :PlayerObjectData;
         }
 
         culled :group {
@@ -190,24 +190,24 @@ struct Message {
     union {
         # Client messages
         login              @0 :LoginMessage;
-        joinSession        @4 :JoinSessionMessage;
-        leaveSession       @5 :LeaveSessionMessage;
+        joinSession        @1 :JoinSessionMessage;
+        leaveSession       @2 :LeaveSessionMessage;
 
-        playerData         @6 :PlayerDataMessage;
-        updateIcons        @11 :UpdateIconsMessage;
-        sendLevelScript    @12 :SendLevelScriptMessage;
-        voiceData          @14 :VoiceDataMessage;
+        playerData         @3 :PlayerDataMessage;
+        updateIcons        @4 :UpdateIconsMessage;
+        sendLevelScript    @5 :SendLevelScriptMessage;
+        voiceData          @6 :VoiceDataMessage;
 
         # Server messages
-        loginOk            @1 :LoginOkMessage;
-        loginFailed        @2 :LoginFailedMessage;
-        joinSessionOk      @7 :JoinSessionOkMessage;
-        joinSessionFailed  @8 :JoinSessionFailedMessage;
+        loginOk            @7 :LoginOkMessage;
+        loginFailed        @8 :LoginFailedMessage;
+        joinSessionOk      @9 :JoinSessionOkMessage;
+        joinSessionFailed  @10 :JoinSessionFailedMessage;
 
-        levelData          @9 :LevelDataMessage;
-        kicked             @10 :KickedMessage;
+        levelData          @11 :LevelDataMessage;
+        kicked             @12 :KickedMessage;
         scriptLogs         @13 :ScriptLogsMessage;
-        voiceBroadcast     @15 :VoiceBroadcastMessage;
-        chatNotPermitted   @3 :ChatNotPermittedMessage;
+        voiceBroadcast     @14 :VoiceBroadcastMessage;
+        chatNotPermitted   @15 :ChatNotPermittedMessage;
     }
 }

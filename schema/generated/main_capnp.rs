@@ -353,26 +353,26 @@ pub mod login_message {
       !self.reader.get_pointer_field(1).is_null()
     }
     #[inline]
+    pub fn get_settings(self) -> ::capnp::Result<crate::shared_capnp::user_settings::Reader<'a>> {
+      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
+    }
+    #[inline]
+    pub fn has_settings(&self) -> bool {
+      !self.reader.get_pointer_field(2).is_null()
+    }
+    #[inline]
     pub fn has_utoken(&self) -> bool {
       if self.reader.get_data_field::<u16>(2) != 0 { return false; }
-      !self.reader.get_pointer_field(2).is_null()
+      !self.reader.get_pointer_field(3).is_null()
     }
     #[inline]
     pub fn has_argon(&self) -> bool {
       if self.reader.get_data_field::<u16>(2) != 1 { return false; }
-      !self.reader.get_pointer_field(2).is_null()
+      !self.reader.get_pointer_field(3).is_null()
     }
     #[inline]
     pub fn has_plain(&self) -> bool {
       if self.reader.get_data_field::<u16>(2) != 2 { return false; }
-      !self.reader.get_pointer_field(2).is_null()
-    }
-    #[inline]
-    pub fn get_settings(self) -> ::capnp::Result<crate::shared_capnp::user_settings::Reader<'a>> {
-      ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
-    }
-    #[inline]
-    pub fn has_settings(&self) -> bool {
       !self.reader.get_pointer_field(3).is_null()
     }
     #[inline]
@@ -380,17 +380,17 @@ pub mod login_message {
       match self.reader.get_data_field::<u16>(2) {
         0 => {
           ::core::result::Result::Ok(Utoken(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
           ))
         }
         1 => {
           ::core::result::Result::Ok(Argon(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
           ))
         }
         2 => {
           ::core::result::Result::Ok(Plain(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(2), ::core::option::Option::None)
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(3), ::core::option::Option::None)
           ))
         }
         x => ::core::result::Result::Err(::capnp::NotInSchema(x))
@@ -491,64 +491,64 @@ pub mod login_message {
       !self.builder.is_pointer_field_null(1)
     }
     #[inline]
+    pub fn get_settings(self) -> ::capnp::Result<crate::shared_capnp::user_settings::Builder<'a>> {
+      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
+    }
+    #[inline]
+    pub fn set_settings(&mut self, value: crate::shared_capnp::user_settings::Reader<'_>) -> ::capnp::Result<()> {
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(2), value, false)
+    }
+    #[inline]
+    pub fn init_settings(self, ) -> crate::shared_capnp::user_settings::Builder<'a> {
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), 0)
+    }
+    #[inline]
+    pub fn has_settings(&self) -> bool {
+      !self.builder.is_pointer_field_null(2)
+    }
+    #[inline]
     pub fn set_utoken(&mut self, value: impl ::capnp::traits::SetterInput<::capnp::text::Owned>)  {
       self.builder.set_data_field::<u16>(2, 0);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(2), value, false).unwrap()
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(3), value, false).unwrap()
     }
     #[inline]
     pub fn init_utoken(self, size: u32) -> ::capnp::text::Builder<'a> {
       self.builder.set_data_field::<u16>(2, 0);
-      self.builder.get_pointer_field(2).init_text(size)
+      self.builder.get_pointer_field(3).init_text(size)
     }
     #[inline]
     pub fn has_utoken(&self) -> bool {
       if self.builder.get_data_field::<u16>(2) != 0 { return false; }
-      !self.builder.is_pointer_field_null(2)
+      !self.builder.is_pointer_field_null(3)
     }
     #[inline]
     pub fn set_argon(&mut self, value: impl ::capnp::traits::SetterInput<::capnp::text::Owned>)  {
       self.builder.set_data_field::<u16>(2, 1);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(2), value, false).unwrap()
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(3), value, false).unwrap()
     }
     #[inline]
     pub fn init_argon(self, size: u32) -> ::capnp::text::Builder<'a> {
       self.builder.set_data_field::<u16>(2, 1);
-      self.builder.get_pointer_field(2).init_text(size)
+      self.builder.get_pointer_field(3).init_text(size)
     }
     #[inline]
     pub fn has_argon(&self) -> bool {
       if self.builder.get_data_field::<u16>(2) != 1 { return false; }
-      !self.builder.is_pointer_field_null(2)
+      !self.builder.is_pointer_field_null(3)
     }
     #[inline]
     pub fn set_plain(&mut self, value: crate::main_capnp::player_account_data::Reader<'_>) -> ::capnp::Result<()> {
       self.builder.set_data_field::<u16>(2, 2);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(2), value, false)
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(3), value, false)
     }
     #[inline]
     pub fn init_plain(self, ) -> crate::main_capnp::player_account_data::Builder<'a> {
       self.builder.set_data_field::<u16>(2, 2);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(2), 0)
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
     }
     #[inline]
     pub fn has_plain(&self) -> bool {
       if self.builder.get_data_field::<u16>(2) != 2 { return false; }
-      !self.builder.is_pointer_field_null(2)
-    }
-    #[inline]
-    pub fn get_settings(self) -> ::capnp::Result<crate::shared_capnp::user_settings::Builder<'a>> {
-      ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
-    }
-    #[inline]
-    pub fn set_settings(&mut self, value: crate::shared_capnp::user_settings::Reader<'_>) -> ::capnp::Result<()> {
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(3), value, false)
-    }
-    #[inline]
-    pub fn init_settings(self, ) -> crate::shared_capnp::user_settings::Builder<'a> {
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(3), 0)
-    }
-    #[inline]
-    pub fn has_settings(&self) -> bool {
       !self.builder.is_pointer_field_null(3)
     }
     #[inline]
@@ -556,17 +556,17 @@ pub mod login_message {
       match self.builder.get_data_field::<u16>(2) {
         0 => {
           ::core::result::Result::Ok(Utoken(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
           ))
         }
         1 => {
           ::core::result::Result::Ok(Argon(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
           ))
         }
         2 => {
           ::core::result::Result::Ok(Plain(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(2), ::core::option::Option::None)
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(3), ::core::option::Option::None)
           ))
         }
         x => ::core::result::Result::Err(::capnp::NotInSchema(x))
@@ -585,7 +585,7 @@ pub mod login_message {
       ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(0))
     }
     pub fn get_settings(&self) -> crate::shared_capnp::user_settings::Pipeline {
-      ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(3))
+      ::capnp::capability::FromTypelessPipeline::new(self._typeless.get_pointer_field(2))
     }
   }
   mod _private {
@@ -629,31 +629,31 @@ pub mod login_message {
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(188, 0, 0, 0, 3, 0, 1, 0),
       ::capnp::word(200, 0, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(4, 0, 255, 255, 2, 0, 0, 0),
+      ::capnp::word(3, 0, 0, 0, 2, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 3, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(197, 0, 0, 0, 58, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(192, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(204, 0, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(5, 0, 254, 255, 2, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 4, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(201, 0, 0, 0, 50, 0, 0, 0),
+      ::capnp::word(197, 0, 0, 0, 74, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(196, 0, 0, 0, 3, 0, 1, 0),
       ::capnp::word(208, 0, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(6, 0, 253, 255, 2, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 5, 0, 0, 0),
+      ::capnp::word(4, 0, 255, 255, 3, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 4, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(205, 0, 0, 0, 50, 0, 0, 0),
+      ::capnp::word(205, 0, 0, 0, 58, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(200, 0, 0, 0, 3, 0, 1, 0),
       ::capnp::word(212, 0, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(3, 0, 0, 0, 3, 0, 0, 0),
+      ::capnp::word(5, 0, 254, 255, 3, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 5, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(209, 0, 0, 0, 50, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(204, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(216, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(6, 0, 253, 255, 3, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 6, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(209, 0, 0, 0, 74, 0, 0, 0),
+      ::capnp::word(213, 0, 0, 0, 50, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(208, 0, 0, 0, 3, 0, 1, 0),
       ::capnp::word(220, 0, 0, 0, 2, 0, 1, 0),
@@ -682,6 +682,15 @@ pub mod login_message {
       ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(115, 101, 116, 116, 105, 110, 103, 115),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(242, 74, 37, 184, 50, 30, 168, 165),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(117, 116, 111, 107, 101, 110, 0, 0),
       ::capnp::word(12, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -706,25 +715,16 @@ pub mod login_message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(115, 101, 116, 116, 105, 110, 103, 115),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(242, 74, 37, 184, 50, 30, 168, 165),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
     ];
     pub fn get_field_types(index: u16) -> ::capnp::introspect::Type {
       match index {
         0 => <i32 as ::capnp::introspect::Introspect>::introspect(),
         1 => <crate::shared_capnp::player_icon_data::Owned as ::capnp::introspect::Introspect>::introspect(),
         2 => <::capnp::data::Owned as ::capnp::introspect::Introspect>::introspect(),
-        3 => <::capnp::text::Owned as ::capnp::introspect::Introspect>::introspect(),
+        3 => <crate::shared_capnp::user_settings::Owned as ::capnp::introspect::Introspect>::introspect(),
         4 => <::capnp::text::Owned as ::capnp::introspect::Introspect>::introspect(),
-        5 => <crate::main_capnp::player_account_data::Owned as ::capnp::introspect::Introspect>::introspect(),
-        6 => <crate::shared_capnp::user_settings::Owned as ::capnp::introspect::Introspect>::introspect(),
+        5 => <::capnp::text::Owned as ::capnp::introspect::Introspect>::introspect(),
+        6 => <crate::main_capnp::player_account_data::Owned as ::capnp::introspect::Introspect>::introspect(),
         _ => ::capnp::introspect::panic_invalid_field_index(index),
       }
     }
@@ -737,9 +737,9 @@ pub mod login_message {
       members_by_discriminant: MEMBERS_BY_DISCRIMINANT,
       members_by_name: MEMBERS_BY_NAME,
     };
-    pub static NONUNION_MEMBERS : &[u16] = &[0,1,2,6];
-    pub static MEMBERS_BY_DISCRIMINANT : &[u16] = &[3,4,5];
-    pub static MEMBERS_BY_NAME : &[u16] = &[0,4,1,5,6,2,3];
+    pub static NONUNION_MEMBERS : &[u16] = &[0,1,2,3];
+    pub static MEMBERS_BY_DISCRIMINANT : &[u16] = &[4,5,6];
+    pub static MEMBERS_BY_NAME : &[u16] = &[0,5,1,6,3,2,4];
     pub const TYPE_ID: u64 = 0xe8fb_b9eb_6533_b3b5;
   }
   pub enum Which<A0,A1,A2> {
@@ -845,18 +845,6 @@ pub mod login_ok_message {
       !self.reader.get_pointer_field(3).is_null()
     }
     #[inline]
-    pub fn get_is_moderator(self) -> bool {
-      self.reader.get_bool_field(0)
-    }
-    #[inline]
-    pub fn get_can_ban(self) -> bool {
-      self.reader.get_bool_field(1)
-    }
-    #[inline]
-    pub fn get_can_set_password(self) -> bool {
-      self.reader.get_bool_field(2)
-    }
-    #[inline]
     pub fn get_name_color(self) -> ::capnp::Result<::capnp::data::Reader<'a>> {
       ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(4), ::core::option::Option::None)
     }
@@ -865,19 +853,31 @@ pub mod login_ok_message {
       !self.reader.get_pointer_field(4).is_null()
     }
     #[inline]
-    pub fn get_can_edit_roles(self) -> bool {
-      self.reader.get_bool_field(3)
-    }
-    #[inline]
-    pub fn get_can_send_features(self) -> bool {
-      self.reader.get_bool_field(4)
-    }
-    #[inline]
-    pub fn get_can_rate_features(self) -> bool {
-      self.reader.get_bool_field(5)
+    pub fn get_is_moderator(self) -> bool {
+      self.reader.get_bool_field(0)
     }
     #[inline]
     pub fn get_can_mute(self) -> bool {
+      self.reader.get_bool_field(1)
+    }
+    #[inline]
+    pub fn get_can_ban(self) -> bool {
+      self.reader.get_bool_field(2)
+    }
+    #[inline]
+    pub fn get_can_set_password(self) -> bool {
+      self.reader.get_bool_field(3)
+    }
+    #[inline]
+    pub fn get_can_edit_roles(self) -> bool {
+      self.reader.get_bool_field(4)
+    }
+    #[inline]
+    pub fn get_can_send_features(self) -> bool {
+      self.reader.get_bool_field(5)
+    }
+    #[inline]
+    pub fn get_can_rate_features(self) -> bool {
       self.reader.get_bool_field(6)
     }
     #[inline]
@@ -1011,30 +1011,6 @@ pub mod login_ok_message {
       !self.builder.is_pointer_field_null(3)
     }
     #[inline]
-    pub fn get_is_moderator(self) -> bool {
-      self.builder.get_bool_field(0)
-    }
-    #[inline]
-    pub fn set_is_moderator(&mut self, value: bool)  {
-      self.builder.set_bool_field(0, value);
-    }
-    #[inline]
-    pub fn get_can_ban(self) -> bool {
-      self.builder.get_bool_field(1)
-    }
-    #[inline]
-    pub fn set_can_ban(&mut self, value: bool)  {
-      self.builder.set_bool_field(1, value);
-    }
-    #[inline]
-    pub fn get_can_set_password(self) -> bool {
-      self.builder.get_bool_field(2)
-    }
-    #[inline]
-    pub fn set_can_set_password(&mut self, value: bool)  {
-      self.builder.set_bool_field(2, value);
-    }
-    #[inline]
     pub fn get_name_color(self) -> ::capnp::Result<::capnp::data::Builder<'a>> {
       ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(4), ::core::option::Option::None)
     }
@@ -1051,35 +1027,59 @@ pub mod login_ok_message {
       !self.builder.is_pointer_field_null(4)
     }
     #[inline]
-    pub fn get_can_edit_roles(self) -> bool {
-      self.builder.get_bool_field(3)
+    pub fn get_is_moderator(self) -> bool {
+      self.builder.get_bool_field(0)
     }
     #[inline]
-    pub fn set_can_edit_roles(&mut self, value: bool)  {
-      self.builder.set_bool_field(3, value);
-    }
-    #[inline]
-    pub fn get_can_send_features(self) -> bool {
-      self.builder.get_bool_field(4)
-    }
-    #[inline]
-    pub fn set_can_send_features(&mut self, value: bool)  {
-      self.builder.set_bool_field(4, value);
-    }
-    #[inline]
-    pub fn get_can_rate_features(self) -> bool {
-      self.builder.get_bool_field(5)
-    }
-    #[inline]
-    pub fn set_can_rate_features(&mut self, value: bool)  {
-      self.builder.set_bool_field(5, value);
+    pub fn set_is_moderator(&mut self, value: bool)  {
+      self.builder.set_bool_field(0, value);
     }
     #[inline]
     pub fn get_can_mute(self) -> bool {
-      self.builder.get_bool_field(6)
+      self.builder.get_bool_field(1)
     }
     #[inline]
     pub fn set_can_mute(&mut self, value: bool)  {
+      self.builder.set_bool_field(1, value);
+    }
+    #[inline]
+    pub fn get_can_ban(self) -> bool {
+      self.builder.get_bool_field(2)
+    }
+    #[inline]
+    pub fn set_can_ban(&mut self, value: bool)  {
+      self.builder.set_bool_field(2, value);
+    }
+    #[inline]
+    pub fn get_can_set_password(self) -> bool {
+      self.builder.get_bool_field(3)
+    }
+    #[inline]
+    pub fn set_can_set_password(&mut self, value: bool)  {
+      self.builder.set_bool_field(3, value);
+    }
+    #[inline]
+    pub fn get_can_edit_roles(self) -> bool {
+      self.builder.get_bool_field(4)
+    }
+    #[inline]
+    pub fn set_can_edit_roles(&mut self, value: bool)  {
+      self.builder.set_bool_field(4, value);
+    }
+    #[inline]
+    pub fn get_can_send_features(self) -> bool {
+      self.builder.get_bool_field(5)
+    }
+    #[inline]
+    pub fn set_can_send_features(&mut self, value: bool)  {
+      self.builder.set_bool_field(5, value);
+    }
+    #[inline]
+    pub fn get_can_rate_features(self) -> bool {
+      self.builder.get_bool_field(6)
+    }
+    #[inline]
+    pub fn set_can_rate_features(&mut self, value: bool)  {
       self.builder.set_bool_field(6, value);
     }
     #[inline]
@@ -1165,59 +1165,59 @@ pub mod login_ok_message {
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(200, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(228, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(5, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(4, 0, 0, 0, 4, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 4, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(225, 1, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(225, 1, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(224, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(236, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(7, 0, 0, 0, 1, 0, 0, 0),
+      ::capnp::word(5, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 5, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(233, 1, 0, 0, 58, 0, 0, 0),
+      ::capnp::word(233, 1, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(228, 1, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(240, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(8, 0, 0, 0, 2, 0, 0, 0),
+      ::capnp::word(232, 1, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(244, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(6, 0, 0, 0, 1, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 6, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(237, 1, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(241, 1, 0, 0, 66, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(236, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(248, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(4, 0, 0, 0, 4, 0, 0, 0),
+      ::capnp::word(7, 0, 0, 0, 2, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(245, 1, 0, 0, 82, 0, 0, 0),
+      ::capnp::word(245, 1, 0, 0, 58, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(244, 1, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(0, 2, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(9, 0, 0, 0, 3, 0, 0, 0),
+      ::capnp::word(240, 1, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(252, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(8, 0, 0, 0, 3, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 8, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(253, 1, 0, 0, 106, 0, 0, 0),
+      ::capnp::word(249, 1, 0, 0, 122, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(252, 1, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(8, 2, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(10, 0, 0, 0, 4, 0, 0, 0),
+      ::capnp::word(248, 1, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(4, 2, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(9, 0, 0, 0, 4, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 9, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(5, 2, 0, 0, 130, 0, 0, 0),
+      ::capnp::word(1, 2, 0, 0, 106, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(4, 2, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(16, 2, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(11, 0, 0, 0, 5, 0, 0, 0),
+      ::capnp::word(0, 2, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(12, 2, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(10, 0, 0, 0, 5, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 10, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(13, 2, 0, 0, 130, 0, 0, 0),
+      ::capnp::word(9, 2, 0, 0, 130, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(12, 2, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(24, 2, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(6, 0, 0, 0, 6, 0, 0, 0),
+      ::capnp::word(8, 2, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(20, 2, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(11, 0, 0, 0, 6, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 11, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(21, 2, 0, 0, 66, 0, 0, 0),
+      ::capnp::word(17, 2, 0, 0, 130, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 2, 0, 0, 3, 0, 1, 0),
       ::capnp::word(28, 2, 0, 0, 2, 0, 1, 0),
@@ -1289,8 +1289,25 @@ pub mod login_ok_message {
       ::capnp::word(14, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(110, 97, 109, 101, 67, 111, 108, 111),
+      ::capnp::word(114, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(105, 115, 77, 111, 100, 101, 114, 97),
       ::capnp::word(116, 111, 114, 0, 0, 0, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(99, 97, 110, 77, 117, 116, 101, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -1315,15 +1332,6 @@ pub mod login_ok_message {
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(110, 97, 109, 101, 67, 111, 108, 111),
-      ::capnp::word(114, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(13, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(99, 97, 110, 69, 100, 105, 116, 82),
       ::capnp::word(111, 108, 101, 115, 0, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
@@ -1344,14 +1352,6 @@ pub mod login_ok_message {
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(99, 97, 110, 82, 97, 116, 101, 70),
       ::capnp::word(101, 97, 116, 117, 114, 101, 115, 0),
-      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(99, 97, 110, 77, 117, 116, 101, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -1395,10 +1395,10 @@ pub mod login_ok_message {
         1 => <::capnp::struct_list::Owned<crate::shared_capnp::game_server::Owned> as ::capnp::introspect::Introspect>::introspect(),
         2 => <::capnp::struct_list::Owned<crate::shared_capnp::user_role::Owned> as ::capnp::introspect::Introspect>::introspect(),
         3 => <::capnp::primitive_list::Owned<u8> as ::capnp::introspect::Introspect>::introspect(),
-        4 => <bool as ::capnp::introspect::Introspect>::introspect(),
+        4 => <::capnp::data::Owned as ::capnp::introspect::Introspect>::introspect(),
         5 => <bool as ::capnp::introspect::Introspect>::introspect(),
         6 => <bool as ::capnp::introspect::Introspect>::introspect(),
-        7 => <::capnp::data::Owned as ::capnp::introspect::Introspect>::introspect(),
+        7 => <bool as ::capnp::introspect::Introspect>::introspect(),
         8 => <bool as ::capnp::introspect::Introspect>::introspect(),
         9 => <bool as ::capnp::introspect::Introspect>::introspect(),
         10 => <bool as ::capnp::introspect::Introspect>::introspect(),
@@ -1420,7 +1420,7 @@ pub mod login_ok_message {
     };
     pub static NONUNION_MEMBERS : &[u16] = &[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
     pub static MEMBERS_BY_DISCRIMINANT : &[u16] = &[];
-    pub static MEMBERS_BY_NAME : &[u16] = &[2,5,8,11,10,9,6,12,14,13,4,7,0,1,3];
+    pub static MEMBERS_BY_NAME : &[u16] = &[2,7,9,6,11,10,8,12,14,13,5,4,0,1,3];
     pub const TYPE_ID: u64 = 0xd038_1709_099c_c27c;
   }
 }
@@ -4041,51 +4041,51 @@ pub mod room_settings {
       self.reader.total_size()
     }
     #[inline]
+    pub fn get_server_id(self) -> u8 {
+      self.reader.get_data_field::<u8>(0)
+    }
+    #[inline]
     pub fn get_player_limit(self) -> u16 {
-      self.reader.get_data_field::<u16>(0)
+      self.reader.get_data_field::<u16>(1)
     }
     #[inline]
     pub fn get_faster_reset(self) -> bool {
-      self.reader.get_bool_field(16)
+      self.reader.get_bool_field(8)
     }
     #[inline]
     pub fn get_hidden(self) -> bool {
-      self.reader.get_bool_field(17)
+      self.reader.get_bool_field(9)
     }
     #[inline]
     pub fn get_private_invites(self) -> bool {
-      self.reader.get_bool_field(18)
+      self.reader.get_bool_field(10)
     }
     #[inline]
     pub fn get_is_follower(self) -> bool {
-      self.reader.get_bool_field(19)
-    }
-    #[inline]
-    pub fn get_collision(self) -> bool {
-      self.reader.get_bool_field(20)
-    }
-    #[inline]
-    pub fn get_two_player_mode(self) -> bool {
-      self.reader.get_bool_field(21)
-    }
-    #[inline]
-    pub fn get_deathlink(self) -> bool {
-      self.reader.get_bool_field(22)
+      self.reader.get_bool_field(11)
     }
     #[inline]
     pub fn get_level_integrity(self) -> bool {
-      self.reader.get_bool_field(23)
-    }
-    #[inline]
-    pub fn get_server_id(self) -> u8 {
-      self.reader.get_data_field::<u8>(3)
+      self.reader.get_bool_field(12)
     }
     #[inline]
     pub fn get_teams(self) -> bool {
-      self.reader.get_bool_field(32)
+      self.reader.get_bool_field(13)
     }
     #[inline]
     pub fn get_locked_teams(self) -> bool {
+      self.reader.get_bool_field(14)
+    }
+    #[inline]
+    pub fn get_collision(self) -> bool {
+      self.reader.get_bool_field(15)
+    }
+    #[inline]
+    pub fn get_two_player_mode(self) -> bool {
+      self.reader.get_bool_field(32)
+    }
+    #[inline]
+    pub fn get_deathlink(self) -> bool {
       self.reader.get_bool_field(33)
     }
   }
@@ -4143,99 +4143,99 @@ pub mod room_settings {
       self.builder.as_reader().total_size()
     }
     #[inline]
-    pub fn get_player_limit(self) -> u16 {
-      self.builder.get_data_field::<u16>(0)
-    }
-    #[inline]
-    pub fn set_player_limit(&mut self, value: u16)  {
-      self.builder.set_data_field::<u16>(0, value);
-    }
-    #[inline]
-    pub fn get_faster_reset(self) -> bool {
-      self.builder.get_bool_field(16)
-    }
-    #[inline]
-    pub fn set_faster_reset(&mut self, value: bool)  {
-      self.builder.set_bool_field(16, value);
-    }
-    #[inline]
-    pub fn get_hidden(self) -> bool {
-      self.builder.get_bool_field(17)
-    }
-    #[inline]
-    pub fn set_hidden(&mut self, value: bool)  {
-      self.builder.set_bool_field(17, value);
-    }
-    #[inline]
-    pub fn get_private_invites(self) -> bool {
-      self.builder.get_bool_field(18)
-    }
-    #[inline]
-    pub fn set_private_invites(&mut self, value: bool)  {
-      self.builder.set_bool_field(18, value);
-    }
-    #[inline]
-    pub fn get_is_follower(self) -> bool {
-      self.builder.get_bool_field(19)
-    }
-    #[inline]
-    pub fn set_is_follower(&mut self, value: bool)  {
-      self.builder.set_bool_field(19, value);
-    }
-    #[inline]
-    pub fn get_collision(self) -> bool {
-      self.builder.get_bool_field(20)
-    }
-    #[inline]
-    pub fn set_collision(&mut self, value: bool)  {
-      self.builder.set_bool_field(20, value);
-    }
-    #[inline]
-    pub fn get_two_player_mode(self) -> bool {
-      self.builder.get_bool_field(21)
-    }
-    #[inline]
-    pub fn set_two_player_mode(&mut self, value: bool)  {
-      self.builder.set_bool_field(21, value);
-    }
-    #[inline]
-    pub fn get_deathlink(self) -> bool {
-      self.builder.get_bool_field(22)
-    }
-    #[inline]
-    pub fn set_deathlink(&mut self, value: bool)  {
-      self.builder.set_bool_field(22, value);
-    }
-    #[inline]
-    pub fn get_level_integrity(self) -> bool {
-      self.builder.get_bool_field(23)
-    }
-    #[inline]
-    pub fn set_level_integrity(&mut self, value: bool)  {
-      self.builder.set_bool_field(23, value);
-    }
-    #[inline]
     pub fn get_server_id(self) -> u8 {
-      self.builder.get_data_field::<u8>(3)
+      self.builder.get_data_field::<u8>(0)
     }
     #[inline]
     pub fn set_server_id(&mut self, value: u8)  {
-      self.builder.set_data_field::<u8>(3, value);
+      self.builder.set_data_field::<u8>(0, value);
+    }
+    #[inline]
+    pub fn get_player_limit(self) -> u16 {
+      self.builder.get_data_field::<u16>(1)
+    }
+    #[inline]
+    pub fn set_player_limit(&mut self, value: u16)  {
+      self.builder.set_data_field::<u16>(1, value);
+    }
+    #[inline]
+    pub fn get_faster_reset(self) -> bool {
+      self.builder.get_bool_field(8)
+    }
+    #[inline]
+    pub fn set_faster_reset(&mut self, value: bool)  {
+      self.builder.set_bool_field(8, value);
+    }
+    #[inline]
+    pub fn get_hidden(self) -> bool {
+      self.builder.get_bool_field(9)
+    }
+    #[inline]
+    pub fn set_hidden(&mut self, value: bool)  {
+      self.builder.set_bool_field(9, value);
+    }
+    #[inline]
+    pub fn get_private_invites(self) -> bool {
+      self.builder.get_bool_field(10)
+    }
+    #[inline]
+    pub fn set_private_invites(&mut self, value: bool)  {
+      self.builder.set_bool_field(10, value);
+    }
+    #[inline]
+    pub fn get_is_follower(self) -> bool {
+      self.builder.get_bool_field(11)
+    }
+    #[inline]
+    pub fn set_is_follower(&mut self, value: bool)  {
+      self.builder.set_bool_field(11, value);
+    }
+    #[inline]
+    pub fn get_level_integrity(self) -> bool {
+      self.builder.get_bool_field(12)
+    }
+    #[inline]
+    pub fn set_level_integrity(&mut self, value: bool)  {
+      self.builder.set_bool_field(12, value);
     }
     #[inline]
     pub fn get_teams(self) -> bool {
-      self.builder.get_bool_field(32)
+      self.builder.get_bool_field(13)
     }
     #[inline]
     pub fn set_teams(&mut self, value: bool)  {
-      self.builder.set_bool_field(32, value);
+      self.builder.set_bool_field(13, value);
     }
     #[inline]
     pub fn get_locked_teams(self) -> bool {
-      self.builder.get_bool_field(33)
+      self.builder.get_bool_field(14)
     }
     #[inline]
     pub fn set_locked_teams(&mut self, value: bool)  {
+      self.builder.set_bool_field(14, value);
+    }
+    #[inline]
+    pub fn get_collision(self) -> bool {
+      self.builder.get_bool_field(15)
+    }
+    #[inline]
+    pub fn set_collision(&mut self, value: bool)  {
+      self.builder.set_bool_field(15, value);
+    }
+    #[inline]
+    pub fn get_two_player_mode(self) -> bool {
+      self.builder.get_bool_field(32)
+    }
+    #[inline]
+    pub fn set_two_player_mode(&mut self, value: bool)  {
+      self.builder.set_bool_field(32, value);
+    }
+    #[inline]
+    pub fn get_deathlink(self) -> bool {
+      self.builder.get_bool_field(33)
+    }
+    #[inline]
+    pub fn set_deathlink(&mut self, value: bool)  {
       self.builder.set_bool_field(33, value);
     }
   }
@@ -4268,90 +4268,99 @@ pub mod room_settings {
       ::capnp::word(101, 116, 116, 105, 110, 103, 115, 0),
       ::capnp::word(0, 0, 0, 0, 1, 0, 1, 0),
       ::capnp::word(48, 0, 0, 0, 3, 0, 4, 0),
-      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 0, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(65, 1, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(65, 1, 0, 0, 74, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(64, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(76, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(2, 0, 0, 0, 16, 0, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 1, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 1, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(73, 1, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(72, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(84, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(3, 0, 0, 0, 17, 0, 0, 0),
+      ::capnp::word(2, 0, 0, 0, 8, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 2, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(81, 1, 0, 0, 58, 0, 0, 0),
+      ::capnp::word(81, 1, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(76, 1, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(88, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(4, 0, 0, 0, 18, 0, 0, 0),
+      ::capnp::word(80, 1, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(92, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(3, 0, 0, 0, 9, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 3, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(85, 1, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(89, 1, 0, 0, 58, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(84, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(96, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(5, 0, 0, 0, 19, 0, 0, 0),
+      ::capnp::word(4, 0, 0, 0, 10, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 4, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(93, 1, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(93, 1, 0, 0, 122, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(92, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(104, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(9, 0, 0, 0, 20, 0, 0, 0),
+      ::capnp::word(5, 0, 0, 0, 11, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 5, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(101, 1, 0, 0, 82, 0, 0, 0),
+      ::capnp::word(101, 1, 0, 0, 90, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(100, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(112, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(10, 0, 0, 0, 21, 0, 0, 0),
+      ::capnp::word(6, 0, 0, 0, 12, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 6, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(109, 1, 0, 0, 114, 0, 0, 0),
+      ::capnp::word(109, 1, 0, 0, 122, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(108, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(120, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(11, 0, 0, 0, 22, 0, 0, 0),
+      ::capnp::word(7, 0, 0, 0, 13, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 7, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(117, 1, 0, 0, 82, 0, 0, 0),
+      ::capnp::word(117, 1, 0, 0, 50, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(116, 1, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(128, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(6, 0, 0, 0, 23, 0, 0, 0),
+      ::capnp::word(112, 1, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(124, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(8, 0, 0, 0, 14, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 8, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(125, 1, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(121, 1, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(124, 1, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(136, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(0, 0, 0, 0, 3, 0, 0, 0),
+      ::capnp::word(120, 1, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(132, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(9, 0, 0, 0, 15, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 9, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(133, 1, 0, 0, 74, 0, 0, 0),
+      ::capnp::word(129, 1, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(132, 1, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(144, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(7, 0, 0, 0, 32, 0, 0, 0),
+      ::capnp::word(128, 1, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(140, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(10, 0, 0, 0, 32, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 10, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(141, 1, 0, 0, 50, 0, 0, 0),
+      ::capnp::word(137, 1, 0, 0, 114, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(136, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(148, 1, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(8, 0, 0, 0, 33, 0, 0, 0),
+      ::capnp::word(11, 0, 0, 0, 33, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 11, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(145, 1, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(145, 1, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(144, 1, 0, 0, 3, 0, 1, 0),
       ::capnp::word(156, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(115, 101, 114, 118, 101, 114, 73, 100),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(6, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(6, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(112, 108, 97, 121, 101, 114, 76, 105),
       ::capnp::word(109, 105, 116, 0, 0, 0, 0, 0),
       ::capnp::word(7, 0, 0, 0, 0, 0, 0, 0),
@@ -4396,6 +4405,32 @@ pub mod room_settings {
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(108, 101, 118, 101, 108, 73, 110, 116),
+      ::capnp::word(101, 103, 114, 105, 116, 121, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(116, 101, 97, 109, 115, 0, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(108, 111, 99, 107, 101, 100, 84, 101),
+      ::capnp::word(97, 109, 115, 0, 0, 0, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(99, 111, 108, 108, 105, 115, 105, 111),
       ::capnp::word(110, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
@@ -4423,46 +4458,11 @@ pub mod room_settings {
       ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(108, 101, 118, 101, 108, 73, 110, 116),
-      ::capnp::word(101, 103, 114, 105, 116, 121, 0, 0),
-      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(115, 101, 114, 118, 101, 114, 73, 100),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(6, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(6, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(116, 101, 97, 109, 115, 0, 0, 0),
-      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(108, 111, 99, 107, 101, 100, 84, 101),
-      ::capnp::word(97, 109, 115, 0, 0, 0, 0, 0),
-      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
     ];
     pub fn get_field_types(index: u16) -> ::capnp::introspect::Type {
       match index {
-        0 => <u16 as ::capnp::introspect::Introspect>::introspect(),
-        1 => <bool as ::capnp::introspect::Introspect>::introspect(),
+        0 => <u8 as ::capnp::introspect::Introspect>::introspect(),
+        1 => <u16 as ::capnp::introspect::Introspect>::introspect(),
         2 => <bool as ::capnp::introspect::Introspect>::introspect(),
         3 => <bool as ::capnp::introspect::Introspect>::introspect(),
         4 => <bool as ::capnp::introspect::Introspect>::introspect(),
@@ -4470,7 +4470,7 @@ pub mod room_settings {
         6 => <bool as ::capnp::introspect::Introspect>::introspect(),
         7 => <bool as ::capnp::introspect::Introspect>::introspect(),
         8 => <bool as ::capnp::introspect::Introspect>::introspect(),
-        9 => <u8 as ::capnp::introspect::Introspect>::introspect(),
+        9 => <bool as ::capnp::introspect::Introspect>::introspect(),
         10 => <bool as ::capnp::introspect::Introspect>::introspect(),
         11 => <bool as ::capnp::introspect::Introspect>::introspect(),
         _ => ::capnp::introspect::panic_invalid_field_index(index),
@@ -4487,7 +4487,7 @@ pub mod room_settings {
     };
     pub static NONUNION_MEMBERS : &[u16] = &[0,1,2,3,4,5,6,7,8,9,10,11];
     pub static MEMBERS_BY_DISCRIMINANT : &[u16] = &[];
-    pub static MEMBERS_BY_NAME : &[u16] = &[5,7,1,2,4,8,11,0,3,9,10,6];
+    pub static MEMBERS_BY_NAME : &[u16] = &[9,11,2,3,5,6,8,1,4,0,7,10];
     pub const TYPE_ID: u64 = 0xb894_9f0d_2a5b_8019;
   }
 }
@@ -16262,7 +16262,7 @@ pub mod send_featured_level_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(3, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(223, 27, 0, 0, 188, 28, 0, 0),
+      ::capnp::word(223, 27, 0, 0, 187, 28, 0, 0),
       ::capnp::word(21, 0, 0, 0, 34, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -16607,7 +16607,7 @@ pub mod discord_link_state_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(2, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(190, 28, 0, 0, 34, 29, 0, 0),
+      ::capnp::word(189, 28, 0, 0, 33, 29, 0, 0),
       ::capnp::word(21, 0, 0, 0, 26, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -16886,7 +16886,7 @@ pub mod discord_link_attempt_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(2, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(36, 29, 0, 0, 138, 29, 0, 0),
+      ::capnp::word(35, 29, 0, 0, 137, 29, 0, 0),
       ::capnp::word(21, 0, 0, 0, 42, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -17141,7 +17141,7 @@ pub mod featured_level_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(0, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(140, 29, 0, 0, 244, 29, 0, 0),
+      ::capnp::word(139, 29, 0, 0, 243, 29, 0, 0),
       ::capnp::word(21, 0, 0, 0, 2, 1, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -17430,7 +17430,7 @@ pub mod featured_list_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(2, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(246, 29, 0, 0, 130, 30, 0, 0),
+      ::capnp::word(245, 29, 0, 0, 129, 30, 0, 0),
       ::capnp::word(21, 0, 0, 0, 250, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -17685,7 +17685,7 @@ pub mod fetch_user_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(0, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(132, 30, 0, 0, 181, 30, 0, 0),
+      ::capnp::word(131, 30, 0, 0, 180, 30, 0, 0),
       ::capnp::word(21, 0, 0, 0, 226, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -17918,7 +17918,7 @@ pub mod fetch_user_response_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(183, 30, 0, 0, 34, 31, 0, 0),
+      ::capnp::word(182, 30, 0, 0, 33, 31, 0, 0),
       ::capnp::word(21, 0, 0, 0, 34, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -18164,7 +18164,7 @@ pub mod admin_login_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(54, 31, 0, 0, 105, 31, 0, 0),
+      ::capnp::word(53, 31, 0, 0, 104, 31, 0, 0),
       ::capnp::word(21, 0, 0, 0, 234, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -18385,7 +18385,7 @@ pub mod admin_kick_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(107, 31, 0, 0, 181, 31, 0, 0),
+      ::capnp::word(106, 31, 0, 0, 180, 31, 0, 0),
       ::capnp::word(21, 0, 0, 0, 226, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -18682,7 +18682,7 @@ pub mod admin_notice_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(2, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(183, 31, 0, 0, 113, 32, 0, 0),
+      ::capnp::word(182, 31, 0, 0, 112, 32, 0, 0),
       ::capnp::word(21, 0, 0, 0, 242, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -18973,7 +18973,7 @@ pub mod admin_notice_everyone_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(115, 32, 0, 0, 174, 32, 0, 0),
+      ::capnp::word(114, 32, 0, 0, 173, 32, 0, 0),
       ::capnp::word(21, 0, 0, 0, 50, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -19182,7 +19182,7 @@ pub mod admin_fetch_user_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(176, 32, 0, 0, 228, 32, 0, 0),
+      ::capnp::word(175, 32, 0, 0, 227, 32, 0, 0),
       ::capnp::word(21, 0, 0, 0, 10, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -19427,7 +19427,7 @@ pub mod user_punishment {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(230, 32, 0, 0, 93, 33, 0, 0),
+      ::capnp::word(229, 32, 0, 0, 92, 33, 0, 0),
       ::capnp::word(21, 0, 0, 0, 210, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -19815,7 +19815,7 @@ pub mod admin_fetch_response_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(4, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(95, 33, 0, 0, 112, 34, 0, 0),
+      ::capnp::word(94, 33, 0, 0, 111, 34, 0, 0),
       ::capnp::word(21, 0, 0, 0, 42, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -20206,7 +20206,7 @@ pub mod fetched_mod {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 34, 0, 0, 19, 35, 0, 0),
+      ::capnp::word(113, 34, 0, 0, 18, 35, 0, 0),
       ::capnp::word(21, 0, 0, 0, 178, 0, 0, 0),
       ::capnp::word(29, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -20496,7 +20496,7 @@ pub mod admin_fetch_mods_response_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(21, 35, 0, 0, 93, 35, 0, 0),
+      ::capnp::word(20, 35, 0, 0, 92, 35, 0, 0),
       ::capnp::word(21, 0, 0, 0, 74, 1, 0, 0),
       ::capnp::word(41, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -20770,7 +20770,7 @@ pub mod admin_fetch_logs_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(95, 35, 0, 0, 254, 35, 0, 0),
+      ::capnp::word(94, 35, 0, 0, 253, 35, 0, 0),
       ::capnp::word(21, 0, 0, 0, 10, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -21143,7 +21143,7 @@ pub mod audit_log {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(2, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 36, 0, 0, 184, 36, 0, 0),
+      ::capnp::word(255, 35, 0, 0, 183, 36, 0, 0),
       ::capnp::word(21, 0, 0, 0, 162, 0, 0, 0),
       ::capnp::word(29, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -21474,7 +21474,7 @@ pub mod admin_logs_response_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(2, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(186, 36, 0, 0, 36, 37, 0, 0),
+      ::capnp::word(185, 36, 0, 0, 35, 37, 0, 0),
       ::capnp::word(21, 0, 0, 0, 34, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -21732,7 +21732,7 @@ pub mod admin_ban_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(38, 37, 0, 0, 163, 37, 0, 0),
+      ::capnp::word(37, 37, 0, 0, 162, 37, 0, 0),
       ::capnp::word(21, 0, 0, 0, 218, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -21962,7 +21962,7 @@ pub mod admin_unban_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(0, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(165, 37, 0, 0, 218, 37, 0, 0),
+      ::capnp::word(164, 37, 0, 0, 217, 37, 0, 0),
       ::capnp::word(21, 0, 0, 0, 234, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -22195,7 +22195,7 @@ pub mod admin_room_ban_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(220, 37, 0, 0, 93, 38, 0, 0),
+      ::capnp::word(219, 37, 0, 0, 92, 38, 0, 0),
       ::capnp::word(21, 0, 0, 0, 250, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -22425,7 +22425,7 @@ pub mod admin_room_unban_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(0, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(95, 38, 0, 0, 152, 38, 0, 0),
+      ::capnp::word(94, 38, 0, 0, 151, 38, 0, 0),
       ::capnp::word(21, 0, 0, 0, 10, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -22659,7 +22659,7 @@ pub mod admin_mute_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(154, 38, 0, 0, 25, 39, 0, 0),
+      ::capnp::word(153, 38, 0, 0, 24, 39, 0, 0),
       ::capnp::word(21, 0, 0, 0, 226, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -22889,7 +22889,7 @@ pub mod admin_unmute_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(0, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(27, 39, 0, 0, 81, 39, 0, 0),
+      ::capnp::word(26, 39, 0, 0, 80, 39, 0, 0),
       ::capnp::word(21, 0, 0, 0, 242, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -23110,7 +23110,7 @@ pub mod admin_edit_roles_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(83, 39, 0, 0, 167, 39, 0, 0),
+      ::capnp::word(82, 39, 0, 0, 166, 39, 0, 0),
       ::capnp::word(21, 0, 0, 0, 10, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -23352,7 +23352,7 @@ pub mod admin_set_password_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(169, 39, 0, 0, 254, 39, 0, 0),
+      ::capnp::word(168, 39, 0, 0, 253, 39, 0, 0),
       ::capnp::word(21, 0, 0, 0, 26, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -23639,7 +23639,7 @@ pub mod admin_update_user_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 40, 0, 0, 173, 40, 0, 0),
+      ::capnp::word(255, 39, 0, 0, 172, 40, 0, 0),
       ::capnp::word(21, 0, 0, 0, 18, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -23907,7 +23907,7 @@ pub mod admin_fetch_mods_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(0, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(175, 40, 0, 0, 206, 40, 0, 0),
+      ::capnp::word(174, 40, 0, 0, 205, 40, 0, 0),
       ::capnp::word(21, 0, 0, 0, 10, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -24109,7 +24109,7 @@ pub mod admin_result_message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(208, 40, 0, 0, 23, 41, 0, 0),
+      ::capnp::word(207, 40, 0, 0, 22, 41, 0, 0),
       ::capnp::word(21, 0, 0, 0, 242, 0, 0, 0),
       ::capnp::word(33, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -24177,7 +24177,7 @@ pub mod admin_result_message {
 }
 
 pub mod message {
-  pub use self::Which::{Login,UpdateUserSettings,FetchUserResponse,LoginOk,LoginFailed,LoginRequired,UpdateOwnData,CreateRoom,JoinRoom,LeaveRoom,WarpPlayer,RoomState,JoinSession,LeaveSession,JoinFailed,Kicked,CheckRoomState,RequestPlayerCounts,PlayerCounts,RoomJoinFailed,RoomCreateFailed,RequestRoomList,RoomList,Banned,RoomBanned,AdminLogin,AdminKick,AdminNotice,AdminNoticeEveryone,AdminFetchUser,AdminBan,AdminUnban,AdminRoomBan,AdminRoomUnban,AdminEditRoles,AdminSetPassword,AdminResult,AdminFetchResponse,Notice,AdminUpdateUser,AdminFetchLogs,AdminLogsResponse,AssignTeam,CreateTeam,DeleteTeam,Warn,TeamCreationResult,TeamChanged,GetTeamMembers,TeamMembers,UpdateTeam,TeamsUpdated,AdminFetchMods,AdminFetchModsResponse,ServersChanged,RoomOwnerAction,UpdateRoomSettings,RoomSettingsUpdated,RequestLevelList,LevelList,RequestRoomPlayers,RoomPlayers,FetchCredits,Credits,JoinRoomByToken,InvitePlayer,Invited,InviteTokenCreated,RequestGlobalPlayerList,GlobalPlayers,AdminMute,AdminUnmute,GetDiscordLinkState,DiscordLinkState,DiscordLinkAttempt,SetDiscordPairingState,DiscordLinkConfirm,UserDataChanged,GetFeaturedLevel,GetFeaturedList,SendFeaturedLevel,FeaturedLevel,FeaturedList,FetchUser,Muted};
+  pub use self::Which::{Login,UpdateOwnData,RequestPlayerCounts,RequestGlobalPlayerList,UpdateUserSettings,CreateRoom,JoinRoom,JoinRoomByToken,LeaveRoom,CheckRoomState,RequestRoomPlayers,RequestRoomList,AssignTeam,CreateTeam,DeleteTeam,UpdateTeam,GetTeamMembers,RoomOwnerAction,UpdateRoomSettings,InvitePlayer,JoinSession,LeaveSession,RequestLevelList,AdminLogin,AdminKick,AdminNotice,AdminNoticeEveryone,AdminFetchUser,AdminFetchLogs,AdminBan,AdminUnban,AdminRoomBan,AdminRoomUnban,AdminMute,AdminUnmute,AdminEditRoles,AdminSetPassword,AdminUpdateUser,AdminFetchMods,FetchCredits,GetDiscordLinkState,SetDiscordPairingState,DiscordLinkConfirm,GetFeaturedLevel,GetFeaturedList,SendFeaturedLevel,FetchUser,LoginOk,LoginFailed,LoginRequired,Banned,Muted,ServersChanged,UserDataChanged,RoomState,RoomPlayers,RoomJoinFailed,RoomCreateFailed,RoomBanned,RoomList,TeamCreationResult,TeamChanged,TeamMembers,TeamsUpdated,RoomSettingsUpdated,Invited,InviteTokenCreated,JoinFailed,WarpPlayer,PlayerCounts,GlobalPlayers,LevelList,Kicked,Notice,Warn,AdminResult,AdminFetchResponse,AdminFetchModsResponse,AdminLogsResponse,Credits,DiscordLinkState,DiscordLinkAttempt,FeaturedLevel,FeaturedList,FetchUserResponse};
 
   #[derive(Copy, Clone)]
   pub struct Owned(());
@@ -24245,407 +24245,407 @@ pub mod message {
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_update_user_settings(&self) -> bool {
+    pub fn has_update_own_data(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 1 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_fetch_user_response(&self) -> bool {
+    pub fn has_request_player_counts(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 2 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_login_ok(&self) -> bool {
+    pub fn has_request_global_player_list(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 3 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_login_failed(&self) -> bool {
+    pub fn has_update_user_settings(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 4 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_login_required(&self) -> bool {
+    pub fn has_create_room(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 5 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_update_own_data(&self) -> bool {
+    pub fn has_join_room(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 6 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_create_room(&self) -> bool {
+    pub fn has_join_room_by_token(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 7 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_join_room(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 8 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_warp_player(&self) -> bool {
+    pub fn has_request_room_players(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 10 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_room_state(&self) -> bool {
+    pub fn has_request_room_list(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 11 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_join_session(&self) -> bool {
+    pub fn has_assign_team(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 12 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_leave_session(&self) -> bool {
+    pub fn has_create_team(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 13 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_join_failed(&self) -> bool {
+    pub fn has_delete_team(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 14 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_kicked(&self) -> bool {
+    pub fn has_update_team(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 15 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_request_player_counts(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 17 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_player_counts(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 18 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_room_join_failed(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 19 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_room_create_failed(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 20 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_request_room_list(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 21 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_room_list(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 22 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_banned(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 23 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_room_banned(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 24 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_login(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 25 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_kick(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 26 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_notice(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 27 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_notice_everyone(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 28 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_fetch_user(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 29 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_ban(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 30 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_unban(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 31 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_room_ban(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 32 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_room_unban(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 33 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_edit_roles(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 34 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_set_password(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 35 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_result(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 36 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_fetch_response(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 37 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_notice(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 38 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_update_user(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 39 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_fetch_logs(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 40 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_logs_response(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 41 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_assign_team(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 42 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_create_team(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 43 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_delete_team(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 44 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_warn(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 45 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_team_creation_result(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 46 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_team_changed(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 47 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
     pub fn has_get_team_members(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 48 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_team_members(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 49 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_update_team(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 50 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_teams_updated(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 51 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_fetch_mods(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 52 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_admin_fetch_mods_response(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 53 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_servers_changed(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 54 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 16 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_room_owner_action(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 55 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 17 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_update_room_settings(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 56 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_room_settings_updated(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 57 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_request_level_list(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 58 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_level_list(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 59 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_request_room_players(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 60 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_room_players(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 61 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_fetch_credits(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 62 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_credits(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 63 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_join_room_by_token(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 64 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 18 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_invite_player(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 65 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 19 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_invited(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 66 { return false; }
+    pub fn has_join_session(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 20 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_invite_token_created(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 67 { return false; }
+    pub fn has_leave_session(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 21 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_request_global_player_list(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 68 { return false; }
+    pub fn has_request_level_list(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 22 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
-    pub fn has_global_players(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 69 { return false; }
+    pub fn has_admin_login(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 23 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_kick(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 24 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_notice(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 25 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_notice_everyone(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 26 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_fetch_user(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 27 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_fetch_logs(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 28 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_ban(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 29 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_unban(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 30 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_room_ban(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 31 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_room_unban(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 32 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_admin_mute(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 70 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 33 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_admin_unmute(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 71 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 34 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_edit_roles(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 35 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_set_password(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 36 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_update_user(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 37 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_fetch_mods(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 38 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_fetch_credits(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 39 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_get_discord_link_state(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 72 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_discord_link_state(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 73 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_discord_link_attempt(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 74 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 40 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_set_discord_pairing_state(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 75 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 41 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_discord_link_confirm(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 76 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_user_data_changed(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 77 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 42 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_get_featured_list(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 79 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 44 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_send_featured_level(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 80 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_featured_level(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 81 { return false; }
-      !self.reader.get_pointer_field(0).is_null()
-    }
-    #[inline]
-    pub fn has_featured_list(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 82 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 45 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_fetch_user(&self) -> bool {
-      if self.reader.get_data_field::<u16>(0) != 83 { return false; }
+      if self.reader.get_data_field::<u16>(0) != 46 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_login_ok(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 47 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_login_failed(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 48 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_login_required(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 49 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_banned(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 50 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
     pub fn has_muted(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 51 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_servers_changed(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 52 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_user_data_changed(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 53 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_room_state(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 54 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_room_players(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 55 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_room_join_failed(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 56 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_room_create_failed(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 57 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_room_banned(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 58 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_room_list(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 59 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_team_creation_result(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 60 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_team_changed(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 61 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_team_members(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 62 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_teams_updated(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 63 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_room_settings_updated(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 64 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_invited(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 65 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_invite_token_created(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 66 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_join_failed(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 67 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_warp_player(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 68 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_player_counts(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 69 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_global_players(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 70 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_level_list(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 71 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_kicked(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 72 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_notice(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 73 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_warn(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 74 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_result(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 75 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_fetch_response(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 76 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_fetch_mods_response(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 77 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_admin_logs_response(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 78 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_credits(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 79 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_discord_link_state(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 80 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_discord_link_attempt(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 81 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_featured_level(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 82 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_featured_list(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 83 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
+    pub fn has_fetch_user_response(&self) -> bool {
       if self.reader.get_data_field::<u16>(0) != 84 { return false; }
       !self.reader.get_pointer_field(0).is_null()
     }
@@ -24658,422 +24658,422 @@ pub mod message {
           ))
         }
         1 => {
-          ::core::result::Result::Ok(UpdateUserSettings(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        2 => {
-          ::core::result::Result::Ok(FetchUserResponse(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        3 => {
-          ::core::result::Result::Ok(LoginOk(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        4 => {
-          ::core::result::Result::Ok(LoginFailed(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        5 => {
-          ::core::result::Result::Ok(LoginRequired(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        6 => {
           ::core::result::Result::Ok(UpdateOwnData(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        7 => {
-          ::core::result::Result::Ok(CreateRoom(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        8 => {
-          ::core::result::Result::Ok(JoinRoom(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        9 => {
-          ::core::result::Result::Ok(LeaveRoom(
-            ()
-          ))
-        }
-        10 => {
-          ::core::result::Result::Ok(WarpPlayer(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        11 => {
-          ::core::result::Result::Ok(RoomState(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        12 => {
-          ::core::result::Result::Ok(JoinSession(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        13 => {
-          ::core::result::Result::Ok(LeaveSession(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        14 => {
-          ::core::result::Result::Ok(JoinFailed(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        15 => {
-          ::core::result::Result::Ok(Kicked(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        16 => {
-          ::core::result::Result::Ok(CheckRoomState(
-            ()
-          ))
-        }
-        17 => {
+        2 => {
           ::core::result::Result::Ok(RequestPlayerCounts(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        18 => {
-          ::core::result::Result::Ok(PlayerCounts(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        19 => {
-          ::core::result::Result::Ok(RoomJoinFailed(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        20 => {
-          ::core::result::Result::Ok(RoomCreateFailed(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        21 => {
-          ::core::result::Result::Ok(RequestRoomList(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        22 => {
-          ::core::result::Result::Ok(RoomList(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        23 => {
-          ::core::result::Result::Ok(Banned(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        24 => {
-          ::core::result::Result::Ok(RoomBanned(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        25 => {
-          ::core::result::Result::Ok(AdminLogin(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        26 => {
-          ::core::result::Result::Ok(AdminKick(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        27 => {
-          ::core::result::Result::Ok(AdminNotice(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        28 => {
-          ::core::result::Result::Ok(AdminNoticeEveryone(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        29 => {
-          ::core::result::Result::Ok(AdminFetchUser(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        30 => {
-          ::core::result::Result::Ok(AdminBan(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        31 => {
-          ::core::result::Result::Ok(AdminUnban(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        32 => {
-          ::core::result::Result::Ok(AdminRoomBan(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        33 => {
-          ::core::result::Result::Ok(AdminRoomUnban(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        34 => {
-          ::core::result::Result::Ok(AdminEditRoles(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        35 => {
-          ::core::result::Result::Ok(AdminSetPassword(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        36 => {
-          ::core::result::Result::Ok(AdminResult(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        37 => {
-          ::core::result::Result::Ok(AdminFetchResponse(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        38 => {
-          ::core::result::Result::Ok(Notice(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        39 => {
-          ::core::result::Result::Ok(AdminUpdateUser(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        40 => {
-          ::core::result::Result::Ok(AdminFetchLogs(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        41 => {
-          ::core::result::Result::Ok(AdminLogsResponse(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        42 => {
-          ::core::result::Result::Ok(AssignTeam(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        43 => {
-          ::core::result::Result::Ok(CreateTeam(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        44 => {
-          ::core::result::Result::Ok(DeleteTeam(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        45 => {
-          ::core::result::Result::Ok(Warn(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        46 => {
-          ::core::result::Result::Ok(TeamCreationResult(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        47 => {
-          ::core::result::Result::Ok(TeamChanged(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        48 => {
-          ::core::result::Result::Ok(GetTeamMembers(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        49 => {
-          ::core::result::Result::Ok(TeamMembers(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        50 => {
-          ::core::result::Result::Ok(UpdateTeam(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        51 => {
-          ::core::result::Result::Ok(TeamsUpdated(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        52 => {
-          ::core::result::Result::Ok(AdminFetchMods(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        53 => {
-          ::core::result::Result::Ok(AdminFetchModsResponse(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        54 => {
-          ::core::result::Result::Ok(ServersChanged(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        55 => {
-          ::core::result::Result::Ok(RoomOwnerAction(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        56 => {
-          ::core::result::Result::Ok(UpdateRoomSettings(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        57 => {
-          ::core::result::Result::Ok(RoomSettingsUpdated(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        58 => {
-          ::core::result::Result::Ok(RequestLevelList(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        59 => {
-          ::core::result::Result::Ok(LevelList(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        60 => {
-          ::core::result::Result::Ok(RequestRoomPlayers(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        61 => {
-          ::core::result::Result::Ok(RoomPlayers(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        62 => {
-          ::core::result::Result::Ok(FetchCredits(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        63 => {
-          ::core::result::Result::Ok(Credits(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        64 => {
-          ::core::result::Result::Ok(JoinRoomByToken(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        65 => {
-          ::core::result::Result::Ok(InvitePlayer(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        66 => {
-          ::core::result::Result::Ok(Invited(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        67 => {
-          ::core::result::Result::Ok(InviteTokenCreated(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        68 => {
+        3 => {
           ::core::result::Result::Ok(RequestGlobalPlayerList(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        69 => {
-          ::core::result::Result::Ok(GlobalPlayers(
+        4 => {
+          ::core::result::Result::Ok(UpdateUserSettings(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        70 => {
+        5 => {
+          ::core::result::Result::Ok(CreateRoom(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        6 => {
+          ::core::result::Result::Ok(JoinRoom(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        7 => {
+          ::core::result::Result::Ok(JoinRoomByToken(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        8 => {
+          ::core::result::Result::Ok(LeaveRoom(
+            ()
+          ))
+        }
+        9 => {
+          ::core::result::Result::Ok(CheckRoomState(
+            ()
+          ))
+        }
+        10 => {
+          ::core::result::Result::Ok(RequestRoomPlayers(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        11 => {
+          ::core::result::Result::Ok(RequestRoomList(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        12 => {
+          ::core::result::Result::Ok(AssignTeam(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        13 => {
+          ::core::result::Result::Ok(CreateTeam(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        14 => {
+          ::core::result::Result::Ok(DeleteTeam(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        15 => {
+          ::core::result::Result::Ok(UpdateTeam(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        16 => {
+          ::core::result::Result::Ok(GetTeamMembers(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        17 => {
+          ::core::result::Result::Ok(RoomOwnerAction(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        18 => {
+          ::core::result::Result::Ok(UpdateRoomSettings(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        19 => {
+          ::core::result::Result::Ok(InvitePlayer(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        20 => {
+          ::core::result::Result::Ok(JoinSession(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        21 => {
+          ::core::result::Result::Ok(LeaveSession(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        22 => {
+          ::core::result::Result::Ok(RequestLevelList(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        23 => {
+          ::core::result::Result::Ok(AdminLogin(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        24 => {
+          ::core::result::Result::Ok(AdminKick(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        25 => {
+          ::core::result::Result::Ok(AdminNotice(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        26 => {
+          ::core::result::Result::Ok(AdminNoticeEveryone(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        27 => {
+          ::core::result::Result::Ok(AdminFetchUser(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        28 => {
+          ::core::result::Result::Ok(AdminFetchLogs(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        29 => {
+          ::core::result::Result::Ok(AdminBan(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        30 => {
+          ::core::result::Result::Ok(AdminUnban(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        31 => {
+          ::core::result::Result::Ok(AdminRoomBan(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        32 => {
+          ::core::result::Result::Ok(AdminRoomUnban(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        33 => {
           ::core::result::Result::Ok(AdminMute(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        71 => {
+        34 => {
           ::core::result::Result::Ok(AdminUnmute(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        72 => {
+        35 => {
+          ::core::result::Result::Ok(AdminEditRoles(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        36 => {
+          ::core::result::Result::Ok(AdminSetPassword(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        37 => {
+          ::core::result::Result::Ok(AdminUpdateUser(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        38 => {
+          ::core::result::Result::Ok(AdminFetchMods(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        39 => {
+          ::core::result::Result::Ok(FetchCredits(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        40 => {
           ::core::result::Result::Ok(GetDiscordLinkState(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        73 => {
-          ::core::result::Result::Ok(DiscordLinkState(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        74 => {
-          ::core::result::Result::Ok(DiscordLinkAttempt(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        75 => {
+        41 => {
           ::core::result::Result::Ok(SetDiscordPairingState(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        76 => {
+        42 => {
           ::core::result::Result::Ok(DiscordLinkConfirm(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        77 => {
-          ::core::result::Result::Ok(UserDataChanged(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        78 => {
+        43 => {
           ::core::result::Result::Ok(GetFeaturedLevel(
             ()
           ))
         }
-        79 => {
+        44 => {
           ::core::result::Result::Ok(GetFeaturedList(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        80 => {
+        45 => {
           ::core::result::Result::Ok(SendFeaturedLevel(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        81 => {
-          ::core::result::Result::Ok(FeaturedLevel(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        82 => {
-          ::core::result::Result::Ok(FeaturedList(
-            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        83 => {
+        46 => {
           ::core::result::Result::Ok(FetchUser(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        84 => {
+        47 => {
+          ::core::result::Result::Ok(LoginOk(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        48 => {
+          ::core::result::Result::Ok(LoginFailed(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        49 => {
+          ::core::result::Result::Ok(LoginRequired(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        50 => {
+          ::core::result::Result::Ok(Banned(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        51 => {
           ::core::result::Result::Ok(Muted(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        52 => {
+          ::core::result::Result::Ok(ServersChanged(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        53 => {
+          ::core::result::Result::Ok(UserDataChanged(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        54 => {
+          ::core::result::Result::Ok(RoomState(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        55 => {
+          ::core::result::Result::Ok(RoomPlayers(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        56 => {
+          ::core::result::Result::Ok(RoomJoinFailed(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        57 => {
+          ::core::result::Result::Ok(RoomCreateFailed(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        58 => {
+          ::core::result::Result::Ok(RoomBanned(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        59 => {
+          ::core::result::Result::Ok(RoomList(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        60 => {
+          ::core::result::Result::Ok(TeamCreationResult(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        61 => {
+          ::core::result::Result::Ok(TeamChanged(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        62 => {
+          ::core::result::Result::Ok(TeamMembers(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        63 => {
+          ::core::result::Result::Ok(TeamsUpdated(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        64 => {
+          ::core::result::Result::Ok(RoomSettingsUpdated(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        65 => {
+          ::core::result::Result::Ok(Invited(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        66 => {
+          ::core::result::Result::Ok(InviteTokenCreated(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        67 => {
+          ::core::result::Result::Ok(JoinFailed(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        68 => {
+          ::core::result::Result::Ok(WarpPlayer(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        69 => {
+          ::core::result::Result::Ok(PlayerCounts(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        70 => {
+          ::core::result::Result::Ok(GlobalPlayers(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        71 => {
+          ::core::result::Result::Ok(LevelList(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        72 => {
+          ::core::result::Result::Ok(Kicked(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        73 => {
+          ::core::result::Result::Ok(Notice(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        74 => {
+          ::core::result::Result::Ok(Warn(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        75 => {
+          ::core::result::Result::Ok(AdminResult(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        76 => {
+          ::core::result::Result::Ok(AdminFetchResponse(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        77 => {
+          ::core::result::Result::Ok(AdminFetchModsResponse(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        78 => {
+          ::core::result::Result::Ok(AdminLogsResponse(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        79 => {
+          ::core::result::Result::Ok(Credits(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        80 => {
+          ::core::result::Result::Ok(DiscordLinkState(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        81 => {
+          ::core::result::Result::Ok(DiscordLinkAttempt(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        82 => {
+          ::core::result::Result::Ok(FeaturedLevel(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        83 => {
+          ::core::result::Result::Ok(FeaturedList(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        84 => {
+          ::core::result::Result::Ok(FetchUserResponse(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
@@ -25150,1229 +25150,1229 @@ pub mod message {
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
-    pub fn set_update_user_settings(&mut self, value: crate::main_capnp::update_user_settings_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 1);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_update_user_settings(self, ) -> crate::main_capnp::update_user_settings_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 1);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_update_user_settings(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 1 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_fetch_user_response(&mut self, value: crate::main_capnp::fetch_user_response_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 2);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_fetch_user_response(self, ) -> crate::main_capnp::fetch_user_response_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 2);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_fetch_user_response(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 2 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_login_ok(&mut self, value: crate::main_capnp::login_ok_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 3);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_login_ok(self, ) -> crate::main_capnp::login_ok_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 3);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_login_ok(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 3 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_login_failed(&mut self, value: crate::main_capnp::login_failed_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 4);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_login_failed(self, ) -> crate::main_capnp::login_failed_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 4);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_login_failed(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 4 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_login_required(&mut self, value: crate::main_capnp::login_required_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 5);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_login_required(self, ) -> crate::main_capnp::login_required_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 5);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_login_required(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 5 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
     pub fn set_update_own_data(&mut self, value: crate::main_capnp::update_own_data_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 6);
+      self.builder.set_data_field::<u16>(0, 1);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_update_own_data(self, ) -> crate::main_capnp::update_own_data_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 6);
+      self.builder.set_data_field::<u16>(0, 1);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_update_own_data(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 6 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 1 { return false; }
       !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_create_room(&mut self, value: crate::main_capnp::create_room_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 7);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_create_room(self, ) -> crate::main_capnp::create_room_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 7);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_create_room(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 7 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_join_room(&mut self, value: crate::main_capnp::join_room_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 8);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_join_room(self, ) -> crate::main_capnp::join_room_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 8);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_join_room(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 8 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_leave_room(&mut self, _value: ())  {
-      self.builder.set_data_field::<u16>(0, 9);
-    }
-    #[inline]
-    pub fn set_warp_player(&mut self, value: crate::main_capnp::warp_player_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 10);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_warp_player(self, ) -> crate::main_capnp::warp_player_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 10);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_warp_player(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 10 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_room_state(&mut self, value: crate::main_capnp::room_state_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 11);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_room_state(self, ) -> crate::main_capnp::room_state_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 11);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_room_state(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 11 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_join_session(&mut self, value: crate::main_capnp::join_session_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 12);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_join_session(self, ) -> crate::main_capnp::join_session_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 12);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_join_session(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 12 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_leave_session(&mut self, value: crate::main_capnp::leave_session_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 13);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_leave_session(self, ) -> crate::main_capnp::leave_session_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 13);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_leave_session(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 13 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_join_failed(&mut self, value: crate::main_capnp::join_failed_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 14);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_join_failed(self, ) -> crate::main_capnp::join_failed_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 14);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_join_failed(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 14 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_kicked(&mut self, value: crate::main_capnp::kicked_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 15);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_kicked(self, ) -> crate::main_capnp::kicked_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 15);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_kicked(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 15 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_check_room_state(&mut self, _value: ())  {
-      self.builder.set_data_field::<u16>(0, 16);
     }
     #[inline]
     pub fn set_request_player_counts(&mut self, value: crate::main_capnp::request_player_counts_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 17);
+      self.builder.set_data_field::<u16>(0, 2);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_request_player_counts(self, ) -> crate::main_capnp::request_player_counts_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 17);
+      self.builder.set_data_field::<u16>(0, 2);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_request_player_counts(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 17 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_player_counts(&mut self, value: crate::main_capnp::player_counts_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 18);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_player_counts(self, ) -> crate::main_capnp::player_counts_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 18);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_player_counts(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 18 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_room_join_failed(&mut self, value: crate::main_capnp::room_join_failed_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 19);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_room_join_failed(self, ) -> crate::main_capnp::room_join_failed_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 19);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_room_join_failed(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 19 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_room_create_failed(&mut self, value: crate::main_capnp::room_create_failed_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 20);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_room_create_failed(self, ) -> crate::main_capnp::room_create_failed_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 20);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_room_create_failed(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 20 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_request_room_list(&mut self, value: crate::main_capnp::request_room_list_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 21);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_request_room_list(self, ) -> crate::main_capnp::request_room_list_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 21);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_request_room_list(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 21 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_room_list(&mut self, value: crate::main_capnp::room_list_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 22);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_room_list(self, ) -> crate::main_capnp::room_list_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 22);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_room_list(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 22 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_banned(&mut self, value: crate::main_capnp::banned_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 23);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_banned(self, ) -> crate::main_capnp::banned_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 23);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_banned(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 23 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_room_banned(&mut self, value: crate::main_capnp::room_banned_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 24);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_room_banned(self, ) -> crate::main_capnp::room_banned_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 24);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_room_banned(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 24 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_login(&mut self, value: crate::main_capnp::admin_login_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 25);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_login(self, ) -> crate::main_capnp::admin_login_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 25);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_login(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 25 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_kick(&mut self, value: crate::main_capnp::admin_kick_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 26);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_kick(self, ) -> crate::main_capnp::admin_kick_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 26);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_kick(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 26 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_notice(&mut self, value: crate::main_capnp::admin_notice_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 27);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_notice(self, ) -> crate::main_capnp::admin_notice_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 27);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_notice(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 27 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_notice_everyone(&mut self, value: crate::main_capnp::admin_notice_everyone_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 28);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_notice_everyone(self, ) -> crate::main_capnp::admin_notice_everyone_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 28);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_notice_everyone(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 28 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_fetch_user(&mut self, value: crate::main_capnp::admin_fetch_user_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 29);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_fetch_user(self, ) -> crate::main_capnp::admin_fetch_user_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 29);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_fetch_user(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 29 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_ban(&mut self, value: crate::main_capnp::admin_ban_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 30);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_ban(self, ) -> crate::main_capnp::admin_ban_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 30);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_ban(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 30 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_unban(&mut self, value: crate::main_capnp::admin_unban_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 31);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_unban(self, ) -> crate::main_capnp::admin_unban_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 31);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_unban(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 31 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_room_ban(&mut self, value: crate::main_capnp::admin_room_ban_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 32);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_room_ban(self, ) -> crate::main_capnp::admin_room_ban_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 32);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_room_ban(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 32 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_room_unban(&mut self, value: crate::main_capnp::admin_room_unban_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 33);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_room_unban(self, ) -> crate::main_capnp::admin_room_unban_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 33);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_room_unban(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 33 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_edit_roles(&mut self, value: crate::main_capnp::admin_edit_roles_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 34);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_edit_roles(self, ) -> crate::main_capnp::admin_edit_roles_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 34);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_edit_roles(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 34 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_set_password(&mut self, value: crate::main_capnp::admin_set_password_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 35);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_set_password(self, ) -> crate::main_capnp::admin_set_password_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 35);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_set_password(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 35 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_result(&mut self, value: crate::main_capnp::admin_result_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 36);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_result(self, ) -> crate::main_capnp::admin_result_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 36);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_result(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 36 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_fetch_response(&mut self, value: crate::main_capnp::admin_fetch_response_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 37);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_fetch_response(self, ) -> crate::main_capnp::admin_fetch_response_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 37);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_fetch_response(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 37 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_notice(&mut self, value: crate::main_capnp::notice_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 38);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_notice(self, ) -> crate::main_capnp::notice_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 38);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_notice(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 38 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_update_user(&mut self, value: crate::main_capnp::admin_update_user_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 39);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_update_user(self, ) -> crate::main_capnp::admin_update_user_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 39);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_update_user(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 39 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_fetch_logs(&mut self, value: crate::main_capnp::admin_fetch_logs_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 40);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_fetch_logs(self, ) -> crate::main_capnp::admin_fetch_logs_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 40);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_fetch_logs(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 40 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_logs_response(&mut self, value: crate::main_capnp::admin_logs_response_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 41);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_logs_response(self, ) -> crate::main_capnp::admin_logs_response_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 41);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_logs_response(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 41 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_assign_team(&mut self, value: crate::main_capnp::assign_team_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 42);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_assign_team(self, ) -> crate::main_capnp::assign_team_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 42);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_assign_team(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 42 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_create_team(&mut self, value: crate::main_capnp::create_team_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 43);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_create_team(self, ) -> crate::main_capnp::create_team_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 43);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_create_team(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 43 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_delete_team(&mut self, value: crate::main_capnp::delete_team_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 44);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_delete_team(self, ) -> crate::main_capnp::delete_team_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 44);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_delete_team(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 44 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_warn(&mut self, value: crate::main_capnp::warn_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 45);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_warn(self, ) -> crate::main_capnp::warn_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 45);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_warn(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 45 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_team_creation_result(&mut self, value: crate::main_capnp::team_creation_result_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 46);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_team_creation_result(self, ) -> crate::main_capnp::team_creation_result_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 46);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_team_creation_result(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 46 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_team_changed(&mut self, value: crate::main_capnp::team_changed_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 47);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_team_changed(self, ) -> crate::main_capnp::team_changed_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 47);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_team_changed(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 47 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_get_team_members(&mut self, value: crate::main_capnp::get_team_members_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 48);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_get_team_members(self, ) -> crate::main_capnp::get_team_members_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 48);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_get_team_members(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 48 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_team_members(&mut self, value: crate::main_capnp::team_members_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 49);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_team_members(self, ) -> crate::main_capnp::team_members_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 49);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_team_members(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 49 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_update_team(&mut self, value: crate::main_capnp::update_team_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 50);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_update_team(self, ) -> crate::main_capnp::update_team_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 50);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_update_team(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 50 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_teams_updated(&mut self, value: crate::main_capnp::teams_updated_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 51);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_teams_updated(self, ) -> crate::main_capnp::teams_updated_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 51);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_teams_updated(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 51 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_fetch_mods(&mut self, value: crate::main_capnp::admin_fetch_mods_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 52);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_fetch_mods(self, ) -> crate::main_capnp::admin_fetch_mods_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 52);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_fetch_mods(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 52 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_admin_fetch_mods_response(&mut self, value: crate::main_capnp::admin_fetch_mods_response_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 53);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_admin_fetch_mods_response(self, ) -> crate::main_capnp::admin_fetch_mods_response_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 53);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_admin_fetch_mods_response(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 53 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_servers_changed(&mut self, value: crate::main_capnp::servers_changed_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 54);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_servers_changed(self, ) -> crate::main_capnp::servers_changed_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 54);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_servers_changed(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 54 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_room_owner_action(&mut self, value: crate::main_capnp::room_owner_action_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 55);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_room_owner_action(self, ) -> crate::main_capnp::room_owner_action_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 55);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_room_owner_action(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 55 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_update_room_settings(&mut self, value: crate::main_capnp::update_room_settings_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 56);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_update_room_settings(self, ) -> crate::main_capnp::update_room_settings_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 56);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_update_room_settings(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 56 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_room_settings_updated(&mut self, value: crate::main_capnp::room_settings_updated_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 57);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_room_settings_updated(self, ) -> crate::main_capnp::room_settings_updated_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 57);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_room_settings_updated(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 57 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_request_level_list(&mut self, value: crate::main_capnp::request_level_list_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 58);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_request_level_list(self, ) -> crate::main_capnp::request_level_list_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 58);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_request_level_list(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 58 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_level_list(&mut self, value: crate::main_capnp::level_list_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 59);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_level_list(self, ) -> crate::main_capnp::level_list_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 59);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_level_list(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 59 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_request_room_players(&mut self, value: crate::main_capnp::request_room_players_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 60);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_request_room_players(self, ) -> crate::main_capnp::request_room_players_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 60);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_request_room_players(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 60 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_room_players(&mut self, value: crate::main_capnp::room_players_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 61);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_room_players(self, ) -> crate::main_capnp::room_players_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 61);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_room_players(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 61 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_fetch_credits(&mut self, value: crate::main_capnp::fetch_credits_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 62);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_fetch_credits(self, ) -> crate::main_capnp::fetch_credits_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 62);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_fetch_credits(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 62 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_credits(&mut self, value: crate::main_capnp::credits_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 63);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_credits(self, ) -> crate::main_capnp::credits_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 63);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_credits(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 63 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_join_room_by_token(&mut self, value: crate::main_capnp::join_room_by_token_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 64);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_join_room_by_token(self, ) -> crate::main_capnp::join_room_by_token_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 64);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_join_room_by_token(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 64 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_invite_player(&mut self, value: crate::main_capnp::invite_player_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 65);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_invite_player(self, ) -> crate::main_capnp::invite_player_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 65);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_invite_player(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 65 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_invited(&mut self, value: crate::main_capnp::invited_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 66);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_invited(self, ) -> crate::main_capnp::invited_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 66);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_invited(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 66 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_invite_token_created(&mut self, value: crate::main_capnp::invite_token_created_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 67);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_invite_token_created(self, ) -> crate::main_capnp::invite_token_created_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 67);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_invite_token_created(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 67 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 2 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_request_global_player_list(&mut self, value: crate::main_capnp::request_global_player_list_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 68);
+      self.builder.set_data_field::<u16>(0, 3);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_request_global_player_list(self, ) -> crate::main_capnp::request_global_player_list_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 68);
+      self.builder.set_data_field::<u16>(0, 3);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_request_global_player_list(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 68 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 3 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
-    pub fn set_global_players(&mut self, value: crate::main_capnp::global_players_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 69);
+    pub fn set_update_user_settings(&mut self, value: crate::main_capnp::update_user_settings_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 4);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
-    pub fn init_global_players(self, ) -> crate::main_capnp::global_players_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 69);
+    pub fn init_update_user_settings(self, ) -> crate::main_capnp::update_user_settings_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 4);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
-    pub fn has_global_players(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 69 { return false; }
+    pub fn has_update_user_settings(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 4 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_create_room(&mut self, value: crate::main_capnp::create_room_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 5);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_create_room(self, ) -> crate::main_capnp::create_room_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 5);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_create_room(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 5 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_join_room(&mut self, value: crate::main_capnp::join_room_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 6);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_join_room(self, ) -> crate::main_capnp::join_room_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 6);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_join_room(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 6 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_join_room_by_token(&mut self, value: crate::main_capnp::join_room_by_token_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 7);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_join_room_by_token(self, ) -> crate::main_capnp::join_room_by_token_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 7);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_join_room_by_token(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 7 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_leave_room(&mut self, _value: ())  {
+      self.builder.set_data_field::<u16>(0, 8);
+    }
+    #[inline]
+    pub fn set_check_room_state(&mut self, _value: ())  {
+      self.builder.set_data_field::<u16>(0, 9);
+    }
+    #[inline]
+    pub fn set_request_room_players(&mut self, value: crate::main_capnp::request_room_players_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 10);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_request_room_players(self, ) -> crate::main_capnp::request_room_players_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 10);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_request_room_players(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 10 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_request_room_list(&mut self, value: crate::main_capnp::request_room_list_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 11);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_request_room_list(self, ) -> crate::main_capnp::request_room_list_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 11);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_request_room_list(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 11 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_assign_team(&mut self, value: crate::main_capnp::assign_team_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 12);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_assign_team(self, ) -> crate::main_capnp::assign_team_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 12);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_assign_team(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 12 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_create_team(&mut self, value: crate::main_capnp::create_team_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 13);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_create_team(self, ) -> crate::main_capnp::create_team_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 13);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_create_team(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 13 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_delete_team(&mut self, value: crate::main_capnp::delete_team_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 14);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_delete_team(self, ) -> crate::main_capnp::delete_team_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 14);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_delete_team(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 14 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_update_team(&mut self, value: crate::main_capnp::update_team_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 15);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_update_team(self, ) -> crate::main_capnp::update_team_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 15);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_update_team(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 15 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_get_team_members(&mut self, value: crate::main_capnp::get_team_members_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 16);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_get_team_members(self, ) -> crate::main_capnp::get_team_members_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 16);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_get_team_members(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 16 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_room_owner_action(&mut self, value: crate::main_capnp::room_owner_action_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 17);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_room_owner_action(self, ) -> crate::main_capnp::room_owner_action_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 17);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_room_owner_action(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 17 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_update_room_settings(&mut self, value: crate::main_capnp::update_room_settings_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 18);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_update_room_settings(self, ) -> crate::main_capnp::update_room_settings_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 18);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_update_room_settings(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 18 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_invite_player(&mut self, value: crate::main_capnp::invite_player_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 19);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_invite_player(self, ) -> crate::main_capnp::invite_player_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 19);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_invite_player(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 19 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_join_session(&mut self, value: crate::main_capnp::join_session_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 20);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_join_session(self, ) -> crate::main_capnp::join_session_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 20);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_join_session(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 20 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_leave_session(&mut self, value: crate::main_capnp::leave_session_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 21);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_leave_session(self, ) -> crate::main_capnp::leave_session_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 21);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_leave_session(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 21 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_request_level_list(&mut self, value: crate::main_capnp::request_level_list_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 22);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_request_level_list(self, ) -> crate::main_capnp::request_level_list_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 22);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_request_level_list(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 22 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_login(&mut self, value: crate::main_capnp::admin_login_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 23);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_login(self, ) -> crate::main_capnp::admin_login_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 23);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_login(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 23 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_kick(&mut self, value: crate::main_capnp::admin_kick_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 24);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_kick(self, ) -> crate::main_capnp::admin_kick_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 24);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_kick(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 24 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_notice(&mut self, value: crate::main_capnp::admin_notice_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 25);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_notice(self, ) -> crate::main_capnp::admin_notice_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 25);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_notice(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 25 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_notice_everyone(&mut self, value: crate::main_capnp::admin_notice_everyone_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 26);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_notice_everyone(self, ) -> crate::main_capnp::admin_notice_everyone_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 26);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_notice_everyone(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 26 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_fetch_user(&mut self, value: crate::main_capnp::admin_fetch_user_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 27);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_fetch_user(self, ) -> crate::main_capnp::admin_fetch_user_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 27);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_fetch_user(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 27 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_fetch_logs(&mut self, value: crate::main_capnp::admin_fetch_logs_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 28);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_fetch_logs(self, ) -> crate::main_capnp::admin_fetch_logs_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 28);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_fetch_logs(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 28 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_ban(&mut self, value: crate::main_capnp::admin_ban_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 29);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_ban(self, ) -> crate::main_capnp::admin_ban_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 29);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_ban(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 29 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_unban(&mut self, value: crate::main_capnp::admin_unban_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 30);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_unban(self, ) -> crate::main_capnp::admin_unban_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 30);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_unban(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 30 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_room_ban(&mut self, value: crate::main_capnp::admin_room_ban_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 31);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_room_ban(self, ) -> crate::main_capnp::admin_room_ban_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 31);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_room_ban(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 31 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_room_unban(&mut self, value: crate::main_capnp::admin_room_unban_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 32);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_room_unban(self, ) -> crate::main_capnp::admin_room_unban_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 32);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_room_unban(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 32 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_admin_mute(&mut self, value: crate::main_capnp::admin_mute_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 70);
+      self.builder.set_data_field::<u16>(0, 33);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_admin_mute(self, ) -> crate::main_capnp::admin_mute_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 70);
+      self.builder.set_data_field::<u16>(0, 33);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_admin_mute(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 70 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 33 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_admin_unmute(&mut self, value: crate::main_capnp::admin_unmute_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 71);
+      self.builder.set_data_field::<u16>(0, 34);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_admin_unmute(self, ) -> crate::main_capnp::admin_unmute_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 71);
+      self.builder.set_data_field::<u16>(0, 34);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_admin_unmute(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 71 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 34 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_edit_roles(&mut self, value: crate::main_capnp::admin_edit_roles_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 35);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_edit_roles(self, ) -> crate::main_capnp::admin_edit_roles_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 35);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_edit_roles(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 35 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_set_password(&mut self, value: crate::main_capnp::admin_set_password_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 36);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_set_password(self, ) -> crate::main_capnp::admin_set_password_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 36);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_set_password(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 36 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_update_user(&mut self, value: crate::main_capnp::admin_update_user_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 37);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_update_user(self, ) -> crate::main_capnp::admin_update_user_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 37);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_update_user(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 37 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_fetch_mods(&mut self, value: crate::main_capnp::admin_fetch_mods_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 38);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_fetch_mods(self, ) -> crate::main_capnp::admin_fetch_mods_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 38);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_fetch_mods(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 38 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_fetch_credits(&mut self, value: crate::main_capnp::fetch_credits_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 39);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_fetch_credits(self, ) -> crate::main_capnp::fetch_credits_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 39);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_fetch_credits(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 39 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_get_discord_link_state(&mut self, value: crate::main_capnp::get_discord_link_state_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 72);
+      self.builder.set_data_field::<u16>(0, 40);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_get_discord_link_state(self, ) -> crate::main_capnp::get_discord_link_state_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 72);
+      self.builder.set_data_field::<u16>(0, 40);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_get_discord_link_state(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 72 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_discord_link_state(&mut self, value: crate::main_capnp::discord_link_state_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 73);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_discord_link_state(self, ) -> crate::main_capnp::discord_link_state_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 73);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_discord_link_state(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 73 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_discord_link_attempt(&mut self, value: crate::main_capnp::discord_link_attempt_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 74);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_discord_link_attempt(self, ) -> crate::main_capnp::discord_link_attempt_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 74);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_discord_link_attempt(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 74 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 40 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_set_discord_pairing_state(&mut self, value: crate::main_capnp::set_discord_pairing_state_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 75);
+      self.builder.set_data_field::<u16>(0, 41);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_set_discord_pairing_state(self, ) -> crate::main_capnp::set_discord_pairing_state_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 75);
+      self.builder.set_data_field::<u16>(0, 41);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_set_discord_pairing_state(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 75 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 41 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_discord_link_confirm(&mut self, value: crate::main_capnp::discord_link_confirm_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 76);
+      self.builder.set_data_field::<u16>(0, 42);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_discord_link_confirm(self, ) -> crate::main_capnp::discord_link_confirm_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 76);
+      self.builder.set_data_field::<u16>(0, 42);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_discord_link_confirm(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 76 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_user_data_changed(&mut self, value: crate::main_capnp::user_data_changed_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 77);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_user_data_changed(self, ) -> crate::main_capnp::user_data_changed_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 77);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_user_data_changed(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 77 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 42 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_get_featured_level(&mut self, _value: ())  {
-      self.builder.set_data_field::<u16>(0, 78);
+      self.builder.set_data_field::<u16>(0, 43);
     }
     #[inline]
     pub fn set_get_featured_list(&mut self, value: crate::main_capnp::get_featured_list_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 79);
+      self.builder.set_data_field::<u16>(0, 44);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_get_featured_list(self, ) -> crate::main_capnp::get_featured_list_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 79);
+      self.builder.set_data_field::<u16>(0, 44);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_get_featured_list(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 79 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 44 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_send_featured_level(&mut self, value: crate::main_capnp::send_featured_level_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 80);
+      self.builder.set_data_field::<u16>(0, 45);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_send_featured_level(self, ) -> crate::main_capnp::send_featured_level_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 80);
+      self.builder.set_data_field::<u16>(0, 45);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_send_featured_level(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 80 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_featured_level(&mut self, value: crate::main_capnp::featured_level_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 81);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_featured_level(self, ) -> crate::main_capnp::featured_level_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 81);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_featured_level(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 81 { return false; }
-      !self.builder.is_pointer_field_null(0)
-    }
-    #[inline]
-    pub fn set_featured_list(&mut self, value: crate::main_capnp::featured_list_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 82);
-      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
-    }
-    #[inline]
-    pub fn init_featured_list(self, ) -> crate::main_capnp::featured_list_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 82);
-      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
-    }
-    #[inline]
-    pub fn has_featured_list(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 82 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 45 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_fetch_user(&mut self, value: crate::main_capnp::fetch_user_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 83);
+      self.builder.set_data_field::<u16>(0, 46);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_fetch_user(self, ) -> crate::main_capnp::fetch_user_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 83);
+      self.builder.set_data_field::<u16>(0, 46);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_fetch_user(&self) -> bool {
-      if self.builder.get_data_field::<u16>(0) != 83 { return false; }
+      if self.builder.get_data_field::<u16>(0) != 46 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_login_ok(&mut self, value: crate::main_capnp::login_ok_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 47);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_login_ok(self, ) -> crate::main_capnp::login_ok_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 47);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_login_ok(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 47 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_login_failed(&mut self, value: crate::main_capnp::login_failed_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 48);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_login_failed(self, ) -> crate::main_capnp::login_failed_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 48);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_login_failed(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 48 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_login_required(&mut self, value: crate::main_capnp::login_required_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 49);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_login_required(self, ) -> crate::main_capnp::login_required_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 49);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_login_required(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 49 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_banned(&mut self, value: crate::main_capnp::banned_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 50);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_banned(self, ) -> crate::main_capnp::banned_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 50);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_banned(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 50 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
     pub fn set_muted(&mut self, value: crate::main_capnp::muted_message::Reader<'_>) -> ::capnp::Result<()> {
-      self.builder.set_data_field::<u16>(0, 84);
+      self.builder.set_data_field::<u16>(0, 51);
       ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
     }
     #[inline]
     pub fn init_muted(self, ) -> crate::main_capnp::muted_message::Builder<'a> {
-      self.builder.set_data_field::<u16>(0, 84);
+      self.builder.set_data_field::<u16>(0, 51);
       ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
     }
     #[inline]
     pub fn has_muted(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 51 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_servers_changed(&mut self, value: crate::main_capnp::servers_changed_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 52);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_servers_changed(self, ) -> crate::main_capnp::servers_changed_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 52);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_servers_changed(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 52 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_user_data_changed(&mut self, value: crate::main_capnp::user_data_changed_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 53);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_user_data_changed(self, ) -> crate::main_capnp::user_data_changed_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 53);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_user_data_changed(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 53 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_room_state(&mut self, value: crate::main_capnp::room_state_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 54);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_room_state(self, ) -> crate::main_capnp::room_state_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 54);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_room_state(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 54 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_room_players(&mut self, value: crate::main_capnp::room_players_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 55);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_room_players(self, ) -> crate::main_capnp::room_players_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 55);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_room_players(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 55 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_room_join_failed(&mut self, value: crate::main_capnp::room_join_failed_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 56);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_room_join_failed(self, ) -> crate::main_capnp::room_join_failed_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 56);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_room_join_failed(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 56 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_room_create_failed(&mut self, value: crate::main_capnp::room_create_failed_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 57);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_room_create_failed(self, ) -> crate::main_capnp::room_create_failed_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 57);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_room_create_failed(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 57 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_room_banned(&mut self, value: crate::main_capnp::room_banned_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 58);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_room_banned(self, ) -> crate::main_capnp::room_banned_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 58);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_room_banned(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 58 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_room_list(&mut self, value: crate::main_capnp::room_list_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 59);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_room_list(self, ) -> crate::main_capnp::room_list_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 59);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_room_list(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 59 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_team_creation_result(&mut self, value: crate::main_capnp::team_creation_result_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 60);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_team_creation_result(self, ) -> crate::main_capnp::team_creation_result_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 60);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_team_creation_result(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 60 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_team_changed(&mut self, value: crate::main_capnp::team_changed_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 61);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_team_changed(self, ) -> crate::main_capnp::team_changed_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 61);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_team_changed(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 61 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_team_members(&mut self, value: crate::main_capnp::team_members_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 62);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_team_members(self, ) -> crate::main_capnp::team_members_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 62);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_team_members(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 62 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_teams_updated(&mut self, value: crate::main_capnp::teams_updated_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 63);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_teams_updated(self, ) -> crate::main_capnp::teams_updated_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 63);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_teams_updated(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 63 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_room_settings_updated(&mut self, value: crate::main_capnp::room_settings_updated_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 64);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_room_settings_updated(self, ) -> crate::main_capnp::room_settings_updated_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 64);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_room_settings_updated(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 64 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_invited(&mut self, value: crate::main_capnp::invited_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 65);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_invited(self, ) -> crate::main_capnp::invited_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 65);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_invited(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 65 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_invite_token_created(&mut self, value: crate::main_capnp::invite_token_created_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 66);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_invite_token_created(self, ) -> crate::main_capnp::invite_token_created_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 66);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_invite_token_created(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 66 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_join_failed(&mut self, value: crate::main_capnp::join_failed_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 67);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_join_failed(self, ) -> crate::main_capnp::join_failed_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 67);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_join_failed(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 67 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_warp_player(&mut self, value: crate::main_capnp::warp_player_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 68);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_warp_player(self, ) -> crate::main_capnp::warp_player_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 68);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_warp_player(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 68 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_player_counts(&mut self, value: crate::main_capnp::player_counts_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 69);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_player_counts(self, ) -> crate::main_capnp::player_counts_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 69);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_player_counts(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 69 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_global_players(&mut self, value: crate::main_capnp::global_players_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 70);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_global_players(self, ) -> crate::main_capnp::global_players_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 70);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_global_players(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 70 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_level_list(&mut self, value: crate::main_capnp::level_list_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 71);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_level_list(self, ) -> crate::main_capnp::level_list_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 71);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_level_list(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 71 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_kicked(&mut self, value: crate::main_capnp::kicked_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 72);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_kicked(self, ) -> crate::main_capnp::kicked_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 72);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_kicked(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 72 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_notice(&mut self, value: crate::main_capnp::notice_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 73);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_notice(self, ) -> crate::main_capnp::notice_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 73);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_notice(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 73 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_warn(&mut self, value: crate::main_capnp::warn_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 74);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_warn(self, ) -> crate::main_capnp::warn_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 74);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_warn(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 74 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_result(&mut self, value: crate::main_capnp::admin_result_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 75);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_result(self, ) -> crate::main_capnp::admin_result_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 75);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_result(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 75 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_fetch_response(&mut self, value: crate::main_capnp::admin_fetch_response_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 76);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_fetch_response(self, ) -> crate::main_capnp::admin_fetch_response_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 76);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_fetch_response(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 76 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_fetch_mods_response(&mut self, value: crate::main_capnp::admin_fetch_mods_response_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 77);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_fetch_mods_response(self, ) -> crate::main_capnp::admin_fetch_mods_response_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 77);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_fetch_mods_response(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 77 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_admin_logs_response(&mut self, value: crate::main_capnp::admin_logs_response_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 78);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_admin_logs_response(self, ) -> crate::main_capnp::admin_logs_response_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 78);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_admin_logs_response(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 78 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_credits(&mut self, value: crate::main_capnp::credits_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 79);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_credits(self, ) -> crate::main_capnp::credits_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 79);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_credits(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 79 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_discord_link_state(&mut self, value: crate::main_capnp::discord_link_state_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 80);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_discord_link_state(self, ) -> crate::main_capnp::discord_link_state_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 80);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_discord_link_state(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 80 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_discord_link_attempt(&mut self, value: crate::main_capnp::discord_link_attempt_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 81);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_discord_link_attempt(self, ) -> crate::main_capnp::discord_link_attempt_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 81);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_discord_link_attempt(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 81 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_featured_level(&mut self, value: crate::main_capnp::featured_level_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 82);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_featured_level(self, ) -> crate::main_capnp::featured_level_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 82);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_featured_level(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 82 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_featured_list(&mut self, value: crate::main_capnp::featured_list_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 83);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_featured_list(self, ) -> crate::main_capnp::featured_list_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 83);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_featured_list(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 83 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
+    pub fn set_fetch_user_response(&mut self, value: crate::main_capnp::fetch_user_response_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 84);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_fetch_user_response(self, ) -> crate::main_capnp::fetch_user_response_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 84);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_fetch_user_response(&self) -> bool {
       if self.builder.get_data_field::<u16>(0) != 84 { return false; }
       !self.builder.is_pointer_field_null(0)
     }
@@ -26385,422 +26385,422 @@ pub mod message {
           ))
         }
         1 => {
-          ::core::result::Result::Ok(UpdateUserSettings(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        2 => {
-          ::core::result::Result::Ok(FetchUserResponse(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        3 => {
-          ::core::result::Result::Ok(LoginOk(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        4 => {
-          ::core::result::Result::Ok(LoginFailed(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        5 => {
-          ::core::result::Result::Ok(LoginRequired(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        6 => {
           ::core::result::Result::Ok(UpdateOwnData(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        7 => {
-          ::core::result::Result::Ok(CreateRoom(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        8 => {
-          ::core::result::Result::Ok(JoinRoom(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        9 => {
-          ::core::result::Result::Ok(LeaveRoom(
-            ()
-          ))
-        }
-        10 => {
-          ::core::result::Result::Ok(WarpPlayer(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        11 => {
-          ::core::result::Result::Ok(RoomState(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        12 => {
-          ::core::result::Result::Ok(JoinSession(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        13 => {
-          ::core::result::Result::Ok(LeaveSession(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        14 => {
-          ::core::result::Result::Ok(JoinFailed(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        15 => {
-          ::core::result::Result::Ok(Kicked(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        16 => {
-          ::core::result::Result::Ok(CheckRoomState(
-            ()
-          ))
-        }
-        17 => {
+        2 => {
           ::core::result::Result::Ok(RequestPlayerCounts(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        18 => {
-          ::core::result::Result::Ok(PlayerCounts(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        19 => {
-          ::core::result::Result::Ok(RoomJoinFailed(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        20 => {
-          ::core::result::Result::Ok(RoomCreateFailed(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        21 => {
-          ::core::result::Result::Ok(RequestRoomList(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        22 => {
-          ::core::result::Result::Ok(RoomList(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        23 => {
-          ::core::result::Result::Ok(Banned(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        24 => {
-          ::core::result::Result::Ok(RoomBanned(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        25 => {
-          ::core::result::Result::Ok(AdminLogin(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        26 => {
-          ::core::result::Result::Ok(AdminKick(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        27 => {
-          ::core::result::Result::Ok(AdminNotice(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        28 => {
-          ::core::result::Result::Ok(AdminNoticeEveryone(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        29 => {
-          ::core::result::Result::Ok(AdminFetchUser(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        30 => {
-          ::core::result::Result::Ok(AdminBan(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        31 => {
-          ::core::result::Result::Ok(AdminUnban(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        32 => {
-          ::core::result::Result::Ok(AdminRoomBan(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        33 => {
-          ::core::result::Result::Ok(AdminRoomUnban(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        34 => {
-          ::core::result::Result::Ok(AdminEditRoles(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        35 => {
-          ::core::result::Result::Ok(AdminSetPassword(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        36 => {
-          ::core::result::Result::Ok(AdminResult(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        37 => {
-          ::core::result::Result::Ok(AdminFetchResponse(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        38 => {
-          ::core::result::Result::Ok(Notice(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        39 => {
-          ::core::result::Result::Ok(AdminUpdateUser(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        40 => {
-          ::core::result::Result::Ok(AdminFetchLogs(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        41 => {
-          ::core::result::Result::Ok(AdminLogsResponse(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        42 => {
-          ::core::result::Result::Ok(AssignTeam(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        43 => {
-          ::core::result::Result::Ok(CreateTeam(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        44 => {
-          ::core::result::Result::Ok(DeleteTeam(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        45 => {
-          ::core::result::Result::Ok(Warn(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        46 => {
-          ::core::result::Result::Ok(TeamCreationResult(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        47 => {
-          ::core::result::Result::Ok(TeamChanged(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        48 => {
-          ::core::result::Result::Ok(GetTeamMembers(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        49 => {
-          ::core::result::Result::Ok(TeamMembers(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        50 => {
-          ::core::result::Result::Ok(UpdateTeam(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        51 => {
-          ::core::result::Result::Ok(TeamsUpdated(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        52 => {
-          ::core::result::Result::Ok(AdminFetchMods(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        53 => {
-          ::core::result::Result::Ok(AdminFetchModsResponse(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        54 => {
-          ::core::result::Result::Ok(ServersChanged(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        55 => {
-          ::core::result::Result::Ok(RoomOwnerAction(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        56 => {
-          ::core::result::Result::Ok(UpdateRoomSettings(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        57 => {
-          ::core::result::Result::Ok(RoomSettingsUpdated(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        58 => {
-          ::core::result::Result::Ok(RequestLevelList(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        59 => {
-          ::core::result::Result::Ok(LevelList(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        60 => {
-          ::core::result::Result::Ok(RequestRoomPlayers(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        61 => {
-          ::core::result::Result::Ok(RoomPlayers(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        62 => {
-          ::core::result::Result::Ok(FetchCredits(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        63 => {
-          ::core::result::Result::Ok(Credits(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        64 => {
-          ::core::result::Result::Ok(JoinRoomByToken(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        65 => {
-          ::core::result::Result::Ok(InvitePlayer(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        66 => {
-          ::core::result::Result::Ok(Invited(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        67 => {
-          ::core::result::Result::Ok(InviteTokenCreated(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        68 => {
+        3 => {
           ::core::result::Result::Ok(RequestGlobalPlayerList(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        69 => {
-          ::core::result::Result::Ok(GlobalPlayers(
+        4 => {
+          ::core::result::Result::Ok(UpdateUserSettings(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        70 => {
+        5 => {
+          ::core::result::Result::Ok(CreateRoom(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        6 => {
+          ::core::result::Result::Ok(JoinRoom(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        7 => {
+          ::core::result::Result::Ok(JoinRoomByToken(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        8 => {
+          ::core::result::Result::Ok(LeaveRoom(
+            ()
+          ))
+        }
+        9 => {
+          ::core::result::Result::Ok(CheckRoomState(
+            ()
+          ))
+        }
+        10 => {
+          ::core::result::Result::Ok(RequestRoomPlayers(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        11 => {
+          ::core::result::Result::Ok(RequestRoomList(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        12 => {
+          ::core::result::Result::Ok(AssignTeam(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        13 => {
+          ::core::result::Result::Ok(CreateTeam(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        14 => {
+          ::core::result::Result::Ok(DeleteTeam(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        15 => {
+          ::core::result::Result::Ok(UpdateTeam(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        16 => {
+          ::core::result::Result::Ok(GetTeamMembers(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        17 => {
+          ::core::result::Result::Ok(RoomOwnerAction(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        18 => {
+          ::core::result::Result::Ok(UpdateRoomSettings(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        19 => {
+          ::core::result::Result::Ok(InvitePlayer(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        20 => {
+          ::core::result::Result::Ok(JoinSession(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        21 => {
+          ::core::result::Result::Ok(LeaveSession(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        22 => {
+          ::core::result::Result::Ok(RequestLevelList(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        23 => {
+          ::core::result::Result::Ok(AdminLogin(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        24 => {
+          ::core::result::Result::Ok(AdminKick(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        25 => {
+          ::core::result::Result::Ok(AdminNotice(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        26 => {
+          ::core::result::Result::Ok(AdminNoticeEveryone(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        27 => {
+          ::core::result::Result::Ok(AdminFetchUser(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        28 => {
+          ::core::result::Result::Ok(AdminFetchLogs(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        29 => {
+          ::core::result::Result::Ok(AdminBan(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        30 => {
+          ::core::result::Result::Ok(AdminUnban(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        31 => {
+          ::core::result::Result::Ok(AdminRoomBan(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        32 => {
+          ::core::result::Result::Ok(AdminRoomUnban(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        33 => {
           ::core::result::Result::Ok(AdminMute(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        71 => {
+        34 => {
           ::core::result::Result::Ok(AdminUnmute(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        72 => {
+        35 => {
+          ::core::result::Result::Ok(AdminEditRoles(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        36 => {
+          ::core::result::Result::Ok(AdminSetPassword(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        37 => {
+          ::core::result::Result::Ok(AdminUpdateUser(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        38 => {
+          ::core::result::Result::Ok(AdminFetchMods(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        39 => {
+          ::core::result::Result::Ok(FetchCredits(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        40 => {
           ::core::result::Result::Ok(GetDiscordLinkState(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        73 => {
-          ::core::result::Result::Ok(DiscordLinkState(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        74 => {
-          ::core::result::Result::Ok(DiscordLinkAttempt(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        75 => {
+        41 => {
           ::core::result::Result::Ok(SetDiscordPairingState(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        76 => {
+        42 => {
           ::core::result::Result::Ok(DiscordLinkConfirm(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        77 => {
-          ::core::result::Result::Ok(UserDataChanged(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        78 => {
+        43 => {
           ::core::result::Result::Ok(GetFeaturedLevel(
             ()
           ))
         }
-        79 => {
+        44 => {
           ::core::result::Result::Ok(GetFeaturedList(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        80 => {
+        45 => {
           ::core::result::Result::Ok(SendFeaturedLevel(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        81 => {
-          ::core::result::Result::Ok(FeaturedLevel(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        82 => {
-          ::core::result::Result::Ok(FeaturedList(
-            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
-          ))
-        }
-        83 => {
+        46 => {
           ::core::result::Result::Ok(FetchUser(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
-        84 => {
+        47 => {
+          ::core::result::Result::Ok(LoginOk(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        48 => {
+          ::core::result::Result::Ok(LoginFailed(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        49 => {
+          ::core::result::Result::Ok(LoginRequired(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        50 => {
+          ::core::result::Result::Ok(Banned(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        51 => {
           ::core::result::Result::Ok(Muted(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        52 => {
+          ::core::result::Result::Ok(ServersChanged(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        53 => {
+          ::core::result::Result::Ok(UserDataChanged(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        54 => {
+          ::core::result::Result::Ok(RoomState(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        55 => {
+          ::core::result::Result::Ok(RoomPlayers(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        56 => {
+          ::core::result::Result::Ok(RoomJoinFailed(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        57 => {
+          ::core::result::Result::Ok(RoomCreateFailed(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        58 => {
+          ::core::result::Result::Ok(RoomBanned(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        59 => {
+          ::core::result::Result::Ok(RoomList(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        60 => {
+          ::core::result::Result::Ok(TeamCreationResult(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        61 => {
+          ::core::result::Result::Ok(TeamChanged(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        62 => {
+          ::core::result::Result::Ok(TeamMembers(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        63 => {
+          ::core::result::Result::Ok(TeamsUpdated(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        64 => {
+          ::core::result::Result::Ok(RoomSettingsUpdated(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        65 => {
+          ::core::result::Result::Ok(Invited(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        66 => {
+          ::core::result::Result::Ok(InviteTokenCreated(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        67 => {
+          ::core::result::Result::Ok(JoinFailed(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        68 => {
+          ::core::result::Result::Ok(WarpPlayer(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        69 => {
+          ::core::result::Result::Ok(PlayerCounts(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        70 => {
+          ::core::result::Result::Ok(GlobalPlayers(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        71 => {
+          ::core::result::Result::Ok(LevelList(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        72 => {
+          ::core::result::Result::Ok(Kicked(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        73 => {
+          ::core::result::Result::Ok(Notice(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        74 => {
+          ::core::result::Result::Ok(Warn(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        75 => {
+          ::core::result::Result::Ok(AdminResult(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        76 => {
+          ::core::result::Result::Ok(AdminFetchResponse(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        77 => {
+          ::core::result::Result::Ok(AdminFetchModsResponse(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        78 => {
+          ::core::result::Result::Ok(AdminLogsResponse(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        79 => {
+          ::core::result::Result::Ok(Credits(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        80 => {
+          ::core::result::Result::Ok(DiscordLinkState(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        81 => {
+          ::core::result::Result::Ok(DiscordLinkAttempt(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        82 => {
+          ::core::result::Result::Ok(FeaturedLevel(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        83 => {
+          ::core::result::Result::Ok(FeaturedList(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        84 => {
+          ::core::result::Result::Ok(FetchUserResponse(
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
@@ -26825,7 +26825,7 @@ pub mod message {
       ::capnp::word(76, 207, 255, 242, 150, 9, 47, 202),
       ::capnp::word(1, 0, 7, 0, 0, 0, 85, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(25, 41, 0, 0, 117, 62, 0, 0),
+      ::capnp::word(24, 41, 0, 0, 116, 62, 0, 0),
       ::capnp::word(21, 0, 0, 0, 154, 0, 0, 0),
       ::capnp::word(29, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -26844,591 +26844,591 @@ pub mod message {
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(56, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(68, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(4, 0, 254, 255, 0, 0, 0, 0),
+      ::capnp::word(1, 0, 254, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 1, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(65, 9, 0, 0, 154, 0, 0, 0),
+      ::capnp::word(65, 9, 0, 0, 114, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(68, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(80, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(84, 0, 253, 255, 0, 0, 0, 0),
+      ::capnp::word(64, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(76, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(2, 0, 253, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 2, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(77, 9, 0, 0, 146, 0, 0, 0),
+      ::capnp::word(73, 9, 0, 0, 162, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(80, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(92, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(47, 0, 252, 255, 0, 0, 0, 0),
+      ::capnp::word(76, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(88, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(3, 0, 252, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 3, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(89, 9, 0, 0, 66, 0, 0, 0),
+      ::capnp::word(85, 9, 0, 0, 194, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(84, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(96, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(48, 0, 251, 255, 0, 0, 0, 0),
+      ::capnp::word(88, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(100, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(4, 0, 251, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 4, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(93, 9, 0, 0, 98, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(92, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(104, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(49, 0, 250, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 5, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(101, 9, 0, 0, 114, 0, 0, 0),
+      ::capnp::word(97, 9, 0, 0, 154, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(100, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(112, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(1, 0, 249, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 6, 0, 0, 0),
+      ::capnp::word(5, 0, 250, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 5, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(109, 9, 0, 0, 114, 0, 0, 0),
+      ::capnp::word(109, 9, 0, 0, 90, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(108, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(120, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(5, 0, 248, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 7, 0, 0, 0),
+      ::capnp::word(6, 0, 249, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 6, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(117, 9, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(117, 9, 0, 0, 74, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(116, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(128, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(6, 0, 247, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 8, 0, 0, 0),
+      ::capnp::word(7, 0, 248, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(125, 9, 0, 0, 74, 0, 0, 0),
+      ::capnp::word(125, 9, 0, 0, 130, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(124, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(136, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(8, 0, 246, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 9, 0, 0, 0),
+      ::capnp::word(8, 0, 247, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 8, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(133, 9, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(132, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(144, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(68, 0, 245, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 10, 0, 0, 0),
+      ::capnp::word(9, 0, 246, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 9, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(141, 9, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(141, 9, 0, 0, 122, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(140, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(152, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(54, 0, 244, 255, 0, 0, 0, 0),
+      ::capnp::word(10, 0, 245, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 10, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(149, 9, 0, 0, 154, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(152, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(164, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(11, 0, 244, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 11, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(149, 9, 0, 0, 82, 0, 0, 0),
+      ::capnp::word(161, 9, 0, 0, 130, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(148, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(160, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(20, 0, 243, 255, 0, 0, 0, 0),
+      ::capnp::word(160, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(172, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(12, 0, 243, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 12, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(157, 9, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(169, 9, 0, 0, 90, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(156, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(168, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(21, 0, 242, 255, 0, 0, 0, 0),
+      ::capnp::word(168, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(180, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(13, 0, 242, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 13, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(165, 9, 0, 0, 106, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(164, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(176, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(67, 0, 241, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 14, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(173, 9, 0, 0, 90, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(172, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(184, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(72, 0, 240, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 15, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(181, 9, 0, 0, 58, 0, 0, 0),
+      ::capnp::word(177, 9, 0, 0, 90, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(176, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(188, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(9, 0, 239, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 16, 0, 0, 0),
+      ::capnp::word(14, 0, 241, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 14, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(185, 9, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(185, 9, 0, 0, 90, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(184, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(196, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(2, 0, 238, 255, 0, 0, 0, 0),
+      ::capnp::word(15, 0, 240, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 15, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(193, 9, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(192, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(204, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(16, 0, 239, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 16, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(201, 9, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(200, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(212, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(17, 0, 238, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 17, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(193, 9, 0, 0, 162, 0, 0, 0),
+      ::capnp::word(209, 9, 0, 0, 130, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(196, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(208, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(69, 0, 237, 255, 0, 0, 0, 0),
+      ::capnp::word(208, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(220, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(18, 0, 237, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 18, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(205, 9, 0, 0, 106, 0, 0, 0),
+      ::capnp::word(217, 9, 0, 0, 154, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(204, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(216, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(56, 0, 236, 255, 0, 0, 0, 0),
+      ::capnp::word(220, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(232, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(19, 0, 236, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 19, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(213, 9, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(229, 9, 0, 0, 106, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(212, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(224, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(57, 0, 235, 255, 0, 0, 0, 0),
+      ::capnp::word(228, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(240, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(20, 0, 235, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 20, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(221, 9, 0, 0, 138, 0, 0, 0),
+      ::capnp::word(237, 9, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(224, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(236, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(11, 0, 234, 255, 0, 0, 0, 0),
+      ::capnp::word(236, 9, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(248, 9, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(21, 0, 234, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 21, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(233, 9, 0, 0, 130, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(232, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(244, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(59, 0, 233, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 22, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(241, 9, 0, 0, 74, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(240, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(252, 9, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(50, 0, 232, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 23, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(249, 9, 0, 0, 58, 0, 0, 0),
+      ::capnp::word(245, 9, 0, 0, 106, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(244, 9, 0, 0, 3, 0, 1, 0),
       ::capnp::word(0, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(58, 0, 231, 255, 0, 0, 0, 0),
+      ::capnp::word(22, 0, 233, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 22, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(253, 9, 0, 0, 138, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(12, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(23, 0, 232, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 23, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(9, 10, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(8, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(20, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(24, 0, 231, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 24, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(253, 9, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(17, 10, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(252, 9, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(8, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(23, 0, 230, 255, 0, 0, 0, 0),
+      ::capnp::word(16, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(28, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(25, 0, 230, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 25, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(5, 10, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(25, 10, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(4, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(16, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(24, 0, 229, 255, 0, 0, 0, 0),
+      ::capnp::word(24, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(36, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(26, 0, 229, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 26, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(13, 10, 0, 0, 82, 0, 0, 0),
+      ::capnp::word(33, 10, 0, 0, 162, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(12, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(24, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(25, 0, 228, 255, 0, 0, 0, 0),
+      ::capnp::word(36, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(48, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(27, 0, 228, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 27, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(21, 10, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(45, 10, 0, 0, 122, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(20, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(32, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(26, 0, 227, 255, 0, 0, 0, 0),
+      ::capnp::word(44, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(56, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(28, 0, 227, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 28, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(29, 10, 0, 0, 162, 0, 0, 0),
+      ::capnp::word(53, 10, 0, 0, 122, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(32, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(44, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(27, 0, 226, 255, 0, 0, 0, 0),
+      ::capnp::word(52, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(64, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(29, 0, 226, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 29, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(41, 10, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(61, 10, 0, 0, 74, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(40, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(52, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(29, 0, 225, 255, 0, 0, 0, 0),
+      ::capnp::word(60, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(72, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(30, 0, 225, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 30, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(49, 10, 0, 0, 74, 0, 0, 0),
+      ::capnp::word(69, 10, 0, 0, 90, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(48, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(60, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(30, 0, 224, 255, 0, 0, 0, 0),
+      ::capnp::word(68, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(80, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(31, 0, 224, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 31, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(57, 10, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(77, 10, 0, 0, 106, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(56, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(68, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(31, 0, 223, 255, 0, 0, 0, 0),
+      ::capnp::word(76, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(88, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(32, 0, 223, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 32, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(65, 10, 0, 0, 106, 0, 0, 0),
+      ::capnp::word(85, 10, 0, 0, 122, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(64, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(76, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(32, 0, 222, 255, 0, 0, 0, 0),
+      ::capnp::word(84, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(96, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(33, 0, 222, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 33, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(73, 10, 0, 0, 122, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(72, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(84, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(35, 0, 221, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 34, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(81, 10, 0, 0, 122, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(80, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(92, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(36, 0, 220, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 35, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(89, 10, 0, 0, 138, 0, 0, 0),
+      ::capnp::word(93, 10, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(92, 10, 0, 0, 3, 0, 1, 0),
       ::capnp::word(104, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(75, 0, 219, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 36, 0, 0, 0),
+      ::capnp::word(34, 0, 221, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 34, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(101, 10, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(100, 10, 0, 0, 3, 0, 1, 0),
       ::capnp::word(112, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(76, 0, 218, 255, 0, 0, 0, 0),
+      ::capnp::word(35, 0, 220, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 35, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(109, 10, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(108, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(120, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(36, 0, 219, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 36, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(117, 10, 0, 0, 138, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(120, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(132, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(37, 0, 218, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 37, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(109, 10, 0, 0, 154, 0, 0, 0),
+      ::capnp::word(129, 10, 0, 0, 130, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(112, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(124, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(73, 0, 217, 255, 0, 0, 0, 0),
+      ::capnp::word(128, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(140, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(38, 0, 217, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 38, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(121, 10, 0, 0, 58, 0, 0, 0),
+      ::capnp::word(137, 10, 0, 0, 122, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(116, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(128, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(37, 0, 216, 255, 0, 0, 0, 0),
+      ::capnp::word(136, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(148, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(39, 0, 216, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 39, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(125, 10, 0, 0, 130, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(124, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(136, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(28, 0, 215, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 40, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(133, 10, 0, 0, 122, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(132, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(144, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(78, 0, 214, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 41, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(141, 10, 0, 0, 146, 0, 0, 0),
+      ::capnp::word(145, 10, 0, 0, 106, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(144, 10, 0, 0, 3, 0, 1, 0),
       ::capnp::word(156, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(12, 0, 213, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 42, 0, 0, 0),
+      ::capnp::word(40, 0, 215, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 40, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(153, 10, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(153, 10, 0, 0, 162, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(152, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(164, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(13, 0, 212, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 43, 0, 0, 0),
+      ::capnp::word(156, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(168, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(41, 0, 214, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 41, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(161, 10, 0, 0, 90, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(160, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(172, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(14, 0, 211, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 44, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(169, 10, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(165, 10, 0, 0, 186, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(168, 10, 0, 0, 3, 0, 1, 0),
       ::capnp::word(180, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(74, 0, 210, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 45, 0, 0, 0),
+      ::capnp::word(42, 0, 213, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 42, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(177, 10, 0, 0, 42, 0, 0, 0),
+      ::capnp::word(177, 10, 0, 0, 154, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(172, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(184, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(60, 0, 209, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 46, 0, 0, 0),
+      ::capnp::word(180, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(192, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(43, 0, 212, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 43, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(181, 10, 0, 0, 154, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(184, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(196, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(61, 0, 208, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 47, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(193, 10, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(189, 10, 0, 0, 138, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(192, 10, 0, 0, 3, 0, 1, 0),
       ::capnp::word(204, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(16, 0, 207, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 48, 0, 0, 0),
+      ::capnp::word(44, 0, 211, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 44, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(201, 10, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(201, 10, 0, 0, 130, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(200, 10, 0, 0, 3, 0, 1, 0),
       ::capnp::word(212, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(62, 0, 206, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 49, 0, 0, 0),
+      ::capnp::word(45, 0, 210, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 45, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(209, 10, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(209, 10, 0, 0, 146, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(208, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(220, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(15, 0, 205, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 50, 0, 0, 0),
+      ::capnp::word(212, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(224, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(46, 0, 209, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 46, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(217, 10, 0, 0, 90, 0, 0, 0),
+      ::capnp::word(221, 10, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(216, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(228, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(63, 0, 204, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 51, 0, 0, 0),
+      ::capnp::word(220, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(232, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(47, 0, 208, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 47, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(225, 10, 0, 0, 106, 0, 0, 0),
+      ::capnp::word(229, 10, 0, 0, 66, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(224, 10, 0, 0, 3, 0, 1, 0),
       ::capnp::word(236, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(38, 0, 203, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 52, 0, 0, 0),
+      ::capnp::word(48, 0, 207, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 48, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(233, 10, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(233, 10, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(232, 10, 0, 0, 3, 0, 1, 0),
       ::capnp::word(244, 10, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(77, 0, 202, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 53, 0, 0, 0),
+      ::capnp::word(49, 0, 206, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 49, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(241, 10, 0, 0, 186, 0, 0, 0),
+      ::capnp::word(241, 10, 0, 0, 114, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(240, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(252, 10, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(50, 0, 205, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 50, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(249, 10, 0, 0, 58, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(244, 10, 0, 0, 3, 0, 1, 0),
       ::capnp::word(0, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(52, 0, 201, 255, 0, 0, 0, 0),
+      ::capnp::word(51, 0, 204, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 51, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(253, 10, 0, 0, 50, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(248, 10, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(4, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(52, 0, 203, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 52, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(1, 11, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(12, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(53, 0, 202, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 53, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(9, 11, 0, 0, 130, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(8, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(20, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(54, 0, 201, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 54, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(253, 10, 0, 0, 122, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(252, 10, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(8, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(17, 0, 200, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 55, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(5, 11, 0, 0, 130, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(4, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(16, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(18, 0, 199, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 56, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(13, 11, 0, 0, 154, 0, 0, 0),
+      ::capnp::word(17, 11, 0, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(28, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(64, 0, 198, 255, 0, 0, 0, 0),
+      ::capnp::word(55, 0, 200, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 55, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(25, 11, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(24, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(36, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(56, 0, 199, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 56, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(33, 11, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(32, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(44, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(57, 0, 198, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 57, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(25, 11, 0, 0, 162, 0, 0, 0),
+      ::capnp::word(41, 11, 0, 0, 138, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(28, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(40, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(22, 0, 197, 255, 0, 0, 0, 0),
+      ::capnp::word(44, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(56, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(58, 0, 197, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 58, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(37, 11, 0, 0, 138, 0, 0, 0),
+      ::capnp::word(53, 11, 0, 0, 90, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(40, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(52, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(71, 0, 196, 255, 0, 0, 0, 0),
+      ::capnp::word(52, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(64, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(59, 0, 196, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 59, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(49, 11, 0, 0, 82, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(48, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(60, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(10, 0, 195, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 60, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(57, 11, 0, 0, 154, 0, 0, 0),
+      ::capnp::word(61, 11, 0, 0, 74, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(60, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(72, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(55, 0, 194, 255, 0, 0, 0, 0),
+      ::capnp::word(60, 0, 195, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 60, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(69, 11, 0, 0, 154, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(72, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(84, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(61, 0, 194, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 61, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(69, 11, 0, 0, 98, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(68, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(80, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(39, 0, 193, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 62, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(77, 11, 0, 0, 106, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(76, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(88, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(79, 0, 192, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 63, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(85, 11, 0, 0, 66, 0, 0, 0),
+      ::capnp::word(81, 11, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(80, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(92, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(7, 0, 191, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 64, 0, 0, 0),
+      ::capnp::word(62, 0, 193, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 62, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(89, 11, 0, 0, 130, 0, 0, 0),
+      ::capnp::word(89, 11, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(88, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(100, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(19, 0, 190, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 65, 0, 0, 0),
+      ::capnp::word(63, 0, 192, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 63, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(97, 11, 0, 0, 106, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(96, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(108, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(65, 0, 189, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 66, 0, 0, 0),
+      ::capnp::word(64, 0, 191, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 64, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(105, 11, 0, 0, 66, 0, 0, 0),
+      ::capnp::word(105, 11, 0, 0, 162, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(100, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(112, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(66, 0, 188, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 67, 0, 0, 0),
+      ::capnp::word(108, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(120, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(65, 0, 190, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 65, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(109, 11, 0, 0, 154, 0, 0, 0),
+      ::capnp::word(117, 11, 0, 0, 66, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(112, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(124, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(3, 0, 187, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 68, 0, 0, 0),
+      ::capnp::word(66, 0, 189, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 66, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(121, 11, 0, 0, 194, 0, 0, 0),
+      ::capnp::word(121, 11, 0, 0, 154, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(124, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(136, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(70, 0, 186, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 69, 0, 0, 0),
+      ::capnp::word(67, 0, 188, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 67, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(133, 11, 0, 0, 114, 0, 0, 0),
+      ::capnp::word(133, 11, 0, 0, 90, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(132, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(144, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(33, 0, 185, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 70, 0, 0, 0),
+      ::capnp::word(68, 0, 187, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 68, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(141, 11, 0, 0, 82, 0, 0, 0),
+      ::capnp::word(141, 11, 0, 0, 90, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(140, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(152, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(34, 0, 184, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 71, 0, 0, 0),
+      ::capnp::word(69, 0, 186, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 69, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(149, 11, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(149, 11, 0, 0, 106, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(148, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(160, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(40, 0, 183, 255, 0, 0, 0, 0),
+      ::capnp::word(70, 0, 185, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 70, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(157, 11, 0, 0, 114, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(156, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(168, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(71, 0, 184, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 71, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(165, 11, 0, 0, 82, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(164, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(176, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(72, 0, 183, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 72, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(157, 11, 0, 0, 162, 0, 0, 0),
+      ::capnp::word(173, 11, 0, 0, 58, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(160, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(172, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(80, 0, 182, 255, 0, 0, 0, 0),
+      ::capnp::word(168, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(180, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(73, 0, 182, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 73, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(169, 11, 0, 0, 138, 0, 0, 0),
+      ::capnp::word(177, 11, 0, 0, 58, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(172, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(184, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(81, 0, 181, 255, 0, 0, 0, 0),
+      ::capnp::word(74, 0, 181, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 74, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(181, 11, 0, 0, 154, 0, 0, 0),
+      ::capnp::word(181, 11, 0, 0, 42, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(176, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(188, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(75, 0, 180, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 75, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(185, 11, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(184, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(196, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(41, 0, 180, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 75, 0, 0, 0),
+      ::capnp::word(76, 0, 179, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 76, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(193, 11, 0, 0, 186, 0, 0, 0),
+      ::capnp::word(193, 11, 0, 0, 154, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(196, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(208, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(42, 0, 179, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 76, 0, 0, 0),
+      ::capnp::word(77, 0, 178, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 77, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(205, 11, 0, 0, 154, 0, 0, 0),
+      ::capnp::word(205, 11, 0, 0, 186, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(208, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(220, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(53, 0, 178, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 77, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(217, 11, 0, 0, 130, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(216, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(228, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(43, 0, 177, 255, 0, 0, 0, 0),
+      ::capnp::word(78, 0, 177, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 78, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(225, 11, 0, 0, 138, 0, 0, 0),
+      ::capnp::word(217, 11, 0, 0, 146, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(228, 11, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(240, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(44, 0, 176, 255, 0, 0, 0, 0),
+      ::capnp::word(220, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(232, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(79, 0, 176, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 79, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(237, 11, 0, 0, 130, 0, 0, 0),
+      ::capnp::word(229, 11, 0, 0, 66, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(224, 11, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(236, 11, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(80, 0, 175, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 80, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(233, 11, 0, 0, 138, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(236, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(248, 11, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(45, 0, 175, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 80, 0, 0, 0),
+      ::capnp::word(81, 0, 174, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 81, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(245, 11, 0, 0, 146, 0, 0, 0),
+      ::capnp::word(245, 11, 0, 0, 154, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(248, 11, 0, 0, 3, 0, 1, 0),
       ::capnp::word(4, 12, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(82, 0, 174, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 81, 0, 0, 0),
+      ::capnp::word(82, 0, 173, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 82, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(1, 12, 0, 0, 114, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 12, 0, 0, 3, 0, 1, 0),
       ::capnp::word(12, 12, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(83, 0, 173, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 82, 0, 0, 0),
+      ::capnp::word(83, 0, 172, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 83, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(9, 12, 0, 0, 106, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(8, 12, 0, 0, 3, 0, 1, 0),
       ::capnp::word(20, 12, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(46, 0, 172, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 83, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(17, 12, 0, 0, 82, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 12, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(28, 12, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(51, 0, 171, 255, 0, 0, 0, 0),
+      ::capnp::word(84, 0, 171, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 84, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(25, 12, 0, 0, 50, 0, 0, 0),
+      ::capnp::word(17, 12, 0, 0, 146, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(20, 12, 0, 0, 3, 0, 1, 0),
       ::capnp::word(32, 12, 0, 0, 2, 0, 1, 0),
@@ -27440,56 +27440,40 @@ pub mod message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(117, 112, 100, 97, 116, 101, 79, 119),
+      ::capnp::word(110, 68, 97, 116, 97, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(235, 253, 207, 19, 175, 80, 10, 185),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 80),
+      ::capnp::word(108, 97, 121, 101, 114, 67, 111, 117),
+      ::capnp::word(110, 116, 115, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(28, 12, 134, 138, 62, 246, 240, 246),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 71),
+      ::capnp::word(108, 111, 98, 97, 108, 80, 108, 97),
+      ::capnp::word(121, 101, 114, 76, 105, 115, 116, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(236, 157, 167, 89, 188, 78, 180, 136),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(117, 112, 100, 97, 116, 101, 85, 115),
       ::capnp::word(101, 114, 83, 101, 116, 116, 105, 110),
       ::capnp::word(103, 115, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(15, 124, 208, 125, 95, 205, 72, 148),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(102, 101, 116, 99, 104, 85, 115, 101),
-      ::capnp::word(114, 82, 101, 115, 112, 111, 110, 115),
-      ::capnp::word(101, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(115, 213, 183, 190, 189, 187, 89, 244),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(108, 111, 103, 105, 110, 79, 107, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(124, 194, 156, 9, 9, 23, 56, 208),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(108, 111, 103, 105, 110, 70, 97, 105),
-      ::capnp::word(108, 101, 100, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 110, 180, 102, 98, 62, 251, 187),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(108, 111, 103, 105, 110, 82, 101, 113),
-      ::capnp::word(117, 105, 114, 101, 100, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(236, 76, 226, 167, 113, 33, 121, 192),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(117, 112, 100, 97, 116, 101, 79, 119),
-      ::capnp::word(110, 68, 97, 116, 97, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(235, 253, 207, 19, 175, 80, 10, 185),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -27513,6 +27497,15 @@ pub mod message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(106, 111, 105, 110, 82, 111, 111, 109),
+      ::capnp::word(66, 121, 84, 111, 107, 101, 110, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(236, 146, 121, 10, 213, 145, 194, 238),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(108, 101, 97, 118, 101, 82, 111, 111),
       ::capnp::word(109, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
@@ -27522,19 +27515,102 @@ pub mod message {
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(119, 97, 114, 112, 80, 108, 97, 121),
-      ::capnp::word(101, 114, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(99, 104, 101, 99, 107, 82, 111, 111),
+      ::capnp::word(109, 83, 116, 97, 116, 101, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 82),
+      ::capnp::word(111, 111, 109, 80, 108, 97, 121, 101),
+      ::capnp::word(114, 115, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(236, 250, 231, 184, 89, 168, 176, 131),
+      ::capnp::word(31, 231, 157, 61, 33, 133, 209, 249),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 111, 111, 109, 83, 116, 97, 116),
-      ::capnp::word(101, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 82),
+      ::capnp::word(111, 111, 109, 76, 105, 115, 116, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(3, 62, 235, 196, 196, 1, 176, 204),
+      ::capnp::word(43, 84, 106, 207, 92, 101, 38, 204),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(97, 115, 115, 105, 103, 110, 84, 101),
+      ::capnp::word(97, 109, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(222, 158, 79, 20, 42, 107, 254, 134),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(99, 114, 101, 97, 116, 101, 84, 101),
+      ::capnp::word(97, 109, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(191, 110, 153, 96, 117, 241, 85, 146),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(100, 101, 108, 101, 116, 101, 84, 101),
+      ::capnp::word(97, 109, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(28, 104, 95, 160, 101, 250, 96, 190),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(117, 112, 100, 97, 116, 101, 84, 101),
+      ::capnp::word(97, 109, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(242, 80, 243, 208, 171, 210, 172, 218),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(103, 101, 116, 84, 101, 97, 109, 77),
+      ::capnp::word(101, 109, 98, 101, 114, 115, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(101, 91, 139, 113, 127, 58, 205, 146),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 111, 111, 109, 79, 119, 110, 101),
+      ::capnp::word(114, 65, 99, 116, 105, 111, 110, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(138, 0, 37, 195, 83, 249, 126, 235),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(117, 112, 100, 97, 116, 101, 82, 111),
+      ::capnp::word(111, 109, 83, 101, 116, 116, 105, 110),
+      ::capnp::word(103, 115, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(130, 176, 23, 8, 210, 10, 248, 128),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(105, 110, 118, 105, 116, 101, 80, 108),
+      ::capnp::word(97, 121, 101, 114, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(185, 14, 177, 43, 31, 138, 217, 175),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -27558,100 +27634,11 @@ pub mod message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(106, 111, 105, 110, 70, 97, 105, 108),
-      ::capnp::word(101, 100, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(21, 73, 4, 223, 168, 32, 232, 185),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 76),
+      ::capnp::word(101, 118, 101, 108, 76, 105, 115, 116),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(107, 105, 99, 107, 101, 100, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(201, 184, 82, 57, 87, 116, 104, 173),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(99, 104, 101, 99, 107, 82, 111, 111),
-      ::capnp::word(109, 83, 116, 97, 116, 101, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 80),
-      ::capnp::word(108, 97, 121, 101, 114, 67, 111, 117),
-      ::capnp::word(110, 116, 115, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(28, 12, 134, 138, 62, 246, 240, 246),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(112, 108, 97, 121, 101, 114, 67, 111),
-      ::capnp::word(117, 110, 116, 115, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(199, 68, 72, 232, 179, 178, 238, 142),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 111, 111, 109, 74, 111, 105, 110),
-      ::capnp::word(70, 97, 105, 108, 101, 100, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(195, 130, 163, 201, 143, 51, 17, 137),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 111, 111, 109, 67, 114, 101, 97),
-      ::capnp::word(116, 101, 70, 97, 105, 108, 101, 100),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(212, 255, 203, 181, 69, 173, 28, 234),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 82),
-      ::capnp::word(111, 111, 109, 76, 105, 115, 116, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(43, 84, 106, 207, 92, 101, 38, 204),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 111, 111, 109, 76, 105, 115, 116),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(191, 20, 165, 81, 118, 97, 109, 213),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(98, 97, 110, 110, 101, 100, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(168, 181, 196, 22, 191, 21, 65, 233),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 111, 111, 109, 66, 97, 110, 110),
-      ::capnp::word(101, 100, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(179, 208, 198, 38, 141, 236, 233, 218),
+      ::capnp::word(13, 120, 11, 124, 31, 113, 61, 217),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -27703,6 +27690,15 @@ pub mod message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(97, 100, 109, 105, 110, 70, 101, 116),
+      ::capnp::word(99, 104, 76, 111, 103, 115, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(76, 88, 50, 18, 169, 29, 116, 255),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(97, 100, 109, 105, 110, 66, 97, 110),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -27739,6 +27735,24 @@ pub mod message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(97, 100, 109, 105, 110, 77, 117, 116),
+      ::capnp::word(101, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(80, 210, 40, 210, 80, 162, 199, 245),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(97, 100, 109, 105, 110, 85, 110, 109),
+      ::capnp::word(117, 116, 101, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(164, 168, 40, 63, 138, 21, 57, 141),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(97, 100, 109, 105, 110, 69, 100, 105),
       ::capnp::word(116, 82, 111, 108, 101, 115, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -27758,146 +27772,10 @@ pub mod message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(97, 100, 109, 105, 110, 82, 101, 115),
-      ::capnp::word(117, 108, 116, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(32, 245, 197, 196, 165, 154, 28, 145),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(97, 100, 109, 105, 110, 70, 101, 116),
-      ::capnp::word(99, 104, 82, 101, 115, 112, 111, 110),
-      ::capnp::word(115, 101, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(251, 115, 138, 205, 118, 170, 173, 174),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(110, 111, 116, 105, 99, 101, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(104, 10, 0, 28, 172, 94, 231, 170),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(97, 100, 109, 105, 110, 85, 112, 100),
       ::capnp::word(97, 116, 101, 85, 115, 101, 114, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(164, 225, 182, 221, 182, 51, 60, 204),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(97, 100, 109, 105, 110, 70, 101, 116),
-      ::capnp::word(99, 104, 76, 111, 103, 115, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(76, 88, 50, 18, 169, 29, 116, 255),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(97, 100, 109, 105, 110, 76, 111, 103),
-      ::capnp::word(115, 82, 101, 115, 112, 111, 110, 115),
-      ::capnp::word(101, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(141, 162, 63, 253, 244, 239, 239, 177),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(97, 115, 115, 105, 103, 110, 84, 101),
-      ::capnp::word(97, 109, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(222, 158, 79, 20, 42, 107, 254, 134),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(99, 114, 101, 97, 116, 101, 84, 101),
-      ::capnp::word(97, 109, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(191, 110, 153, 96, 117, 241, 85, 146),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(100, 101, 108, 101, 116, 101, 84, 101),
-      ::capnp::word(97, 109, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(28, 104, 95, 160, 101, 250, 96, 190),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(119, 97, 114, 110, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(228, 120, 82, 29, 214, 21, 5, 140),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(116, 101, 97, 109, 67, 114, 101, 97),
-      ::capnp::word(116, 105, 111, 110, 82, 101, 115, 117),
-      ::capnp::word(108, 116, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(118, 133, 145, 110, 26, 171, 195, 158),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(116, 101, 97, 109, 67, 104, 97, 110),
-      ::capnp::word(103, 101, 100, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(205, 37, 100, 82, 57, 65, 89, 195),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(103, 101, 116, 84, 101, 97, 109, 77),
-      ::capnp::word(101, 109, 98, 101, 114, 115, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(101, 91, 139, 113, 127, 58, 205, 146),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(116, 101, 97, 109, 77, 101, 109, 98),
-      ::capnp::word(101, 114, 115, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(182, 151, 167, 198, 79, 142, 192, 194),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(117, 112, 100, 97, 116, 101, 84, 101),
-      ::capnp::word(97, 109, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(242, 80, 243, 208, 171, 210, 172, 218),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(116, 101, 97, 109, 115, 85, 112, 100),
-      ::capnp::word(97, 116, 101, 100, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(244, 144, 206, 45, 185, 212, 225, 180),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -27912,177 +27790,10 @@ pub mod message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(97, 100, 109, 105, 110, 70, 101, 116),
-      ::capnp::word(99, 104, 77, 111, 100, 115, 82, 101),
-      ::capnp::word(115, 112, 111, 110, 115, 101, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(150, 62, 43, 135, 115, 147, 125, 163),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(115, 101, 114, 118, 101, 114, 115, 67),
-      ::capnp::word(104, 97, 110, 103, 101, 100, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(30, 41, 14, 127, 146, 199, 146, 130),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 111, 111, 109, 79, 119, 110, 101),
-      ::capnp::word(114, 65, 99, 116, 105, 111, 110, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(138, 0, 37, 195, 83, 249, 126, 235),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(117, 112, 100, 97, 116, 101, 82, 111),
-      ::capnp::word(111, 109, 83, 101, 116, 116, 105, 110),
-      ::capnp::word(103, 115, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(130, 176, 23, 8, 210, 10, 248, 128),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 111, 111, 109, 83, 101, 116, 116),
-      ::capnp::word(105, 110, 103, 115, 85, 112, 100, 97),
-      ::capnp::word(116, 101, 100, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(127, 181, 239, 55, 183, 204, 237, 179),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 76),
-      ::capnp::word(101, 118, 101, 108, 76, 105, 115, 116),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(13, 120, 11, 124, 31, 113, 61, 217),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(108, 101, 118, 101, 108, 76, 105, 115),
-      ::capnp::word(116, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(31, 233, 166, 54, 29, 32, 25, 129),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 82),
-      ::capnp::word(111, 111, 109, 80, 108, 97, 121, 101),
-      ::capnp::word(114, 115, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(31, 231, 157, 61, 33, 133, 209, 249),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 111, 111, 109, 80, 108, 97, 121),
-      ::capnp::word(101, 114, 115, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(165, 168, 36, 124, 76, 60, 18, 218),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(102, 101, 116, 99, 104, 67, 114, 101),
       ::capnp::word(100, 105, 116, 115, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(254, 178, 85, 171, 72, 250, 207, 151),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(99, 114, 101, 100, 105, 116, 115, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(217, 52, 35, 75, 219, 92, 150, 234),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(106, 111, 105, 110, 82, 111, 111, 109),
-      ::capnp::word(66, 121, 84, 111, 107, 101, 110, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(236, 146, 121, 10, 213, 145, 194, 238),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(105, 110, 118, 105, 116, 101, 80, 108),
-      ::capnp::word(97, 121, 101, 114, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(185, 14, 177, 43, 31, 138, 217, 175),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(105, 110, 118, 105, 116, 101, 100, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(89, 230, 198, 50, 244, 247, 105, 255),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(105, 110, 118, 105, 116, 101, 84, 111),
-      ::capnp::word(107, 101, 110, 67, 114, 101, 97, 116),
-      ::capnp::word(101, 100, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(139, 35, 41, 230, 141, 234, 208, 211),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(114, 101, 113, 117, 101, 115, 116, 71),
-      ::capnp::word(108, 111, 98, 97, 108, 80, 108, 97),
-      ::capnp::word(121, 101, 114, 76, 105, 115, 116, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(236, 157, 167, 89, 188, 78, 180, 136),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(103, 108, 111, 98, 97, 108, 80, 108),
-      ::capnp::word(97, 121, 101, 114, 115, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(205, 213, 123, 65, 146, 156, 1, 143),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(97, 100, 109, 105, 110, 77, 117, 116),
-      ::capnp::word(101, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(80, 210, 40, 210, 80, 162, 199, 245),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(97, 100, 109, 105, 110, 85, 110, 109),
-      ::capnp::word(117, 116, 101, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(164, 168, 40, 63, 138, 21, 57, 141),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -28093,26 +27804,6 @@ pub mod message {
       ::capnp::word(97, 116, 101, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(136, 200, 225, 208, 45, 156, 68, 214),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(100, 105, 115, 99, 111, 114, 100, 76),
-      ::capnp::word(105, 110, 107, 83, 116, 97, 116, 101),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(99, 8, 126, 125, 162, 38, 40, 242),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(100, 105, 115, 99, 111, 114, 100, 76),
-      ::capnp::word(105, 110, 107, 65, 116, 116, 101, 109),
-      ::capnp::word(112, 116, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(145, 138, 81, 41, 168, 237, 164, 234),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -28133,15 +27824,6 @@ pub mod message {
       ::capnp::word(114, 109, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(40, 66, 44, 251, 208, 52, 181, 208),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(117, 115, 101, 114, 68, 97, 116, 97),
-      ::capnp::word(67, 104, 97, 110, 103, 101, 100, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(33, 196, 57, 181, 184, 76, 186, 242),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -28176,6 +27858,331 @@ pub mod message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(102, 101, 116, 99, 104, 85, 115, 101),
+      ::capnp::word(114, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(43, 98, 205, 177, 171, 218, 191, 169),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(108, 111, 103, 105, 110, 79, 107, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(124, 194, 156, 9, 9, 23, 56, 208),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(108, 111, 103, 105, 110, 70, 97, 105),
+      ::capnp::word(108, 101, 100, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 110, 180, 102, 98, 62, 251, 187),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(108, 111, 103, 105, 110, 82, 101, 113),
+      ::capnp::word(117, 105, 114, 101, 100, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(236, 76, 226, 167, 113, 33, 121, 192),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(98, 97, 110, 110, 101, 100, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(168, 181, 196, 22, 191, 21, 65, 233),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(109, 117, 116, 101, 100, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(50, 188, 16, 81, 15, 144, 253, 192),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(115, 101, 114, 118, 101, 114, 115, 67),
+      ::capnp::word(104, 97, 110, 103, 101, 100, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(30, 41, 14, 127, 146, 199, 146, 130),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(117, 115, 101, 114, 68, 97, 116, 97),
+      ::capnp::word(67, 104, 97, 110, 103, 101, 100, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(33, 196, 57, 181, 184, 76, 186, 242),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 111, 111, 109, 83, 116, 97, 116),
+      ::capnp::word(101, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(3, 62, 235, 196, 196, 1, 176, 204),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 111, 111, 109, 80, 108, 97, 121),
+      ::capnp::word(101, 114, 115, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(165, 168, 36, 124, 76, 60, 18, 218),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 111, 111, 109, 74, 111, 105, 110),
+      ::capnp::word(70, 97, 105, 108, 101, 100, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(195, 130, 163, 201, 143, 51, 17, 137),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 111, 111, 109, 67, 114, 101, 97),
+      ::capnp::word(116, 101, 70, 97, 105, 108, 101, 100),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(212, 255, 203, 181, 69, 173, 28, 234),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 111, 111, 109, 66, 97, 110, 110),
+      ::capnp::word(101, 100, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(179, 208, 198, 38, 141, 236, 233, 218),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 111, 111, 109, 76, 105, 115, 116),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(191, 20, 165, 81, 118, 97, 109, 213),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(116, 101, 97, 109, 67, 114, 101, 97),
+      ::capnp::word(116, 105, 111, 110, 82, 101, 115, 117),
+      ::capnp::word(108, 116, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(118, 133, 145, 110, 26, 171, 195, 158),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(116, 101, 97, 109, 67, 104, 97, 110),
+      ::capnp::word(103, 101, 100, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(205, 37, 100, 82, 57, 65, 89, 195),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(116, 101, 97, 109, 77, 101, 109, 98),
+      ::capnp::word(101, 114, 115, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(182, 151, 167, 198, 79, 142, 192, 194),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(116, 101, 97, 109, 115, 85, 112, 100),
+      ::capnp::word(97, 116, 101, 100, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(244, 144, 206, 45, 185, 212, 225, 180),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 111, 111, 109, 83, 101, 116, 116),
+      ::capnp::word(105, 110, 103, 115, 85, 112, 100, 97),
+      ::capnp::word(116, 101, 100, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(127, 181, 239, 55, 183, 204, 237, 179),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(105, 110, 118, 105, 116, 101, 100, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(89, 230, 198, 50, 244, 247, 105, 255),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(105, 110, 118, 105, 116, 101, 84, 111),
+      ::capnp::word(107, 101, 110, 67, 114, 101, 97, 116),
+      ::capnp::word(101, 100, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(139, 35, 41, 230, 141, 234, 208, 211),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(106, 111, 105, 110, 70, 97, 105, 108),
+      ::capnp::word(101, 100, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(21, 73, 4, 223, 168, 32, 232, 185),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(119, 97, 114, 112, 80, 108, 97, 121),
+      ::capnp::word(101, 114, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(236, 250, 231, 184, 89, 168, 176, 131),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(112, 108, 97, 121, 101, 114, 67, 111),
+      ::capnp::word(117, 110, 116, 115, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(199, 68, 72, 232, 179, 178, 238, 142),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(103, 108, 111, 98, 97, 108, 80, 108),
+      ::capnp::word(97, 121, 101, 114, 115, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(205, 213, 123, 65, 146, 156, 1, 143),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(108, 101, 118, 101, 108, 76, 105, 115),
+      ::capnp::word(116, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(31, 233, 166, 54, 29, 32, 25, 129),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(107, 105, 99, 107, 101, 100, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(201, 184, 82, 57, 87, 116, 104, 173),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(110, 111, 116, 105, 99, 101, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(104, 10, 0, 28, 172, 94, 231, 170),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(119, 97, 114, 110, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(228, 120, 82, 29, 214, 21, 5, 140),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(97, 100, 109, 105, 110, 82, 101, 115),
+      ::capnp::word(117, 108, 116, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(32, 245, 197, 196, 165, 154, 28, 145),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(97, 100, 109, 105, 110, 70, 101, 116),
+      ::capnp::word(99, 104, 82, 101, 115, 112, 111, 110),
+      ::capnp::word(115, 101, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(251, 115, 138, 205, 118, 170, 173, 174),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(97, 100, 109, 105, 110, 70, 101, 116),
+      ::capnp::word(99, 104, 77, 111, 100, 115, 82, 101),
+      ::capnp::word(115, 112, 111, 110, 115, 101, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(150, 62, 43, 135, 115, 147, 125, 163),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(97, 100, 109, 105, 110, 76, 111, 103),
+      ::capnp::word(115, 82, 101, 115, 112, 111, 110, 115),
+      ::capnp::word(101, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(141, 162, 63, 253, 244, 239, 239, 177),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(99, 114, 101, 100, 105, 116, 115, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(217, 52, 35, 75, 219, 92, 150, 234),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(100, 105, 115, 99, 111, 114, 100, 76),
+      ::capnp::word(105, 110, 107, 83, 116, 97, 116, 101),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(99, 8, 126, 125, 162, 38, 40, 242),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(100, 105, 115, 99, 111, 114, 100, 76),
+      ::capnp::word(105, 110, 107, 65, 116, 116, 101, 109),
+      ::capnp::word(112, 116, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(145, 138, 81, 41, 168, 237, 164, 234),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(102, 101, 97, 116, 117, 114, 101, 100),
       ::capnp::word(76, 101, 118, 101, 108, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -28195,17 +28202,10 @@ pub mod message {
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(102, 101, 116, 99, 104, 85, 115, 101),
-      ::capnp::word(114, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 82, 101, 115, 112, 111, 110, 115),
+      ::capnp::word(101, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(43, 98, 205, 177, 171, 218, 191, 169),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(109, 117, 116, 101, 100, 0, 0, 0),
-      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(50, 188, 16, 81, 15, 144, 253, 192),
+      ::capnp::word(115, 213, 183, 190, 189, 187, 89, 244),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -28215,90 +28215,90 @@ pub mod message {
     pub fn get_field_types(index: u16) -> ::capnp::introspect::Type {
       match index {
         0 => <crate::main_capnp::login_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        1 => <crate::main_capnp::update_user_settings_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        2 => <crate::main_capnp::fetch_user_response_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        3 => <crate::main_capnp::login_ok_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        4 => <crate::main_capnp::login_failed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        5 => <crate::main_capnp::login_required_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        6 => <crate::main_capnp::update_own_data_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        7 => <crate::main_capnp::create_room_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        8 => <crate::main_capnp::join_room_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        1 => <crate::main_capnp::update_own_data_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        2 => <crate::main_capnp::request_player_counts_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        3 => <crate::main_capnp::request_global_player_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        4 => <crate::main_capnp::update_user_settings_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        5 => <crate::main_capnp::create_room_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        6 => <crate::main_capnp::join_room_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        7 => <crate::main_capnp::join_room_by_token_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        8 => <() as ::capnp::introspect::Introspect>::introspect(),
         9 => <() as ::capnp::introspect::Introspect>::introspect(),
-        10 => <crate::main_capnp::warp_player_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        11 => <crate::main_capnp::room_state_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        12 => <crate::main_capnp::join_session_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        13 => <crate::main_capnp::leave_session_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        14 => <crate::main_capnp::join_failed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        15 => <crate::main_capnp::kicked_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        16 => <() as ::capnp::introspect::Introspect>::introspect(),
-        17 => <crate::main_capnp::request_player_counts_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        18 => <crate::main_capnp::player_counts_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        19 => <crate::main_capnp::room_join_failed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        20 => <crate::main_capnp::room_create_failed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        21 => <crate::main_capnp::request_room_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        22 => <crate::main_capnp::room_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        23 => <crate::main_capnp::banned_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        24 => <crate::main_capnp::room_banned_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        25 => <crate::main_capnp::admin_login_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        26 => <crate::main_capnp::admin_kick_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        27 => <crate::main_capnp::admin_notice_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        28 => <crate::main_capnp::admin_notice_everyone_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        29 => <crate::main_capnp::admin_fetch_user_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        30 => <crate::main_capnp::admin_ban_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        31 => <crate::main_capnp::admin_unban_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        32 => <crate::main_capnp::admin_room_ban_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        33 => <crate::main_capnp::admin_room_unban_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        34 => <crate::main_capnp::admin_edit_roles_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        35 => <crate::main_capnp::admin_set_password_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        36 => <crate::main_capnp::admin_result_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        37 => <crate::main_capnp::admin_fetch_response_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        38 => <crate::main_capnp::notice_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        39 => <crate::main_capnp::admin_update_user_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        40 => <crate::main_capnp::admin_fetch_logs_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        41 => <crate::main_capnp::admin_logs_response_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        42 => <crate::main_capnp::assign_team_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        43 => <crate::main_capnp::create_team_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        44 => <crate::main_capnp::delete_team_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        45 => <crate::main_capnp::warn_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        46 => <crate::main_capnp::team_creation_result_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        47 => <crate::main_capnp::team_changed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        48 => <crate::main_capnp::get_team_members_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        49 => <crate::main_capnp::team_members_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        50 => <crate::main_capnp::update_team_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        51 => <crate::main_capnp::teams_updated_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        52 => <crate::main_capnp::admin_fetch_mods_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        53 => <crate::main_capnp::admin_fetch_mods_response_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        54 => <crate::main_capnp::servers_changed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        55 => <crate::main_capnp::room_owner_action_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        56 => <crate::main_capnp::update_room_settings_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        57 => <crate::main_capnp::room_settings_updated_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        58 => <crate::main_capnp::request_level_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        59 => <crate::main_capnp::level_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        60 => <crate::main_capnp::request_room_players_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        61 => <crate::main_capnp::room_players_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        62 => <crate::main_capnp::fetch_credits_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        63 => <crate::main_capnp::credits_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        64 => <crate::main_capnp::join_room_by_token_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        65 => <crate::main_capnp::invite_player_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        66 => <crate::main_capnp::invited_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        67 => <crate::main_capnp::invite_token_created_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        68 => <crate::main_capnp::request_global_player_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        69 => <crate::main_capnp::global_players_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        70 => <crate::main_capnp::admin_mute_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        71 => <crate::main_capnp::admin_unmute_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        72 => <crate::main_capnp::get_discord_link_state_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        73 => <crate::main_capnp::discord_link_state_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        74 => <crate::main_capnp::discord_link_attempt_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        75 => <crate::main_capnp::set_discord_pairing_state_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        76 => <crate::main_capnp::discord_link_confirm_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        77 => <crate::main_capnp::user_data_changed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        78 => <() as ::capnp::introspect::Introspect>::introspect(),
-        79 => <crate::main_capnp::get_featured_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        80 => <crate::main_capnp::send_featured_level_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        81 => <crate::main_capnp::featured_level_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        82 => <crate::main_capnp::featured_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        83 => <crate::main_capnp::fetch_user_message::Owned as ::capnp::introspect::Introspect>::introspect(),
-        84 => <crate::main_capnp::muted_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        10 => <crate::main_capnp::request_room_players_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        11 => <crate::main_capnp::request_room_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        12 => <crate::main_capnp::assign_team_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        13 => <crate::main_capnp::create_team_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        14 => <crate::main_capnp::delete_team_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        15 => <crate::main_capnp::update_team_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        16 => <crate::main_capnp::get_team_members_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        17 => <crate::main_capnp::room_owner_action_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        18 => <crate::main_capnp::update_room_settings_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        19 => <crate::main_capnp::invite_player_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        20 => <crate::main_capnp::join_session_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        21 => <crate::main_capnp::leave_session_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        22 => <crate::main_capnp::request_level_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        23 => <crate::main_capnp::admin_login_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        24 => <crate::main_capnp::admin_kick_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        25 => <crate::main_capnp::admin_notice_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        26 => <crate::main_capnp::admin_notice_everyone_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        27 => <crate::main_capnp::admin_fetch_user_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        28 => <crate::main_capnp::admin_fetch_logs_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        29 => <crate::main_capnp::admin_ban_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        30 => <crate::main_capnp::admin_unban_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        31 => <crate::main_capnp::admin_room_ban_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        32 => <crate::main_capnp::admin_room_unban_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        33 => <crate::main_capnp::admin_mute_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        34 => <crate::main_capnp::admin_unmute_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        35 => <crate::main_capnp::admin_edit_roles_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        36 => <crate::main_capnp::admin_set_password_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        37 => <crate::main_capnp::admin_update_user_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        38 => <crate::main_capnp::admin_fetch_mods_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        39 => <crate::main_capnp::fetch_credits_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        40 => <crate::main_capnp::get_discord_link_state_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        41 => <crate::main_capnp::set_discord_pairing_state_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        42 => <crate::main_capnp::discord_link_confirm_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        43 => <() as ::capnp::introspect::Introspect>::introspect(),
+        44 => <crate::main_capnp::get_featured_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        45 => <crate::main_capnp::send_featured_level_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        46 => <crate::main_capnp::fetch_user_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        47 => <crate::main_capnp::login_ok_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        48 => <crate::main_capnp::login_failed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        49 => <crate::main_capnp::login_required_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        50 => <crate::main_capnp::banned_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        51 => <crate::main_capnp::muted_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        52 => <crate::main_capnp::servers_changed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        53 => <crate::main_capnp::user_data_changed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        54 => <crate::main_capnp::room_state_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        55 => <crate::main_capnp::room_players_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        56 => <crate::main_capnp::room_join_failed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        57 => <crate::main_capnp::room_create_failed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        58 => <crate::main_capnp::room_banned_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        59 => <crate::main_capnp::room_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        60 => <crate::main_capnp::team_creation_result_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        61 => <crate::main_capnp::team_changed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        62 => <crate::main_capnp::team_members_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        63 => <crate::main_capnp::teams_updated_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        64 => <crate::main_capnp::room_settings_updated_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        65 => <crate::main_capnp::invited_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        66 => <crate::main_capnp::invite_token_created_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        67 => <crate::main_capnp::join_failed_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        68 => <crate::main_capnp::warp_player_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        69 => <crate::main_capnp::player_counts_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        70 => <crate::main_capnp::global_players_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        71 => <crate::main_capnp::level_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        72 => <crate::main_capnp::kicked_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        73 => <crate::main_capnp::notice_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        74 => <crate::main_capnp::warn_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        75 => <crate::main_capnp::admin_result_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        76 => <crate::main_capnp::admin_fetch_response_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        77 => <crate::main_capnp::admin_fetch_mods_response_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        78 => <crate::main_capnp::admin_logs_response_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        79 => <crate::main_capnp::credits_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        80 => <crate::main_capnp::discord_link_state_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        81 => <crate::main_capnp::discord_link_attempt_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        82 => <crate::main_capnp::featured_level_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        83 => <crate::main_capnp::featured_list_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        84 => <crate::main_capnp::fetch_user_response_message::Owned as ::capnp::introspect::Introspect>::introspect(),
         _ => ::capnp::introspect::panic_invalid_field_index(index),
       }
     }
@@ -28313,96 +28313,96 @@ pub mod message {
     };
     pub static NONUNION_MEMBERS : &[u16] = &[];
     pub static MEMBERS_BY_DISCRIMINANT : &[u16] = &[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84];
-    pub static MEMBERS_BY_NAME : &[u16] = &[30,34,40,52,53,37,29,26,25,41,70,27,28,36,32,33,35,31,71,39,42,23,16,7,43,63,44,74,76,73,81,82,62,83,2,72,78,79,48,69,65,67,66,14,8,64,12,15,9,13,59,0,4,3,5,84,38,18,68,58,17,21,60,24,20,19,22,55,61,57,11,80,54,75,47,46,49,51,6,56,50,1,77,45,10];
+    pub static MEMBERS_BY_NAME : &[u16] = &[29,35,28,38,77,76,27,24,23,78,33,25,26,75,31,32,36,30,34,37,12,50,9,5,13,79,14,81,42,80,82,83,39,46,84,40,43,44,16,70,19,66,65,67,6,7,20,72,8,21,71,0,48,47,49,51,73,69,3,22,2,11,10,58,57,56,59,17,55,64,54,45,52,41,61,60,62,63,1,18,15,4,53,74,68];
     pub const TYPE_ID: u64 = 0xa55b_5ef7_374b_3a21;
   }
   pub enum Which<A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31,A32,A33,A34,A35,A36,A37,A38,A39,A40,A41,A42,A43,A44,A45,A46,A47,A48,A49,A50,A51,A52,A53,A54,A55,A56,A57,A58,A59,A60,A61,A62,A63,A64,A65,A66,A67,A68,A69,A70,A71,A72,A73,A74,A75,A76,A77,A78,A79,A80,A81> {
     Login(A0),
-    UpdateUserSettings(A1),
-    FetchUserResponse(A2),
-    LoginOk(A3),
-    LoginFailed(A4),
-    LoginRequired(A5),
-    UpdateOwnData(A6),
-    CreateRoom(A7),
-    JoinRoom(A8),
+    UpdateOwnData(A1),
+    RequestPlayerCounts(A2),
+    RequestGlobalPlayerList(A3),
+    UpdateUserSettings(A4),
+    CreateRoom(A5),
+    JoinRoom(A6),
+    JoinRoomByToken(A7),
     LeaveRoom(()),
-    WarpPlayer(A9),
-    RoomState(A10),
-    JoinSession(A11),
-    LeaveSession(A12),
-    JoinFailed(A13),
-    Kicked(A14),
     CheckRoomState(()),
-    RequestPlayerCounts(A15),
-    PlayerCounts(A16),
-    RoomJoinFailed(A17),
-    RoomCreateFailed(A18),
-    RequestRoomList(A19),
-    RoomList(A20),
-    Banned(A21),
-    RoomBanned(A22),
-    AdminLogin(A23),
-    AdminKick(A24),
-    AdminNotice(A25),
-    AdminNoticeEveryone(A26),
-    AdminFetchUser(A27),
-    AdminBan(A28),
-    AdminUnban(A29),
-    AdminRoomBan(A30),
-    AdminRoomUnban(A31),
-    AdminEditRoles(A32),
-    AdminSetPassword(A33),
-    AdminResult(A34),
-    AdminFetchResponse(A35),
-    Notice(A36),
-    AdminUpdateUser(A37),
-    AdminFetchLogs(A38),
-    AdminLogsResponse(A39),
-    AssignTeam(A40),
-    CreateTeam(A41),
-    DeleteTeam(A42),
-    Warn(A43),
-    TeamCreationResult(A44),
-    TeamChanged(A45),
-    GetTeamMembers(A46),
-    TeamMembers(A47),
-    UpdateTeam(A48),
-    TeamsUpdated(A49),
-    AdminFetchMods(A50),
-    AdminFetchModsResponse(A51),
-    ServersChanged(A52),
-    RoomOwnerAction(A53),
-    UpdateRoomSettings(A54),
-    RoomSettingsUpdated(A55),
-    RequestLevelList(A56),
-    LevelList(A57),
-    RequestRoomPlayers(A58),
-    RoomPlayers(A59),
-    FetchCredits(A60),
-    Credits(A61),
-    JoinRoomByToken(A62),
-    InvitePlayer(A63),
-    Invited(A64),
-    InviteTokenCreated(A65),
-    RequestGlobalPlayerList(A66),
-    GlobalPlayers(A67),
-    AdminMute(A68),
-    AdminUnmute(A69),
-    GetDiscordLinkState(A70),
-    DiscordLinkState(A71),
-    DiscordLinkAttempt(A72),
-    SetDiscordPairingState(A73),
-    DiscordLinkConfirm(A74),
-    UserDataChanged(A75),
+    RequestRoomPlayers(A8),
+    RequestRoomList(A9),
+    AssignTeam(A10),
+    CreateTeam(A11),
+    DeleteTeam(A12),
+    UpdateTeam(A13),
+    GetTeamMembers(A14),
+    RoomOwnerAction(A15),
+    UpdateRoomSettings(A16),
+    InvitePlayer(A17),
+    JoinSession(A18),
+    LeaveSession(A19),
+    RequestLevelList(A20),
+    AdminLogin(A21),
+    AdminKick(A22),
+    AdminNotice(A23),
+    AdminNoticeEveryone(A24),
+    AdminFetchUser(A25),
+    AdminFetchLogs(A26),
+    AdminBan(A27),
+    AdminUnban(A28),
+    AdminRoomBan(A29),
+    AdminRoomUnban(A30),
+    AdminMute(A31),
+    AdminUnmute(A32),
+    AdminEditRoles(A33),
+    AdminSetPassword(A34),
+    AdminUpdateUser(A35),
+    AdminFetchMods(A36),
+    FetchCredits(A37),
+    GetDiscordLinkState(A38),
+    SetDiscordPairingState(A39),
+    DiscordLinkConfirm(A40),
     GetFeaturedLevel(()),
-    GetFeaturedList(A76),
-    SendFeaturedLevel(A77),
-    FeaturedLevel(A78),
-    FeaturedList(A79),
-    FetchUser(A80),
-    Muted(A81),
+    GetFeaturedList(A41),
+    SendFeaturedLevel(A42),
+    FetchUser(A43),
+    LoginOk(A44),
+    LoginFailed(A45),
+    LoginRequired(A46),
+    Banned(A47),
+    Muted(A48),
+    ServersChanged(A49),
+    UserDataChanged(A50),
+    RoomState(A51),
+    RoomPlayers(A52),
+    RoomJoinFailed(A53),
+    RoomCreateFailed(A54),
+    RoomBanned(A55),
+    RoomList(A56),
+    TeamCreationResult(A57),
+    TeamChanged(A58),
+    TeamMembers(A59),
+    TeamsUpdated(A60),
+    RoomSettingsUpdated(A61),
+    Invited(A62),
+    InviteTokenCreated(A63),
+    JoinFailed(A64),
+    WarpPlayer(A65),
+    PlayerCounts(A66),
+    GlobalPlayers(A67),
+    LevelList(A68),
+    Kicked(A69),
+    Notice(A70),
+    Warn(A71),
+    AdminResult(A72),
+    AdminFetchResponse(A73),
+    AdminFetchModsResponse(A74),
+    AdminLogsResponse(A75),
+    Credits(A76),
+    DiscordLinkState(A77),
+    DiscordLinkAttempt(A78),
+    FeaturedLevel(A79),
+    FeaturedList(A80),
+    FetchUserResponse(A81),
   }
-  pub type WhichReader<'a,> = Which<::capnp::Result<crate::main_capnp::login_message::Reader<'a>>,::capnp::Result<crate::main_capnp::update_user_settings_message::Reader<'a>>,::capnp::Result<crate::main_capnp::fetch_user_response_message::Reader<'a>>,::capnp::Result<crate::main_capnp::login_ok_message::Reader<'a>>,::capnp::Result<crate::main_capnp::login_failed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::login_required_message::Reader<'a>>,::capnp::Result<crate::main_capnp::update_own_data_message::Reader<'a>>,::capnp::Result<crate::main_capnp::create_room_message::Reader<'a>>,::capnp::Result<crate::main_capnp::join_room_message::Reader<'a>>,::capnp::Result<crate::main_capnp::warp_player_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_state_message::Reader<'a>>,::capnp::Result<crate::main_capnp::join_session_message::Reader<'a>>,::capnp::Result<crate::main_capnp::leave_session_message::Reader<'a>>,::capnp::Result<crate::main_capnp::join_failed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::kicked_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_player_counts_message::Reader<'a>>,::capnp::Result<crate::main_capnp::player_counts_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_join_failed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_create_failed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_room_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::banned_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_banned_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_login_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_kick_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_notice_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_notice_everyone_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_user_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_ban_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_unban_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_room_ban_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_room_unban_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_edit_roles_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_set_password_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_result_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_response_message::Reader<'a>>,::capnp::Result<crate::main_capnp::notice_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_update_user_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_logs_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_logs_response_message::Reader<'a>>,::capnp::Result<crate::main_capnp::assign_team_message::Reader<'a>>,::capnp::Result<crate::main_capnp::create_team_message::Reader<'a>>,::capnp::Result<crate::main_capnp::delete_team_message::Reader<'a>>,::capnp::Result<crate::main_capnp::warn_message::Reader<'a>>,::capnp::Result<crate::main_capnp::team_creation_result_message::Reader<'a>>,::capnp::Result<crate::main_capnp::team_changed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::get_team_members_message::Reader<'a>>,::capnp::Result<crate::main_capnp::team_members_message::Reader<'a>>,::capnp::Result<crate::main_capnp::update_team_message::Reader<'a>>,::capnp::Result<crate::main_capnp::teams_updated_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_mods_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_mods_response_message::Reader<'a>>,::capnp::Result<crate::main_capnp::servers_changed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_owner_action_message::Reader<'a>>,::capnp::Result<crate::main_capnp::update_room_settings_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_settings_updated_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_level_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::level_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_room_players_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_players_message::Reader<'a>>,::capnp::Result<crate::main_capnp::fetch_credits_message::Reader<'a>>,::capnp::Result<crate::main_capnp::credits_message::Reader<'a>>,::capnp::Result<crate::main_capnp::join_room_by_token_message::Reader<'a>>,::capnp::Result<crate::main_capnp::invite_player_message::Reader<'a>>,::capnp::Result<crate::main_capnp::invited_message::Reader<'a>>,::capnp::Result<crate::main_capnp::invite_token_created_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_global_player_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::global_players_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_mute_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_unmute_message::Reader<'a>>,::capnp::Result<crate::main_capnp::get_discord_link_state_message::Reader<'a>>,::capnp::Result<crate::main_capnp::discord_link_state_message::Reader<'a>>,::capnp::Result<crate::main_capnp::discord_link_attempt_message::Reader<'a>>,::capnp::Result<crate::main_capnp::set_discord_pairing_state_message::Reader<'a>>,::capnp::Result<crate::main_capnp::discord_link_confirm_message::Reader<'a>>,::capnp::Result<crate::main_capnp::user_data_changed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::get_featured_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::send_featured_level_message::Reader<'a>>,::capnp::Result<crate::main_capnp::featured_level_message::Reader<'a>>,::capnp::Result<crate::main_capnp::featured_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::fetch_user_message::Reader<'a>>,::capnp::Result<crate::main_capnp::muted_message::Reader<'a>>>;
-  pub type WhichBuilder<'a,> = Which<::capnp::Result<crate::main_capnp::login_message::Builder<'a>>,::capnp::Result<crate::main_capnp::update_user_settings_message::Builder<'a>>,::capnp::Result<crate::main_capnp::fetch_user_response_message::Builder<'a>>,::capnp::Result<crate::main_capnp::login_ok_message::Builder<'a>>,::capnp::Result<crate::main_capnp::login_failed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::login_required_message::Builder<'a>>,::capnp::Result<crate::main_capnp::update_own_data_message::Builder<'a>>,::capnp::Result<crate::main_capnp::create_room_message::Builder<'a>>,::capnp::Result<crate::main_capnp::join_room_message::Builder<'a>>,::capnp::Result<crate::main_capnp::warp_player_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_state_message::Builder<'a>>,::capnp::Result<crate::main_capnp::join_session_message::Builder<'a>>,::capnp::Result<crate::main_capnp::leave_session_message::Builder<'a>>,::capnp::Result<crate::main_capnp::join_failed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::kicked_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_player_counts_message::Builder<'a>>,::capnp::Result<crate::main_capnp::player_counts_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_join_failed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_create_failed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_room_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::banned_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_banned_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_login_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_kick_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_notice_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_notice_everyone_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_user_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_ban_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_unban_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_room_ban_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_room_unban_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_edit_roles_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_set_password_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_result_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_response_message::Builder<'a>>,::capnp::Result<crate::main_capnp::notice_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_update_user_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_logs_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_logs_response_message::Builder<'a>>,::capnp::Result<crate::main_capnp::assign_team_message::Builder<'a>>,::capnp::Result<crate::main_capnp::create_team_message::Builder<'a>>,::capnp::Result<crate::main_capnp::delete_team_message::Builder<'a>>,::capnp::Result<crate::main_capnp::warn_message::Builder<'a>>,::capnp::Result<crate::main_capnp::team_creation_result_message::Builder<'a>>,::capnp::Result<crate::main_capnp::team_changed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::get_team_members_message::Builder<'a>>,::capnp::Result<crate::main_capnp::team_members_message::Builder<'a>>,::capnp::Result<crate::main_capnp::update_team_message::Builder<'a>>,::capnp::Result<crate::main_capnp::teams_updated_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_mods_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_mods_response_message::Builder<'a>>,::capnp::Result<crate::main_capnp::servers_changed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_owner_action_message::Builder<'a>>,::capnp::Result<crate::main_capnp::update_room_settings_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_settings_updated_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_level_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::level_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_room_players_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_players_message::Builder<'a>>,::capnp::Result<crate::main_capnp::fetch_credits_message::Builder<'a>>,::capnp::Result<crate::main_capnp::credits_message::Builder<'a>>,::capnp::Result<crate::main_capnp::join_room_by_token_message::Builder<'a>>,::capnp::Result<crate::main_capnp::invite_player_message::Builder<'a>>,::capnp::Result<crate::main_capnp::invited_message::Builder<'a>>,::capnp::Result<crate::main_capnp::invite_token_created_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_global_player_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::global_players_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_mute_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_unmute_message::Builder<'a>>,::capnp::Result<crate::main_capnp::get_discord_link_state_message::Builder<'a>>,::capnp::Result<crate::main_capnp::discord_link_state_message::Builder<'a>>,::capnp::Result<crate::main_capnp::discord_link_attempt_message::Builder<'a>>,::capnp::Result<crate::main_capnp::set_discord_pairing_state_message::Builder<'a>>,::capnp::Result<crate::main_capnp::discord_link_confirm_message::Builder<'a>>,::capnp::Result<crate::main_capnp::user_data_changed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::get_featured_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::send_featured_level_message::Builder<'a>>,::capnp::Result<crate::main_capnp::featured_level_message::Builder<'a>>,::capnp::Result<crate::main_capnp::featured_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::fetch_user_message::Builder<'a>>,::capnp::Result<crate::main_capnp::muted_message::Builder<'a>>>;
+  pub type WhichReader<'a,> = Which<::capnp::Result<crate::main_capnp::login_message::Reader<'a>>,::capnp::Result<crate::main_capnp::update_own_data_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_player_counts_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_global_player_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::update_user_settings_message::Reader<'a>>,::capnp::Result<crate::main_capnp::create_room_message::Reader<'a>>,::capnp::Result<crate::main_capnp::join_room_message::Reader<'a>>,::capnp::Result<crate::main_capnp::join_room_by_token_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_room_players_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_room_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::assign_team_message::Reader<'a>>,::capnp::Result<crate::main_capnp::create_team_message::Reader<'a>>,::capnp::Result<crate::main_capnp::delete_team_message::Reader<'a>>,::capnp::Result<crate::main_capnp::update_team_message::Reader<'a>>,::capnp::Result<crate::main_capnp::get_team_members_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_owner_action_message::Reader<'a>>,::capnp::Result<crate::main_capnp::update_room_settings_message::Reader<'a>>,::capnp::Result<crate::main_capnp::invite_player_message::Reader<'a>>,::capnp::Result<crate::main_capnp::join_session_message::Reader<'a>>,::capnp::Result<crate::main_capnp::leave_session_message::Reader<'a>>,::capnp::Result<crate::main_capnp::request_level_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_login_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_kick_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_notice_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_notice_everyone_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_user_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_logs_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_ban_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_unban_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_room_ban_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_room_unban_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_mute_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_unmute_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_edit_roles_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_set_password_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_update_user_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_mods_message::Reader<'a>>,::capnp::Result<crate::main_capnp::fetch_credits_message::Reader<'a>>,::capnp::Result<crate::main_capnp::get_discord_link_state_message::Reader<'a>>,::capnp::Result<crate::main_capnp::set_discord_pairing_state_message::Reader<'a>>,::capnp::Result<crate::main_capnp::discord_link_confirm_message::Reader<'a>>,::capnp::Result<crate::main_capnp::get_featured_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::send_featured_level_message::Reader<'a>>,::capnp::Result<crate::main_capnp::fetch_user_message::Reader<'a>>,::capnp::Result<crate::main_capnp::login_ok_message::Reader<'a>>,::capnp::Result<crate::main_capnp::login_failed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::login_required_message::Reader<'a>>,::capnp::Result<crate::main_capnp::banned_message::Reader<'a>>,::capnp::Result<crate::main_capnp::muted_message::Reader<'a>>,::capnp::Result<crate::main_capnp::servers_changed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::user_data_changed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_state_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_players_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_join_failed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_create_failed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_banned_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::team_creation_result_message::Reader<'a>>,::capnp::Result<crate::main_capnp::team_changed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::team_members_message::Reader<'a>>,::capnp::Result<crate::main_capnp::teams_updated_message::Reader<'a>>,::capnp::Result<crate::main_capnp::room_settings_updated_message::Reader<'a>>,::capnp::Result<crate::main_capnp::invited_message::Reader<'a>>,::capnp::Result<crate::main_capnp::invite_token_created_message::Reader<'a>>,::capnp::Result<crate::main_capnp::join_failed_message::Reader<'a>>,::capnp::Result<crate::main_capnp::warp_player_message::Reader<'a>>,::capnp::Result<crate::main_capnp::player_counts_message::Reader<'a>>,::capnp::Result<crate::main_capnp::global_players_message::Reader<'a>>,::capnp::Result<crate::main_capnp::level_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::kicked_message::Reader<'a>>,::capnp::Result<crate::main_capnp::notice_message::Reader<'a>>,::capnp::Result<crate::main_capnp::warn_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_result_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_response_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_mods_response_message::Reader<'a>>,::capnp::Result<crate::main_capnp::admin_logs_response_message::Reader<'a>>,::capnp::Result<crate::main_capnp::credits_message::Reader<'a>>,::capnp::Result<crate::main_capnp::discord_link_state_message::Reader<'a>>,::capnp::Result<crate::main_capnp::discord_link_attempt_message::Reader<'a>>,::capnp::Result<crate::main_capnp::featured_level_message::Reader<'a>>,::capnp::Result<crate::main_capnp::featured_list_message::Reader<'a>>,::capnp::Result<crate::main_capnp::fetch_user_response_message::Reader<'a>>>;
+  pub type WhichBuilder<'a,> = Which<::capnp::Result<crate::main_capnp::login_message::Builder<'a>>,::capnp::Result<crate::main_capnp::update_own_data_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_player_counts_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_global_player_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::update_user_settings_message::Builder<'a>>,::capnp::Result<crate::main_capnp::create_room_message::Builder<'a>>,::capnp::Result<crate::main_capnp::join_room_message::Builder<'a>>,::capnp::Result<crate::main_capnp::join_room_by_token_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_room_players_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_room_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::assign_team_message::Builder<'a>>,::capnp::Result<crate::main_capnp::create_team_message::Builder<'a>>,::capnp::Result<crate::main_capnp::delete_team_message::Builder<'a>>,::capnp::Result<crate::main_capnp::update_team_message::Builder<'a>>,::capnp::Result<crate::main_capnp::get_team_members_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_owner_action_message::Builder<'a>>,::capnp::Result<crate::main_capnp::update_room_settings_message::Builder<'a>>,::capnp::Result<crate::main_capnp::invite_player_message::Builder<'a>>,::capnp::Result<crate::main_capnp::join_session_message::Builder<'a>>,::capnp::Result<crate::main_capnp::leave_session_message::Builder<'a>>,::capnp::Result<crate::main_capnp::request_level_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_login_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_kick_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_notice_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_notice_everyone_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_user_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_logs_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_ban_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_unban_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_room_ban_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_room_unban_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_mute_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_unmute_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_edit_roles_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_set_password_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_update_user_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_mods_message::Builder<'a>>,::capnp::Result<crate::main_capnp::fetch_credits_message::Builder<'a>>,::capnp::Result<crate::main_capnp::get_discord_link_state_message::Builder<'a>>,::capnp::Result<crate::main_capnp::set_discord_pairing_state_message::Builder<'a>>,::capnp::Result<crate::main_capnp::discord_link_confirm_message::Builder<'a>>,::capnp::Result<crate::main_capnp::get_featured_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::send_featured_level_message::Builder<'a>>,::capnp::Result<crate::main_capnp::fetch_user_message::Builder<'a>>,::capnp::Result<crate::main_capnp::login_ok_message::Builder<'a>>,::capnp::Result<crate::main_capnp::login_failed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::login_required_message::Builder<'a>>,::capnp::Result<crate::main_capnp::banned_message::Builder<'a>>,::capnp::Result<crate::main_capnp::muted_message::Builder<'a>>,::capnp::Result<crate::main_capnp::servers_changed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::user_data_changed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_state_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_players_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_join_failed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_create_failed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_banned_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::team_creation_result_message::Builder<'a>>,::capnp::Result<crate::main_capnp::team_changed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::team_members_message::Builder<'a>>,::capnp::Result<crate::main_capnp::teams_updated_message::Builder<'a>>,::capnp::Result<crate::main_capnp::room_settings_updated_message::Builder<'a>>,::capnp::Result<crate::main_capnp::invited_message::Builder<'a>>,::capnp::Result<crate::main_capnp::invite_token_created_message::Builder<'a>>,::capnp::Result<crate::main_capnp::join_failed_message::Builder<'a>>,::capnp::Result<crate::main_capnp::warp_player_message::Builder<'a>>,::capnp::Result<crate::main_capnp::player_counts_message::Builder<'a>>,::capnp::Result<crate::main_capnp::global_players_message::Builder<'a>>,::capnp::Result<crate::main_capnp::level_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::kicked_message::Builder<'a>>,::capnp::Result<crate::main_capnp::notice_message::Builder<'a>>,::capnp::Result<crate::main_capnp::warn_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_result_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_response_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_fetch_mods_response_message::Builder<'a>>,::capnp::Result<crate::main_capnp::admin_logs_response_message::Builder<'a>>,::capnp::Result<crate::main_capnp::credits_message::Builder<'a>>,::capnp::Result<crate::main_capnp::discord_link_state_message::Builder<'a>>,::capnp::Result<crate::main_capnp::discord_link_attempt_message::Builder<'a>>,::capnp::Result<crate::main_capnp::featured_level_message::Builder<'a>>,::capnp::Result<crate::main_capnp::featured_list_message::Builder<'a>>,::capnp::Result<crate::main_capnp::fetch_user_response_message::Builder<'a>>>;
 }

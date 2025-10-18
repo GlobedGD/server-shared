@@ -1574,90 +1574,90 @@ struct Message {
   class Pipeline;
   enum Which: uint16_t {
     LOGIN,
-    UPDATE_USER_SETTINGS,
-    FETCH_USER_RESPONSE,
-    LOGIN_OK,
-    LOGIN_FAILED,
-    LOGIN_REQUIRED,
     UPDATE_OWN_DATA,
+    REQUEST_PLAYER_COUNTS,
+    REQUEST_GLOBAL_PLAYER_LIST,
+    UPDATE_USER_SETTINGS,
     CREATE_ROOM,
     JOIN_ROOM,
+    JOIN_ROOM_BY_TOKEN,
     LEAVE_ROOM,
-    WARP_PLAYER,
-    ROOM_STATE,
+    CHECK_ROOM_STATE,
+    REQUEST_ROOM_PLAYERS,
+    REQUEST_ROOM_LIST,
+    ASSIGN_TEAM,
+    CREATE_TEAM,
+    DELETE_TEAM,
+    UPDATE_TEAM,
+    GET_TEAM_MEMBERS,
+    ROOM_OWNER_ACTION,
+    UPDATE_ROOM_SETTINGS,
+    INVITE_PLAYER,
     JOIN_SESSION,
     LEAVE_SESSION,
-    JOIN_FAILED,
-    KICKED,
-    CHECK_ROOM_STATE,
-    REQUEST_PLAYER_COUNTS,
-    PLAYER_COUNTS,
-    ROOM_JOIN_FAILED,
-    ROOM_CREATE_FAILED,
-    REQUEST_ROOM_LIST,
-    ROOM_LIST,
-    BANNED,
-    ROOM_BANNED,
+    REQUEST_LEVEL_LIST,
     ADMIN_LOGIN,
     ADMIN_KICK,
     ADMIN_NOTICE,
     ADMIN_NOTICE_EVERYONE,
     ADMIN_FETCH_USER,
+    ADMIN_FETCH_LOGS,
     ADMIN_BAN,
     ADMIN_UNBAN,
     ADMIN_ROOM_BAN,
     ADMIN_ROOM_UNBAN,
-    ADMIN_EDIT_ROLES,
-    ADMIN_SET_PASSWORD,
-    ADMIN_RESULT,
-    ADMIN_FETCH_RESPONSE,
-    NOTICE,
-    ADMIN_UPDATE_USER,
-    ADMIN_FETCH_LOGS,
-    ADMIN_LOGS_RESPONSE,
-    ASSIGN_TEAM,
-    CREATE_TEAM,
-    DELETE_TEAM,
-    WARN,
-    TEAM_CREATION_RESULT,
-    TEAM_CHANGED,
-    GET_TEAM_MEMBERS,
-    TEAM_MEMBERS,
-    UPDATE_TEAM,
-    TEAMS_UPDATED,
-    ADMIN_FETCH_MODS,
-    ADMIN_FETCH_MODS_RESPONSE,
-    SERVERS_CHANGED,
-    ROOM_OWNER_ACTION,
-    UPDATE_ROOM_SETTINGS,
-    ROOM_SETTINGS_UPDATED,
-    REQUEST_LEVEL_LIST,
-    LEVEL_LIST,
-    REQUEST_ROOM_PLAYERS,
-    ROOM_PLAYERS,
-    FETCH_CREDITS,
-    CREDITS,
-    JOIN_ROOM_BY_TOKEN,
-    INVITE_PLAYER,
-    INVITED,
-    INVITE_TOKEN_CREATED,
-    REQUEST_GLOBAL_PLAYER_LIST,
-    GLOBAL_PLAYERS,
     ADMIN_MUTE,
     ADMIN_UNMUTE,
+    ADMIN_EDIT_ROLES,
+    ADMIN_SET_PASSWORD,
+    ADMIN_UPDATE_USER,
+    ADMIN_FETCH_MODS,
+    FETCH_CREDITS,
     GET_DISCORD_LINK_STATE,
-    DISCORD_LINK_STATE,
-    DISCORD_LINK_ATTEMPT,
     SET_DISCORD_PAIRING_STATE,
     DISCORD_LINK_CONFIRM,
-    USER_DATA_CHANGED,
     GET_FEATURED_LEVEL,
     GET_FEATURED_LIST,
     SEND_FEATURED_LEVEL,
+    FETCH_USER,
+    LOGIN_OK,
+    LOGIN_FAILED,
+    LOGIN_REQUIRED,
+    BANNED,
+    MUTED,
+    SERVERS_CHANGED,
+    USER_DATA_CHANGED,
+    ROOM_STATE,
+    ROOM_PLAYERS,
+    ROOM_JOIN_FAILED,
+    ROOM_CREATE_FAILED,
+    ROOM_BANNED,
+    ROOM_LIST,
+    TEAM_CREATION_RESULT,
+    TEAM_CHANGED,
+    TEAM_MEMBERS,
+    TEAMS_UPDATED,
+    ROOM_SETTINGS_UPDATED,
+    INVITED,
+    INVITE_TOKEN_CREATED,
+    JOIN_FAILED,
+    WARP_PLAYER,
+    PLAYER_COUNTS,
+    GLOBAL_PLAYERS,
+    LEVEL_LIST,
+    KICKED,
+    NOTICE,
+    WARN,
+    ADMIN_RESULT,
+    ADMIN_FETCH_RESPONSE,
+    ADMIN_FETCH_MODS_RESPONSE,
+    ADMIN_LOGS_RESPONSE,
+    CREDITS,
+    DISCORD_LINK_STATE,
+    DISCORD_LINK_ATTEMPT,
     FEATURED_LEVEL,
     FEATURED_LIST,
-    FETCH_USER,
-    MUTED,
+    FETCH_USER_RESPONSE,
   };
 
   struct _capnpPrivate {
@@ -1787,6 +1787,9 @@ public:
   inline bool hasUident() const;
   inline  ::capnp::Data::Reader getUident() const;
 
+  inline bool hasSettings() const;
+  inline  ::globed::schema::shared::UserSettings::Reader getSettings() const;
+
   inline bool isUtoken() const;
   inline bool hasUtoken() const;
   inline  ::capnp::Text::Reader getUtoken() const;
@@ -1798,9 +1801,6 @@ public:
   inline bool isPlain() const;
   inline bool hasPlain() const;
   inline  ::globed::schema::main::PlayerAccountData::Reader getPlain() const;
-
-  inline bool hasSettings() const;
-  inline  ::globed::schema::shared::UserSettings::Reader getSettings() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1848,6 +1848,13 @@ public:
   inline void adoptUident(::capnp::Orphan< ::capnp::Data>&& value);
   inline ::capnp::Orphan< ::capnp::Data> disownUident();
 
+  inline bool hasSettings();
+  inline  ::globed::schema::shared::UserSettings::Builder getSettings();
+  inline void setSettings( ::globed::schema::shared::UserSettings::Reader value);
+  inline  ::globed::schema::shared::UserSettings::Builder initSettings();
+  inline void adoptSettings(::capnp::Orphan< ::globed::schema::shared::UserSettings>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::UserSettings> disownSettings();
+
   inline bool isUtoken();
   inline bool hasUtoken();
   inline  ::capnp::Text::Builder getUtoken();
@@ -1871,13 +1878,6 @@ public:
   inline  ::globed::schema::main::PlayerAccountData::Builder initPlain();
   inline void adoptPlain(::capnp::Orphan< ::globed::schema::main::PlayerAccountData>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::PlayerAccountData> disownPlain();
-
-  inline bool hasSettings();
-  inline  ::globed::schema::shared::UserSettings::Builder getSettings();
-  inline void setSettings( ::globed::schema::shared::UserSettings::Reader value);
-  inline  ::globed::schema::shared::UserSettings::Builder initSettings();
-  inline void adoptSettings(::capnp::Orphan< ::globed::schema::shared::UserSettings>&& value);
-  inline ::capnp::Orphan< ::globed::schema::shared::UserSettings> disownSettings();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1936,22 +1936,22 @@ public:
   inline bool hasUserRoles() const;
   inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getUserRoles() const;
 
+  inline bool hasNameColor() const;
+  inline  ::capnp::Data::Reader getNameColor() const;
+
   inline bool getIsModerator() const;
+
+  inline bool getCanMute() const;
 
   inline bool getCanBan() const;
 
   inline bool getCanSetPassword() const;
-
-  inline bool hasNameColor() const;
-  inline  ::capnp::Data::Reader getNameColor() const;
 
   inline bool getCanEditRoles() const;
 
   inline bool getCanSendFeatures() const;
 
   inline bool getCanRateFeatures() const;
-
-  inline bool getCanMute() const;
 
   inline  ::int32_t getFeaturedLevel() const;
 
@@ -2016,21 +2016,24 @@ public:
   inline void adoptUserRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownUserRoles();
 
-  inline bool getIsModerator();
-  inline void setIsModerator(bool value);
-
-  inline bool getCanBan();
-  inline void setCanBan(bool value);
-
-  inline bool getCanSetPassword();
-  inline void setCanSetPassword(bool value);
-
   inline bool hasNameColor();
   inline  ::capnp::Data::Builder getNameColor();
   inline void setNameColor( ::capnp::Data::Reader value);
   inline  ::capnp::Data::Builder initNameColor(unsigned int size);
   inline void adoptNameColor(::capnp::Orphan< ::capnp::Data>&& value);
   inline ::capnp::Orphan< ::capnp::Data> disownNameColor();
+
+  inline bool getIsModerator();
+  inline void setIsModerator(bool value);
+
+  inline bool getCanMute();
+  inline void setCanMute(bool value);
+
+  inline bool getCanBan();
+  inline void setCanBan(bool value);
+
+  inline bool getCanSetPassword();
+  inline void setCanSetPassword(bool value);
 
   inline bool getCanEditRoles();
   inline void setCanEditRoles(bool value);
@@ -2040,9 +2043,6 @@ public:
 
   inline bool getCanRateFeatures();
   inline void setCanRateFeatures(bool value);
-
-  inline bool getCanMute();
-  inline void setCanMute(bool value);
 
   inline  ::int32_t getFeaturedLevel();
   inline void setFeaturedLevel( ::int32_t value);
@@ -2971,6 +2971,8 @@ public:
   }
 #endif  // !CAPNP_LITE
 
+  inline  ::uint8_t getServerId() const;
+
   inline  ::uint16_t getPlayerLimit() const;
 
   inline bool getFasterReset() const;
@@ -2981,19 +2983,17 @@ public:
 
   inline bool getIsFollower() const;
 
+  inline bool getLevelIntegrity() const;
+
+  inline bool getTeams() const;
+
+  inline bool getLockedTeams() const;
+
   inline bool getCollision() const;
 
   inline bool getTwoPlayerMode() const;
 
   inline bool getDeathlink() const;
-
-  inline bool getLevelIntegrity() const;
-
-  inline  ::uint8_t getServerId() const;
-
-  inline bool getTeams() const;
-
-  inline bool getLockedTeams() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -3023,6 +3023,9 @@ public:
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
 
+  inline  ::uint8_t getServerId();
+  inline void setServerId( ::uint8_t value);
+
   inline  ::uint16_t getPlayerLimit();
   inline void setPlayerLimit( ::uint16_t value);
 
@@ -3038,6 +3041,15 @@ public:
   inline bool getIsFollower();
   inline void setIsFollower(bool value);
 
+  inline bool getLevelIntegrity();
+  inline void setLevelIntegrity(bool value);
+
+  inline bool getTeams();
+  inline void setTeams(bool value);
+
+  inline bool getLockedTeams();
+  inline void setLockedTeams(bool value);
+
   inline bool getCollision();
   inline void setCollision(bool value);
 
@@ -3046,18 +3058,6 @@ public:
 
   inline bool getDeathlink();
   inline void setDeathlink(bool value);
-
-  inline bool getLevelIntegrity();
-  inline void setLevelIntegrity(bool value);
-
-  inline  ::uint8_t getServerId();
-  inline void setServerId( ::uint8_t value);
-
-  inline bool getTeams();
-  inline void setTeams(bool value);
-
-  inline bool getLockedTeams();
-  inline void setLockedTeams(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -9941,29 +9941,21 @@ public:
   inline bool hasLogin() const;
   inline  ::globed::schema::main::LoginMessage::Reader getLogin() const;
 
-  inline bool isUpdateUserSettings() const;
-  inline bool hasUpdateUserSettings() const;
-  inline  ::globed::schema::main::UpdateUserSettingsMessage::Reader getUpdateUserSettings() const;
-
-  inline bool isFetchUserResponse() const;
-  inline bool hasFetchUserResponse() const;
-  inline  ::globed::schema::main::FetchUserResponseMessage::Reader getFetchUserResponse() const;
-
-  inline bool isLoginOk() const;
-  inline bool hasLoginOk() const;
-  inline  ::globed::schema::main::LoginOkMessage::Reader getLoginOk() const;
-
-  inline bool isLoginFailed() const;
-  inline bool hasLoginFailed() const;
-  inline  ::globed::schema::main::LoginFailedMessage::Reader getLoginFailed() const;
-
-  inline bool isLoginRequired() const;
-  inline bool hasLoginRequired() const;
-  inline  ::globed::schema::main::LoginRequiredMessage::Reader getLoginRequired() const;
-
   inline bool isUpdateOwnData() const;
   inline bool hasUpdateOwnData() const;
   inline  ::globed::schema::main::UpdateOwnDataMessage::Reader getUpdateOwnData() const;
+
+  inline bool isRequestPlayerCounts() const;
+  inline bool hasRequestPlayerCounts() const;
+  inline  ::globed::schema::main::RequestPlayerCountsMessage::Reader getRequestPlayerCounts() const;
+
+  inline bool isRequestGlobalPlayerList() const;
+  inline bool hasRequestGlobalPlayerList() const;
+  inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Reader getRequestGlobalPlayerList() const;
+
+  inline bool isUpdateUserSettings() const;
+  inline bool hasUpdateUserSettings() const;
+  inline  ::globed::schema::main::UpdateUserSettingsMessage::Reader getUpdateUserSettings() const;
 
   inline bool isCreateRoom() const;
   inline bool hasCreateRoom() const;
@@ -9973,16 +9965,55 @@ public:
   inline bool hasJoinRoom() const;
   inline  ::globed::schema::main::JoinRoomMessage::Reader getJoinRoom() const;
 
+  inline bool isJoinRoomByToken() const;
+  inline bool hasJoinRoomByToken() const;
+  inline  ::globed::schema::main::JoinRoomByTokenMessage::Reader getJoinRoomByToken() const;
+
   inline bool isLeaveRoom() const;
   inline  ::capnp::Void getLeaveRoom() const;
 
-  inline bool isWarpPlayer() const;
-  inline bool hasWarpPlayer() const;
-  inline  ::globed::schema::main::WarpPlayerMessage::Reader getWarpPlayer() const;
+  inline bool isCheckRoomState() const;
+  inline  ::capnp::Void getCheckRoomState() const;
 
-  inline bool isRoomState() const;
-  inline bool hasRoomState() const;
-  inline  ::globed::schema::main::RoomStateMessage::Reader getRoomState() const;
+  inline bool isRequestRoomPlayers() const;
+  inline bool hasRequestRoomPlayers() const;
+  inline  ::globed::schema::main::RequestRoomPlayersMessage::Reader getRequestRoomPlayers() const;
+
+  inline bool isRequestRoomList() const;
+  inline bool hasRequestRoomList() const;
+  inline  ::globed::schema::main::RequestRoomListMessage::Reader getRequestRoomList() const;
+
+  inline bool isAssignTeam() const;
+  inline bool hasAssignTeam() const;
+  inline  ::globed::schema::main::AssignTeamMessage::Reader getAssignTeam() const;
+
+  inline bool isCreateTeam() const;
+  inline bool hasCreateTeam() const;
+  inline  ::globed::schema::main::CreateTeamMessage::Reader getCreateTeam() const;
+
+  inline bool isDeleteTeam() const;
+  inline bool hasDeleteTeam() const;
+  inline  ::globed::schema::main::DeleteTeamMessage::Reader getDeleteTeam() const;
+
+  inline bool isUpdateTeam() const;
+  inline bool hasUpdateTeam() const;
+  inline  ::globed::schema::main::UpdateTeamMessage::Reader getUpdateTeam() const;
+
+  inline bool isGetTeamMembers() const;
+  inline bool hasGetTeamMembers() const;
+  inline  ::globed::schema::main::GetTeamMembersMessage::Reader getGetTeamMembers() const;
+
+  inline bool isRoomOwnerAction() const;
+  inline bool hasRoomOwnerAction() const;
+  inline  ::globed::schema::main::RoomOwnerActionMessage::Reader getRoomOwnerAction() const;
+
+  inline bool isUpdateRoomSettings() const;
+  inline bool hasUpdateRoomSettings() const;
+  inline  ::globed::schema::main::UpdateRoomSettingsMessage::Reader getUpdateRoomSettings() const;
+
+  inline bool isInvitePlayer() const;
+  inline bool hasInvitePlayer() const;
+  inline  ::globed::schema::main::InvitePlayerMessage::Reader getInvitePlayer() const;
 
   inline bool isJoinSession() const;
   inline bool hasJoinSession() const;
@@ -9992,48 +10023,9 @@ public:
   inline bool hasLeaveSession() const;
   inline  ::globed::schema::main::LeaveSessionMessage::Reader getLeaveSession() const;
 
-  inline bool isJoinFailed() const;
-  inline bool hasJoinFailed() const;
-  inline  ::globed::schema::main::JoinFailedMessage::Reader getJoinFailed() const;
-
-  inline bool isKicked() const;
-  inline bool hasKicked() const;
-  inline  ::globed::schema::main::KickedMessage::Reader getKicked() const;
-
-  inline bool isCheckRoomState() const;
-  inline  ::capnp::Void getCheckRoomState() const;
-
-  inline bool isRequestPlayerCounts() const;
-  inline bool hasRequestPlayerCounts() const;
-  inline  ::globed::schema::main::RequestPlayerCountsMessage::Reader getRequestPlayerCounts() const;
-
-  inline bool isPlayerCounts() const;
-  inline bool hasPlayerCounts() const;
-  inline  ::globed::schema::main::PlayerCountsMessage::Reader getPlayerCounts() const;
-
-  inline bool isRoomJoinFailed() const;
-  inline bool hasRoomJoinFailed() const;
-  inline  ::globed::schema::main::RoomJoinFailedMessage::Reader getRoomJoinFailed() const;
-
-  inline bool isRoomCreateFailed() const;
-  inline bool hasRoomCreateFailed() const;
-  inline  ::globed::schema::main::RoomCreateFailedMessage::Reader getRoomCreateFailed() const;
-
-  inline bool isRequestRoomList() const;
-  inline bool hasRequestRoomList() const;
-  inline  ::globed::schema::main::RequestRoomListMessage::Reader getRequestRoomList() const;
-
-  inline bool isRoomList() const;
-  inline bool hasRoomList() const;
-  inline  ::globed::schema::main::RoomListMessage::Reader getRoomList() const;
-
-  inline bool isBanned() const;
-  inline bool hasBanned() const;
-  inline  ::globed::schema::main::BannedMessage::Reader getBanned() const;
-
-  inline bool isRoomBanned() const;
-  inline bool hasRoomBanned() const;
-  inline  ::globed::schema::main::RoomBannedMessage::Reader getRoomBanned() const;
+  inline bool isRequestLevelList() const;
+  inline bool hasRequestLevelList() const;
+  inline  ::globed::schema::main::RequestLevelListMessage::Reader getRequestLevelList() const;
 
   inline bool isAdminLogin() const;
   inline bool hasAdminLogin() const;
@@ -10055,6 +10047,10 @@ public:
   inline bool hasAdminFetchUser() const;
   inline  ::globed::schema::main::AdminFetchUserMessage::Reader getAdminFetchUser() const;
 
+  inline bool isAdminFetchLogs() const;
+  inline bool hasAdminFetchLogs() const;
+  inline  ::globed::schema::main::AdminFetchLogsMessage::Reader getAdminFetchLogs() const;
+
   inline bool isAdminBan() const;
   inline bool hasAdminBan() const;
   inline  ::globed::schema::main::AdminBanMessage::Reader getAdminBan() const;
@@ -10071,150 +10067,6 @@ public:
   inline bool hasAdminRoomUnban() const;
   inline  ::globed::schema::main::AdminRoomUnbanMessage::Reader getAdminRoomUnban() const;
 
-  inline bool isAdminEditRoles() const;
-  inline bool hasAdminEditRoles() const;
-  inline  ::globed::schema::main::AdminEditRolesMessage::Reader getAdminEditRoles() const;
-
-  inline bool isAdminSetPassword() const;
-  inline bool hasAdminSetPassword() const;
-  inline  ::globed::schema::main::AdminSetPasswordMessage::Reader getAdminSetPassword() const;
-
-  inline bool isAdminResult() const;
-  inline bool hasAdminResult() const;
-  inline  ::globed::schema::main::AdminResultMessage::Reader getAdminResult() const;
-
-  inline bool isAdminFetchResponse() const;
-  inline bool hasAdminFetchResponse() const;
-  inline  ::globed::schema::main::AdminFetchResponseMessage::Reader getAdminFetchResponse() const;
-
-  inline bool isNotice() const;
-  inline bool hasNotice() const;
-  inline  ::globed::schema::main::NoticeMessage::Reader getNotice() const;
-
-  inline bool isAdminUpdateUser() const;
-  inline bool hasAdminUpdateUser() const;
-  inline  ::globed::schema::main::AdminUpdateUserMessage::Reader getAdminUpdateUser() const;
-
-  inline bool isAdminFetchLogs() const;
-  inline bool hasAdminFetchLogs() const;
-  inline  ::globed::schema::main::AdminFetchLogsMessage::Reader getAdminFetchLogs() const;
-
-  inline bool isAdminLogsResponse() const;
-  inline bool hasAdminLogsResponse() const;
-  inline  ::globed::schema::main::AdminLogsResponseMessage::Reader getAdminLogsResponse() const;
-
-  inline bool isAssignTeam() const;
-  inline bool hasAssignTeam() const;
-  inline  ::globed::schema::main::AssignTeamMessage::Reader getAssignTeam() const;
-
-  inline bool isCreateTeam() const;
-  inline bool hasCreateTeam() const;
-  inline  ::globed::schema::main::CreateTeamMessage::Reader getCreateTeam() const;
-
-  inline bool isDeleteTeam() const;
-  inline bool hasDeleteTeam() const;
-  inline  ::globed::schema::main::DeleteTeamMessage::Reader getDeleteTeam() const;
-
-  inline bool isWarn() const;
-  inline bool hasWarn() const;
-  inline  ::globed::schema::main::WarnMessage::Reader getWarn() const;
-
-  inline bool isTeamCreationResult() const;
-  inline bool hasTeamCreationResult() const;
-  inline  ::globed::schema::main::TeamCreationResultMessage::Reader getTeamCreationResult() const;
-
-  inline bool isTeamChanged() const;
-  inline bool hasTeamChanged() const;
-  inline  ::globed::schema::main::TeamChangedMessage::Reader getTeamChanged() const;
-
-  inline bool isGetTeamMembers() const;
-  inline bool hasGetTeamMembers() const;
-  inline  ::globed::schema::main::GetTeamMembersMessage::Reader getGetTeamMembers() const;
-
-  inline bool isTeamMembers() const;
-  inline bool hasTeamMembers() const;
-  inline  ::globed::schema::main::TeamMembersMessage::Reader getTeamMembers() const;
-
-  inline bool isUpdateTeam() const;
-  inline bool hasUpdateTeam() const;
-  inline  ::globed::schema::main::UpdateTeamMessage::Reader getUpdateTeam() const;
-
-  inline bool isTeamsUpdated() const;
-  inline bool hasTeamsUpdated() const;
-  inline  ::globed::schema::main::TeamsUpdatedMessage::Reader getTeamsUpdated() const;
-
-  inline bool isAdminFetchMods() const;
-  inline bool hasAdminFetchMods() const;
-  inline  ::globed::schema::main::AdminFetchModsMessage::Reader getAdminFetchMods() const;
-
-  inline bool isAdminFetchModsResponse() const;
-  inline bool hasAdminFetchModsResponse() const;
-  inline  ::globed::schema::main::AdminFetchModsResponseMessage::Reader getAdminFetchModsResponse() const;
-
-  inline bool isServersChanged() const;
-  inline bool hasServersChanged() const;
-  inline  ::globed::schema::main::ServersChangedMessage::Reader getServersChanged() const;
-
-  inline bool isRoomOwnerAction() const;
-  inline bool hasRoomOwnerAction() const;
-  inline  ::globed::schema::main::RoomOwnerActionMessage::Reader getRoomOwnerAction() const;
-
-  inline bool isUpdateRoomSettings() const;
-  inline bool hasUpdateRoomSettings() const;
-  inline  ::globed::schema::main::UpdateRoomSettingsMessage::Reader getUpdateRoomSettings() const;
-
-  inline bool isRoomSettingsUpdated() const;
-  inline bool hasRoomSettingsUpdated() const;
-  inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Reader getRoomSettingsUpdated() const;
-
-  inline bool isRequestLevelList() const;
-  inline bool hasRequestLevelList() const;
-  inline  ::globed::schema::main::RequestLevelListMessage::Reader getRequestLevelList() const;
-
-  inline bool isLevelList() const;
-  inline bool hasLevelList() const;
-  inline  ::globed::schema::main::LevelListMessage::Reader getLevelList() const;
-
-  inline bool isRequestRoomPlayers() const;
-  inline bool hasRequestRoomPlayers() const;
-  inline  ::globed::schema::main::RequestRoomPlayersMessage::Reader getRequestRoomPlayers() const;
-
-  inline bool isRoomPlayers() const;
-  inline bool hasRoomPlayers() const;
-  inline  ::globed::schema::main::RoomPlayersMessage::Reader getRoomPlayers() const;
-
-  inline bool isFetchCredits() const;
-  inline bool hasFetchCredits() const;
-  inline  ::globed::schema::main::FetchCreditsMessage::Reader getFetchCredits() const;
-
-  inline bool isCredits() const;
-  inline bool hasCredits() const;
-  inline  ::globed::schema::main::CreditsMessage::Reader getCredits() const;
-
-  inline bool isJoinRoomByToken() const;
-  inline bool hasJoinRoomByToken() const;
-  inline  ::globed::schema::main::JoinRoomByTokenMessage::Reader getJoinRoomByToken() const;
-
-  inline bool isInvitePlayer() const;
-  inline bool hasInvitePlayer() const;
-  inline  ::globed::schema::main::InvitePlayerMessage::Reader getInvitePlayer() const;
-
-  inline bool isInvited() const;
-  inline bool hasInvited() const;
-  inline  ::globed::schema::main::InvitedMessage::Reader getInvited() const;
-
-  inline bool isInviteTokenCreated() const;
-  inline bool hasInviteTokenCreated() const;
-  inline  ::globed::schema::main::InviteTokenCreatedMessage::Reader getInviteTokenCreated() const;
-
-  inline bool isRequestGlobalPlayerList() const;
-  inline bool hasRequestGlobalPlayerList() const;
-  inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Reader getRequestGlobalPlayerList() const;
-
-  inline bool isGlobalPlayers() const;
-  inline bool hasGlobalPlayers() const;
-  inline  ::globed::schema::main::GlobalPlayersMessage::Reader getGlobalPlayers() const;
-
   inline bool isAdminMute() const;
   inline bool hasAdminMute() const;
   inline  ::globed::schema::main::AdminMuteMessage::Reader getAdminMute() const;
@@ -10223,17 +10075,29 @@ public:
   inline bool hasAdminUnmute() const;
   inline  ::globed::schema::main::AdminUnmuteMessage::Reader getAdminUnmute() const;
 
+  inline bool isAdminEditRoles() const;
+  inline bool hasAdminEditRoles() const;
+  inline  ::globed::schema::main::AdminEditRolesMessage::Reader getAdminEditRoles() const;
+
+  inline bool isAdminSetPassword() const;
+  inline bool hasAdminSetPassword() const;
+  inline  ::globed::schema::main::AdminSetPasswordMessage::Reader getAdminSetPassword() const;
+
+  inline bool isAdminUpdateUser() const;
+  inline bool hasAdminUpdateUser() const;
+  inline  ::globed::schema::main::AdminUpdateUserMessage::Reader getAdminUpdateUser() const;
+
+  inline bool isAdminFetchMods() const;
+  inline bool hasAdminFetchMods() const;
+  inline  ::globed::schema::main::AdminFetchModsMessage::Reader getAdminFetchMods() const;
+
+  inline bool isFetchCredits() const;
+  inline bool hasFetchCredits() const;
+  inline  ::globed::schema::main::FetchCreditsMessage::Reader getFetchCredits() const;
+
   inline bool isGetDiscordLinkState() const;
   inline bool hasGetDiscordLinkState() const;
   inline  ::globed::schema::main::GetDiscordLinkStateMessage::Reader getGetDiscordLinkState() const;
-
-  inline bool isDiscordLinkState() const;
-  inline bool hasDiscordLinkState() const;
-  inline  ::globed::schema::main::DiscordLinkStateMessage::Reader getDiscordLinkState() const;
-
-  inline bool isDiscordLinkAttempt() const;
-  inline bool hasDiscordLinkAttempt() const;
-  inline  ::globed::schema::main::DiscordLinkAttemptMessage::Reader getDiscordLinkAttempt() const;
 
   inline bool isSetDiscordPairingState() const;
   inline bool hasSetDiscordPairingState() const;
@@ -10242,10 +10106,6 @@ public:
   inline bool isDiscordLinkConfirm() const;
   inline bool hasDiscordLinkConfirm() const;
   inline  ::globed::schema::main::DiscordLinkConfirmMessage::Reader getDiscordLinkConfirm() const;
-
-  inline bool isUserDataChanged() const;
-  inline bool hasUserDataChanged() const;
-  inline  ::globed::schema::main::UserDataChangedMessage::Reader getUserDataChanged() const;
 
   inline bool isGetFeaturedLevel() const;
   inline  ::capnp::Void getGetFeaturedLevel() const;
@@ -10258,6 +10118,150 @@ public:
   inline bool hasSendFeaturedLevel() const;
   inline  ::globed::schema::main::SendFeaturedLevelMessage::Reader getSendFeaturedLevel() const;
 
+  inline bool isFetchUser() const;
+  inline bool hasFetchUser() const;
+  inline  ::globed::schema::main::FetchUserMessage::Reader getFetchUser() const;
+
+  inline bool isLoginOk() const;
+  inline bool hasLoginOk() const;
+  inline  ::globed::schema::main::LoginOkMessage::Reader getLoginOk() const;
+
+  inline bool isLoginFailed() const;
+  inline bool hasLoginFailed() const;
+  inline  ::globed::schema::main::LoginFailedMessage::Reader getLoginFailed() const;
+
+  inline bool isLoginRequired() const;
+  inline bool hasLoginRequired() const;
+  inline  ::globed::schema::main::LoginRequiredMessage::Reader getLoginRequired() const;
+
+  inline bool isBanned() const;
+  inline bool hasBanned() const;
+  inline  ::globed::schema::main::BannedMessage::Reader getBanned() const;
+
+  inline bool isMuted() const;
+  inline bool hasMuted() const;
+  inline  ::globed::schema::main::MutedMessage::Reader getMuted() const;
+
+  inline bool isServersChanged() const;
+  inline bool hasServersChanged() const;
+  inline  ::globed::schema::main::ServersChangedMessage::Reader getServersChanged() const;
+
+  inline bool isUserDataChanged() const;
+  inline bool hasUserDataChanged() const;
+  inline  ::globed::schema::main::UserDataChangedMessage::Reader getUserDataChanged() const;
+
+  inline bool isRoomState() const;
+  inline bool hasRoomState() const;
+  inline  ::globed::schema::main::RoomStateMessage::Reader getRoomState() const;
+
+  inline bool isRoomPlayers() const;
+  inline bool hasRoomPlayers() const;
+  inline  ::globed::schema::main::RoomPlayersMessage::Reader getRoomPlayers() const;
+
+  inline bool isRoomJoinFailed() const;
+  inline bool hasRoomJoinFailed() const;
+  inline  ::globed::schema::main::RoomJoinFailedMessage::Reader getRoomJoinFailed() const;
+
+  inline bool isRoomCreateFailed() const;
+  inline bool hasRoomCreateFailed() const;
+  inline  ::globed::schema::main::RoomCreateFailedMessage::Reader getRoomCreateFailed() const;
+
+  inline bool isRoomBanned() const;
+  inline bool hasRoomBanned() const;
+  inline  ::globed::schema::main::RoomBannedMessage::Reader getRoomBanned() const;
+
+  inline bool isRoomList() const;
+  inline bool hasRoomList() const;
+  inline  ::globed::schema::main::RoomListMessage::Reader getRoomList() const;
+
+  inline bool isTeamCreationResult() const;
+  inline bool hasTeamCreationResult() const;
+  inline  ::globed::schema::main::TeamCreationResultMessage::Reader getTeamCreationResult() const;
+
+  inline bool isTeamChanged() const;
+  inline bool hasTeamChanged() const;
+  inline  ::globed::schema::main::TeamChangedMessage::Reader getTeamChanged() const;
+
+  inline bool isTeamMembers() const;
+  inline bool hasTeamMembers() const;
+  inline  ::globed::schema::main::TeamMembersMessage::Reader getTeamMembers() const;
+
+  inline bool isTeamsUpdated() const;
+  inline bool hasTeamsUpdated() const;
+  inline  ::globed::schema::main::TeamsUpdatedMessage::Reader getTeamsUpdated() const;
+
+  inline bool isRoomSettingsUpdated() const;
+  inline bool hasRoomSettingsUpdated() const;
+  inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Reader getRoomSettingsUpdated() const;
+
+  inline bool isInvited() const;
+  inline bool hasInvited() const;
+  inline  ::globed::schema::main::InvitedMessage::Reader getInvited() const;
+
+  inline bool isInviteTokenCreated() const;
+  inline bool hasInviteTokenCreated() const;
+  inline  ::globed::schema::main::InviteTokenCreatedMessage::Reader getInviteTokenCreated() const;
+
+  inline bool isJoinFailed() const;
+  inline bool hasJoinFailed() const;
+  inline  ::globed::schema::main::JoinFailedMessage::Reader getJoinFailed() const;
+
+  inline bool isWarpPlayer() const;
+  inline bool hasWarpPlayer() const;
+  inline  ::globed::schema::main::WarpPlayerMessage::Reader getWarpPlayer() const;
+
+  inline bool isPlayerCounts() const;
+  inline bool hasPlayerCounts() const;
+  inline  ::globed::schema::main::PlayerCountsMessage::Reader getPlayerCounts() const;
+
+  inline bool isGlobalPlayers() const;
+  inline bool hasGlobalPlayers() const;
+  inline  ::globed::schema::main::GlobalPlayersMessage::Reader getGlobalPlayers() const;
+
+  inline bool isLevelList() const;
+  inline bool hasLevelList() const;
+  inline  ::globed::schema::main::LevelListMessage::Reader getLevelList() const;
+
+  inline bool isKicked() const;
+  inline bool hasKicked() const;
+  inline  ::globed::schema::main::KickedMessage::Reader getKicked() const;
+
+  inline bool isNotice() const;
+  inline bool hasNotice() const;
+  inline  ::globed::schema::main::NoticeMessage::Reader getNotice() const;
+
+  inline bool isWarn() const;
+  inline bool hasWarn() const;
+  inline  ::globed::schema::main::WarnMessage::Reader getWarn() const;
+
+  inline bool isAdminResult() const;
+  inline bool hasAdminResult() const;
+  inline  ::globed::schema::main::AdminResultMessage::Reader getAdminResult() const;
+
+  inline bool isAdminFetchResponse() const;
+  inline bool hasAdminFetchResponse() const;
+  inline  ::globed::schema::main::AdminFetchResponseMessage::Reader getAdminFetchResponse() const;
+
+  inline bool isAdminFetchModsResponse() const;
+  inline bool hasAdminFetchModsResponse() const;
+  inline  ::globed::schema::main::AdminFetchModsResponseMessage::Reader getAdminFetchModsResponse() const;
+
+  inline bool isAdminLogsResponse() const;
+  inline bool hasAdminLogsResponse() const;
+  inline  ::globed::schema::main::AdminLogsResponseMessage::Reader getAdminLogsResponse() const;
+
+  inline bool isCredits() const;
+  inline bool hasCredits() const;
+  inline  ::globed::schema::main::CreditsMessage::Reader getCredits() const;
+
+  inline bool isDiscordLinkState() const;
+  inline bool hasDiscordLinkState() const;
+  inline  ::globed::schema::main::DiscordLinkStateMessage::Reader getDiscordLinkState() const;
+
+  inline bool isDiscordLinkAttempt() const;
+  inline bool hasDiscordLinkAttempt() const;
+  inline  ::globed::schema::main::DiscordLinkAttemptMessage::Reader getDiscordLinkAttempt() const;
+
   inline bool isFeaturedLevel() const;
   inline bool hasFeaturedLevel() const;
   inline  ::globed::schema::main::FeaturedLevelMessage::Reader getFeaturedLevel() const;
@@ -10266,13 +10270,9 @@ public:
   inline bool hasFeaturedList() const;
   inline  ::globed::schema::main::FeaturedListMessage::Reader getFeaturedList() const;
 
-  inline bool isFetchUser() const;
-  inline bool hasFetchUser() const;
-  inline  ::globed::schema::main::FetchUserMessage::Reader getFetchUser() const;
-
-  inline bool isMuted() const;
-  inline bool hasMuted() const;
-  inline  ::globed::schema::main::MutedMessage::Reader getMuted() const;
+  inline bool isFetchUserResponse() const;
+  inline bool hasFetchUserResponse() const;
+  inline  ::globed::schema::main::FetchUserResponseMessage::Reader getFetchUserResponse() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -10311,46 +10311,6 @@ public:
   inline void adoptLogin(::capnp::Orphan< ::globed::schema::main::LoginMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::LoginMessage> disownLogin();
 
-  inline bool isUpdateUserSettings();
-  inline bool hasUpdateUserSettings();
-  inline  ::globed::schema::main::UpdateUserSettingsMessage::Builder getUpdateUserSettings();
-  inline void setUpdateUserSettings( ::globed::schema::main::UpdateUserSettingsMessage::Reader value);
-  inline  ::globed::schema::main::UpdateUserSettingsMessage::Builder initUpdateUserSettings();
-  inline void adoptUpdateUserSettings(::capnp::Orphan< ::globed::schema::main::UpdateUserSettingsMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::UpdateUserSettingsMessage> disownUpdateUserSettings();
-
-  inline bool isFetchUserResponse();
-  inline bool hasFetchUserResponse();
-  inline  ::globed::schema::main::FetchUserResponseMessage::Builder getFetchUserResponse();
-  inline void setFetchUserResponse( ::globed::schema::main::FetchUserResponseMessage::Reader value);
-  inline  ::globed::schema::main::FetchUserResponseMessage::Builder initFetchUserResponse();
-  inline void adoptFetchUserResponse(::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> disownFetchUserResponse();
-
-  inline bool isLoginOk();
-  inline bool hasLoginOk();
-  inline  ::globed::schema::main::LoginOkMessage::Builder getLoginOk();
-  inline void setLoginOk( ::globed::schema::main::LoginOkMessage::Reader value);
-  inline  ::globed::schema::main::LoginOkMessage::Builder initLoginOk();
-  inline void adoptLoginOk(::capnp::Orphan< ::globed::schema::main::LoginOkMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::LoginOkMessage> disownLoginOk();
-
-  inline bool isLoginFailed();
-  inline bool hasLoginFailed();
-  inline  ::globed::schema::main::LoginFailedMessage::Builder getLoginFailed();
-  inline void setLoginFailed( ::globed::schema::main::LoginFailedMessage::Reader value);
-  inline  ::globed::schema::main::LoginFailedMessage::Builder initLoginFailed();
-  inline void adoptLoginFailed(::capnp::Orphan< ::globed::schema::main::LoginFailedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::LoginFailedMessage> disownLoginFailed();
-
-  inline bool isLoginRequired();
-  inline bool hasLoginRequired();
-  inline  ::globed::schema::main::LoginRequiredMessage::Builder getLoginRequired();
-  inline void setLoginRequired( ::globed::schema::main::LoginRequiredMessage::Reader value);
-  inline  ::globed::schema::main::LoginRequiredMessage::Builder initLoginRequired();
-  inline void adoptLoginRequired(::capnp::Orphan< ::globed::schema::main::LoginRequiredMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::LoginRequiredMessage> disownLoginRequired();
-
   inline bool isUpdateOwnData();
   inline bool hasUpdateOwnData();
   inline  ::globed::schema::main::UpdateOwnDataMessage::Builder getUpdateOwnData();
@@ -10358,6 +10318,30 @@ public:
   inline  ::globed::schema::main::UpdateOwnDataMessage::Builder initUpdateOwnData();
   inline void adoptUpdateOwnData(::capnp::Orphan< ::globed::schema::main::UpdateOwnDataMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::UpdateOwnDataMessage> disownUpdateOwnData();
+
+  inline bool isRequestPlayerCounts();
+  inline bool hasRequestPlayerCounts();
+  inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder getRequestPlayerCounts();
+  inline void setRequestPlayerCounts( ::globed::schema::main::RequestPlayerCountsMessage::Reader value);
+  inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder initRequestPlayerCounts();
+  inline void adoptRequestPlayerCounts(::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage> disownRequestPlayerCounts();
+
+  inline bool isRequestGlobalPlayerList();
+  inline bool hasRequestGlobalPlayerList();
+  inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Builder getRequestGlobalPlayerList();
+  inline void setRequestGlobalPlayerList( ::globed::schema::main::RequestGlobalPlayerListMessage::Reader value);
+  inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Builder initRequestGlobalPlayerList();
+  inline void adoptRequestGlobalPlayerList(::capnp::Orphan< ::globed::schema::main::RequestGlobalPlayerListMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RequestGlobalPlayerListMessage> disownRequestGlobalPlayerList();
+
+  inline bool isUpdateUserSettings();
+  inline bool hasUpdateUserSettings();
+  inline  ::globed::schema::main::UpdateUserSettingsMessage::Builder getUpdateUserSettings();
+  inline void setUpdateUserSettings( ::globed::schema::main::UpdateUserSettingsMessage::Reader value);
+  inline  ::globed::schema::main::UpdateUserSettingsMessage::Builder initUpdateUserSettings();
+  inline void adoptUpdateUserSettings(::capnp::Orphan< ::globed::schema::main::UpdateUserSettingsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UpdateUserSettingsMessage> disownUpdateUserSettings();
 
   inline bool isCreateRoom();
   inline bool hasCreateRoom();
@@ -10375,25 +10359,101 @@ public:
   inline void adoptJoinRoom(::capnp::Orphan< ::globed::schema::main::JoinRoomMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::JoinRoomMessage> disownJoinRoom();
 
+  inline bool isJoinRoomByToken();
+  inline bool hasJoinRoomByToken();
+  inline  ::globed::schema::main::JoinRoomByTokenMessage::Builder getJoinRoomByToken();
+  inline void setJoinRoomByToken( ::globed::schema::main::JoinRoomByTokenMessage::Reader value);
+  inline  ::globed::schema::main::JoinRoomByTokenMessage::Builder initJoinRoomByToken();
+  inline void adoptJoinRoomByToken(::capnp::Orphan< ::globed::schema::main::JoinRoomByTokenMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::JoinRoomByTokenMessage> disownJoinRoomByToken();
+
   inline bool isLeaveRoom();
   inline  ::capnp::Void getLeaveRoom();
   inline void setLeaveRoom( ::capnp::Void value = ::capnp::VOID);
 
-  inline bool isWarpPlayer();
-  inline bool hasWarpPlayer();
-  inline  ::globed::schema::main::WarpPlayerMessage::Builder getWarpPlayer();
-  inline void setWarpPlayer( ::globed::schema::main::WarpPlayerMessage::Reader value);
-  inline  ::globed::schema::main::WarpPlayerMessage::Builder initWarpPlayer();
-  inline void adoptWarpPlayer(::capnp::Orphan< ::globed::schema::main::WarpPlayerMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::WarpPlayerMessage> disownWarpPlayer();
+  inline bool isCheckRoomState();
+  inline  ::capnp::Void getCheckRoomState();
+  inline void setCheckRoomState( ::capnp::Void value = ::capnp::VOID);
 
-  inline bool isRoomState();
-  inline bool hasRoomState();
-  inline  ::globed::schema::main::RoomStateMessage::Builder getRoomState();
-  inline void setRoomState( ::globed::schema::main::RoomStateMessage::Reader value);
-  inline  ::globed::schema::main::RoomStateMessage::Builder initRoomState();
-  inline void adoptRoomState(::capnp::Orphan< ::globed::schema::main::RoomStateMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RoomStateMessage> disownRoomState();
+  inline bool isRequestRoomPlayers();
+  inline bool hasRequestRoomPlayers();
+  inline  ::globed::schema::main::RequestRoomPlayersMessage::Builder getRequestRoomPlayers();
+  inline void setRequestRoomPlayers( ::globed::schema::main::RequestRoomPlayersMessage::Reader value);
+  inline  ::globed::schema::main::RequestRoomPlayersMessage::Builder initRequestRoomPlayers();
+  inline void adoptRequestRoomPlayers(::capnp::Orphan< ::globed::schema::main::RequestRoomPlayersMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RequestRoomPlayersMessage> disownRequestRoomPlayers();
+
+  inline bool isRequestRoomList();
+  inline bool hasRequestRoomList();
+  inline  ::globed::schema::main::RequestRoomListMessage::Builder getRequestRoomList();
+  inline void setRequestRoomList( ::globed::schema::main::RequestRoomListMessage::Reader value);
+  inline  ::globed::schema::main::RequestRoomListMessage::Builder initRequestRoomList();
+  inline void adoptRequestRoomList(::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage> disownRequestRoomList();
+
+  inline bool isAssignTeam();
+  inline bool hasAssignTeam();
+  inline  ::globed::schema::main::AssignTeamMessage::Builder getAssignTeam();
+  inline void setAssignTeam( ::globed::schema::main::AssignTeamMessage::Reader value);
+  inline  ::globed::schema::main::AssignTeamMessage::Builder initAssignTeam();
+  inline void adoptAssignTeam(::capnp::Orphan< ::globed::schema::main::AssignTeamMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AssignTeamMessage> disownAssignTeam();
+
+  inline bool isCreateTeam();
+  inline bool hasCreateTeam();
+  inline  ::globed::schema::main::CreateTeamMessage::Builder getCreateTeam();
+  inline void setCreateTeam( ::globed::schema::main::CreateTeamMessage::Reader value);
+  inline  ::globed::schema::main::CreateTeamMessage::Builder initCreateTeam();
+  inline void adoptCreateTeam(::capnp::Orphan< ::globed::schema::main::CreateTeamMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::CreateTeamMessage> disownCreateTeam();
+
+  inline bool isDeleteTeam();
+  inline bool hasDeleteTeam();
+  inline  ::globed::schema::main::DeleteTeamMessage::Builder getDeleteTeam();
+  inline void setDeleteTeam( ::globed::schema::main::DeleteTeamMessage::Reader value);
+  inline  ::globed::schema::main::DeleteTeamMessage::Builder initDeleteTeam();
+  inline void adoptDeleteTeam(::capnp::Orphan< ::globed::schema::main::DeleteTeamMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::DeleteTeamMessage> disownDeleteTeam();
+
+  inline bool isUpdateTeam();
+  inline bool hasUpdateTeam();
+  inline  ::globed::schema::main::UpdateTeamMessage::Builder getUpdateTeam();
+  inline void setUpdateTeam( ::globed::schema::main::UpdateTeamMessage::Reader value);
+  inline  ::globed::schema::main::UpdateTeamMessage::Builder initUpdateTeam();
+  inline void adoptUpdateTeam(::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage> disownUpdateTeam();
+
+  inline bool isGetTeamMembers();
+  inline bool hasGetTeamMembers();
+  inline  ::globed::schema::main::GetTeamMembersMessage::Builder getGetTeamMembers();
+  inline void setGetTeamMembers( ::globed::schema::main::GetTeamMembersMessage::Reader value);
+  inline  ::globed::schema::main::GetTeamMembersMessage::Builder initGetTeamMembers();
+  inline void adoptGetTeamMembers(::capnp::Orphan< ::globed::schema::main::GetTeamMembersMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::GetTeamMembersMessage> disownGetTeamMembers();
+
+  inline bool isRoomOwnerAction();
+  inline bool hasRoomOwnerAction();
+  inline  ::globed::schema::main::RoomOwnerActionMessage::Builder getRoomOwnerAction();
+  inline void setRoomOwnerAction( ::globed::schema::main::RoomOwnerActionMessage::Reader value);
+  inline  ::globed::schema::main::RoomOwnerActionMessage::Builder initRoomOwnerAction();
+  inline void adoptRoomOwnerAction(::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage> disownRoomOwnerAction();
+
+  inline bool isUpdateRoomSettings();
+  inline bool hasUpdateRoomSettings();
+  inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder getUpdateRoomSettings();
+  inline void setUpdateRoomSettings( ::globed::schema::main::UpdateRoomSettingsMessage::Reader value);
+  inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder initUpdateRoomSettings();
+  inline void adoptUpdateRoomSettings(::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage> disownUpdateRoomSettings();
+
+  inline bool isInvitePlayer();
+  inline bool hasInvitePlayer();
+  inline  ::globed::schema::main::InvitePlayerMessage::Builder getInvitePlayer();
+  inline void setInvitePlayer( ::globed::schema::main::InvitePlayerMessage::Reader value);
+  inline  ::globed::schema::main::InvitePlayerMessage::Builder initInvitePlayer();
+  inline void adoptInvitePlayer(::capnp::Orphan< ::globed::schema::main::InvitePlayerMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::InvitePlayerMessage> disownInvitePlayer();
 
   inline bool isJoinSession();
   inline bool hasJoinSession();
@@ -10411,89 +10471,13 @@ public:
   inline void adoptLeaveSession(::capnp::Orphan< ::globed::schema::main::LeaveSessionMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::LeaveSessionMessage> disownLeaveSession();
 
-  inline bool isJoinFailed();
-  inline bool hasJoinFailed();
-  inline  ::globed::schema::main::JoinFailedMessage::Builder getJoinFailed();
-  inline void setJoinFailed( ::globed::schema::main::JoinFailedMessage::Reader value);
-  inline  ::globed::schema::main::JoinFailedMessage::Builder initJoinFailed();
-  inline void adoptJoinFailed(::capnp::Orphan< ::globed::schema::main::JoinFailedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::JoinFailedMessage> disownJoinFailed();
-
-  inline bool isKicked();
-  inline bool hasKicked();
-  inline  ::globed::schema::main::KickedMessage::Builder getKicked();
-  inline void setKicked( ::globed::schema::main::KickedMessage::Reader value);
-  inline  ::globed::schema::main::KickedMessage::Builder initKicked();
-  inline void adoptKicked(::capnp::Orphan< ::globed::schema::main::KickedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::KickedMessage> disownKicked();
-
-  inline bool isCheckRoomState();
-  inline  ::capnp::Void getCheckRoomState();
-  inline void setCheckRoomState( ::capnp::Void value = ::capnp::VOID);
-
-  inline bool isRequestPlayerCounts();
-  inline bool hasRequestPlayerCounts();
-  inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder getRequestPlayerCounts();
-  inline void setRequestPlayerCounts( ::globed::schema::main::RequestPlayerCountsMessage::Reader value);
-  inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder initRequestPlayerCounts();
-  inline void adoptRequestPlayerCounts(::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage> disownRequestPlayerCounts();
-
-  inline bool isPlayerCounts();
-  inline bool hasPlayerCounts();
-  inline  ::globed::schema::main::PlayerCountsMessage::Builder getPlayerCounts();
-  inline void setPlayerCounts( ::globed::schema::main::PlayerCountsMessage::Reader value);
-  inline  ::globed::schema::main::PlayerCountsMessage::Builder initPlayerCounts();
-  inline void adoptPlayerCounts(::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage> disownPlayerCounts();
-
-  inline bool isRoomJoinFailed();
-  inline bool hasRoomJoinFailed();
-  inline  ::globed::schema::main::RoomJoinFailedMessage::Builder getRoomJoinFailed();
-  inline void setRoomJoinFailed( ::globed::schema::main::RoomJoinFailedMessage::Reader value);
-  inline  ::globed::schema::main::RoomJoinFailedMessage::Builder initRoomJoinFailed();
-  inline void adoptRoomJoinFailed(::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage> disownRoomJoinFailed();
-
-  inline bool isRoomCreateFailed();
-  inline bool hasRoomCreateFailed();
-  inline  ::globed::schema::main::RoomCreateFailedMessage::Builder getRoomCreateFailed();
-  inline void setRoomCreateFailed( ::globed::schema::main::RoomCreateFailedMessage::Reader value);
-  inline  ::globed::schema::main::RoomCreateFailedMessage::Builder initRoomCreateFailed();
-  inline void adoptRoomCreateFailed(::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage> disownRoomCreateFailed();
-
-  inline bool isRequestRoomList();
-  inline bool hasRequestRoomList();
-  inline  ::globed::schema::main::RequestRoomListMessage::Builder getRequestRoomList();
-  inline void setRequestRoomList( ::globed::schema::main::RequestRoomListMessage::Reader value);
-  inline  ::globed::schema::main::RequestRoomListMessage::Builder initRequestRoomList();
-  inline void adoptRequestRoomList(::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage> disownRequestRoomList();
-
-  inline bool isRoomList();
-  inline bool hasRoomList();
-  inline  ::globed::schema::main::RoomListMessage::Builder getRoomList();
-  inline void setRoomList( ::globed::schema::main::RoomListMessage::Reader value);
-  inline  ::globed::schema::main::RoomListMessage::Builder initRoomList();
-  inline void adoptRoomList(::capnp::Orphan< ::globed::schema::main::RoomListMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RoomListMessage> disownRoomList();
-
-  inline bool isBanned();
-  inline bool hasBanned();
-  inline  ::globed::schema::main::BannedMessage::Builder getBanned();
-  inline void setBanned( ::globed::schema::main::BannedMessage::Reader value);
-  inline  ::globed::schema::main::BannedMessage::Builder initBanned();
-  inline void adoptBanned(::capnp::Orphan< ::globed::schema::main::BannedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::BannedMessage> disownBanned();
-
-  inline bool isRoomBanned();
-  inline bool hasRoomBanned();
-  inline  ::globed::schema::main::RoomBannedMessage::Builder getRoomBanned();
-  inline void setRoomBanned( ::globed::schema::main::RoomBannedMessage::Reader value);
-  inline  ::globed::schema::main::RoomBannedMessage::Builder initRoomBanned();
-  inline void adoptRoomBanned(::capnp::Orphan< ::globed::schema::main::RoomBannedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage> disownRoomBanned();
+  inline bool isRequestLevelList();
+  inline bool hasRequestLevelList();
+  inline  ::globed::schema::main::RequestLevelListMessage::Builder getRequestLevelList();
+  inline void setRequestLevelList( ::globed::schema::main::RequestLevelListMessage::Reader value);
+  inline  ::globed::schema::main::RequestLevelListMessage::Builder initRequestLevelList();
+  inline void adoptRequestLevelList(::capnp::Orphan< ::globed::schema::main::RequestLevelListMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RequestLevelListMessage> disownRequestLevelList();
 
   inline bool isAdminLogin();
   inline bool hasAdminLogin();
@@ -10535,6 +10519,14 @@ public:
   inline void adoptAdminFetchUser(::capnp::Orphan< ::globed::schema::main::AdminFetchUserMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::AdminFetchUserMessage> disownAdminFetchUser();
 
+  inline bool isAdminFetchLogs();
+  inline bool hasAdminFetchLogs();
+  inline  ::globed::schema::main::AdminFetchLogsMessage::Builder getAdminFetchLogs();
+  inline void setAdminFetchLogs( ::globed::schema::main::AdminFetchLogsMessage::Reader value);
+  inline  ::globed::schema::main::AdminFetchLogsMessage::Builder initAdminFetchLogs();
+  inline void adoptAdminFetchLogs(::capnp::Orphan< ::globed::schema::main::AdminFetchLogsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchLogsMessage> disownAdminFetchLogs();
+
   inline bool isAdminBan();
   inline bool hasAdminBan();
   inline  ::globed::schema::main::AdminBanMessage::Builder getAdminBan();
@@ -10567,294 +10559,6 @@ public:
   inline void adoptAdminRoomUnban(::capnp::Orphan< ::globed::schema::main::AdminRoomUnbanMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::AdminRoomUnbanMessage> disownAdminRoomUnban();
 
-  inline bool isAdminEditRoles();
-  inline bool hasAdminEditRoles();
-  inline  ::globed::schema::main::AdminEditRolesMessage::Builder getAdminEditRoles();
-  inline void setAdminEditRoles( ::globed::schema::main::AdminEditRolesMessage::Reader value);
-  inline  ::globed::schema::main::AdminEditRolesMessage::Builder initAdminEditRoles();
-  inline void adoptAdminEditRoles(::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage> disownAdminEditRoles();
-
-  inline bool isAdminSetPassword();
-  inline bool hasAdminSetPassword();
-  inline  ::globed::schema::main::AdminSetPasswordMessage::Builder getAdminSetPassword();
-  inline void setAdminSetPassword( ::globed::schema::main::AdminSetPasswordMessage::Reader value);
-  inline  ::globed::schema::main::AdminSetPasswordMessage::Builder initAdminSetPassword();
-  inline void adoptAdminSetPassword(::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage> disownAdminSetPassword();
-
-  inline bool isAdminResult();
-  inline bool hasAdminResult();
-  inline  ::globed::schema::main::AdminResultMessage::Builder getAdminResult();
-  inline void setAdminResult( ::globed::schema::main::AdminResultMessage::Reader value);
-  inline  ::globed::schema::main::AdminResultMessage::Builder initAdminResult();
-  inline void adoptAdminResult(::capnp::Orphan< ::globed::schema::main::AdminResultMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AdminResultMessage> disownAdminResult();
-
-  inline bool isAdminFetchResponse();
-  inline bool hasAdminFetchResponse();
-  inline  ::globed::schema::main::AdminFetchResponseMessage::Builder getAdminFetchResponse();
-  inline void setAdminFetchResponse( ::globed::schema::main::AdminFetchResponseMessage::Reader value);
-  inline  ::globed::schema::main::AdminFetchResponseMessage::Builder initAdminFetchResponse();
-  inline void adoptAdminFetchResponse(::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage> disownAdminFetchResponse();
-
-  inline bool isNotice();
-  inline bool hasNotice();
-  inline  ::globed::schema::main::NoticeMessage::Builder getNotice();
-  inline void setNotice( ::globed::schema::main::NoticeMessage::Reader value);
-  inline  ::globed::schema::main::NoticeMessage::Builder initNotice();
-  inline void adoptNotice(::capnp::Orphan< ::globed::schema::main::NoticeMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::NoticeMessage> disownNotice();
-
-  inline bool isAdminUpdateUser();
-  inline bool hasAdminUpdateUser();
-  inline  ::globed::schema::main::AdminUpdateUserMessage::Builder getAdminUpdateUser();
-  inline void setAdminUpdateUser( ::globed::schema::main::AdminUpdateUserMessage::Reader value);
-  inline  ::globed::schema::main::AdminUpdateUserMessage::Builder initAdminUpdateUser();
-  inline void adoptAdminUpdateUser(::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage> disownAdminUpdateUser();
-
-  inline bool isAdminFetchLogs();
-  inline bool hasAdminFetchLogs();
-  inline  ::globed::schema::main::AdminFetchLogsMessage::Builder getAdminFetchLogs();
-  inline void setAdminFetchLogs( ::globed::schema::main::AdminFetchLogsMessage::Reader value);
-  inline  ::globed::schema::main::AdminFetchLogsMessage::Builder initAdminFetchLogs();
-  inline void adoptAdminFetchLogs(::capnp::Orphan< ::globed::schema::main::AdminFetchLogsMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchLogsMessage> disownAdminFetchLogs();
-
-  inline bool isAdminLogsResponse();
-  inline bool hasAdminLogsResponse();
-  inline  ::globed::schema::main::AdminLogsResponseMessage::Builder getAdminLogsResponse();
-  inline void setAdminLogsResponse( ::globed::schema::main::AdminLogsResponseMessage::Reader value);
-  inline  ::globed::schema::main::AdminLogsResponseMessage::Builder initAdminLogsResponse();
-  inline void adoptAdminLogsResponse(::capnp::Orphan< ::globed::schema::main::AdminLogsResponseMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AdminLogsResponseMessage> disownAdminLogsResponse();
-
-  inline bool isAssignTeam();
-  inline bool hasAssignTeam();
-  inline  ::globed::schema::main::AssignTeamMessage::Builder getAssignTeam();
-  inline void setAssignTeam( ::globed::schema::main::AssignTeamMessage::Reader value);
-  inline  ::globed::schema::main::AssignTeamMessage::Builder initAssignTeam();
-  inline void adoptAssignTeam(::capnp::Orphan< ::globed::schema::main::AssignTeamMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AssignTeamMessage> disownAssignTeam();
-
-  inline bool isCreateTeam();
-  inline bool hasCreateTeam();
-  inline  ::globed::schema::main::CreateTeamMessage::Builder getCreateTeam();
-  inline void setCreateTeam( ::globed::schema::main::CreateTeamMessage::Reader value);
-  inline  ::globed::schema::main::CreateTeamMessage::Builder initCreateTeam();
-  inline void adoptCreateTeam(::capnp::Orphan< ::globed::schema::main::CreateTeamMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::CreateTeamMessage> disownCreateTeam();
-
-  inline bool isDeleteTeam();
-  inline bool hasDeleteTeam();
-  inline  ::globed::schema::main::DeleteTeamMessage::Builder getDeleteTeam();
-  inline void setDeleteTeam( ::globed::schema::main::DeleteTeamMessage::Reader value);
-  inline  ::globed::schema::main::DeleteTeamMessage::Builder initDeleteTeam();
-  inline void adoptDeleteTeam(::capnp::Orphan< ::globed::schema::main::DeleteTeamMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::DeleteTeamMessage> disownDeleteTeam();
-
-  inline bool isWarn();
-  inline bool hasWarn();
-  inline  ::globed::schema::main::WarnMessage::Builder getWarn();
-  inline void setWarn( ::globed::schema::main::WarnMessage::Reader value);
-  inline  ::globed::schema::main::WarnMessage::Builder initWarn();
-  inline void adoptWarn(::capnp::Orphan< ::globed::schema::main::WarnMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::WarnMessage> disownWarn();
-
-  inline bool isTeamCreationResult();
-  inline bool hasTeamCreationResult();
-  inline  ::globed::schema::main::TeamCreationResultMessage::Builder getTeamCreationResult();
-  inline void setTeamCreationResult( ::globed::schema::main::TeamCreationResultMessage::Reader value);
-  inline  ::globed::schema::main::TeamCreationResultMessage::Builder initTeamCreationResult();
-  inline void adoptTeamCreationResult(::capnp::Orphan< ::globed::schema::main::TeamCreationResultMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::TeamCreationResultMessage> disownTeamCreationResult();
-
-  inline bool isTeamChanged();
-  inline bool hasTeamChanged();
-  inline  ::globed::schema::main::TeamChangedMessage::Builder getTeamChanged();
-  inline void setTeamChanged( ::globed::schema::main::TeamChangedMessage::Reader value);
-  inline  ::globed::schema::main::TeamChangedMessage::Builder initTeamChanged();
-  inline void adoptTeamChanged(::capnp::Orphan< ::globed::schema::main::TeamChangedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::TeamChangedMessage> disownTeamChanged();
-
-  inline bool isGetTeamMembers();
-  inline bool hasGetTeamMembers();
-  inline  ::globed::schema::main::GetTeamMembersMessage::Builder getGetTeamMembers();
-  inline void setGetTeamMembers( ::globed::schema::main::GetTeamMembersMessage::Reader value);
-  inline  ::globed::schema::main::GetTeamMembersMessage::Builder initGetTeamMembers();
-  inline void adoptGetTeamMembers(::capnp::Orphan< ::globed::schema::main::GetTeamMembersMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::GetTeamMembersMessage> disownGetTeamMembers();
-
-  inline bool isTeamMembers();
-  inline bool hasTeamMembers();
-  inline  ::globed::schema::main::TeamMembersMessage::Builder getTeamMembers();
-  inline void setTeamMembers( ::globed::schema::main::TeamMembersMessage::Reader value);
-  inline  ::globed::schema::main::TeamMembersMessage::Builder initTeamMembers();
-  inline void adoptTeamMembers(::capnp::Orphan< ::globed::schema::main::TeamMembersMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::TeamMembersMessage> disownTeamMembers();
-
-  inline bool isUpdateTeam();
-  inline bool hasUpdateTeam();
-  inline  ::globed::schema::main::UpdateTeamMessage::Builder getUpdateTeam();
-  inline void setUpdateTeam( ::globed::schema::main::UpdateTeamMessage::Reader value);
-  inline  ::globed::schema::main::UpdateTeamMessage::Builder initUpdateTeam();
-  inline void adoptUpdateTeam(::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage> disownUpdateTeam();
-
-  inline bool isTeamsUpdated();
-  inline bool hasTeamsUpdated();
-  inline  ::globed::schema::main::TeamsUpdatedMessage::Builder getTeamsUpdated();
-  inline void setTeamsUpdated( ::globed::schema::main::TeamsUpdatedMessage::Reader value);
-  inline  ::globed::schema::main::TeamsUpdatedMessage::Builder initTeamsUpdated();
-  inline void adoptTeamsUpdated(::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage> disownTeamsUpdated();
-
-  inline bool isAdminFetchMods();
-  inline bool hasAdminFetchMods();
-  inline  ::globed::schema::main::AdminFetchModsMessage::Builder getAdminFetchMods();
-  inline void setAdminFetchMods( ::globed::schema::main::AdminFetchModsMessage::Reader value);
-  inline  ::globed::schema::main::AdminFetchModsMessage::Builder initAdminFetchMods();
-  inline void adoptAdminFetchMods(::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage> disownAdminFetchMods();
-
-  inline bool isAdminFetchModsResponse();
-  inline bool hasAdminFetchModsResponse();
-  inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder getAdminFetchModsResponse();
-  inline void setAdminFetchModsResponse( ::globed::schema::main::AdminFetchModsResponseMessage::Reader value);
-  inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder initAdminFetchModsResponse();
-  inline void adoptAdminFetchModsResponse(::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage> disownAdminFetchModsResponse();
-
-  inline bool isServersChanged();
-  inline bool hasServersChanged();
-  inline  ::globed::schema::main::ServersChangedMessage::Builder getServersChanged();
-  inline void setServersChanged( ::globed::schema::main::ServersChangedMessage::Reader value);
-  inline  ::globed::schema::main::ServersChangedMessage::Builder initServersChanged();
-  inline void adoptServersChanged(::capnp::Orphan< ::globed::schema::main::ServersChangedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::ServersChangedMessage> disownServersChanged();
-
-  inline bool isRoomOwnerAction();
-  inline bool hasRoomOwnerAction();
-  inline  ::globed::schema::main::RoomOwnerActionMessage::Builder getRoomOwnerAction();
-  inline void setRoomOwnerAction( ::globed::schema::main::RoomOwnerActionMessage::Reader value);
-  inline  ::globed::schema::main::RoomOwnerActionMessage::Builder initRoomOwnerAction();
-  inline void adoptRoomOwnerAction(::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage> disownRoomOwnerAction();
-
-  inline bool isUpdateRoomSettings();
-  inline bool hasUpdateRoomSettings();
-  inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder getUpdateRoomSettings();
-  inline void setUpdateRoomSettings( ::globed::schema::main::UpdateRoomSettingsMessage::Reader value);
-  inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder initUpdateRoomSettings();
-  inline void adoptUpdateRoomSettings(::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage> disownUpdateRoomSettings();
-
-  inline bool isRoomSettingsUpdated();
-  inline bool hasRoomSettingsUpdated();
-  inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder getRoomSettingsUpdated();
-  inline void setRoomSettingsUpdated( ::globed::schema::main::RoomSettingsUpdatedMessage::Reader value);
-  inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder initRoomSettingsUpdated();
-  inline void adoptRoomSettingsUpdated(::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage> disownRoomSettingsUpdated();
-
-  inline bool isRequestLevelList();
-  inline bool hasRequestLevelList();
-  inline  ::globed::schema::main::RequestLevelListMessage::Builder getRequestLevelList();
-  inline void setRequestLevelList( ::globed::schema::main::RequestLevelListMessage::Reader value);
-  inline  ::globed::schema::main::RequestLevelListMessage::Builder initRequestLevelList();
-  inline void adoptRequestLevelList(::capnp::Orphan< ::globed::schema::main::RequestLevelListMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RequestLevelListMessage> disownRequestLevelList();
-
-  inline bool isLevelList();
-  inline bool hasLevelList();
-  inline  ::globed::schema::main::LevelListMessage::Builder getLevelList();
-  inline void setLevelList( ::globed::schema::main::LevelListMessage::Reader value);
-  inline  ::globed::schema::main::LevelListMessage::Builder initLevelList();
-  inline void adoptLevelList(::capnp::Orphan< ::globed::schema::main::LevelListMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::LevelListMessage> disownLevelList();
-
-  inline bool isRequestRoomPlayers();
-  inline bool hasRequestRoomPlayers();
-  inline  ::globed::schema::main::RequestRoomPlayersMessage::Builder getRequestRoomPlayers();
-  inline void setRequestRoomPlayers( ::globed::schema::main::RequestRoomPlayersMessage::Reader value);
-  inline  ::globed::schema::main::RequestRoomPlayersMessage::Builder initRequestRoomPlayers();
-  inline void adoptRequestRoomPlayers(::capnp::Orphan< ::globed::schema::main::RequestRoomPlayersMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RequestRoomPlayersMessage> disownRequestRoomPlayers();
-
-  inline bool isRoomPlayers();
-  inline bool hasRoomPlayers();
-  inline  ::globed::schema::main::RoomPlayersMessage::Builder getRoomPlayers();
-  inline void setRoomPlayers( ::globed::schema::main::RoomPlayersMessage::Reader value);
-  inline  ::globed::schema::main::RoomPlayersMessage::Builder initRoomPlayers();
-  inline void adoptRoomPlayers(::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage> disownRoomPlayers();
-
-  inline bool isFetchCredits();
-  inline bool hasFetchCredits();
-  inline  ::globed::schema::main::FetchCreditsMessage::Builder getFetchCredits();
-  inline void setFetchCredits( ::globed::schema::main::FetchCreditsMessage::Reader value);
-  inline  ::globed::schema::main::FetchCreditsMessage::Builder initFetchCredits();
-  inline void adoptFetchCredits(::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage> disownFetchCredits();
-
-  inline bool isCredits();
-  inline bool hasCredits();
-  inline  ::globed::schema::main::CreditsMessage::Builder getCredits();
-  inline void setCredits( ::globed::schema::main::CreditsMessage::Reader value);
-  inline  ::globed::schema::main::CreditsMessage::Builder initCredits();
-  inline void adoptCredits(::capnp::Orphan< ::globed::schema::main::CreditsMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::CreditsMessage> disownCredits();
-
-  inline bool isJoinRoomByToken();
-  inline bool hasJoinRoomByToken();
-  inline  ::globed::schema::main::JoinRoomByTokenMessage::Builder getJoinRoomByToken();
-  inline void setJoinRoomByToken( ::globed::schema::main::JoinRoomByTokenMessage::Reader value);
-  inline  ::globed::schema::main::JoinRoomByTokenMessage::Builder initJoinRoomByToken();
-  inline void adoptJoinRoomByToken(::capnp::Orphan< ::globed::schema::main::JoinRoomByTokenMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::JoinRoomByTokenMessage> disownJoinRoomByToken();
-
-  inline bool isInvitePlayer();
-  inline bool hasInvitePlayer();
-  inline  ::globed::schema::main::InvitePlayerMessage::Builder getInvitePlayer();
-  inline void setInvitePlayer( ::globed::schema::main::InvitePlayerMessage::Reader value);
-  inline  ::globed::schema::main::InvitePlayerMessage::Builder initInvitePlayer();
-  inline void adoptInvitePlayer(::capnp::Orphan< ::globed::schema::main::InvitePlayerMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::InvitePlayerMessage> disownInvitePlayer();
-
-  inline bool isInvited();
-  inline bool hasInvited();
-  inline  ::globed::schema::main::InvitedMessage::Builder getInvited();
-  inline void setInvited( ::globed::schema::main::InvitedMessage::Reader value);
-  inline  ::globed::schema::main::InvitedMessage::Builder initInvited();
-  inline void adoptInvited(::capnp::Orphan< ::globed::schema::main::InvitedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::InvitedMessage> disownInvited();
-
-  inline bool isInviteTokenCreated();
-  inline bool hasInviteTokenCreated();
-  inline  ::globed::schema::main::InviteTokenCreatedMessage::Builder getInviteTokenCreated();
-  inline void setInviteTokenCreated( ::globed::schema::main::InviteTokenCreatedMessage::Reader value);
-  inline  ::globed::schema::main::InviteTokenCreatedMessage::Builder initInviteTokenCreated();
-  inline void adoptInviteTokenCreated(::capnp::Orphan< ::globed::schema::main::InviteTokenCreatedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::InviteTokenCreatedMessage> disownInviteTokenCreated();
-
-  inline bool isRequestGlobalPlayerList();
-  inline bool hasRequestGlobalPlayerList();
-  inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Builder getRequestGlobalPlayerList();
-  inline void setRequestGlobalPlayerList( ::globed::schema::main::RequestGlobalPlayerListMessage::Reader value);
-  inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Builder initRequestGlobalPlayerList();
-  inline void adoptRequestGlobalPlayerList(::capnp::Orphan< ::globed::schema::main::RequestGlobalPlayerListMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::RequestGlobalPlayerListMessage> disownRequestGlobalPlayerList();
-
-  inline bool isGlobalPlayers();
-  inline bool hasGlobalPlayers();
-  inline  ::globed::schema::main::GlobalPlayersMessage::Builder getGlobalPlayers();
-  inline void setGlobalPlayers( ::globed::schema::main::GlobalPlayersMessage::Reader value);
-  inline  ::globed::schema::main::GlobalPlayersMessage::Builder initGlobalPlayers();
-  inline void adoptGlobalPlayers(::capnp::Orphan< ::globed::schema::main::GlobalPlayersMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::GlobalPlayersMessage> disownGlobalPlayers();
-
   inline bool isAdminMute();
   inline bool hasAdminMute();
   inline  ::globed::schema::main::AdminMuteMessage::Builder getAdminMute();
@@ -10871,6 +10575,46 @@ public:
   inline void adoptAdminUnmute(::capnp::Orphan< ::globed::schema::main::AdminUnmuteMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::AdminUnmuteMessage> disownAdminUnmute();
 
+  inline bool isAdminEditRoles();
+  inline bool hasAdminEditRoles();
+  inline  ::globed::schema::main::AdminEditRolesMessage::Builder getAdminEditRoles();
+  inline void setAdminEditRoles( ::globed::schema::main::AdminEditRolesMessage::Reader value);
+  inline  ::globed::schema::main::AdminEditRolesMessage::Builder initAdminEditRoles();
+  inline void adoptAdminEditRoles(::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage> disownAdminEditRoles();
+
+  inline bool isAdminSetPassword();
+  inline bool hasAdminSetPassword();
+  inline  ::globed::schema::main::AdminSetPasswordMessage::Builder getAdminSetPassword();
+  inline void setAdminSetPassword( ::globed::schema::main::AdminSetPasswordMessage::Reader value);
+  inline  ::globed::schema::main::AdminSetPasswordMessage::Builder initAdminSetPassword();
+  inline void adoptAdminSetPassword(::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage> disownAdminSetPassword();
+
+  inline bool isAdminUpdateUser();
+  inline bool hasAdminUpdateUser();
+  inline  ::globed::schema::main::AdminUpdateUserMessage::Builder getAdminUpdateUser();
+  inline void setAdminUpdateUser( ::globed::schema::main::AdminUpdateUserMessage::Reader value);
+  inline  ::globed::schema::main::AdminUpdateUserMessage::Builder initAdminUpdateUser();
+  inline void adoptAdminUpdateUser(::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage> disownAdminUpdateUser();
+
+  inline bool isAdminFetchMods();
+  inline bool hasAdminFetchMods();
+  inline  ::globed::schema::main::AdminFetchModsMessage::Builder getAdminFetchMods();
+  inline void setAdminFetchMods( ::globed::schema::main::AdminFetchModsMessage::Reader value);
+  inline  ::globed::schema::main::AdminFetchModsMessage::Builder initAdminFetchMods();
+  inline void adoptAdminFetchMods(::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage> disownAdminFetchMods();
+
+  inline bool isFetchCredits();
+  inline bool hasFetchCredits();
+  inline  ::globed::schema::main::FetchCreditsMessage::Builder getFetchCredits();
+  inline void setFetchCredits( ::globed::schema::main::FetchCreditsMessage::Reader value);
+  inline  ::globed::schema::main::FetchCreditsMessage::Builder initFetchCredits();
+  inline void adoptFetchCredits(::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage> disownFetchCredits();
+
   inline bool isGetDiscordLinkState();
   inline bool hasGetDiscordLinkState();
   inline  ::globed::schema::main::GetDiscordLinkStateMessage::Builder getGetDiscordLinkState();
@@ -10878,22 +10622,6 @@ public:
   inline  ::globed::schema::main::GetDiscordLinkStateMessage::Builder initGetDiscordLinkState();
   inline void adoptGetDiscordLinkState(::capnp::Orphan< ::globed::schema::main::GetDiscordLinkStateMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::GetDiscordLinkStateMessage> disownGetDiscordLinkState();
-
-  inline bool isDiscordLinkState();
-  inline bool hasDiscordLinkState();
-  inline  ::globed::schema::main::DiscordLinkStateMessage::Builder getDiscordLinkState();
-  inline void setDiscordLinkState( ::globed::schema::main::DiscordLinkStateMessage::Reader value);
-  inline  ::globed::schema::main::DiscordLinkStateMessage::Builder initDiscordLinkState();
-  inline void adoptDiscordLinkState(::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage> disownDiscordLinkState();
-
-  inline bool isDiscordLinkAttempt();
-  inline bool hasDiscordLinkAttempt();
-  inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder getDiscordLinkAttempt();
-  inline void setDiscordLinkAttempt( ::globed::schema::main::DiscordLinkAttemptMessage::Reader value);
-  inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder initDiscordLinkAttempt();
-  inline void adoptDiscordLinkAttempt(::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage> disownDiscordLinkAttempt();
 
   inline bool isSetDiscordPairingState();
   inline bool hasSetDiscordPairingState();
@@ -10910,14 +10638,6 @@ public:
   inline  ::globed::schema::main::DiscordLinkConfirmMessage::Builder initDiscordLinkConfirm();
   inline void adoptDiscordLinkConfirm(::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage> disownDiscordLinkConfirm();
-
-  inline bool isUserDataChanged();
-  inline bool hasUserDataChanged();
-  inline  ::globed::schema::main::UserDataChangedMessage::Builder getUserDataChanged();
-  inline void setUserDataChanged( ::globed::schema::main::UserDataChangedMessage::Reader value);
-  inline  ::globed::schema::main::UserDataChangedMessage::Builder initUserDataChanged();
-  inline void adoptUserDataChanged(::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage> disownUserDataChanged();
 
   inline bool isGetFeaturedLevel();
   inline  ::capnp::Void getGetFeaturedLevel();
@@ -10939,6 +10659,294 @@ public:
   inline void adoptSendFeaturedLevel(::capnp::Orphan< ::globed::schema::main::SendFeaturedLevelMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::SendFeaturedLevelMessage> disownSendFeaturedLevel();
 
+  inline bool isFetchUser();
+  inline bool hasFetchUser();
+  inline  ::globed::schema::main::FetchUserMessage::Builder getFetchUser();
+  inline void setFetchUser( ::globed::schema::main::FetchUserMessage::Reader value);
+  inline  ::globed::schema::main::FetchUserMessage::Builder initFetchUser();
+  inline void adoptFetchUser(::capnp::Orphan< ::globed::schema::main::FetchUserMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::FetchUserMessage> disownFetchUser();
+
+  inline bool isLoginOk();
+  inline bool hasLoginOk();
+  inline  ::globed::schema::main::LoginOkMessage::Builder getLoginOk();
+  inline void setLoginOk( ::globed::schema::main::LoginOkMessage::Reader value);
+  inline  ::globed::schema::main::LoginOkMessage::Builder initLoginOk();
+  inline void adoptLoginOk(::capnp::Orphan< ::globed::schema::main::LoginOkMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::LoginOkMessage> disownLoginOk();
+
+  inline bool isLoginFailed();
+  inline bool hasLoginFailed();
+  inline  ::globed::schema::main::LoginFailedMessage::Builder getLoginFailed();
+  inline void setLoginFailed( ::globed::schema::main::LoginFailedMessage::Reader value);
+  inline  ::globed::schema::main::LoginFailedMessage::Builder initLoginFailed();
+  inline void adoptLoginFailed(::capnp::Orphan< ::globed::schema::main::LoginFailedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::LoginFailedMessage> disownLoginFailed();
+
+  inline bool isLoginRequired();
+  inline bool hasLoginRequired();
+  inline  ::globed::schema::main::LoginRequiredMessage::Builder getLoginRequired();
+  inline void setLoginRequired( ::globed::schema::main::LoginRequiredMessage::Reader value);
+  inline  ::globed::schema::main::LoginRequiredMessage::Builder initLoginRequired();
+  inline void adoptLoginRequired(::capnp::Orphan< ::globed::schema::main::LoginRequiredMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::LoginRequiredMessage> disownLoginRequired();
+
+  inline bool isBanned();
+  inline bool hasBanned();
+  inline  ::globed::schema::main::BannedMessage::Builder getBanned();
+  inline void setBanned( ::globed::schema::main::BannedMessage::Reader value);
+  inline  ::globed::schema::main::BannedMessage::Builder initBanned();
+  inline void adoptBanned(::capnp::Orphan< ::globed::schema::main::BannedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::BannedMessage> disownBanned();
+
+  inline bool isMuted();
+  inline bool hasMuted();
+  inline  ::globed::schema::main::MutedMessage::Builder getMuted();
+  inline void setMuted( ::globed::schema::main::MutedMessage::Reader value);
+  inline  ::globed::schema::main::MutedMessage::Builder initMuted();
+  inline void adoptMuted(::capnp::Orphan< ::globed::schema::main::MutedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::MutedMessage> disownMuted();
+
+  inline bool isServersChanged();
+  inline bool hasServersChanged();
+  inline  ::globed::schema::main::ServersChangedMessage::Builder getServersChanged();
+  inline void setServersChanged( ::globed::schema::main::ServersChangedMessage::Reader value);
+  inline  ::globed::schema::main::ServersChangedMessage::Builder initServersChanged();
+  inline void adoptServersChanged(::capnp::Orphan< ::globed::schema::main::ServersChangedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::ServersChangedMessage> disownServersChanged();
+
+  inline bool isUserDataChanged();
+  inline bool hasUserDataChanged();
+  inline  ::globed::schema::main::UserDataChangedMessage::Builder getUserDataChanged();
+  inline void setUserDataChanged( ::globed::schema::main::UserDataChangedMessage::Reader value);
+  inline  ::globed::schema::main::UserDataChangedMessage::Builder initUserDataChanged();
+  inline void adoptUserDataChanged(::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage> disownUserDataChanged();
+
+  inline bool isRoomState();
+  inline bool hasRoomState();
+  inline  ::globed::schema::main::RoomStateMessage::Builder getRoomState();
+  inline void setRoomState( ::globed::schema::main::RoomStateMessage::Reader value);
+  inline  ::globed::schema::main::RoomStateMessage::Builder initRoomState();
+  inline void adoptRoomState(::capnp::Orphan< ::globed::schema::main::RoomStateMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomStateMessage> disownRoomState();
+
+  inline bool isRoomPlayers();
+  inline bool hasRoomPlayers();
+  inline  ::globed::schema::main::RoomPlayersMessage::Builder getRoomPlayers();
+  inline void setRoomPlayers( ::globed::schema::main::RoomPlayersMessage::Reader value);
+  inline  ::globed::schema::main::RoomPlayersMessage::Builder initRoomPlayers();
+  inline void adoptRoomPlayers(::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage> disownRoomPlayers();
+
+  inline bool isRoomJoinFailed();
+  inline bool hasRoomJoinFailed();
+  inline  ::globed::schema::main::RoomJoinFailedMessage::Builder getRoomJoinFailed();
+  inline void setRoomJoinFailed( ::globed::schema::main::RoomJoinFailedMessage::Reader value);
+  inline  ::globed::schema::main::RoomJoinFailedMessage::Builder initRoomJoinFailed();
+  inline void adoptRoomJoinFailed(::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage> disownRoomJoinFailed();
+
+  inline bool isRoomCreateFailed();
+  inline bool hasRoomCreateFailed();
+  inline  ::globed::schema::main::RoomCreateFailedMessage::Builder getRoomCreateFailed();
+  inline void setRoomCreateFailed( ::globed::schema::main::RoomCreateFailedMessage::Reader value);
+  inline  ::globed::schema::main::RoomCreateFailedMessage::Builder initRoomCreateFailed();
+  inline void adoptRoomCreateFailed(::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage> disownRoomCreateFailed();
+
+  inline bool isRoomBanned();
+  inline bool hasRoomBanned();
+  inline  ::globed::schema::main::RoomBannedMessage::Builder getRoomBanned();
+  inline void setRoomBanned( ::globed::schema::main::RoomBannedMessage::Reader value);
+  inline  ::globed::schema::main::RoomBannedMessage::Builder initRoomBanned();
+  inline void adoptRoomBanned(::capnp::Orphan< ::globed::schema::main::RoomBannedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage> disownRoomBanned();
+
+  inline bool isRoomList();
+  inline bool hasRoomList();
+  inline  ::globed::schema::main::RoomListMessage::Builder getRoomList();
+  inline void setRoomList( ::globed::schema::main::RoomListMessage::Reader value);
+  inline  ::globed::schema::main::RoomListMessage::Builder initRoomList();
+  inline void adoptRoomList(::capnp::Orphan< ::globed::schema::main::RoomListMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomListMessage> disownRoomList();
+
+  inline bool isTeamCreationResult();
+  inline bool hasTeamCreationResult();
+  inline  ::globed::schema::main::TeamCreationResultMessage::Builder getTeamCreationResult();
+  inline void setTeamCreationResult( ::globed::schema::main::TeamCreationResultMessage::Reader value);
+  inline  ::globed::schema::main::TeamCreationResultMessage::Builder initTeamCreationResult();
+  inline void adoptTeamCreationResult(::capnp::Orphan< ::globed::schema::main::TeamCreationResultMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::TeamCreationResultMessage> disownTeamCreationResult();
+
+  inline bool isTeamChanged();
+  inline bool hasTeamChanged();
+  inline  ::globed::schema::main::TeamChangedMessage::Builder getTeamChanged();
+  inline void setTeamChanged( ::globed::schema::main::TeamChangedMessage::Reader value);
+  inline  ::globed::schema::main::TeamChangedMessage::Builder initTeamChanged();
+  inline void adoptTeamChanged(::capnp::Orphan< ::globed::schema::main::TeamChangedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::TeamChangedMessage> disownTeamChanged();
+
+  inline bool isTeamMembers();
+  inline bool hasTeamMembers();
+  inline  ::globed::schema::main::TeamMembersMessage::Builder getTeamMembers();
+  inline void setTeamMembers( ::globed::schema::main::TeamMembersMessage::Reader value);
+  inline  ::globed::schema::main::TeamMembersMessage::Builder initTeamMembers();
+  inline void adoptTeamMembers(::capnp::Orphan< ::globed::schema::main::TeamMembersMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::TeamMembersMessage> disownTeamMembers();
+
+  inline bool isTeamsUpdated();
+  inline bool hasTeamsUpdated();
+  inline  ::globed::schema::main::TeamsUpdatedMessage::Builder getTeamsUpdated();
+  inline void setTeamsUpdated( ::globed::schema::main::TeamsUpdatedMessage::Reader value);
+  inline  ::globed::schema::main::TeamsUpdatedMessage::Builder initTeamsUpdated();
+  inline void adoptTeamsUpdated(::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage> disownTeamsUpdated();
+
+  inline bool isRoomSettingsUpdated();
+  inline bool hasRoomSettingsUpdated();
+  inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder getRoomSettingsUpdated();
+  inline void setRoomSettingsUpdated( ::globed::schema::main::RoomSettingsUpdatedMessage::Reader value);
+  inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder initRoomSettingsUpdated();
+  inline void adoptRoomSettingsUpdated(::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage> disownRoomSettingsUpdated();
+
+  inline bool isInvited();
+  inline bool hasInvited();
+  inline  ::globed::schema::main::InvitedMessage::Builder getInvited();
+  inline void setInvited( ::globed::schema::main::InvitedMessage::Reader value);
+  inline  ::globed::schema::main::InvitedMessage::Builder initInvited();
+  inline void adoptInvited(::capnp::Orphan< ::globed::schema::main::InvitedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::InvitedMessage> disownInvited();
+
+  inline bool isInviteTokenCreated();
+  inline bool hasInviteTokenCreated();
+  inline  ::globed::schema::main::InviteTokenCreatedMessage::Builder getInviteTokenCreated();
+  inline void setInviteTokenCreated( ::globed::schema::main::InviteTokenCreatedMessage::Reader value);
+  inline  ::globed::schema::main::InviteTokenCreatedMessage::Builder initInviteTokenCreated();
+  inline void adoptInviteTokenCreated(::capnp::Orphan< ::globed::schema::main::InviteTokenCreatedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::InviteTokenCreatedMessage> disownInviteTokenCreated();
+
+  inline bool isJoinFailed();
+  inline bool hasJoinFailed();
+  inline  ::globed::schema::main::JoinFailedMessage::Builder getJoinFailed();
+  inline void setJoinFailed( ::globed::schema::main::JoinFailedMessage::Reader value);
+  inline  ::globed::schema::main::JoinFailedMessage::Builder initJoinFailed();
+  inline void adoptJoinFailed(::capnp::Orphan< ::globed::schema::main::JoinFailedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::JoinFailedMessage> disownJoinFailed();
+
+  inline bool isWarpPlayer();
+  inline bool hasWarpPlayer();
+  inline  ::globed::schema::main::WarpPlayerMessage::Builder getWarpPlayer();
+  inline void setWarpPlayer( ::globed::schema::main::WarpPlayerMessage::Reader value);
+  inline  ::globed::schema::main::WarpPlayerMessage::Builder initWarpPlayer();
+  inline void adoptWarpPlayer(::capnp::Orphan< ::globed::schema::main::WarpPlayerMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::WarpPlayerMessage> disownWarpPlayer();
+
+  inline bool isPlayerCounts();
+  inline bool hasPlayerCounts();
+  inline  ::globed::schema::main::PlayerCountsMessage::Builder getPlayerCounts();
+  inline void setPlayerCounts( ::globed::schema::main::PlayerCountsMessage::Reader value);
+  inline  ::globed::schema::main::PlayerCountsMessage::Builder initPlayerCounts();
+  inline void adoptPlayerCounts(::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage> disownPlayerCounts();
+
+  inline bool isGlobalPlayers();
+  inline bool hasGlobalPlayers();
+  inline  ::globed::schema::main::GlobalPlayersMessage::Builder getGlobalPlayers();
+  inline void setGlobalPlayers( ::globed::schema::main::GlobalPlayersMessage::Reader value);
+  inline  ::globed::schema::main::GlobalPlayersMessage::Builder initGlobalPlayers();
+  inline void adoptGlobalPlayers(::capnp::Orphan< ::globed::schema::main::GlobalPlayersMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::GlobalPlayersMessage> disownGlobalPlayers();
+
+  inline bool isLevelList();
+  inline bool hasLevelList();
+  inline  ::globed::schema::main::LevelListMessage::Builder getLevelList();
+  inline void setLevelList( ::globed::schema::main::LevelListMessage::Reader value);
+  inline  ::globed::schema::main::LevelListMessage::Builder initLevelList();
+  inline void adoptLevelList(::capnp::Orphan< ::globed::schema::main::LevelListMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::LevelListMessage> disownLevelList();
+
+  inline bool isKicked();
+  inline bool hasKicked();
+  inline  ::globed::schema::main::KickedMessage::Builder getKicked();
+  inline void setKicked( ::globed::schema::main::KickedMessage::Reader value);
+  inline  ::globed::schema::main::KickedMessage::Builder initKicked();
+  inline void adoptKicked(::capnp::Orphan< ::globed::schema::main::KickedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::KickedMessage> disownKicked();
+
+  inline bool isNotice();
+  inline bool hasNotice();
+  inline  ::globed::schema::main::NoticeMessage::Builder getNotice();
+  inline void setNotice( ::globed::schema::main::NoticeMessage::Reader value);
+  inline  ::globed::schema::main::NoticeMessage::Builder initNotice();
+  inline void adoptNotice(::capnp::Orphan< ::globed::schema::main::NoticeMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::NoticeMessage> disownNotice();
+
+  inline bool isWarn();
+  inline bool hasWarn();
+  inline  ::globed::schema::main::WarnMessage::Builder getWarn();
+  inline void setWarn( ::globed::schema::main::WarnMessage::Reader value);
+  inline  ::globed::schema::main::WarnMessage::Builder initWarn();
+  inline void adoptWarn(::capnp::Orphan< ::globed::schema::main::WarnMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::WarnMessage> disownWarn();
+
+  inline bool isAdminResult();
+  inline bool hasAdminResult();
+  inline  ::globed::schema::main::AdminResultMessage::Builder getAdminResult();
+  inline void setAdminResult( ::globed::schema::main::AdminResultMessage::Reader value);
+  inline  ::globed::schema::main::AdminResultMessage::Builder initAdminResult();
+  inline void adoptAdminResult(::capnp::Orphan< ::globed::schema::main::AdminResultMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminResultMessage> disownAdminResult();
+
+  inline bool isAdminFetchResponse();
+  inline bool hasAdminFetchResponse();
+  inline  ::globed::schema::main::AdminFetchResponseMessage::Builder getAdminFetchResponse();
+  inline void setAdminFetchResponse( ::globed::schema::main::AdminFetchResponseMessage::Reader value);
+  inline  ::globed::schema::main::AdminFetchResponseMessage::Builder initAdminFetchResponse();
+  inline void adoptAdminFetchResponse(::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage> disownAdminFetchResponse();
+
+  inline bool isAdminFetchModsResponse();
+  inline bool hasAdminFetchModsResponse();
+  inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder getAdminFetchModsResponse();
+  inline void setAdminFetchModsResponse( ::globed::schema::main::AdminFetchModsResponseMessage::Reader value);
+  inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder initAdminFetchModsResponse();
+  inline void adoptAdminFetchModsResponse(::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage> disownAdminFetchModsResponse();
+
+  inline bool isAdminLogsResponse();
+  inline bool hasAdminLogsResponse();
+  inline  ::globed::schema::main::AdminLogsResponseMessage::Builder getAdminLogsResponse();
+  inline void setAdminLogsResponse( ::globed::schema::main::AdminLogsResponseMessage::Reader value);
+  inline  ::globed::schema::main::AdminLogsResponseMessage::Builder initAdminLogsResponse();
+  inline void adoptAdminLogsResponse(::capnp::Orphan< ::globed::schema::main::AdminLogsResponseMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminLogsResponseMessage> disownAdminLogsResponse();
+
+  inline bool isCredits();
+  inline bool hasCredits();
+  inline  ::globed::schema::main::CreditsMessage::Builder getCredits();
+  inline void setCredits( ::globed::schema::main::CreditsMessage::Reader value);
+  inline  ::globed::schema::main::CreditsMessage::Builder initCredits();
+  inline void adoptCredits(::capnp::Orphan< ::globed::schema::main::CreditsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::CreditsMessage> disownCredits();
+
+  inline bool isDiscordLinkState();
+  inline bool hasDiscordLinkState();
+  inline  ::globed::schema::main::DiscordLinkStateMessage::Builder getDiscordLinkState();
+  inline void setDiscordLinkState( ::globed::schema::main::DiscordLinkStateMessage::Reader value);
+  inline  ::globed::schema::main::DiscordLinkStateMessage::Builder initDiscordLinkState();
+  inline void adoptDiscordLinkState(::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage> disownDiscordLinkState();
+
+  inline bool isDiscordLinkAttempt();
+  inline bool hasDiscordLinkAttempt();
+  inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder getDiscordLinkAttempt();
+  inline void setDiscordLinkAttempt( ::globed::schema::main::DiscordLinkAttemptMessage::Reader value);
+  inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder initDiscordLinkAttempt();
+  inline void adoptDiscordLinkAttempt(::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage> disownDiscordLinkAttempt();
+
   inline bool isFeaturedLevel();
   inline bool hasFeaturedLevel();
   inline  ::globed::schema::main::FeaturedLevelMessage::Builder getFeaturedLevel();
@@ -10955,21 +10963,13 @@ public:
   inline void adoptFeaturedList(::capnp::Orphan< ::globed::schema::main::FeaturedListMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::FeaturedListMessage> disownFeaturedList();
 
-  inline bool isFetchUser();
-  inline bool hasFetchUser();
-  inline  ::globed::schema::main::FetchUserMessage::Builder getFetchUser();
-  inline void setFetchUser( ::globed::schema::main::FetchUserMessage::Reader value);
-  inline  ::globed::schema::main::FetchUserMessage::Builder initFetchUser();
-  inline void adoptFetchUser(::capnp::Orphan< ::globed::schema::main::FetchUserMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::FetchUserMessage> disownFetchUser();
-
-  inline bool isMuted();
-  inline bool hasMuted();
-  inline  ::globed::schema::main::MutedMessage::Builder getMuted();
-  inline void setMuted( ::globed::schema::main::MutedMessage::Reader value);
-  inline  ::globed::schema::main::MutedMessage::Builder initMuted();
-  inline void adoptMuted(::capnp::Orphan< ::globed::schema::main::MutedMessage>&& value);
-  inline ::capnp::Orphan< ::globed::schema::main::MutedMessage> disownMuted();
+  inline bool isFetchUserResponse();
+  inline bool hasFetchUserResponse();
+  inline  ::globed::schema::main::FetchUserResponseMessage::Builder getFetchUserResponse();
+  inline void setFetchUserResponse( ::globed::schema::main::FetchUserResponseMessage::Reader value);
+  inline  ::globed::schema::main::FetchUserResponseMessage::Builder initFetchUserResponse();
+  inline void adoptFetchUserResponse(::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> disownFetchUserResponse();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -11157,6 +11157,45 @@ inline ::capnp::Orphan< ::capnp::Data> LoginMessage::Builder::disownUident() {
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
+inline bool LoginMessage::Reader::hasSettings() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginMessage::Builder::hasSettings() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::UserSettings::Reader LoginMessage::Reader::getSettings() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::UserSettings::Builder LoginMessage::Builder::getSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::UserSettings::Pipeline LoginMessage::Pipeline::getSettings() {
+  return  ::globed::schema::shared::UserSettings::Pipeline(_typeless.getPointerField(2));
+}
+#endif  // !CAPNP_LITE
+inline void LoginMessage::Builder::setSettings( ::globed::schema::shared::UserSettings::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::UserSettings::Builder LoginMessage::Builder::initSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void LoginMessage::Builder::adoptSettings(
+    ::capnp::Orphan< ::globed::schema::shared::UserSettings>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::UserSettings> LoginMessage::Builder::disownSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
 inline bool LoginMessage::Reader::isUtoken() const {
   return which() == LoginMessage::UTOKEN;
 }
@@ -11166,49 +11205,49 @@ inline bool LoginMessage::Builder::isUtoken() {
 inline bool LoginMessage::Reader::hasUtoken() const {
   if (which() != LoginMessage::UTOKEN) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
 }
 inline bool LoginMessage::Builder::hasUtoken() {
   if (which() != LoginMessage::UTOKEN) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
 }
 inline  ::capnp::Text::Reader LoginMessage::Reader::getUtoken() const {
   KJ_IREQUIRE((which() == LoginMessage::UTOKEN),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 inline  ::capnp::Text::Builder LoginMessage::Builder::getUtoken() {
   KJ_IREQUIRE((which() == LoginMessage::UTOKEN),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 inline void LoginMessage::Builder::setUtoken( ::capnp::Text::Reader value) {
   _builder.setDataField<LoginMessage::Which>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::UTOKEN);
   ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
 }
 inline  ::capnp::Text::Builder LoginMessage::Builder::initUtoken(unsigned int size) {
   _builder.setDataField<LoginMessage::Which>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::UTOKEN);
   return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+      ::capnp::bounded<3>() * ::capnp::POINTERS), size);
 }
 inline void LoginMessage::Builder::adoptUtoken(
     ::capnp::Orphan< ::capnp::Text>&& value) {
   _builder.setDataField<LoginMessage::Which>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::UTOKEN);
   ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
 }
 inline ::capnp::Orphan< ::capnp::Text> LoginMessage::Builder::disownUtoken() {
   KJ_IREQUIRE((which() == LoginMessage::UTOKEN),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 
 inline bool LoginMessage::Reader::isArgon() const {
@@ -11220,49 +11259,49 @@ inline bool LoginMessage::Builder::isArgon() {
 inline bool LoginMessage::Reader::hasArgon() const {
   if (which() != LoginMessage::ARGON) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
 }
 inline bool LoginMessage::Builder::hasArgon() {
   if (which() != LoginMessage::ARGON) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
 }
 inline  ::capnp::Text::Reader LoginMessage::Reader::getArgon() const {
   KJ_IREQUIRE((which() == LoginMessage::ARGON),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 inline  ::capnp::Text::Builder LoginMessage::Builder::getArgon() {
   KJ_IREQUIRE((which() == LoginMessage::ARGON),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 inline void LoginMessage::Builder::setArgon( ::capnp::Text::Reader value) {
   _builder.setDataField<LoginMessage::Which>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::ARGON);
   ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
 }
 inline  ::capnp::Text::Builder LoginMessage::Builder::initArgon(unsigned int size) {
   _builder.setDataField<LoginMessage::Which>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::ARGON);
   return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+      ::capnp::bounded<3>() * ::capnp::POINTERS), size);
 }
 inline void LoginMessage::Builder::adoptArgon(
     ::capnp::Orphan< ::capnp::Text>&& value) {
   _builder.setDataField<LoginMessage::Which>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::ARGON);
   ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
 }
 inline ::capnp::Orphan< ::capnp::Text> LoginMessage::Builder::disownArgon() {
   KJ_IREQUIRE((which() == LoginMessage::ARGON),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 
 inline bool LoginMessage::Reader::isPlain() const {
@@ -11274,87 +11313,48 @@ inline bool LoginMessage::Builder::isPlain() {
 inline bool LoginMessage::Reader::hasPlain() const {
   if (which() != LoginMessage::PLAIN) return false;
   return !_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
 }
 inline bool LoginMessage::Builder::hasPlain() {
   if (which() != LoginMessage::PLAIN) return false;
   return !_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
 }
 inline  ::globed::schema::main::PlayerAccountData::Reader LoginMessage::Reader::getPlain() const {
   KJ_IREQUIRE((which() == LoginMessage::PLAIN),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerAccountData>::get(_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 inline  ::globed::schema::main::PlayerAccountData::Builder LoginMessage::Builder::getPlain() {
   KJ_IREQUIRE((which() == LoginMessage::PLAIN),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerAccountData>::get(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 inline void LoginMessage::Builder::setPlain( ::globed::schema::main::PlayerAccountData::Reader value) {
   _builder.setDataField<LoginMessage::Which>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::PLAIN);
   ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerAccountData>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
 }
 inline  ::globed::schema::main::PlayerAccountData::Builder LoginMessage::Builder::initPlain() {
   _builder.setDataField<LoginMessage::Which>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::PLAIN);
   return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerAccountData>::init(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 inline void LoginMessage::Builder::adoptPlain(
     ::capnp::Orphan< ::globed::schema::main::PlayerAccountData>&& value) {
   _builder.setDataField<LoginMessage::Which>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::PLAIN);
   ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerAccountData>::adopt(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
 }
 inline ::capnp::Orphan< ::globed::schema::main::PlayerAccountData> LoginMessage::Builder::disownPlain() {
   KJ_IREQUIRE((which() == LoginMessage::PLAIN),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerAccountData>::disown(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
-}
-
-inline bool LoginMessage::Reader::hasSettings() const {
-  return !_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
-}
-inline bool LoginMessage::Builder::hasSettings() {
-  return !_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::shared::UserSettings::Reader LoginMessage::Reader::getSettings() const {
-  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::get(_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::shared::UserSettings::Builder LoginMessage::Builder::getSettings() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::get(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
-}
-#if !CAPNP_LITE
-inline  ::globed::schema::shared::UserSettings::Pipeline LoginMessage::Pipeline::getSettings() {
-  return  ::globed::schema::shared::UserSettings::Pipeline(_typeless.getPointerField(3));
-}
-#endif  // !CAPNP_LITE
-inline void LoginMessage::Builder::setSettings( ::globed::schema::shared::UserSettings::Reader value) {
-  ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::shared::UserSettings::Builder LoginMessage::Builder::initSettings() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::init(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
-}
-inline void LoginMessage::Builder::adoptSettings(
-    ::capnp::Orphan< ::globed::schema::shared::UserSettings>&& value) {
-  ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::adopt(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::shared::UserSettings> LoginMessage::Builder::disownSettings() {
-  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::disown(_builder.getPointerField(
       ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 
@@ -11498,48 +11498,6 @@ inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> Lo
       ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 
-inline bool LoginOkMessage::Reader::getIsModerator() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-
-inline bool LoginOkMessage::Builder::getIsModerator() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-inline void LoginOkMessage::Builder::setIsModerator(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool LoginOkMessage::Reader::getCanBan() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
-}
-
-inline bool LoginOkMessage::Builder::getCanBan() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
-}
-inline void LoginOkMessage::Builder::setCanBan(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool LoginOkMessage::Reader::getCanSetPassword() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
-}
-
-inline bool LoginOkMessage::Builder::getCanSetPassword() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
-}
-inline void LoginOkMessage::Builder::setCanSetPassword(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
-}
-
 inline bool LoginOkMessage::Reader::hasNameColor() const {
   return !_reader.getPointerField(
       ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
@@ -11574,58 +11532,100 @@ inline ::capnp::Orphan< ::capnp::Data> LoginOkMessage::Builder::disownNameColor(
       ::capnp::bounded<4>() * ::capnp::POINTERS));
 }
 
-inline bool LoginOkMessage::Reader::getCanEditRoles() const {
+inline bool LoginOkMessage::Reader::getIsModerator() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
 
-inline bool LoginOkMessage::Builder::getCanEditRoles() {
+inline bool LoginOkMessage::Builder::getIsModerator() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
-inline void LoginOkMessage::Builder::setCanEditRoles(bool value) {
+inline void LoginOkMessage::Builder::setIsModerator(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool LoginOkMessage::Reader::getCanSendFeatures() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
-}
-
-inline bool LoginOkMessage::Builder::getCanSendFeatures() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
-}
-inline void LoginOkMessage::Builder::setCanSendFeatures(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool LoginOkMessage::Reader::getCanRateFeatures() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
-}
-
-inline bool LoginOkMessage::Builder::getCanRateFeatures() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
-}
-inline void LoginOkMessage::Builder::setCanRateFeatures(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool LoginOkMessage::Reader::getCanMute() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
 
 inline bool LoginOkMessage::Builder::getCanMute() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
 inline void LoginOkMessage::Builder::setCanMute(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::getCanBan() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanBan() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanBan(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::getCanSetPassword() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanSetPassword() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanSetPassword(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::getCanEditRoles() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanEditRoles() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanEditRoles(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::getCanSendFeatures() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanSendFeatures() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanSendFeatures(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::getCanRateFeatures() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanRateFeatures() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanRateFeatures(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
 }
@@ -12208,170 +12208,170 @@ inline ::capnp::Orphan< ::globed::schema::shared::UserSettings> UpdateUserSettin
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline  ::uint16_t RoomSettings::Reader::getPlayerLimit() const {
-  return _reader.getDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-
-inline  ::uint16_t RoomSettings::Builder::getPlayerLimit() {
-  return _builder.getDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-inline void RoomSettings::Builder::setPlayerLimit( ::uint16_t value) {
-  _builder.setDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool RoomSettings::Reader::getFasterReset() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<16>() * ::capnp::ELEMENTS);
-}
-
-inline bool RoomSettings::Builder::getFasterReset() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<16>() * ::capnp::ELEMENTS);
-}
-inline void RoomSettings::Builder::setFasterReset(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<16>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool RoomSettings::Reader::getHidden() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<17>() * ::capnp::ELEMENTS);
-}
-
-inline bool RoomSettings::Builder::getHidden() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<17>() * ::capnp::ELEMENTS);
-}
-inline void RoomSettings::Builder::setHidden(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<17>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool RoomSettings::Reader::getPrivateInvites() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<18>() * ::capnp::ELEMENTS);
-}
-
-inline bool RoomSettings::Builder::getPrivateInvites() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<18>() * ::capnp::ELEMENTS);
-}
-inline void RoomSettings::Builder::setPrivateInvites(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<18>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool RoomSettings::Reader::getIsFollower() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<19>() * ::capnp::ELEMENTS);
-}
-
-inline bool RoomSettings::Builder::getIsFollower() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<19>() * ::capnp::ELEMENTS);
-}
-inline void RoomSettings::Builder::setIsFollower(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<19>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool RoomSettings::Reader::getCollision() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<20>() * ::capnp::ELEMENTS);
-}
-
-inline bool RoomSettings::Builder::getCollision() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<20>() * ::capnp::ELEMENTS);
-}
-inline void RoomSettings::Builder::setCollision(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<20>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool RoomSettings::Reader::getTwoPlayerMode() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<21>() * ::capnp::ELEMENTS);
-}
-
-inline bool RoomSettings::Builder::getTwoPlayerMode() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<21>() * ::capnp::ELEMENTS);
-}
-inline void RoomSettings::Builder::setTwoPlayerMode(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<21>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool RoomSettings::Reader::getDeathlink() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<22>() * ::capnp::ELEMENTS);
-}
-
-inline bool RoomSettings::Builder::getDeathlink() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<22>() * ::capnp::ELEMENTS);
-}
-inline void RoomSettings::Builder::setDeathlink(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<22>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool RoomSettings::Reader::getLevelIntegrity() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<23>() * ::capnp::ELEMENTS);
-}
-
-inline bool RoomSettings::Builder::getLevelIntegrity() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<23>() * ::capnp::ELEMENTS);
-}
-inline void RoomSettings::Builder::setLevelIntegrity(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<23>() * ::capnp::ELEMENTS, value);
-}
-
 inline  ::uint8_t RoomSettings::Reader::getServerId() const {
   return _reader.getDataField< ::uint8_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
 
 inline  ::uint8_t RoomSettings::Builder::getServerId() {
   return _builder.getDataField< ::uint8_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
 inline void RoomSettings::Builder::setServerId( ::uint8_t value) {
   _builder.setDataField< ::uint8_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint16_t RoomSettings::Reader::getPlayerLimit() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t RoomSettings::Builder::getPlayerLimit() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setPlayerLimit( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getFasterReset() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<8>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getFasterReset() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<8>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setFasterReset(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<8>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getHidden() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<9>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getHidden() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<9>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setHidden(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<9>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getPrivateInvites() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<10>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getPrivateInvites() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<10>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setPrivateInvites(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<10>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getIsFollower() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<11>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getIsFollower() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<11>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setIsFollower(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<11>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getLevelIntegrity() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<12>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getLevelIntegrity() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<12>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setLevelIntegrity(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<12>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool RoomSettings::Reader::getTeams() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<13>() * ::capnp::ELEMENTS);
 }
 
 inline bool RoomSettings::Builder::getTeams() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<13>() * ::capnp::ELEMENTS);
 }
 inline void RoomSettings::Builder::setTeams(bool value) {
   _builder.setDataField<bool>(
-      ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+      ::capnp::bounded<13>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool RoomSettings::Reader::getLockedTeams() const {
   return _reader.getDataField<bool>(
-      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<14>() * ::capnp::ELEMENTS);
 }
 
 inline bool RoomSettings::Builder::getLockedTeams() {
   return _builder.getDataField<bool>(
-      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<14>() * ::capnp::ELEMENTS);
 }
 inline void RoomSettings::Builder::setLockedTeams(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<14>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getCollision() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<15>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getCollision() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<15>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setCollision(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<15>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getTwoPlayerMode() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getTwoPlayerMode() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setTwoPlayerMode(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getDeathlink() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getDeathlink() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setDeathlink(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<33>() * ::capnp::ELEMENTS, value);
 }
@@ -16538,276 +16538,6 @@ inline ::capnp::Orphan< ::globed::schema::main::LoginMessage> Message::Builder::
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline bool Message::Reader::isUpdateUserSettings() const {
-  return which() == Message::UPDATE_USER_SETTINGS;
-}
-inline bool Message::Builder::isUpdateUserSettings() {
-  return which() == Message::UPDATE_USER_SETTINGS;
-}
-inline bool Message::Reader::hasUpdateUserSettings() const {
-  if (which() != Message::UPDATE_USER_SETTINGS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasUpdateUserSettings() {
-  if (which() != Message::UPDATE_USER_SETTINGS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::UpdateUserSettingsMessage::Reader Message::Reader::getUpdateUserSettings() const {
-  KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::UpdateUserSettingsMessage::Builder Message::Builder::getUpdateUserSettings() {
-  KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setUpdateUserSettings( ::globed::schema::main::UpdateUserSettingsMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_USER_SETTINGS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::UpdateUserSettingsMessage::Builder Message::Builder::initUpdateUserSettings() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_USER_SETTINGS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptUpdateUserSettings(
-    ::capnp::Orphan< ::globed::schema::main::UpdateUserSettingsMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_USER_SETTINGS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::UpdateUserSettingsMessage> Message::Builder::disownUpdateUserSettings() {
-  KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isFetchUserResponse() const {
-  return which() == Message::FETCH_USER_RESPONSE;
-}
-inline bool Message::Builder::isFetchUserResponse() {
-  return which() == Message::FETCH_USER_RESPONSE;
-}
-inline bool Message::Reader::hasFetchUserResponse() const {
-  if (which() != Message::FETCH_USER_RESPONSE) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasFetchUserResponse() {
-  if (which() != Message::FETCH_USER_RESPONSE) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::FetchUserResponseMessage::Reader Message::Reader::getFetchUserResponse() const {
-  KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::FetchUserResponseMessage::Builder Message::Builder::getFetchUserResponse() {
-  KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setFetchUserResponse( ::globed::schema::main::FetchUserResponseMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER_RESPONSE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::FetchUserResponseMessage::Builder Message::Builder::initFetchUserResponse() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER_RESPONSE);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptFetchUserResponse(
-    ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER_RESPONSE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> Message::Builder::disownFetchUserResponse() {
-  KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isLoginOk() const {
-  return which() == Message::LOGIN_OK;
-}
-inline bool Message::Builder::isLoginOk() {
-  return which() == Message::LOGIN_OK;
-}
-inline bool Message::Reader::hasLoginOk() const {
-  if (which() != Message::LOGIN_OK) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasLoginOk() {
-  if (which() != Message::LOGIN_OK) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::LoginOkMessage::Reader Message::Reader::getLoginOk() const {
-  KJ_IREQUIRE((which() == Message::LOGIN_OK),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::LoginOkMessage::Builder Message::Builder::getLoginOk() {
-  KJ_IREQUIRE((which() == Message::LOGIN_OK),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setLoginOk( ::globed::schema::main::LoginOkMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_OK);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::LoginOkMessage::Builder Message::Builder::initLoginOk() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_OK);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptLoginOk(
-    ::capnp::Orphan< ::globed::schema::main::LoginOkMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_OK);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::LoginOkMessage> Message::Builder::disownLoginOk() {
-  KJ_IREQUIRE((which() == Message::LOGIN_OK),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isLoginFailed() const {
-  return which() == Message::LOGIN_FAILED;
-}
-inline bool Message::Builder::isLoginFailed() {
-  return which() == Message::LOGIN_FAILED;
-}
-inline bool Message::Reader::hasLoginFailed() const {
-  if (which() != Message::LOGIN_FAILED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasLoginFailed() {
-  if (which() != Message::LOGIN_FAILED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::LoginFailedMessage::Reader Message::Reader::getLoginFailed() const {
-  KJ_IREQUIRE((which() == Message::LOGIN_FAILED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::LoginFailedMessage::Builder Message::Builder::getLoginFailed() {
-  KJ_IREQUIRE((which() == Message::LOGIN_FAILED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setLoginFailed( ::globed::schema::main::LoginFailedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_FAILED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::LoginFailedMessage::Builder Message::Builder::initLoginFailed() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_FAILED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptLoginFailed(
-    ::capnp::Orphan< ::globed::schema::main::LoginFailedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_FAILED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::LoginFailedMessage> Message::Builder::disownLoginFailed() {
-  KJ_IREQUIRE((which() == Message::LOGIN_FAILED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isLoginRequired() const {
-  return which() == Message::LOGIN_REQUIRED;
-}
-inline bool Message::Builder::isLoginRequired() {
-  return which() == Message::LOGIN_REQUIRED;
-}
-inline bool Message::Reader::hasLoginRequired() const {
-  if (which() != Message::LOGIN_REQUIRED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasLoginRequired() {
-  if (which() != Message::LOGIN_REQUIRED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::LoginRequiredMessage::Reader Message::Reader::getLoginRequired() const {
-  KJ_IREQUIRE((which() == Message::LOGIN_REQUIRED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::LoginRequiredMessage::Builder Message::Builder::getLoginRequired() {
-  KJ_IREQUIRE((which() == Message::LOGIN_REQUIRED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setLoginRequired( ::globed::schema::main::LoginRequiredMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_REQUIRED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::LoginRequiredMessage::Builder Message::Builder::initLoginRequired() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_REQUIRED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptLoginRequired(
-    ::capnp::Orphan< ::globed::schema::main::LoginRequiredMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_REQUIRED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::LoginRequiredMessage> Message::Builder::disownLoginRequired() {
-  KJ_IREQUIRE((which() == Message::LOGIN_REQUIRED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
 inline bool Message::Reader::isUpdateOwnData() const {
   return which() == Message::UPDATE_OWN_DATA;
 }
@@ -16859,6 +16589,168 @@ inline ::capnp::Orphan< ::globed::schema::main::UpdateOwnDataMessage> Message::B
   KJ_IREQUIRE((which() == Message::UPDATE_OWN_DATA),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateOwnDataMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRequestPlayerCounts() const {
+  return which() == Message::REQUEST_PLAYER_COUNTS;
+}
+inline bool Message::Builder::isRequestPlayerCounts() {
+  return which() == Message::REQUEST_PLAYER_COUNTS;
+}
+inline bool Message::Reader::hasRequestPlayerCounts() const {
+  if (which() != Message::REQUEST_PLAYER_COUNTS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRequestPlayerCounts() {
+  if (which() != Message::REQUEST_PLAYER_COUNTS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RequestPlayerCountsMessage::Reader Message::Reader::getRequestPlayerCounts() const {
+  KJ_IREQUIRE((which() == Message::REQUEST_PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder Message::Builder::getRequestPlayerCounts() {
+  KJ_IREQUIRE((which() == Message::REQUEST_PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRequestPlayerCounts( ::globed::schema::main::RequestPlayerCountsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_PLAYER_COUNTS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder Message::Builder::initRequestPlayerCounts() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_PLAYER_COUNTS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRequestPlayerCounts(
+    ::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_PLAYER_COUNTS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage> Message::Builder::disownRequestPlayerCounts() {
+  KJ_IREQUIRE((which() == Message::REQUEST_PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRequestGlobalPlayerList() const {
+  return which() == Message::REQUEST_GLOBAL_PLAYER_LIST;
+}
+inline bool Message::Builder::isRequestGlobalPlayerList() {
+  return which() == Message::REQUEST_GLOBAL_PLAYER_LIST;
+}
+inline bool Message::Reader::hasRequestGlobalPlayerList() const {
+  if (which() != Message::REQUEST_GLOBAL_PLAYER_LIST) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRequestGlobalPlayerList() {
+  if (which() != Message::REQUEST_GLOBAL_PLAYER_LIST) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Reader Message::Reader::getRequestGlobalPlayerList() const {
+  KJ_IREQUIRE((which() == Message::REQUEST_GLOBAL_PLAYER_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Builder Message::Builder::getRequestGlobalPlayerList() {
+  KJ_IREQUIRE((which() == Message::REQUEST_GLOBAL_PLAYER_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRequestGlobalPlayerList( ::globed::schema::main::RequestGlobalPlayerListMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_GLOBAL_PLAYER_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Builder Message::Builder::initRequestGlobalPlayerList() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_GLOBAL_PLAYER_LIST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRequestGlobalPlayerList(
+    ::capnp::Orphan< ::globed::schema::main::RequestGlobalPlayerListMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_GLOBAL_PLAYER_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RequestGlobalPlayerListMessage> Message::Builder::disownRequestGlobalPlayerList() {
+  KJ_IREQUIRE((which() == Message::REQUEST_GLOBAL_PLAYER_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isUpdateUserSettings() const {
+  return which() == Message::UPDATE_USER_SETTINGS;
+}
+inline bool Message::Builder::isUpdateUserSettings() {
+  return which() == Message::UPDATE_USER_SETTINGS;
+}
+inline bool Message::Reader::hasUpdateUserSettings() const {
+  if (which() != Message::UPDATE_USER_SETTINGS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUpdateUserSettings() {
+  if (which() != Message::UPDATE_USER_SETTINGS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UpdateUserSettingsMessage::Reader Message::Reader::getUpdateUserSettings() const {
+  KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UpdateUserSettingsMessage::Builder Message::Builder::getUpdateUserSettings() {
+  KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUpdateUserSettings( ::globed::schema::main::UpdateUserSettingsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_USER_SETTINGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UpdateUserSettingsMessage::Builder Message::Builder::initUpdateUserSettings() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_USER_SETTINGS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUpdateUserSettings(
+    ::capnp::Orphan< ::globed::schema::main::UpdateUserSettingsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_USER_SETTINGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UpdateUserSettingsMessage> Message::Builder::disownUpdateUserSettings() {
+  KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateUserSettingsMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
@@ -16970,6 +16862,60 @@ inline ::capnp::Orphan< ::globed::schema::main::JoinRoomMessage> Message::Builde
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool Message::Reader::isJoinRoomByToken() const {
+  return which() == Message::JOIN_ROOM_BY_TOKEN;
+}
+inline bool Message::Builder::isJoinRoomByToken() {
+  return which() == Message::JOIN_ROOM_BY_TOKEN;
+}
+inline bool Message::Reader::hasJoinRoomByToken() const {
+  if (which() != Message::JOIN_ROOM_BY_TOKEN) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasJoinRoomByToken() {
+  if (which() != Message::JOIN_ROOM_BY_TOKEN) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::JoinRoomByTokenMessage::Reader Message::Reader::getJoinRoomByToken() const {
+  KJ_IREQUIRE((which() == Message::JOIN_ROOM_BY_TOKEN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::JoinRoomByTokenMessage::Builder Message::Builder::getJoinRoomByToken() {
+  KJ_IREQUIRE((which() == Message::JOIN_ROOM_BY_TOKEN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setJoinRoomByToken( ::globed::schema::main::JoinRoomByTokenMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_ROOM_BY_TOKEN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::JoinRoomByTokenMessage::Builder Message::Builder::initJoinRoomByToken() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_ROOM_BY_TOKEN);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptJoinRoomByToken(
+    ::capnp::Orphan< ::globed::schema::main::JoinRoomByTokenMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_ROOM_BY_TOKEN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::JoinRoomByTokenMessage> Message::Builder::disownJoinRoomByToken() {
+  KJ_IREQUIRE((which() == Message::JOIN_ROOM_BY_TOKEN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline bool Message::Reader::isLeaveRoom() const {
   return which() == Message::LEAVE_ROOM;
 }
@@ -16996,111 +16942,569 @@ inline void Message::Builder::setLeaveRoom( ::capnp::Void value) {
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool Message::Reader::isWarpPlayer() const {
-  return which() == Message::WARP_PLAYER;
+inline bool Message::Reader::isCheckRoomState() const {
+  return which() == Message::CHECK_ROOM_STATE;
 }
-inline bool Message::Builder::isWarpPlayer() {
-  return which() == Message::WARP_PLAYER;
+inline bool Message::Builder::isCheckRoomState() {
+  return which() == Message::CHECK_ROOM_STATE;
 }
-inline bool Message::Reader::hasWarpPlayer() const {
-  if (which() != Message::WARP_PLAYER) return false;
+inline  ::capnp::Void Message::Reader::getCheckRoomState() const {
+  KJ_IREQUIRE((which() == Message::CHECK_ROOM_STATE),
+              "Must check which() before get()ing a union member.");
+  return _reader.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::capnp::Void Message::Builder::getCheckRoomState() {
+  KJ_IREQUIRE((which() == Message::CHECK_ROOM_STATE),
+              "Must check which() before get()ing a union member.");
+  return _builder.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void Message::Builder::setCheckRoomState( ::capnp::Void value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CHECK_ROOM_STATE);
+  _builder.setDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool Message::Reader::isRequestRoomPlayers() const {
+  return which() == Message::REQUEST_ROOM_PLAYERS;
+}
+inline bool Message::Builder::isRequestRoomPlayers() {
+  return which() == Message::REQUEST_ROOM_PLAYERS;
+}
+inline bool Message::Reader::hasRequestRoomPlayers() const {
+  if (which() != Message::REQUEST_ROOM_PLAYERS) return false;
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline bool Message::Builder::hasWarpPlayer() {
-  if (which() != Message::WARP_PLAYER) return false;
+inline bool Message::Builder::hasRequestRoomPlayers() {
+  if (which() != Message::REQUEST_ROOM_PLAYERS) return false;
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::globed::schema::main::WarpPlayerMessage::Reader Message::Reader::getWarpPlayer() const {
-  KJ_IREQUIRE((which() == Message::WARP_PLAYER),
+inline  ::globed::schema::main::RequestRoomPlayersMessage::Reader Message::Reader::getRequestRoomPlayers() const {
+  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_PLAYERS),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::get(_reader.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::globed::schema::main::WarpPlayerMessage::Builder Message::Builder::getWarpPlayer() {
-  KJ_IREQUIRE((which() == Message::WARP_PLAYER),
+inline  ::globed::schema::main::RequestRoomPlayersMessage::Builder Message::Builder::getRequestRoomPlayers() {
+  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_PLAYERS),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::get(_builder.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void Message::Builder::setWarpPlayer( ::globed::schema::main::WarpPlayerMessage::Reader value) {
+inline void Message::Builder::setRequestRoomPlayers( ::globed::schema::main::RequestRoomPlayersMessage::Reader value) {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARP_PLAYER);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_PLAYERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline  ::globed::schema::main::WarpPlayerMessage::Builder Message::Builder::initWarpPlayer() {
+inline  ::globed::schema::main::RequestRoomPlayersMessage::Builder Message::Builder::initRequestRoomPlayers() {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARP_PLAYER);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_PLAYERS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::init(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void Message::Builder::adoptWarpPlayer(
-    ::capnp::Orphan< ::globed::schema::main::WarpPlayerMessage>&& value) {
+inline void Message::Builder::adoptRequestRoomPlayers(
+    ::capnp::Orphan< ::globed::schema::main::RequestRoomPlayersMessage>&& value) {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARP_PLAYER);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_PLAYERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::globed::schema::main::WarpPlayerMessage> Message::Builder::disownWarpPlayer() {
-  KJ_IREQUIRE((which() == Message::WARP_PLAYER),
+inline ::capnp::Orphan< ::globed::schema::main::RequestRoomPlayersMessage> Message::Builder::disownRequestRoomPlayers() {
+  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_PLAYERS),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::disown(_builder.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline bool Message::Reader::isRoomState() const {
-  return which() == Message::ROOM_STATE;
+inline bool Message::Reader::isRequestRoomList() const {
+  return which() == Message::REQUEST_ROOM_LIST;
 }
-inline bool Message::Builder::isRoomState() {
-  return which() == Message::ROOM_STATE;
+inline bool Message::Builder::isRequestRoomList() {
+  return which() == Message::REQUEST_ROOM_LIST;
 }
-inline bool Message::Reader::hasRoomState() const {
-  if (which() != Message::ROOM_STATE) return false;
+inline bool Message::Reader::hasRequestRoomList() const {
+  if (which() != Message::REQUEST_ROOM_LIST) return false;
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline bool Message::Builder::hasRoomState() {
-  if (which() != Message::ROOM_STATE) return false;
+inline bool Message::Builder::hasRequestRoomList() {
+  if (which() != Message::REQUEST_ROOM_LIST) return false;
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::globed::schema::main::RoomStateMessage::Reader Message::Reader::getRoomState() const {
-  KJ_IREQUIRE((which() == Message::ROOM_STATE),
+inline  ::globed::schema::main::RequestRoomListMessage::Reader Message::Reader::getRequestRoomList() const {
+  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::get(_reader.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::globed::schema::main::RoomStateMessage::Builder Message::Builder::getRoomState() {
-  KJ_IREQUIRE((which() == Message::ROOM_STATE),
+inline  ::globed::schema::main::RequestRoomListMessage::Builder Message::Builder::getRequestRoomList() {
+  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::get(_builder.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void Message::Builder::setRoomState( ::globed::schema::main::RoomStateMessage::Reader value) {
+inline void Message::Builder::setRequestRoomList( ::globed::schema::main::RequestRoomListMessage::Reader value) {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_STATE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline  ::globed::schema::main::RoomStateMessage::Builder Message::Builder::initRoomState() {
+inline  ::globed::schema::main::RequestRoomListMessage::Builder Message::Builder::initRequestRoomList() {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_STATE);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_LIST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::init(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void Message::Builder::adoptRoomState(
-    ::capnp::Orphan< ::globed::schema::main::RoomStateMessage>&& value) {
+inline void Message::Builder::adoptRequestRoomList(
+    ::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage>&& value) {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_STATE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::globed::schema::main::RoomStateMessage> Message::Builder::disownRoomState() {
-  KJ_IREQUIRE((which() == Message::ROOM_STATE),
+inline ::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage> Message::Builder::disownRequestRoomList() {
+  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::disown(_builder.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAssignTeam() const {
+  return which() == Message::ASSIGN_TEAM;
+}
+inline bool Message::Builder::isAssignTeam() {
+  return which() == Message::ASSIGN_TEAM;
+}
+inline bool Message::Reader::hasAssignTeam() const {
+  if (which() != Message::ASSIGN_TEAM) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAssignTeam() {
+  if (which() != Message::ASSIGN_TEAM) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AssignTeamMessage::Reader Message::Reader::getAssignTeam() const {
+  KJ_IREQUIRE((which() == Message::ASSIGN_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AssignTeamMessage::Builder Message::Builder::getAssignTeam() {
+  KJ_IREQUIRE((which() == Message::ASSIGN_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAssignTeam( ::globed::schema::main::AssignTeamMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ASSIGN_TEAM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AssignTeamMessage::Builder Message::Builder::initAssignTeam() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ASSIGN_TEAM);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAssignTeam(
+    ::capnp::Orphan< ::globed::schema::main::AssignTeamMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ASSIGN_TEAM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AssignTeamMessage> Message::Builder::disownAssignTeam() {
+  KJ_IREQUIRE((which() == Message::ASSIGN_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isCreateTeam() const {
+  return which() == Message::CREATE_TEAM;
+}
+inline bool Message::Builder::isCreateTeam() {
+  return which() == Message::CREATE_TEAM;
+}
+inline bool Message::Reader::hasCreateTeam() const {
+  if (which() != Message::CREATE_TEAM) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasCreateTeam() {
+  if (which() != Message::CREATE_TEAM) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::CreateTeamMessage::Reader Message::Reader::getCreateTeam() const {
+  KJ_IREQUIRE((which() == Message::CREATE_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::CreateTeamMessage::Builder Message::Builder::getCreateTeam() {
+  KJ_IREQUIRE((which() == Message::CREATE_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setCreateTeam( ::globed::schema::main::CreateTeamMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREATE_TEAM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::CreateTeamMessage::Builder Message::Builder::initCreateTeam() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREATE_TEAM);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptCreateTeam(
+    ::capnp::Orphan< ::globed::schema::main::CreateTeamMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREATE_TEAM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::CreateTeamMessage> Message::Builder::disownCreateTeam() {
+  KJ_IREQUIRE((which() == Message::CREATE_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isDeleteTeam() const {
+  return which() == Message::DELETE_TEAM;
+}
+inline bool Message::Builder::isDeleteTeam() {
+  return which() == Message::DELETE_TEAM;
+}
+inline bool Message::Reader::hasDeleteTeam() const {
+  if (which() != Message::DELETE_TEAM) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasDeleteTeam() {
+  if (which() != Message::DELETE_TEAM) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::DeleteTeamMessage::Reader Message::Reader::getDeleteTeam() const {
+  KJ_IREQUIRE((which() == Message::DELETE_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::DeleteTeamMessage::Builder Message::Builder::getDeleteTeam() {
+  KJ_IREQUIRE((which() == Message::DELETE_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setDeleteTeam( ::globed::schema::main::DeleteTeamMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DELETE_TEAM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::DeleteTeamMessage::Builder Message::Builder::initDeleteTeam() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DELETE_TEAM);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptDeleteTeam(
+    ::capnp::Orphan< ::globed::schema::main::DeleteTeamMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DELETE_TEAM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::DeleteTeamMessage> Message::Builder::disownDeleteTeam() {
+  KJ_IREQUIRE((which() == Message::DELETE_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isUpdateTeam() const {
+  return which() == Message::UPDATE_TEAM;
+}
+inline bool Message::Builder::isUpdateTeam() {
+  return which() == Message::UPDATE_TEAM;
+}
+inline bool Message::Reader::hasUpdateTeam() const {
+  if (which() != Message::UPDATE_TEAM) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUpdateTeam() {
+  if (which() != Message::UPDATE_TEAM) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UpdateTeamMessage::Reader Message::Reader::getUpdateTeam() const {
+  KJ_IREQUIRE((which() == Message::UPDATE_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UpdateTeamMessage::Builder Message::Builder::getUpdateTeam() {
+  KJ_IREQUIRE((which() == Message::UPDATE_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUpdateTeam( ::globed::schema::main::UpdateTeamMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_TEAM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UpdateTeamMessage::Builder Message::Builder::initUpdateTeam() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_TEAM);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUpdateTeam(
+    ::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_TEAM);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage> Message::Builder::disownUpdateTeam() {
+  KJ_IREQUIRE((which() == Message::UPDATE_TEAM),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isGetTeamMembers() const {
+  return which() == Message::GET_TEAM_MEMBERS;
+}
+inline bool Message::Builder::isGetTeamMembers() {
+  return which() == Message::GET_TEAM_MEMBERS;
+}
+inline bool Message::Reader::hasGetTeamMembers() const {
+  if (which() != Message::GET_TEAM_MEMBERS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasGetTeamMembers() {
+  if (which() != Message::GET_TEAM_MEMBERS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::GetTeamMembersMessage::Reader Message::Reader::getGetTeamMembers() const {
+  KJ_IREQUIRE((which() == Message::GET_TEAM_MEMBERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::GetTeamMembersMessage::Builder Message::Builder::getGetTeamMembers() {
+  KJ_IREQUIRE((which() == Message::GET_TEAM_MEMBERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setGetTeamMembers( ::globed::schema::main::GetTeamMembersMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_TEAM_MEMBERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::GetTeamMembersMessage::Builder Message::Builder::initGetTeamMembers() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_TEAM_MEMBERS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptGetTeamMembers(
+    ::capnp::Orphan< ::globed::schema::main::GetTeamMembersMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_TEAM_MEMBERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::GetTeamMembersMessage> Message::Builder::disownGetTeamMembers() {
+  KJ_IREQUIRE((which() == Message::GET_TEAM_MEMBERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomOwnerAction() const {
+  return which() == Message::ROOM_OWNER_ACTION;
+}
+inline bool Message::Builder::isRoomOwnerAction() {
+  return which() == Message::ROOM_OWNER_ACTION;
+}
+inline bool Message::Reader::hasRoomOwnerAction() const {
+  if (which() != Message::ROOM_OWNER_ACTION) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomOwnerAction() {
+  if (which() != Message::ROOM_OWNER_ACTION) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomOwnerActionMessage::Reader Message::Reader::getRoomOwnerAction() const {
+  KJ_IREQUIRE((which() == Message::ROOM_OWNER_ACTION),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomOwnerActionMessage::Builder Message::Builder::getRoomOwnerAction() {
+  KJ_IREQUIRE((which() == Message::ROOM_OWNER_ACTION),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomOwnerAction( ::globed::schema::main::RoomOwnerActionMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_OWNER_ACTION);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomOwnerActionMessage::Builder Message::Builder::initRoomOwnerAction() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_OWNER_ACTION);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomOwnerAction(
+    ::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_OWNER_ACTION);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage> Message::Builder::disownRoomOwnerAction() {
+  KJ_IREQUIRE((which() == Message::ROOM_OWNER_ACTION),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isUpdateRoomSettings() const {
+  return which() == Message::UPDATE_ROOM_SETTINGS;
+}
+inline bool Message::Builder::isUpdateRoomSettings() {
+  return which() == Message::UPDATE_ROOM_SETTINGS;
+}
+inline bool Message::Reader::hasUpdateRoomSettings() const {
+  if (which() != Message::UPDATE_ROOM_SETTINGS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUpdateRoomSettings() {
+  if (which() != Message::UPDATE_ROOM_SETTINGS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UpdateRoomSettingsMessage::Reader Message::Reader::getUpdateRoomSettings() const {
+  KJ_IREQUIRE((which() == Message::UPDATE_ROOM_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder Message::Builder::getUpdateRoomSettings() {
+  KJ_IREQUIRE((which() == Message::UPDATE_ROOM_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUpdateRoomSettings( ::globed::schema::main::UpdateRoomSettingsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ROOM_SETTINGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder Message::Builder::initUpdateRoomSettings() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ROOM_SETTINGS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUpdateRoomSettings(
+    ::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ROOM_SETTINGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage> Message::Builder::disownUpdateRoomSettings() {
+  KJ_IREQUIRE((which() == Message::UPDATE_ROOM_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isInvitePlayer() const {
+  return which() == Message::INVITE_PLAYER;
+}
+inline bool Message::Builder::isInvitePlayer() {
+  return which() == Message::INVITE_PLAYER;
+}
+inline bool Message::Reader::hasInvitePlayer() const {
+  if (which() != Message::INVITE_PLAYER) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasInvitePlayer() {
+  if (which() != Message::INVITE_PLAYER) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::InvitePlayerMessage::Reader Message::Reader::getInvitePlayer() const {
+  KJ_IREQUIRE((which() == Message::INVITE_PLAYER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::InvitePlayerMessage::Builder Message::Builder::getInvitePlayer() {
+  KJ_IREQUIRE((which() == Message::INVITE_PLAYER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setInvitePlayer( ::globed::schema::main::InvitePlayerMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_PLAYER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::InvitePlayerMessage::Builder Message::Builder::initInvitePlayer() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_PLAYER);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptInvitePlayer(
+    ::capnp::Orphan< ::globed::schema::main::InvitePlayerMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_PLAYER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::InvitePlayerMessage> Message::Builder::disownInvitePlayer() {
+  KJ_IREQUIRE((which() == Message::INVITE_PLAYER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
@@ -17212,569 +17616,57 @@ inline ::capnp::Orphan< ::globed::schema::main::LeaveSessionMessage> Message::Bu
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline bool Message::Reader::isJoinFailed() const {
-  return which() == Message::JOIN_FAILED;
+inline bool Message::Reader::isRequestLevelList() const {
+  return which() == Message::REQUEST_LEVEL_LIST;
 }
-inline bool Message::Builder::isJoinFailed() {
-  return which() == Message::JOIN_FAILED;
+inline bool Message::Builder::isRequestLevelList() {
+  return which() == Message::REQUEST_LEVEL_LIST;
 }
-inline bool Message::Reader::hasJoinFailed() const {
-  if (which() != Message::JOIN_FAILED) return false;
+inline bool Message::Reader::hasRequestLevelList() const {
+  if (which() != Message::REQUEST_LEVEL_LIST) return false;
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline bool Message::Builder::hasJoinFailed() {
-  if (which() != Message::JOIN_FAILED) return false;
+inline bool Message::Builder::hasRequestLevelList() {
+  if (which() != Message::REQUEST_LEVEL_LIST) return false;
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::globed::schema::main::JoinFailedMessage::Reader Message::Reader::getJoinFailed() const {
-  KJ_IREQUIRE((which() == Message::JOIN_FAILED),
+inline  ::globed::schema::main::RequestLevelListMessage::Reader Message::Reader::getRequestLevelList() const {
+  KJ_IREQUIRE((which() == Message::REQUEST_LEVEL_LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::get(_reader.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::globed::schema::main::JoinFailedMessage::Builder Message::Builder::getJoinFailed() {
-  KJ_IREQUIRE((which() == Message::JOIN_FAILED),
+inline  ::globed::schema::main::RequestLevelListMessage::Builder Message::Builder::getRequestLevelList() {
+  KJ_IREQUIRE((which() == Message::REQUEST_LEVEL_LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::get(_builder.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void Message::Builder::setJoinFailed( ::globed::schema::main::JoinFailedMessage::Reader value) {
+inline void Message::Builder::setRequestLevelList( ::globed::schema::main::RequestLevelListMessage::Reader value) {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_FAILED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_LEVEL_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline  ::globed::schema::main::JoinFailedMessage::Builder Message::Builder::initJoinFailed() {
+inline  ::globed::schema::main::RequestLevelListMessage::Builder Message::Builder::initRequestLevelList() {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_FAILED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_LEVEL_LIST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::init(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void Message::Builder::adoptJoinFailed(
-    ::capnp::Orphan< ::globed::schema::main::JoinFailedMessage>&& value) {
+inline void Message::Builder::adoptRequestLevelList(
+    ::capnp::Orphan< ::globed::schema::main::RequestLevelListMessage>&& value) {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_FAILED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_LEVEL_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::globed::schema::main::JoinFailedMessage> Message::Builder::disownJoinFailed() {
-  KJ_IREQUIRE((which() == Message::JOIN_FAILED),
+inline ::capnp::Orphan< ::globed::schema::main::RequestLevelListMessage> Message::Builder::disownRequestLevelList() {
+  KJ_IREQUIRE((which() == Message::REQUEST_LEVEL_LIST),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isKicked() const {
-  return which() == Message::KICKED;
-}
-inline bool Message::Builder::isKicked() {
-  return which() == Message::KICKED;
-}
-inline bool Message::Reader::hasKicked() const {
-  if (which() != Message::KICKED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasKicked() {
-  if (which() != Message::KICKED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::KickedMessage::Reader Message::Reader::getKicked() const {
-  KJ_IREQUIRE((which() == Message::KICKED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::KickedMessage::Builder Message::Builder::getKicked() {
-  KJ_IREQUIRE((which() == Message::KICKED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setKicked( ::globed::schema::main::KickedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::KICKED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::KickedMessage::Builder Message::Builder::initKicked() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::KICKED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptKicked(
-    ::capnp::Orphan< ::globed::schema::main::KickedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::KICKED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::KickedMessage> Message::Builder::disownKicked() {
-  KJ_IREQUIRE((which() == Message::KICKED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isCheckRoomState() const {
-  return which() == Message::CHECK_ROOM_STATE;
-}
-inline bool Message::Builder::isCheckRoomState() {
-  return which() == Message::CHECK_ROOM_STATE;
-}
-inline  ::capnp::Void Message::Reader::getCheckRoomState() const {
-  KJ_IREQUIRE((which() == Message::CHECK_ROOM_STATE),
-              "Must check which() before get()ing a union member.");
-  return _reader.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-
-inline  ::capnp::Void Message::Builder::getCheckRoomState() {
-  KJ_IREQUIRE((which() == Message::CHECK_ROOM_STATE),
-              "Must check which() before get()ing a union member.");
-  return _builder.getDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-inline void Message::Builder::setCheckRoomState( ::capnp::Void value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CHECK_ROOM_STATE);
-  _builder.setDataField< ::capnp::Void>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool Message::Reader::isRequestPlayerCounts() const {
-  return which() == Message::REQUEST_PLAYER_COUNTS;
-}
-inline bool Message::Builder::isRequestPlayerCounts() {
-  return which() == Message::REQUEST_PLAYER_COUNTS;
-}
-inline bool Message::Reader::hasRequestPlayerCounts() const {
-  if (which() != Message::REQUEST_PLAYER_COUNTS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRequestPlayerCounts() {
-  if (which() != Message::REQUEST_PLAYER_COUNTS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RequestPlayerCountsMessage::Reader Message::Reader::getRequestPlayerCounts() const {
-  KJ_IREQUIRE((which() == Message::REQUEST_PLAYER_COUNTS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder Message::Builder::getRequestPlayerCounts() {
-  KJ_IREQUIRE((which() == Message::REQUEST_PLAYER_COUNTS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRequestPlayerCounts( ::globed::schema::main::RequestPlayerCountsMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_PLAYER_COUNTS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RequestPlayerCountsMessage::Builder Message::Builder::initRequestPlayerCounts() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_PLAYER_COUNTS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRequestPlayerCounts(
-    ::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_PLAYER_COUNTS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RequestPlayerCountsMessage> Message::Builder::disownRequestPlayerCounts() {
-  KJ_IREQUIRE((which() == Message::REQUEST_PLAYER_COUNTS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestPlayerCountsMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isPlayerCounts() const {
-  return which() == Message::PLAYER_COUNTS;
-}
-inline bool Message::Builder::isPlayerCounts() {
-  return which() == Message::PLAYER_COUNTS;
-}
-inline bool Message::Reader::hasPlayerCounts() const {
-  if (which() != Message::PLAYER_COUNTS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasPlayerCounts() {
-  if (which() != Message::PLAYER_COUNTS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::PlayerCountsMessage::Reader Message::Reader::getPlayerCounts() const {
-  KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::PlayerCountsMessage::Builder Message::Builder::getPlayerCounts() {
-  KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setPlayerCounts( ::globed::schema::main::PlayerCountsMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_COUNTS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::PlayerCountsMessage::Builder Message::Builder::initPlayerCounts() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_COUNTS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptPlayerCounts(
-    ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_COUNTS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage> Message::Builder::disownPlayerCounts() {
-  KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRoomJoinFailed() const {
-  return which() == Message::ROOM_JOIN_FAILED;
-}
-inline bool Message::Builder::isRoomJoinFailed() {
-  return which() == Message::ROOM_JOIN_FAILED;
-}
-inline bool Message::Reader::hasRoomJoinFailed() const {
-  if (which() != Message::ROOM_JOIN_FAILED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRoomJoinFailed() {
-  if (which() != Message::ROOM_JOIN_FAILED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RoomJoinFailedMessage::Reader Message::Reader::getRoomJoinFailed() const {
-  KJ_IREQUIRE((which() == Message::ROOM_JOIN_FAILED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RoomJoinFailedMessage::Builder Message::Builder::getRoomJoinFailed() {
-  KJ_IREQUIRE((which() == Message::ROOM_JOIN_FAILED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRoomJoinFailed( ::globed::schema::main::RoomJoinFailedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_JOIN_FAILED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RoomJoinFailedMessage::Builder Message::Builder::initRoomJoinFailed() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_JOIN_FAILED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRoomJoinFailed(
-    ::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_JOIN_FAILED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage> Message::Builder::disownRoomJoinFailed() {
-  KJ_IREQUIRE((which() == Message::ROOM_JOIN_FAILED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRoomCreateFailed() const {
-  return which() == Message::ROOM_CREATE_FAILED;
-}
-inline bool Message::Builder::isRoomCreateFailed() {
-  return which() == Message::ROOM_CREATE_FAILED;
-}
-inline bool Message::Reader::hasRoomCreateFailed() const {
-  if (which() != Message::ROOM_CREATE_FAILED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRoomCreateFailed() {
-  if (which() != Message::ROOM_CREATE_FAILED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RoomCreateFailedMessage::Reader Message::Reader::getRoomCreateFailed() const {
-  KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RoomCreateFailedMessage::Builder Message::Builder::getRoomCreateFailed() {
-  KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRoomCreateFailed( ::globed::schema::main::RoomCreateFailedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_CREATE_FAILED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RoomCreateFailedMessage::Builder Message::Builder::initRoomCreateFailed() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_CREATE_FAILED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRoomCreateFailed(
-    ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_CREATE_FAILED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage> Message::Builder::disownRoomCreateFailed() {
-  KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRequestRoomList() const {
-  return which() == Message::REQUEST_ROOM_LIST;
-}
-inline bool Message::Builder::isRequestRoomList() {
-  return which() == Message::REQUEST_ROOM_LIST;
-}
-inline bool Message::Reader::hasRequestRoomList() const {
-  if (which() != Message::REQUEST_ROOM_LIST) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRequestRoomList() {
-  if (which() != Message::REQUEST_ROOM_LIST) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RequestRoomListMessage::Reader Message::Reader::getRequestRoomList() const {
-  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RequestRoomListMessage::Builder Message::Builder::getRequestRoomList() {
-  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRequestRoomList( ::globed::schema::main::RequestRoomListMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RequestRoomListMessage::Builder Message::Builder::initRequestRoomList() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_LIST);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRequestRoomList(
-    ::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RequestRoomListMessage> Message::Builder::disownRequestRoomList() {
-  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomListMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRoomList() const {
-  return which() == Message::ROOM_LIST;
-}
-inline bool Message::Builder::isRoomList() {
-  return which() == Message::ROOM_LIST;
-}
-inline bool Message::Reader::hasRoomList() const {
-  if (which() != Message::ROOM_LIST) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRoomList() {
-  if (which() != Message::ROOM_LIST) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RoomListMessage::Reader Message::Reader::getRoomList() const {
-  KJ_IREQUIRE((which() == Message::ROOM_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RoomListMessage::Builder Message::Builder::getRoomList() {
-  KJ_IREQUIRE((which() == Message::ROOM_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRoomList( ::globed::schema::main::RoomListMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RoomListMessage::Builder Message::Builder::initRoomList() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_LIST);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRoomList(
-    ::capnp::Orphan< ::globed::schema::main::RoomListMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RoomListMessage> Message::Builder::disownRoomList() {
-  KJ_IREQUIRE((which() == Message::ROOM_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isBanned() const {
-  return which() == Message::BANNED;
-}
-inline bool Message::Builder::isBanned() {
-  return which() == Message::BANNED;
-}
-inline bool Message::Reader::hasBanned() const {
-  if (which() != Message::BANNED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasBanned() {
-  if (which() != Message::BANNED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::BannedMessage::Reader Message::Reader::getBanned() const {
-  KJ_IREQUIRE((which() == Message::BANNED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::BannedMessage::Builder Message::Builder::getBanned() {
-  KJ_IREQUIRE((which() == Message::BANNED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setBanned( ::globed::schema::main::BannedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::BANNED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::BannedMessage::Builder Message::Builder::initBanned() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::BANNED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptBanned(
-    ::capnp::Orphan< ::globed::schema::main::BannedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::BANNED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::BannedMessage> Message::Builder::disownBanned() {
-  KJ_IREQUIRE((which() == Message::BANNED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRoomBanned() const {
-  return which() == Message::ROOM_BANNED;
-}
-inline bool Message::Builder::isRoomBanned() {
-  return which() == Message::ROOM_BANNED;
-}
-inline bool Message::Reader::hasRoomBanned() const {
-  if (which() != Message::ROOM_BANNED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRoomBanned() {
-  if (which() != Message::ROOM_BANNED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RoomBannedMessage::Reader Message::Reader::getRoomBanned() const {
-  KJ_IREQUIRE((which() == Message::ROOM_BANNED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RoomBannedMessage::Builder Message::Builder::getRoomBanned() {
-  KJ_IREQUIRE((which() == Message::ROOM_BANNED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRoomBanned( ::globed::schema::main::RoomBannedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_BANNED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RoomBannedMessage::Builder Message::Builder::initRoomBanned() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_BANNED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRoomBanned(
-    ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_BANNED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage> Message::Builder::disownRoomBanned() {
-  KJ_IREQUIRE((which() == Message::ROOM_BANNED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::disown(_builder.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
@@ -18048,6 +17940,60 @@ inline ::capnp::Orphan< ::globed::schema::main::AdminFetchUserMessage> Message::
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool Message::Reader::isAdminFetchLogs() const {
+  return which() == Message::ADMIN_FETCH_LOGS;
+}
+inline bool Message::Builder::isAdminFetchLogs() {
+  return which() == Message::ADMIN_FETCH_LOGS;
+}
+inline bool Message::Reader::hasAdminFetchLogs() const {
+  if (which() != Message::ADMIN_FETCH_LOGS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminFetchLogs() {
+  if (which() != Message::ADMIN_FETCH_LOGS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminFetchLogsMessage::Reader Message::Reader::getAdminFetchLogs() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_LOGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminFetchLogsMessage::Builder Message::Builder::getAdminFetchLogs() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_LOGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminFetchLogs( ::globed::schema::main::AdminFetchLogsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_LOGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminFetchLogsMessage::Builder Message::Builder::initAdminFetchLogs() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_LOGS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminFetchLogs(
+    ::capnp::Orphan< ::globed::schema::main::AdminFetchLogsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_LOGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminFetchLogsMessage> Message::Builder::disownAdminFetchLogs() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_LOGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline bool Message::Reader::isAdminBan() const {
   return which() == Message::ADMIN_BAN;
 }
@@ -18264,1950 +18210,6 @@ inline ::capnp::Orphan< ::globed::schema::main::AdminRoomUnbanMessage> Message::
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline bool Message::Reader::isAdminEditRoles() const {
-  return which() == Message::ADMIN_EDIT_ROLES;
-}
-inline bool Message::Builder::isAdminEditRoles() {
-  return which() == Message::ADMIN_EDIT_ROLES;
-}
-inline bool Message::Reader::hasAdminEditRoles() const {
-  if (which() != Message::ADMIN_EDIT_ROLES) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAdminEditRoles() {
-  if (which() != Message::ADMIN_EDIT_ROLES) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AdminEditRolesMessage::Reader Message::Reader::getAdminEditRoles() const {
-  KJ_IREQUIRE((which() == Message::ADMIN_EDIT_ROLES),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AdminEditRolesMessage::Builder Message::Builder::getAdminEditRoles() {
-  KJ_IREQUIRE((which() == Message::ADMIN_EDIT_ROLES),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAdminEditRoles( ::globed::schema::main::AdminEditRolesMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_EDIT_ROLES);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AdminEditRolesMessage::Builder Message::Builder::initAdminEditRoles() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_EDIT_ROLES);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAdminEditRoles(
-    ::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_EDIT_ROLES);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage> Message::Builder::disownAdminEditRoles() {
-  KJ_IREQUIRE((which() == Message::ADMIN_EDIT_ROLES),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isAdminSetPassword() const {
-  return which() == Message::ADMIN_SET_PASSWORD;
-}
-inline bool Message::Builder::isAdminSetPassword() {
-  return which() == Message::ADMIN_SET_PASSWORD;
-}
-inline bool Message::Reader::hasAdminSetPassword() const {
-  if (which() != Message::ADMIN_SET_PASSWORD) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAdminSetPassword() {
-  if (which() != Message::ADMIN_SET_PASSWORD) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AdminSetPasswordMessage::Reader Message::Reader::getAdminSetPassword() const {
-  KJ_IREQUIRE((which() == Message::ADMIN_SET_PASSWORD),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AdminSetPasswordMessage::Builder Message::Builder::getAdminSetPassword() {
-  KJ_IREQUIRE((which() == Message::ADMIN_SET_PASSWORD),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAdminSetPassword( ::globed::schema::main::AdminSetPasswordMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_PASSWORD);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AdminSetPasswordMessage::Builder Message::Builder::initAdminSetPassword() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_PASSWORD);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAdminSetPassword(
-    ::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_PASSWORD);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage> Message::Builder::disownAdminSetPassword() {
-  KJ_IREQUIRE((which() == Message::ADMIN_SET_PASSWORD),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isAdminResult() const {
-  return which() == Message::ADMIN_RESULT;
-}
-inline bool Message::Builder::isAdminResult() {
-  return which() == Message::ADMIN_RESULT;
-}
-inline bool Message::Reader::hasAdminResult() const {
-  if (which() != Message::ADMIN_RESULT) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAdminResult() {
-  if (which() != Message::ADMIN_RESULT) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AdminResultMessage::Reader Message::Reader::getAdminResult() const {
-  KJ_IREQUIRE((which() == Message::ADMIN_RESULT),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AdminResultMessage::Builder Message::Builder::getAdminResult() {
-  KJ_IREQUIRE((which() == Message::ADMIN_RESULT),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAdminResult( ::globed::schema::main::AdminResultMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_RESULT);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AdminResultMessage::Builder Message::Builder::initAdminResult() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_RESULT);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAdminResult(
-    ::capnp::Orphan< ::globed::schema::main::AdminResultMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_RESULT);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AdminResultMessage> Message::Builder::disownAdminResult() {
-  KJ_IREQUIRE((which() == Message::ADMIN_RESULT),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isAdminFetchResponse() const {
-  return which() == Message::ADMIN_FETCH_RESPONSE;
-}
-inline bool Message::Builder::isAdminFetchResponse() {
-  return which() == Message::ADMIN_FETCH_RESPONSE;
-}
-inline bool Message::Reader::hasAdminFetchResponse() const {
-  if (which() != Message::ADMIN_FETCH_RESPONSE) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAdminFetchResponse() {
-  if (which() != Message::ADMIN_FETCH_RESPONSE) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AdminFetchResponseMessage::Reader Message::Reader::getAdminFetchResponse() const {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AdminFetchResponseMessage::Builder Message::Builder::getAdminFetchResponse() {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAdminFetchResponse( ::globed::schema::main::AdminFetchResponseMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_RESPONSE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AdminFetchResponseMessage::Builder Message::Builder::initAdminFetchResponse() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_RESPONSE);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAdminFetchResponse(
-    ::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_RESPONSE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage> Message::Builder::disownAdminFetchResponse() {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isNotice() const {
-  return which() == Message::NOTICE;
-}
-inline bool Message::Builder::isNotice() {
-  return which() == Message::NOTICE;
-}
-inline bool Message::Reader::hasNotice() const {
-  if (which() != Message::NOTICE) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasNotice() {
-  if (which() != Message::NOTICE) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::NoticeMessage::Reader Message::Reader::getNotice() const {
-  KJ_IREQUIRE((which() == Message::NOTICE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::NoticeMessage::Builder Message::Builder::getNotice() {
-  KJ_IREQUIRE((which() == Message::NOTICE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setNotice( ::globed::schema::main::NoticeMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::NoticeMessage::Builder Message::Builder::initNotice() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptNotice(
-    ::capnp::Orphan< ::globed::schema::main::NoticeMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::NoticeMessage> Message::Builder::disownNotice() {
-  KJ_IREQUIRE((which() == Message::NOTICE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isAdminUpdateUser() const {
-  return which() == Message::ADMIN_UPDATE_USER;
-}
-inline bool Message::Builder::isAdminUpdateUser() {
-  return which() == Message::ADMIN_UPDATE_USER;
-}
-inline bool Message::Reader::hasAdminUpdateUser() const {
-  if (which() != Message::ADMIN_UPDATE_USER) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAdminUpdateUser() {
-  if (which() != Message::ADMIN_UPDATE_USER) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AdminUpdateUserMessage::Reader Message::Reader::getAdminUpdateUser() const {
-  KJ_IREQUIRE((which() == Message::ADMIN_UPDATE_USER),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AdminUpdateUserMessage::Builder Message::Builder::getAdminUpdateUser() {
-  KJ_IREQUIRE((which() == Message::ADMIN_UPDATE_USER),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAdminUpdateUser( ::globed::schema::main::AdminUpdateUserMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UPDATE_USER);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AdminUpdateUserMessage::Builder Message::Builder::initAdminUpdateUser() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UPDATE_USER);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAdminUpdateUser(
-    ::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UPDATE_USER);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage> Message::Builder::disownAdminUpdateUser() {
-  KJ_IREQUIRE((which() == Message::ADMIN_UPDATE_USER),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isAdminFetchLogs() const {
-  return which() == Message::ADMIN_FETCH_LOGS;
-}
-inline bool Message::Builder::isAdminFetchLogs() {
-  return which() == Message::ADMIN_FETCH_LOGS;
-}
-inline bool Message::Reader::hasAdminFetchLogs() const {
-  if (which() != Message::ADMIN_FETCH_LOGS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAdminFetchLogs() {
-  if (which() != Message::ADMIN_FETCH_LOGS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AdminFetchLogsMessage::Reader Message::Reader::getAdminFetchLogs() const {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_LOGS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AdminFetchLogsMessage::Builder Message::Builder::getAdminFetchLogs() {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_LOGS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAdminFetchLogs( ::globed::schema::main::AdminFetchLogsMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_LOGS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AdminFetchLogsMessage::Builder Message::Builder::initAdminFetchLogs() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_LOGS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAdminFetchLogs(
-    ::capnp::Orphan< ::globed::schema::main::AdminFetchLogsMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_LOGS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AdminFetchLogsMessage> Message::Builder::disownAdminFetchLogs() {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_LOGS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchLogsMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isAdminLogsResponse() const {
-  return which() == Message::ADMIN_LOGS_RESPONSE;
-}
-inline bool Message::Builder::isAdminLogsResponse() {
-  return which() == Message::ADMIN_LOGS_RESPONSE;
-}
-inline bool Message::Reader::hasAdminLogsResponse() const {
-  if (which() != Message::ADMIN_LOGS_RESPONSE) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAdminLogsResponse() {
-  if (which() != Message::ADMIN_LOGS_RESPONSE) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AdminLogsResponseMessage::Reader Message::Reader::getAdminLogsResponse() const {
-  KJ_IREQUIRE((which() == Message::ADMIN_LOGS_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AdminLogsResponseMessage::Builder Message::Builder::getAdminLogsResponse() {
-  KJ_IREQUIRE((which() == Message::ADMIN_LOGS_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAdminLogsResponse( ::globed::schema::main::AdminLogsResponseMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_LOGS_RESPONSE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AdminLogsResponseMessage::Builder Message::Builder::initAdminLogsResponse() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_LOGS_RESPONSE);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAdminLogsResponse(
-    ::capnp::Orphan< ::globed::schema::main::AdminLogsResponseMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_LOGS_RESPONSE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AdminLogsResponseMessage> Message::Builder::disownAdminLogsResponse() {
-  KJ_IREQUIRE((which() == Message::ADMIN_LOGS_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isAssignTeam() const {
-  return which() == Message::ASSIGN_TEAM;
-}
-inline bool Message::Builder::isAssignTeam() {
-  return which() == Message::ASSIGN_TEAM;
-}
-inline bool Message::Reader::hasAssignTeam() const {
-  if (which() != Message::ASSIGN_TEAM) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAssignTeam() {
-  if (which() != Message::ASSIGN_TEAM) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AssignTeamMessage::Reader Message::Reader::getAssignTeam() const {
-  KJ_IREQUIRE((which() == Message::ASSIGN_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AssignTeamMessage::Builder Message::Builder::getAssignTeam() {
-  KJ_IREQUIRE((which() == Message::ASSIGN_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAssignTeam( ::globed::schema::main::AssignTeamMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ASSIGN_TEAM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AssignTeamMessage::Builder Message::Builder::initAssignTeam() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ASSIGN_TEAM);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAssignTeam(
-    ::capnp::Orphan< ::globed::schema::main::AssignTeamMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ASSIGN_TEAM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AssignTeamMessage> Message::Builder::disownAssignTeam() {
-  KJ_IREQUIRE((which() == Message::ASSIGN_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AssignTeamMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isCreateTeam() const {
-  return which() == Message::CREATE_TEAM;
-}
-inline bool Message::Builder::isCreateTeam() {
-  return which() == Message::CREATE_TEAM;
-}
-inline bool Message::Reader::hasCreateTeam() const {
-  if (which() != Message::CREATE_TEAM) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasCreateTeam() {
-  if (which() != Message::CREATE_TEAM) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::CreateTeamMessage::Reader Message::Reader::getCreateTeam() const {
-  KJ_IREQUIRE((which() == Message::CREATE_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::CreateTeamMessage::Builder Message::Builder::getCreateTeam() {
-  KJ_IREQUIRE((which() == Message::CREATE_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setCreateTeam( ::globed::schema::main::CreateTeamMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREATE_TEAM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::CreateTeamMessage::Builder Message::Builder::initCreateTeam() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREATE_TEAM);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptCreateTeam(
-    ::capnp::Orphan< ::globed::schema::main::CreateTeamMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREATE_TEAM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::CreateTeamMessage> Message::Builder::disownCreateTeam() {
-  KJ_IREQUIRE((which() == Message::CREATE_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreateTeamMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isDeleteTeam() const {
-  return which() == Message::DELETE_TEAM;
-}
-inline bool Message::Builder::isDeleteTeam() {
-  return which() == Message::DELETE_TEAM;
-}
-inline bool Message::Reader::hasDeleteTeam() const {
-  if (which() != Message::DELETE_TEAM) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasDeleteTeam() {
-  if (which() != Message::DELETE_TEAM) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::DeleteTeamMessage::Reader Message::Reader::getDeleteTeam() const {
-  KJ_IREQUIRE((which() == Message::DELETE_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::DeleteTeamMessage::Builder Message::Builder::getDeleteTeam() {
-  KJ_IREQUIRE((which() == Message::DELETE_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setDeleteTeam( ::globed::schema::main::DeleteTeamMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DELETE_TEAM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::DeleteTeamMessage::Builder Message::Builder::initDeleteTeam() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DELETE_TEAM);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptDeleteTeam(
-    ::capnp::Orphan< ::globed::schema::main::DeleteTeamMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DELETE_TEAM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::DeleteTeamMessage> Message::Builder::disownDeleteTeam() {
-  KJ_IREQUIRE((which() == Message::DELETE_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DeleteTeamMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isWarn() const {
-  return which() == Message::WARN;
-}
-inline bool Message::Builder::isWarn() {
-  return which() == Message::WARN;
-}
-inline bool Message::Reader::hasWarn() const {
-  if (which() != Message::WARN) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasWarn() {
-  if (which() != Message::WARN) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::WarnMessage::Reader Message::Reader::getWarn() const {
-  KJ_IREQUIRE((which() == Message::WARN),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::WarnMessage::Builder Message::Builder::getWarn() {
-  KJ_IREQUIRE((which() == Message::WARN),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setWarn( ::globed::schema::main::WarnMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARN);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::WarnMessage::Builder Message::Builder::initWarn() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARN);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptWarn(
-    ::capnp::Orphan< ::globed::schema::main::WarnMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARN);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::WarnMessage> Message::Builder::disownWarn() {
-  KJ_IREQUIRE((which() == Message::WARN),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isTeamCreationResult() const {
-  return which() == Message::TEAM_CREATION_RESULT;
-}
-inline bool Message::Builder::isTeamCreationResult() {
-  return which() == Message::TEAM_CREATION_RESULT;
-}
-inline bool Message::Reader::hasTeamCreationResult() const {
-  if (which() != Message::TEAM_CREATION_RESULT) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasTeamCreationResult() {
-  if (which() != Message::TEAM_CREATION_RESULT) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::TeamCreationResultMessage::Reader Message::Reader::getTeamCreationResult() const {
-  KJ_IREQUIRE((which() == Message::TEAM_CREATION_RESULT),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::TeamCreationResultMessage::Builder Message::Builder::getTeamCreationResult() {
-  KJ_IREQUIRE((which() == Message::TEAM_CREATION_RESULT),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setTeamCreationResult( ::globed::schema::main::TeamCreationResultMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CREATION_RESULT);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::TeamCreationResultMessage::Builder Message::Builder::initTeamCreationResult() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CREATION_RESULT);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptTeamCreationResult(
-    ::capnp::Orphan< ::globed::schema::main::TeamCreationResultMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CREATION_RESULT);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::TeamCreationResultMessage> Message::Builder::disownTeamCreationResult() {
-  KJ_IREQUIRE((which() == Message::TEAM_CREATION_RESULT),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isTeamChanged() const {
-  return which() == Message::TEAM_CHANGED;
-}
-inline bool Message::Builder::isTeamChanged() {
-  return which() == Message::TEAM_CHANGED;
-}
-inline bool Message::Reader::hasTeamChanged() const {
-  if (which() != Message::TEAM_CHANGED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasTeamChanged() {
-  if (which() != Message::TEAM_CHANGED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::TeamChangedMessage::Reader Message::Reader::getTeamChanged() const {
-  KJ_IREQUIRE((which() == Message::TEAM_CHANGED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::TeamChangedMessage::Builder Message::Builder::getTeamChanged() {
-  KJ_IREQUIRE((which() == Message::TEAM_CHANGED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setTeamChanged( ::globed::schema::main::TeamChangedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CHANGED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::TeamChangedMessage::Builder Message::Builder::initTeamChanged() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CHANGED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptTeamChanged(
-    ::capnp::Orphan< ::globed::schema::main::TeamChangedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CHANGED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::TeamChangedMessage> Message::Builder::disownTeamChanged() {
-  KJ_IREQUIRE((which() == Message::TEAM_CHANGED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isGetTeamMembers() const {
-  return which() == Message::GET_TEAM_MEMBERS;
-}
-inline bool Message::Builder::isGetTeamMembers() {
-  return which() == Message::GET_TEAM_MEMBERS;
-}
-inline bool Message::Reader::hasGetTeamMembers() const {
-  if (which() != Message::GET_TEAM_MEMBERS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasGetTeamMembers() {
-  if (which() != Message::GET_TEAM_MEMBERS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::GetTeamMembersMessage::Reader Message::Reader::getGetTeamMembers() const {
-  KJ_IREQUIRE((which() == Message::GET_TEAM_MEMBERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::GetTeamMembersMessage::Builder Message::Builder::getGetTeamMembers() {
-  KJ_IREQUIRE((which() == Message::GET_TEAM_MEMBERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setGetTeamMembers( ::globed::schema::main::GetTeamMembersMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_TEAM_MEMBERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::GetTeamMembersMessage::Builder Message::Builder::initGetTeamMembers() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_TEAM_MEMBERS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptGetTeamMembers(
-    ::capnp::Orphan< ::globed::schema::main::GetTeamMembersMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_TEAM_MEMBERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::GetTeamMembersMessage> Message::Builder::disownGetTeamMembers() {
-  KJ_IREQUIRE((which() == Message::GET_TEAM_MEMBERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::GetTeamMembersMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isTeamMembers() const {
-  return which() == Message::TEAM_MEMBERS;
-}
-inline bool Message::Builder::isTeamMembers() {
-  return which() == Message::TEAM_MEMBERS;
-}
-inline bool Message::Reader::hasTeamMembers() const {
-  if (which() != Message::TEAM_MEMBERS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasTeamMembers() {
-  if (which() != Message::TEAM_MEMBERS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::TeamMembersMessage::Reader Message::Reader::getTeamMembers() const {
-  KJ_IREQUIRE((which() == Message::TEAM_MEMBERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::TeamMembersMessage::Builder Message::Builder::getTeamMembers() {
-  KJ_IREQUIRE((which() == Message::TEAM_MEMBERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setTeamMembers( ::globed::schema::main::TeamMembersMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_MEMBERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::TeamMembersMessage::Builder Message::Builder::initTeamMembers() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_MEMBERS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptTeamMembers(
-    ::capnp::Orphan< ::globed::schema::main::TeamMembersMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_MEMBERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::TeamMembersMessage> Message::Builder::disownTeamMembers() {
-  KJ_IREQUIRE((which() == Message::TEAM_MEMBERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isUpdateTeam() const {
-  return which() == Message::UPDATE_TEAM;
-}
-inline bool Message::Builder::isUpdateTeam() {
-  return which() == Message::UPDATE_TEAM;
-}
-inline bool Message::Reader::hasUpdateTeam() const {
-  if (which() != Message::UPDATE_TEAM) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasUpdateTeam() {
-  if (which() != Message::UPDATE_TEAM) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::UpdateTeamMessage::Reader Message::Reader::getUpdateTeam() const {
-  KJ_IREQUIRE((which() == Message::UPDATE_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::UpdateTeamMessage::Builder Message::Builder::getUpdateTeam() {
-  KJ_IREQUIRE((which() == Message::UPDATE_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setUpdateTeam( ::globed::schema::main::UpdateTeamMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_TEAM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::UpdateTeamMessage::Builder Message::Builder::initUpdateTeam() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_TEAM);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptUpdateTeam(
-    ::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_TEAM);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::UpdateTeamMessage> Message::Builder::disownUpdateTeam() {
-  KJ_IREQUIRE((which() == Message::UPDATE_TEAM),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateTeamMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isTeamsUpdated() const {
-  return which() == Message::TEAMS_UPDATED;
-}
-inline bool Message::Builder::isTeamsUpdated() {
-  return which() == Message::TEAMS_UPDATED;
-}
-inline bool Message::Reader::hasTeamsUpdated() const {
-  if (which() != Message::TEAMS_UPDATED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasTeamsUpdated() {
-  if (which() != Message::TEAMS_UPDATED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::TeamsUpdatedMessage::Reader Message::Reader::getTeamsUpdated() const {
-  KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::TeamsUpdatedMessage::Builder Message::Builder::getTeamsUpdated() {
-  KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setTeamsUpdated( ::globed::schema::main::TeamsUpdatedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAMS_UPDATED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::TeamsUpdatedMessage::Builder Message::Builder::initTeamsUpdated() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAMS_UPDATED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptTeamsUpdated(
-    ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAMS_UPDATED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage> Message::Builder::disownTeamsUpdated() {
-  KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isAdminFetchMods() const {
-  return which() == Message::ADMIN_FETCH_MODS;
-}
-inline bool Message::Builder::isAdminFetchMods() {
-  return which() == Message::ADMIN_FETCH_MODS;
-}
-inline bool Message::Reader::hasAdminFetchMods() const {
-  if (which() != Message::ADMIN_FETCH_MODS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAdminFetchMods() {
-  if (which() != Message::ADMIN_FETCH_MODS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AdminFetchModsMessage::Reader Message::Reader::getAdminFetchMods() const {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AdminFetchModsMessage::Builder Message::Builder::getAdminFetchMods() {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAdminFetchMods( ::globed::schema::main::AdminFetchModsMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AdminFetchModsMessage::Builder Message::Builder::initAdminFetchMods() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAdminFetchMods(
-    ::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage> Message::Builder::disownAdminFetchMods() {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isAdminFetchModsResponse() const {
-  return which() == Message::ADMIN_FETCH_MODS_RESPONSE;
-}
-inline bool Message::Builder::isAdminFetchModsResponse() {
-  return which() == Message::ADMIN_FETCH_MODS_RESPONSE;
-}
-inline bool Message::Reader::hasAdminFetchModsResponse() const {
-  if (which() != Message::ADMIN_FETCH_MODS_RESPONSE) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasAdminFetchModsResponse() {
-  if (which() != Message::ADMIN_FETCH_MODS_RESPONSE) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::AdminFetchModsResponseMessage::Reader Message::Reader::getAdminFetchModsResponse() const {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder Message::Builder::getAdminFetchModsResponse() {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setAdminFetchModsResponse( ::globed::schema::main::AdminFetchModsResponseMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS_RESPONSE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder Message::Builder::initAdminFetchModsResponse() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS_RESPONSE);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptAdminFetchModsResponse(
-    ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS_RESPONSE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage> Message::Builder::disownAdminFetchModsResponse() {
-  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isServersChanged() const {
-  return which() == Message::SERVERS_CHANGED;
-}
-inline bool Message::Builder::isServersChanged() {
-  return which() == Message::SERVERS_CHANGED;
-}
-inline bool Message::Reader::hasServersChanged() const {
-  if (which() != Message::SERVERS_CHANGED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasServersChanged() {
-  if (which() != Message::SERVERS_CHANGED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::ServersChangedMessage::Reader Message::Reader::getServersChanged() const {
-  KJ_IREQUIRE((which() == Message::SERVERS_CHANGED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::ServersChangedMessage::Builder Message::Builder::getServersChanged() {
-  KJ_IREQUIRE((which() == Message::SERVERS_CHANGED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setServersChanged( ::globed::schema::main::ServersChangedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SERVERS_CHANGED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::ServersChangedMessage::Builder Message::Builder::initServersChanged() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SERVERS_CHANGED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptServersChanged(
-    ::capnp::Orphan< ::globed::schema::main::ServersChangedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SERVERS_CHANGED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::ServersChangedMessage> Message::Builder::disownServersChanged() {
-  KJ_IREQUIRE((which() == Message::SERVERS_CHANGED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRoomOwnerAction() const {
-  return which() == Message::ROOM_OWNER_ACTION;
-}
-inline bool Message::Builder::isRoomOwnerAction() {
-  return which() == Message::ROOM_OWNER_ACTION;
-}
-inline bool Message::Reader::hasRoomOwnerAction() const {
-  if (which() != Message::ROOM_OWNER_ACTION) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRoomOwnerAction() {
-  if (which() != Message::ROOM_OWNER_ACTION) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RoomOwnerActionMessage::Reader Message::Reader::getRoomOwnerAction() const {
-  KJ_IREQUIRE((which() == Message::ROOM_OWNER_ACTION),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RoomOwnerActionMessage::Builder Message::Builder::getRoomOwnerAction() {
-  KJ_IREQUIRE((which() == Message::ROOM_OWNER_ACTION),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRoomOwnerAction( ::globed::schema::main::RoomOwnerActionMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_OWNER_ACTION);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RoomOwnerActionMessage::Builder Message::Builder::initRoomOwnerAction() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_OWNER_ACTION);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRoomOwnerAction(
-    ::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_OWNER_ACTION);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RoomOwnerActionMessage> Message::Builder::disownRoomOwnerAction() {
-  KJ_IREQUIRE((which() == Message::ROOM_OWNER_ACTION),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomOwnerActionMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isUpdateRoomSettings() const {
-  return which() == Message::UPDATE_ROOM_SETTINGS;
-}
-inline bool Message::Builder::isUpdateRoomSettings() {
-  return which() == Message::UPDATE_ROOM_SETTINGS;
-}
-inline bool Message::Reader::hasUpdateRoomSettings() const {
-  if (which() != Message::UPDATE_ROOM_SETTINGS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasUpdateRoomSettings() {
-  if (which() != Message::UPDATE_ROOM_SETTINGS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::UpdateRoomSettingsMessage::Reader Message::Reader::getUpdateRoomSettings() const {
-  KJ_IREQUIRE((which() == Message::UPDATE_ROOM_SETTINGS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder Message::Builder::getUpdateRoomSettings() {
-  KJ_IREQUIRE((which() == Message::UPDATE_ROOM_SETTINGS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setUpdateRoomSettings( ::globed::schema::main::UpdateRoomSettingsMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ROOM_SETTINGS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::UpdateRoomSettingsMessage::Builder Message::Builder::initUpdateRoomSettings() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ROOM_SETTINGS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptUpdateRoomSettings(
-    ::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_ROOM_SETTINGS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::UpdateRoomSettingsMessage> Message::Builder::disownUpdateRoomSettings() {
-  KJ_IREQUIRE((which() == Message::UPDATE_ROOM_SETTINGS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdateRoomSettingsMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRoomSettingsUpdated() const {
-  return which() == Message::ROOM_SETTINGS_UPDATED;
-}
-inline bool Message::Builder::isRoomSettingsUpdated() {
-  return which() == Message::ROOM_SETTINGS_UPDATED;
-}
-inline bool Message::Reader::hasRoomSettingsUpdated() const {
-  if (which() != Message::ROOM_SETTINGS_UPDATED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRoomSettingsUpdated() {
-  if (which() != Message::ROOM_SETTINGS_UPDATED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Reader Message::Reader::getRoomSettingsUpdated() const {
-  KJ_IREQUIRE((which() == Message::ROOM_SETTINGS_UPDATED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder Message::Builder::getRoomSettingsUpdated() {
-  KJ_IREQUIRE((which() == Message::ROOM_SETTINGS_UPDATED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRoomSettingsUpdated( ::globed::schema::main::RoomSettingsUpdatedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_SETTINGS_UPDATED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder Message::Builder::initRoomSettingsUpdated() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_SETTINGS_UPDATED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRoomSettingsUpdated(
-    ::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_SETTINGS_UPDATED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage> Message::Builder::disownRoomSettingsUpdated() {
-  KJ_IREQUIRE((which() == Message::ROOM_SETTINGS_UPDATED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRequestLevelList() const {
-  return which() == Message::REQUEST_LEVEL_LIST;
-}
-inline bool Message::Builder::isRequestLevelList() {
-  return which() == Message::REQUEST_LEVEL_LIST;
-}
-inline bool Message::Reader::hasRequestLevelList() const {
-  if (which() != Message::REQUEST_LEVEL_LIST) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRequestLevelList() {
-  if (which() != Message::REQUEST_LEVEL_LIST) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RequestLevelListMessage::Reader Message::Reader::getRequestLevelList() const {
-  KJ_IREQUIRE((which() == Message::REQUEST_LEVEL_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RequestLevelListMessage::Builder Message::Builder::getRequestLevelList() {
-  KJ_IREQUIRE((which() == Message::REQUEST_LEVEL_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRequestLevelList( ::globed::schema::main::RequestLevelListMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_LEVEL_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RequestLevelListMessage::Builder Message::Builder::initRequestLevelList() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_LEVEL_LIST);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRequestLevelList(
-    ::capnp::Orphan< ::globed::schema::main::RequestLevelListMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_LEVEL_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RequestLevelListMessage> Message::Builder::disownRequestLevelList() {
-  KJ_IREQUIRE((which() == Message::REQUEST_LEVEL_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestLevelListMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isLevelList() const {
-  return which() == Message::LEVEL_LIST;
-}
-inline bool Message::Builder::isLevelList() {
-  return which() == Message::LEVEL_LIST;
-}
-inline bool Message::Reader::hasLevelList() const {
-  if (which() != Message::LEVEL_LIST) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasLevelList() {
-  if (which() != Message::LEVEL_LIST) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::LevelListMessage::Reader Message::Reader::getLevelList() const {
-  KJ_IREQUIRE((which() == Message::LEVEL_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::LevelListMessage::Builder Message::Builder::getLevelList() {
-  KJ_IREQUIRE((which() == Message::LEVEL_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setLevelList( ::globed::schema::main::LevelListMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::LevelListMessage::Builder Message::Builder::initLevelList() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_LIST);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptLevelList(
-    ::capnp::Orphan< ::globed::schema::main::LevelListMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::LevelListMessage> Message::Builder::disownLevelList() {
-  KJ_IREQUIRE((which() == Message::LEVEL_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRequestRoomPlayers() const {
-  return which() == Message::REQUEST_ROOM_PLAYERS;
-}
-inline bool Message::Builder::isRequestRoomPlayers() {
-  return which() == Message::REQUEST_ROOM_PLAYERS;
-}
-inline bool Message::Reader::hasRequestRoomPlayers() const {
-  if (which() != Message::REQUEST_ROOM_PLAYERS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRequestRoomPlayers() {
-  if (which() != Message::REQUEST_ROOM_PLAYERS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RequestRoomPlayersMessage::Reader Message::Reader::getRequestRoomPlayers() const {
-  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_PLAYERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RequestRoomPlayersMessage::Builder Message::Builder::getRequestRoomPlayers() {
-  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_PLAYERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRequestRoomPlayers( ::globed::schema::main::RequestRoomPlayersMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_PLAYERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RequestRoomPlayersMessage::Builder Message::Builder::initRequestRoomPlayers() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_PLAYERS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRequestRoomPlayers(
-    ::capnp::Orphan< ::globed::schema::main::RequestRoomPlayersMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_ROOM_PLAYERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RequestRoomPlayersMessage> Message::Builder::disownRequestRoomPlayers() {
-  KJ_IREQUIRE((which() == Message::REQUEST_ROOM_PLAYERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestRoomPlayersMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRoomPlayers() const {
-  return which() == Message::ROOM_PLAYERS;
-}
-inline bool Message::Builder::isRoomPlayers() {
-  return which() == Message::ROOM_PLAYERS;
-}
-inline bool Message::Reader::hasRoomPlayers() const {
-  if (which() != Message::ROOM_PLAYERS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRoomPlayers() {
-  if (which() != Message::ROOM_PLAYERS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RoomPlayersMessage::Reader Message::Reader::getRoomPlayers() const {
-  KJ_IREQUIRE((which() == Message::ROOM_PLAYERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RoomPlayersMessage::Builder Message::Builder::getRoomPlayers() {
-  KJ_IREQUIRE((which() == Message::ROOM_PLAYERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRoomPlayers( ::globed::schema::main::RoomPlayersMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_PLAYERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RoomPlayersMessage::Builder Message::Builder::initRoomPlayers() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_PLAYERS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRoomPlayers(
-    ::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_PLAYERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage> Message::Builder::disownRoomPlayers() {
-  KJ_IREQUIRE((which() == Message::ROOM_PLAYERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isFetchCredits() const {
-  return which() == Message::FETCH_CREDITS;
-}
-inline bool Message::Builder::isFetchCredits() {
-  return which() == Message::FETCH_CREDITS;
-}
-inline bool Message::Reader::hasFetchCredits() const {
-  if (which() != Message::FETCH_CREDITS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasFetchCredits() {
-  if (which() != Message::FETCH_CREDITS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::FetchCreditsMessage::Reader Message::Reader::getFetchCredits() const {
-  KJ_IREQUIRE((which() == Message::FETCH_CREDITS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::FetchCreditsMessage::Builder Message::Builder::getFetchCredits() {
-  KJ_IREQUIRE((which() == Message::FETCH_CREDITS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setFetchCredits( ::globed::schema::main::FetchCreditsMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_CREDITS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::FetchCreditsMessage::Builder Message::Builder::initFetchCredits() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_CREDITS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptFetchCredits(
-    ::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_CREDITS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage> Message::Builder::disownFetchCredits() {
-  KJ_IREQUIRE((which() == Message::FETCH_CREDITS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isCredits() const {
-  return which() == Message::CREDITS;
-}
-inline bool Message::Builder::isCredits() {
-  return which() == Message::CREDITS;
-}
-inline bool Message::Reader::hasCredits() const {
-  if (which() != Message::CREDITS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasCredits() {
-  if (which() != Message::CREDITS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::CreditsMessage::Reader Message::Reader::getCredits() const {
-  KJ_IREQUIRE((which() == Message::CREDITS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::CreditsMessage::Builder Message::Builder::getCredits() {
-  KJ_IREQUIRE((which() == Message::CREDITS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setCredits( ::globed::schema::main::CreditsMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREDITS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::CreditsMessage::Builder Message::Builder::initCredits() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREDITS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptCredits(
-    ::capnp::Orphan< ::globed::schema::main::CreditsMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREDITS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::CreditsMessage> Message::Builder::disownCredits() {
-  KJ_IREQUIRE((which() == Message::CREDITS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isJoinRoomByToken() const {
-  return which() == Message::JOIN_ROOM_BY_TOKEN;
-}
-inline bool Message::Builder::isJoinRoomByToken() {
-  return which() == Message::JOIN_ROOM_BY_TOKEN;
-}
-inline bool Message::Reader::hasJoinRoomByToken() const {
-  if (which() != Message::JOIN_ROOM_BY_TOKEN) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasJoinRoomByToken() {
-  if (which() != Message::JOIN_ROOM_BY_TOKEN) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::JoinRoomByTokenMessage::Reader Message::Reader::getJoinRoomByToken() const {
-  KJ_IREQUIRE((which() == Message::JOIN_ROOM_BY_TOKEN),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::JoinRoomByTokenMessage::Builder Message::Builder::getJoinRoomByToken() {
-  KJ_IREQUIRE((which() == Message::JOIN_ROOM_BY_TOKEN),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setJoinRoomByToken( ::globed::schema::main::JoinRoomByTokenMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_ROOM_BY_TOKEN);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::JoinRoomByTokenMessage::Builder Message::Builder::initJoinRoomByToken() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_ROOM_BY_TOKEN);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptJoinRoomByToken(
-    ::capnp::Orphan< ::globed::schema::main::JoinRoomByTokenMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_ROOM_BY_TOKEN);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::JoinRoomByTokenMessage> Message::Builder::disownJoinRoomByToken() {
-  KJ_IREQUIRE((which() == Message::JOIN_ROOM_BY_TOKEN),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinRoomByTokenMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isInvitePlayer() const {
-  return which() == Message::INVITE_PLAYER;
-}
-inline bool Message::Builder::isInvitePlayer() {
-  return which() == Message::INVITE_PLAYER;
-}
-inline bool Message::Reader::hasInvitePlayer() const {
-  if (which() != Message::INVITE_PLAYER) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasInvitePlayer() {
-  if (which() != Message::INVITE_PLAYER) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::InvitePlayerMessage::Reader Message::Reader::getInvitePlayer() const {
-  KJ_IREQUIRE((which() == Message::INVITE_PLAYER),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::InvitePlayerMessage::Builder Message::Builder::getInvitePlayer() {
-  KJ_IREQUIRE((which() == Message::INVITE_PLAYER),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setInvitePlayer( ::globed::schema::main::InvitePlayerMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_PLAYER);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::InvitePlayerMessage::Builder Message::Builder::initInvitePlayer() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_PLAYER);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptInvitePlayer(
-    ::capnp::Orphan< ::globed::schema::main::InvitePlayerMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_PLAYER);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::InvitePlayerMessage> Message::Builder::disownInvitePlayer() {
-  KJ_IREQUIRE((which() == Message::INVITE_PLAYER),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitePlayerMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isInvited() const {
-  return which() == Message::INVITED;
-}
-inline bool Message::Builder::isInvited() {
-  return which() == Message::INVITED;
-}
-inline bool Message::Reader::hasInvited() const {
-  if (which() != Message::INVITED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasInvited() {
-  if (which() != Message::INVITED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::InvitedMessage::Reader Message::Reader::getInvited() const {
-  KJ_IREQUIRE((which() == Message::INVITED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::InvitedMessage::Builder Message::Builder::getInvited() {
-  KJ_IREQUIRE((which() == Message::INVITED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setInvited( ::globed::schema::main::InvitedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::InvitedMessage::Builder Message::Builder::initInvited() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptInvited(
-    ::capnp::Orphan< ::globed::schema::main::InvitedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::InvitedMessage> Message::Builder::disownInvited() {
-  KJ_IREQUIRE((which() == Message::INVITED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isInviteTokenCreated() const {
-  return which() == Message::INVITE_TOKEN_CREATED;
-}
-inline bool Message::Builder::isInviteTokenCreated() {
-  return which() == Message::INVITE_TOKEN_CREATED;
-}
-inline bool Message::Reader::hasInviteTokenCreated() const {
-  if (which() != Message::INVITE_TOKEN_CREATED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasInviteTokenCreated() {
-  if (which() != Message::INVITE_TOKEN_CREATED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::InviteTokenCreatedMessage::Reader Message::Reader::getInviteTokenCreated() const {
-  KJ_IREQUIRE((which() == Message::INVITE_TOKEN_CREATED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::InviteTokenCreatedMessage::Builder Message::Builder::getInviteTokenCreated() {
-  KJ_IREQUIRE((which() == Message::INVITE_TOKEN_CREATED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setInviteTokenCreated( ::globed::schema::main::InviteTokenCreatedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_TOKEN_CREATED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::InviteTokenCreatedMessage::Builder Message::Builder::initInviteTokenCreated() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_TOKEN_CREATED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptInviteTokenCreated(
-    ::capnp::Orphan< ::globed::schema::main::InviteTokenCreatedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_TOKEN_CREATED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::InviteTokenCreatedMessage> Message::Builder::disownInviteTokenCreated() {
-  KJ_IREQUIRE((which() == Message::INVITE_TOKEN_CREATED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isRequestGlobalPlayerList() const {
-  return which() == Message::REQUEST_GLOBAL_PLAYER_LIST;
-}
-inline bool Message::Builder::isRequestGlobalPlayerList() {
-  return which() == Message::REQUEST_GLOBAL_PLAYER_LIST;
-}
-inline bool Message::Reader::hasRequestGlobalPlayerList() const {
-  if (which() != Message::REQUEST_GLOBAL_PLAYER_LIST) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasRequestGlobalPlayerList() {
-  if (which() != Message::REQUEST_GLOBAL_PLAYER_LIST) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Reader Message::Reader::getRequestGlobalPlayerList() const {
-  KJ_IREQUIRE((which() == Message::REQUEST_GLOBAL_PLAYER_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Builder Message::Builder::getRequestGlobalPlayerList() {
-  KJ_IREQUIRE((which() == Message::REQUEST_GLOBAL_PLAYER_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setRequestGlobalPlayerList( ::globed::schema::main::RequestGlobalPlayerListMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_GLOBAL_PLAYER_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::RequestGlobalPlayerListMessage::Builder Message::Builder::initRequestGlobalPlayerList() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_GLOBAL_PLAYER_LIST);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptRequestGlobalPlayerList(
-    ::capnp::Orphan< ::globed::schema::main::RequestGlobalPlayerListMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_GLOBAL_PLAYER_LIST);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::RequestGlobalPlayerListMessage> Message::Builder::disownRequestGlobalPlayerList() {
-  KJ_IREQUIRE((which() == Message::REQUEST_GLOBAL_PLAYER_LIST),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::RequestGlobalPlayerListMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isGlobalPlayers() const {
-  return which() == Message::GLOBAL_PLAYERS;
-}
-inline bool Message::Builder::isGlobalPlayers() {
-  return which() == Message::GLOBAL_PLAYERS;
-}
-inline bool Message::Reader::hasGlobalPlayers() const {
-  if (which() != Message::GLOBAL_PLAYERS) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasGlobalPlayers() {
-  if (which() != Message::GLOBAL_PLAYERS) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::GlobalPlayersMessage::Reader Message::Reader::getGlobalPlayers() const {
-  KJ_IREQUIRE((which() == Message::GLOBAL_PLAYERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::GlobalPlayersMessage::Builder Message::Builder::getGlobalPlayers() {
-  KJ_IREQUIRE((which() == Message::GLOBAL_PLAYERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setGlobalPlayers( ::globed::schema::main::GlobalPlayersMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GLOBAL_PLAYERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::GlobalPlayersMessage::Builder Message::Builder::initGlobalPlayers() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GLOBAL_PLAYERS);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptGlobalPlayers(
-    ::capnp::Orphan< ::globed::schema::main::GlobalPlayersMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GLOBAL_PLAYERS);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::GlobalPlayersMessage> Message::Builder::disownGlobalPlayers() {
-  KJ_IREQUIRE((which() == Message::GLOBAL_PLAYERS),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
 inline bool Message::Reader::isAdminMute() const {
   return which() == Message::ADMIN_MUTE;
 }
@@ -20316,6 +18318,276 @@ inline ::capnp::Orphan< ::globed::schema::main::AdminUnmuteMessage> Message::Bui
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool Message::Reader::isAdminEditRoles() const {
+  return which() == Message::ADMIN_EDIT_ROLES;
+}
+inline bool Message::Builder::isAdminEditRoles() {
+  return which() == Message::ADMIN_EDIT_ROLES;
+}
+inline bool Message::Reader::hasAdminEditRoles() const {
+  if (which() != Message::ADMIN_EDIT_ROLES) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminEditRoles() {
+  if (which() != Message::ADMIN_EDIT_ROLES) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminEditRolesMessage::Reader Message::Reader::getAdminEditRoles() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_EDIT_ROLES),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminEditRolesMessage::Builder Message::Builder::getAdminEditRoles() {
+  KJ_IREQUIRE((which() == Message::ADMIN_EDIT_ROLES),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminEditRoles( ::globed::schema::main::AdminEditRolesMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_EDIT_ROLES);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminEditRolesMessage::Builder Message::Builder::initAdminEditRoles() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_EDIT_ROLES);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminEditRoles(
+    ::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_EDIT_ROLES);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminEditRolesMessage> Message::Builder::disownAdminEditRoles() {
+  KJ_IREQUIRE((which() == Message::ADMIN_EDIT_ROLES),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminEditRolesMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminSetPassword() const {
+  return which() == Message::ADMIN_SET_PASSWORD;
+}
+inline bool Message::Builder::isAdminSetPassword() {
+  return which() == Message::ADMIN_SET_PASSWORD;
+}
+inline bool Message::Reader::hasAdminSetPassword() const {
+  if (which() != Message::ADMIN_SET_PASSWORD) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminSetPassword() {
+  if (which() != Message::ADMIN_SET_PASSWORD) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminSetPasswordMessage::Reader Message::Reader::getAdminSetPassword() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_SET_PASSWORD),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminSetPasswordMessage::Builder Message::Builder::getAdminSetPassword() {
+  KJ_IREQUIRE((which() == Message::ADMIN_SET_PASSWORD),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminSetPassword( ::globed::schema::main::AdminSetPasswordMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_PASSWORD);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminSetPasswordMessage::Builder Message::Builder::initAdminSetPassword() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_PASSWORD);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminSetPassword(
+    ::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_PASSWORD);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminSetPasswordMessage> Message::Builder::disownAdminSetPassword() {
+  KJ_IREQUIRE((which() == Message::ADMIN_SET_PASSWORD),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetPasswordMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminUpdateUser() const {
+  return which() == Message::ADMIN_UPDATE_USER;
+}
+inline bool Message::Builder::isAdminUpdateUser() {
+  return which() == Message::ADMIN_UPDATE_USER;
+}
+inline bool Message::Reader::hasAdminUpdateUser() const {
+  if (which() != Message::ADMIN_UPDATE_USER) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminUpdateUser() {
+  if (which() != Message::ADMIN_UPDATE_USER) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminUpdateUserMessage::Reader Message::Reader::getAdminUpdateUser() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_UPDATE_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminUpdateUserMessage::Builder Message::Builder::getAdminUpdateUser() {
+  KJ_IREQUIRE((which() == Message::ADMIN_UPDATE_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminUpdateUser( ::globed::schema::main::AdminUpdateUserMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UPDATE_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminUpdateUserMessage::Builder Message::Builder::initAdminUpdateUser() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UPDATE_USER);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminUpdateUser(
+    ::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_UPDATE_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminUpdateUserMessage> Message::Builder::disownAdminUpdateUser() {
+  KJ_IREQUIRE((which() == Message::ADMIN_UPDATE_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminUpdateUserMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminFetchMods() const {
+  return which() == Message::ADMIN_FETCH_MODS;
+}
+inline bool Message::Builder::isAdminFetchMods() {
+  return which() == Message::ADMIN_FETCH_MODS;
+}
+inline bool Message::Reader::hasAdminFetchMods() const {
+  if (which() != Message::ADMIN_FETCH_MODS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminFetchMods() {
+  if (which() != Message::ADMIN_FETCH_MODS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminFetchModsMessage::Reader Message::Reader::getAdminFetchMods() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminFetchModsMessage::Builder Message::Builder::getAdminFetchMods() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminFetchMods( ::globed::schema::main::AdminFetchModsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminFetchModsMessage::Builder Message::Builder::initAdminFetchMods() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminFetchMods(
+    ::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsMessage> Message::Builder::disownAdminFetchMods() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isFetchCredits() const {
+  return which() == Message::FETCH_CREDITS;
+}
+inline bool Message::Builder::isFetchCredits() {
+  return which() == Message::FETCH_CREDITS;
+}
+inline bool Message::Reader::hasFetchCredits() const {
+  if (which() != Message::FETCH_CREDITS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasFetchCredits() {
+  if (which() != Message::FETCH_CREDITS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::FetchCreditsMessage::Reader Message::Reader::getFetchCredits() const {
+  KJ_IREQUIRE((which() == Message::FETCH_CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::FetchCreditsMessage::Builder Message::Builder::getFetchCredits() {
+  KJ_IREQUIRE((which() == Message::FETCH_CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setFetchCredits( ::globed::schema::main::FetchCreditsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_CREDITS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::FetchCreditsMessage::Builder Message::Builder::initFetchCredits() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_CREDITS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptFetchCredits(
+    ::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_CREDITS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::FetchCreditsMessage> Message::Builder::disownFetchCredits() {
+  KJ_IREQUIRE((which() == Message::FETCH_CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchCreditsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline bool Message::Reader::isGetDiscordLinkState() const {
   return which() == Message::GET_DISCORD_LINK_STATE;
 }
@@ -20367,114 +18639,6 @@ inline ::capnp::Orphan< ::globed::schema::main::GetDiscordLinkStateMessage> Mess
   KJ_IREQUIRE((which() == Message::GET_DISCORD_LINK_STATE),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::GetDiscordLinkStateMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isDiscordLinkState() const {
-  return which() == Message::DISCORD_LINK_STATE;
-}
-inline bool Message::Builder::isDiscordLinkState() {
-  return which() == Message::DISCORD_LINK_STATE;
-}
-inline bool Message::Reader::hasDiscordLinkState() const {
-  if (which() != Message::DISCORD_LINK_STATE) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasDiscordLinkState() {
-  if (which() != Message::DISCORD_LINK_STATE) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::DiscordLinkStateMessage::Reader Message::Reader::getDiscordLinkState() const {
-  KJ_IREQUIRE((which() == Message::DISCORD_LINK_STATE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::DiscordLinkStateMessage::Builder Message::Builder::getDiscordLinkState() {
-  KJ_IREQUIRE((which() == Message::DISCORD_LINK_STATE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setDiscordLinkState( ::globed::schema::main::DiscordLinkStateMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_STATE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::DiscordLinkStateMessage::Builder Message::Builder::initDiscordLinkState() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_STATE);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptDiscordLinkState(
-    ::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_STATE);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage> Message::Builder::disownDiscordLinkState() {
-  KJ_IREQUIRE((which() == Message::DISCORD_LINK_STATE),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isDiscordLinkAttempt() const {
-  return which() == Message::DISCORD_LINK_ATTEMPT;
-}
-inline bool Message::Builder::isDiscordLinkAttempt() {
-  return which() == Message::DISCORD_LINK_ATTEMPT;
-}
-inline bool Message::Reader::hasDiscordLinkAttempt() const {
-  if (which() != Message::DISCORD_LINK_ATTEMPT) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasDiscordLinkAttempt() {
-  if (which() != Message::DISCORD_LINK_ATTEMPT) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::DiscordLinkAttemptMessage::Reader Message::Reader::getDiscordLinkAttempt() const {
-  KJ_IREQUIRE((which() == Message::DISCORD_LINK_ATTEMPT),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder Message::Builder::getDiscordLinkAttempt() {
-  KJ_IREQUIRE((which() == Message::DISCORD_LINK_ATTEMPT),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setDiscordLinkAttempt( ::globed::schema::main::DiscordLinkAttemptMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_ATTEMPT);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder Message::Builder::initDiscordLinkAttempt() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_ATTEMPT);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptDiscordLinkAttempt(
-    ::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_ATTEMPT);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage> Message::Builder::disownDiscordLinkAttempt() {
-  KJ_IREQUIRE((which() == Message::DISCORD_LINK_ATTEMPT),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
@@ -20583,60 +18747,6 @@ inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkConfirmMessage> Messa
   KJ_IREQUIRE((which() == Message::DISCORD_LINK_CONFIRM),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkConfirmMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isUserDataChanged() const {
-  return which() == Message::USER_DATA_CHANGED;
-}
-inline bool Message::Builder::isUserDataChanged() {
-  return which() == Message::USER_DATA_CHANGED;
-}
-inline bool Message::Reader::hasUserDataChanged() const {
-  if (which() != Message::USER_DATA_CHANGED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasUserDataChanged() {
-  if (which() != Message::USER_DATA_CHANGED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::UserDataChangedMessage::Reader Message::Reader::getUserDataChanged() const {
-  KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::UserDataChangedMessage::Builder Message::Builder::getUserDataChanged() {
-  KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setUserDataChanged( ::globed::schema::main::UserDataChangedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_DATA_CHANGED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::UserDataChangedMessage::Builder Message::Builder::initUserDataChanged() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_DATA_CHANGED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptUserDataChanged(
-    ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_DATA_CHANGED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage> Message::Builder::disownUserDataChanged() {
-  KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
@@ -20774,6 +18884,1950 @@ inline ::capnp::Orphan< ::globed::schema::main::SendFeaturedLevelMessage> Messag
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool Message::Reader::isFetchUser() const {
+  return which() == Message::FETCH_USER;
+}
+inline bool Message::Builder::isFetchUser() {
+  return which() == Message::FETCH_USER;
+}
+inline bool Message::Reader::hasFetchUser() const {
+  if (which() != Message::FETCH_USER) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasFetchUser() {
+  if (which() != Message::FETCH_USER) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::FetchUserMessage::Reader Message::Reader::getFetchUser() const {
+  KJ_IREQUIRE((which() == Message::FETCH_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::FetchUserMessage::Builder Message::Builder::getFetchUser() {
+  KJ_IREQUIRE((which() == Message::FETCH_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setFetchUser( ::globed::schema::main::FetchUserMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::FetchUserMessage::Builder Message::Builder::initFetchUser() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptFetchUser(
+    ::capnp::Orphan< ::globed::schema::main::FetchUserMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::FetchUserMessage> Message::Builder::disownFetchUser() {
+  KJ_IREQUIRE((which() == Message::FETCH_USER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isLoginOk() const {
+  return which() == Message::LOGIN_OK;
+}
+inline bool Message::Builder::isLoginOk() {
+  return which() == Message::LOGIN_OK;
+}
+inline bool Message::Reader::hasLoginOk() const {
+  if (which() != Message::LOGIN_OK) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasLoginOk() {
+  if (which() != Message::LOGIN_OK) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::LoginOkMessage::Reader Message::Reader::getLoginOk() const {
+  KJ_IREQUIRE((which() == Message::LOGIN_OK),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::LoginOkMessage::Builder Message::Builder::getLoginOk() {
+  KJ_IREQUIRE((which() == Message::LOGIN_OK),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setLoginOk( ::globed::schema::main::LoginOkMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_OK);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::LoginOkMessage::Builder Message::Builder::initLoginOk() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_OK);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptLoginOk(
+    ::capnp::Orphan< ::globed::schema::main::LoginOkMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_OK);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::LoginOkMessage> Message::Builder::disownLoginOk() {
+  KJ_IREQUIRE((which() == Message::LOGIN_OK),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginOkMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isLoginFailed() const {
+  return which() == Message::LOGIN_FAILED;
+}
+inline bool Message::Builder::isLoginFailed() {
+  return which() == Message::LOGIN_FAILED;
+}
+inline bool Message::Reader::hasLoginFailed() const {
+  if (which() != Message::LOGIN_FAILED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasLoginFailed() {
+  if (which() != Message::LOGIN_FAILED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::LoginFailedMessage::Reader Message::Reader::getLoginFailed() const {
+  KJ_IREQUIRE((which() == Message::LOGIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::LoginFailedMessage::Builder Message::Builder::getLoginFailed() {
+  KJ_IREQUIRE((which() == Message::LOGIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setLoginFailed( ::globed::schema::main::LoginFailedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::LoginFailedMessage::Builder Message::Builder::initLoginFailed() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_FAILED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptLoginFailed(
+    ::capnp::Orphan< ::globed::schema::main::LoginFailedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::LoginFailedMessage> Message::Builder::disownLoginFailed() {
+  KJ_IREQUIRE((which() == Message::LOGIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginFailedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isLoginRequired() const {
+  return which() == Message::LOGIN_REQUIRED;
+}
+inline bool Message::Builder::isLoginRequired() {
+  return which() == Message::LOGIN_REQUIRED;
+}
+inline bool Message::Reader::hasLoginRequired() const {
+  if (which() != Message::LOGIN_REQUIRED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasLoginRequired() {
+  if (which() != Message::LOGIN_REQUIRED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::LoginRequiredMessage::Reader Message::Reader::getLoginRequired() const {
+  KJ_IREQUIRE((which() == Message::LOGIN_REQUIRED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::LoginRequiredMessage::Builder Message::Builder::getLoginRequired() {
+  KJ_IREQUIRE((which() == Message::LOGIN_REQUIRED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setLoginRequired( ::globed::schema::main::LoginRequiredMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_REQUIRED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::LoginRequiredMessage::Builder Message::Builder::initLoginRequired() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_REQUIRED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptLoginRequired(
+    ::capnp::Orphan< ::globed::schema::main::LoginRequiredMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LOGIN_REQUIRED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::LoginRequiredMessage> Message::Builder::disownLoginRequired() {
+  KJ_IREQUIRE((which() == Message::LOGIN_REQUIRED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LoginRequiredMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isBanned() const {
+  return which() == Message::BANNED;
+}
+inline bool Message::Builder::isBanned() {
+  return which() == Message::BANNED;
+}
+inline bool Message::Reader::hasBanned() const {
+  if (which() != Message::BANNED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasBanned() {
+  if (which() != Message::BANNED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::BannedMessage::Reader Message::Reader::getBanned() const {
+  KJ_IREQUIRE((which() == Message::BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::BannedMessage::Builder Message::Builder::getBanned() {
+  KJ_IREQUIRE((which() == Message::BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setBanned( ::globed::schema::main::BannedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::BANNED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::BannedMessage::Builder Message::Builder::initBanned() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::BANNED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptBanned(
+    ::capnp::Orphan< ::globed::schema::main::BannedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::BANNED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::BannedMessage> Message::Builder::disownBanned() {
+  KJ_IREQUIRE((which() == Message::BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::BannedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isMuted() const {
+  return which() == Message::MUTED;
+}
+inline bool Message::Builder::isMuted() {
+  return which() == Message::MUTED;
+}
+inline bool Message::Reader::hasMuted() const {
+  if (which() != Message::MUTED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasMuted() {
+  if (which() != Message::MUTED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::MutedMessage::Reader Message::Reader::getMuted() const {
+  KJ_IREQUIRE((which() == Message::MUTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::MutedMessage::Builder Message::Builder::getMuted() {
+  KJ_IREQUIRE((which() == Message::MUTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setMuted( ::globed::schema::main::MutedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::MUTED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::MutedMessage::Builder Message::Builder::initMuted() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::MUTED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptMuted(
+    ::capnp::Orphan< ::globed::schema::main::MutedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::MUTED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::MutedMessage> Message::Builder::disownMuted() {
+  KJ_IREQUIRE((which() == Message::MUTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isServersChanged() const {
+  return which() == Message::SERVERS_CHANGED;
+}
+inline bool Message::Builder::isServersChanged() {
+  return which() == Message::SERVERS_CHANGED;
+}
+inline bool Message::Reader::hasServersChanged() const {
+  if (which() != Message::SERVERS_CHANGED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasServersChanged() {
+  if (which() != Message::SERVERS_CHANGED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::ServersChangedMessage::Reader Message::Reader::getServersChanged() const {
+  KJ_IREQUIRE((which() == Message::SERVERS_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::ServersChangedMessage::Builder Message::Builder::getServersChanged() {
+  KJ_IREQUIRE((which() == Message::SERVERS_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setServersChanged( ::globed::schema::main::ServersChangedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SERVERS_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::ServersChangedMessage::Builder Message::Builder::initServersChanged() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SERVERS_CHANGED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptServersChanged(
+    ::capnp::Orphan< ::globed::schema::main::ServersChangedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::SERVERS_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::ServersChangedMessage> Message::Builder::disownServersChanged() {
+  KJ_IREQUIRE((which() == Message::SERVERS_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ServersChangedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isUserDataChanged() const {
+  return which() == Message::USER_DATA_CHANGED;
+}
+inline bool Message::Builder::isUserDataChanged() {
+  return which() == Message::USER_DATA_CHANGED;
+}
+inline bool Message::Reader::hasUserDataChanged() const {
+  if (which() != Message::USER_DATA_CHANGED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUserDataChanged() {
+  if (which() != Message::USER_DATA_CHANGED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UserDataChangedMessage::Reader Message::Reader::getUserDataChanged() const {
+  KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UserDataChangedMessage::Builder Message::Builder::getUserDataChanged() {
+  KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUserDataChanged( ::globed::schema::main::UserDataChangedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_DATA_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UserDataChangedMessage::Builder Message::Builder::initUserDataChanged() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_DATA_CHANGED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUserDataChanged(
+    ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_DATA_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UserDataChangedMessage> Message::Builder::disownUserDataChanged() {
+  KJ_IREQUIRE((which() == Message::USER_DATA_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserDataChangedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomState() const {
+  return which() == Message::ROOM_STATE;
+}
+inline bool Message::Builder::isRoomState() {
+  return which() == Message::ROOM_STATE;
+}
+inline bool Message::Reader::hasRoomState() const {
+  if (which() != Message::ROOM_STATE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomState() {
+  if (which() != Message::ROOM_STATE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomStateMessage::Reader Message::Reader::getRoomState() const {
+  KJ_IREQUIRE((which() == Message::ROOM_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomStateMessage::Builder Message::Builder::getRoomState() {
+  KJ_IREQUIRE((which() == Message::ROOM_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomState( ::globed::schema::main::RoomStateMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomStateMessage::Builder Message::Builder::initRoomState() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_STATE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomState(
+    ::capnp::Orphan< ::globed::schema::main::RoomStateMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomStateMessage> Message::Builder::disownRoomState() {
+  KJ_IREQUIRE((which() == Message::ROOM_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomStateMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomPlayers() const {
+  return which() == Message::ROOM_PLAYERS;
+}
+inline bool Message::Builder::isRoomPlayers() {
+  return which() == Message::ROOM_PLAYERS;
+}
+inline bool Message::Reader::hasRoomPlayers() const {
+  if (which() != Message::ROOM_PLAYERS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomPlayers() {
+  if (which() != Message::ROOM_PLAYERS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomPlayersMessage::Reader Message::Reader::getRoomPlayers() const {
+  KJ_IREQUIRE((which() == Message::ROOM_PLAYERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomPlayersMessage::Builder Message::Builder::getRoomPlayers() {
+  KJ_IREQUIRE((which() == Message::ROOM_PLAYERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomPlayers( ::globed::schema::main::RoomPlayersMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_PLAYERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomPlayersMessage::Builder Message::Builder::initRoomPlayers() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_PLAYERS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomPlayers(
+    ::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_PLAYERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomPlayersMessage> Message::Builder::disownRoomPlayers() {
+  KJ_IREQUIRE((which() == Message::ROOM_PLAYERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomPlayersMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomJoinFailed() const {
+  return which() == Message::ROOM_JOIN_FAILED;
+}
+inline bool Message::Builder::isRoomJoinFailed() {
+  return which() == Message::ROOM_JOIN_FAILED;
+}
+inline bool Message::Reader::hasRoomJoinFailed() const {
+  if (which() != Message::ROOM_JOIN_FAILED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomJoinFailed() {
+  if (which() != Message::ROOM_JOIN_FAILED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomJoinFailedMessage::Reader Message::Reader::getRoomJoinFailed() const {
+  KJ_IREQUIRE((which() == Message::ROOM_JOIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomJoinFailedMessage::Builder Message::Builder::getRoomJoinFailed() {
+  KJ_IREQUIRE((which() == Message::ROOM_JOIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomJoinFailed( ::globed::schema::main::RoomJoinFailedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_JOIN_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomJoinFailedMessage::Builder Message::Builder::initRoomJoinFailed() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_JOIN_FAILED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomJoinFailed(
+    ::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_JOIN_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomJoinFailedMessage> Message::Builder::disownRoomJoinFailed() {
+  KJ_IREQUIRE((which() == Message::ROOM_JOIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomJoinFailedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomCreateFailed() const {
+  return which() == Message::ROOM_CREATE_FAILED;
+}
+inline bool Message::Builder::isRoomCreateFailed() {
+  return which() == Message::ROOM_CREATE_FAILED;
+}
+inline bool Message::Reader::hasRoomCreateFailed() const {
+  if (which() != Message::ROOM_CREATE_FAILED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomCreateFailed() {
+  if (which() != Message::ROOM_CREATE_FAILED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomCreateFailedMessage::Reader Message::Reader::getRoomCreateFailed() const {
+  KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomCreateFailedMessage::Builder Message::Builder::getRoomCreateFailed() {
+  KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomCreateFailed( ::globed::schema::main::RoomCreateFailedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_CREATE_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomCreateFailedMessage::Builder Message::Builder::initRoomCreateFailed() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_CREATE_FAILED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomCreateFailed(
+    ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_CREATE_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomCreateFailedMessage> Message::Builder::disownRoomCreateFailed() {
+  KJ_IREQUIRE((which() == Message::ROOM_CREATE_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomCreateFailedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomBanned() const {
+  return which() == Message::ROOM_BANNED;
+}
+inline bool Message::Builder::isRoomBanned() {
+  return which() == Message::ROOM_BANNED;
+}
+inline bool Message::Reader::hasRoomBanned() const {
+  if (which() != Message::ROOM_BANNED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomBanned() {
+  if (which() != Message::ROOM_BANNED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomBannedMessage::Reader Message::Reader::getRoomBanned() const {
+  KJ_IREQUIRE((which() == Message::ROOM_BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomBannedMessage::Builder Message::Builder::getRoomBanned() {
+  KJ_IREQUIRE((which() == Message::ROOM_BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomBanned( ::globed::schema::main::RoomBannedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_BANNED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomBannedMessage::Builder Message::Builder::initRoomBanned() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_BANNED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomBanned(
+    ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_BANNED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomBannedMessage> Message::Builder::disownRoomBanned() {
+  KJ_IREQUIRE((which() == Message::ROOM_BANNED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomBannedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomList() const {
+  return which() == Message::ROOM_LIST;
+}
+inline bool Message::Builder::isRoomList() {
+  return which() == Message::ROOM_LIST;
+}
+inline bool Message::Reader::hasRoomList() const {
+  if (which() != Message::ROOM_LIST) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomList() {
+  if (which() != Message::ROOM_LIST) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomListMessage::Reader Message::Reader::getRoomList() const {
+  KJ_IREQUIRE((which() == Message::ROOM_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomListMessage::Builder Message::Builder::getRoomList() {
+  KJ_IREQUIRE((which() == Message::ROOM_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomList( ::globed::schema::main::RoomListMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomListMessage::Builder Message::Builder::initRoomList() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_LIST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomList(
+    ::capnp::Orphan< ::globed::schema::main::RoomListMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomListMessage> Message::Builder::disownRoomList() {
+  KJ_IREQUIRE((which() == Message::ROOM_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomListMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isTeamCreationResult() const {
+  return which() == Message::TEAM_CREATION_RESULT;
+}
+inline bool Message::Builder::isTeamCreationResult() {
+  return which() == Message::TEAM_CREATION_RESULT;
+}
+inline bool Message::Reader::hasTeamCreationResult() const {
+  if (which() != Message::TEAM_CREATION_RESULT) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasTeamCreationResult() {
+  if (which() != Message::TEAM_CREATION_RESULT) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::TeamCreationResultMessage::Reader Message::Reader::getTeamCreationResult() const {
+  KJ_IREQUIRE((which() == Message::TEAM_CREATION_RESULT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::TeamCreationResultMessage::Builder Message::Builder::getTeamCreationResult() {
+  KJ_IREQUIRE((which() == Message::TEAM_CREATION_RESULT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setTeamCreationResult( ::globed::schema::main::TeamCreationResultMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CREATION_RESULT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::TeamCreationResultMessage::Builder Message::Builder::initTeamCreationResult() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CREATION_RESULT);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptTeamCreationResult(
+    ::capnp::Orphan< ::globed::schema::main::TeamCreationResultMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CREATION_RESULT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::TeamCreationResultMessage> Message::Builder::disownTeamCreationResult() {
+  KJ_IREQUIRE((which() == Message::TEAM_CREATION_RESULT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamCreationResultMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isTeamChanged() const {
+  return which() == Message::TEAM_CHANGED;
+}
+inline bool Message::Builder::isTeamChanged() {
+  return which() == Message::TEAM_CHANGED;
+}
+inline bool Message::Reader::hasTeamChanged() const {
+  if (which() != Message::TEAM_CHANGED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasTeamChanged() {
+  if (which() != Message::TEAM_CHANGED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::TeamChangedMessage::Reader Message::Reader::getTeamChanged() const {
+  KJ_IREQUIRE((which() == Message::TEAM_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::TeamChangedMessage::Builder Message::Builder::getTeamChanged() {
+  KJ_IREQUIRE((which() == Message::TEAM_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setTeamChanged( ::globed::schema::main::TeamChangedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::TeamChangedMessage::Builder Message::Builder::initTeamChanged() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CHANGED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptTeamChanged(
+    ::capnp::Orphan< ::globed::schema::main::TeamChangedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_CHANGED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::TeamChangedMessage> Message::Builder::disownTeamChanged() {
+  KJ_IREQUIRE((which() == Message::TEAM_CHANGED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamChangedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isTeamMembers() const {
+  return which() == Message::TEAM_MEMBERS;
+}
+inline bool Message::Builder::isTeamMembers() {
+  return which() == Message::TEAM_MEMBERS;
+}
+inline bool Message::Reader::hasTeamMembers() const {
+  if (which() != Message::TEAM_MEMBERS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasTeamMembers() {
+  if (which() != Message::TEAM_MEMBERS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::TeamMembersMessage::Reader Message::Reader::getTeamMembers() const {
+  KJ_IREQUIRE((which() == Message::TEAM_MEMBERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::TeamMembersMessage::Builder Message::Builder::getTeamMembers() {
+  KJ_IREQUIRE((which() == Message::TEAM_MEMBERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setTeamMembers( ::globed::schema::main::TeamMembersMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_MEMBERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::TeamMembersMessage::Builder Message::Builder::initTeamMembers() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_MEMBERS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptTeamMembers(
+    ::capnp::Orphan< ::globed::schema::main::TeamMembersMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAM_MEMBERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::TeamMembersMessage> Message::Builder::disownTeamMembers() {
+  KJ_IREQUIRE((which() == Message::TEAM_MEMBERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamMembersMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isTeamsUpdated() const {
+  return which() == Message::TEAMS_UPDATED;
+}
+inline bool Message::Builder::isTeamsUpdated() {
+  return which() == Message::TEAMS_UPDATED;
+}
+inline bool Message::Reader::hasTeamsUpdated() const {
+  if (which() != Message::TEAMS_UPDATED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasTeamsUpdated() {
+  if (which() != Message::TEAMS_UPDATED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::TeamsUpdatedMessage::Reader Message::Reader::getTeamsUpdated() const {
+  KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::TeamsUpdatedMessage::Builder Message::Builder::getTeamsUpdated() {
+  KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setTeamsUpdated( ::globed::schema::main::TeamsUpdatedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAMS_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::TeamsUpdatedMessage::Builder Message::Builder::initTeamsUpdated() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAMS_UPDATED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptTeamsUpdated(
+    ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::TEAMS_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::TeamsUpdatedMessage> Message::Builder::disownTeamsUpdated() {
+  KJ_IREQUIRE((which() == Message::TEAMS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::TeamsUpdatedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRoomSettingsUpdated() const {
+  return which() == Message::ROOM_SETTINGS_UPDATED;
+}
+inline bool Message::Builder::isRoomSettingsUpdated() {
+  return which() == Message::ROOM_SETTINGS_UPDATED;
+}
+inline bool Message::Reader::hasRoomSettingsUpdated() const {
+  if (which() != Message::ROOM_SETTINGS_UPDATED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasRoomSettingsUpdated() {
+  if (which() != Message::ROOM_SETTINGS_UPDATED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Reader Message::Reader::getRoomSettingsUpdated() const {
+  KJ_IREQUIRE((which() == Message::ROOM_SETTINGS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder Message::Builder::getRoomSettingsUpdated() {
+  KJ_IREQUIRE((which() == Message::ROOM_SETTINGS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setRoomSettingsUpdated( ::globed::schema::main::RoomSettingsUpdatedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_SETTINGS_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::RoomSettingsUpdatedMessage::Builder Message::Builder::initRoomSettingsUpdated() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_SETTINGS_UPDATED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptRoomSettingsUpdated(
+    ::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ROOM_SETTINGS_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::RoomSettingsUpdatedMessage> Message::Builder::disownRoomSettingsUpdated() {
+  KJ_IREQUIRE((which() == Message::ROOM_SETTINGS_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettingsUpdatedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isInvited() const {
+  return which() == Message::INVITED;
+}
+inline bool Message::Builder::isInvited() {
+  return which() == Message::INVITED;
+}
+inline bool Message::Reader::hasInvited() const {
+  if (which() != Message::INVITED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasInvited() {
+  if (which() != Message::INVITED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::InvitedMessage::Reader Message::Reader::getInvited() const {
+  KJ_IREQUIRE((which() == Message::INVITED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::InvitedMessage::Builder Message::Builder::getInvited() {
+  KJ_IREQUIRE((which() == Message::INVITED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setInvited( ::globed::schema::main::InvitedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::InvitedMessage::Builder Message::Builder::initInvited() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptInvited(
+    ::capnp::Orphan< ::globed::schema::main::InvitedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::InvitedMessage> Message::Builder::disownInvited() {
+  KJ_IREQUIRE((which() == Message::INVITED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InvitedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isInviteTokenCreated() const {
+  return which() == Message::INVITE_TOKEN_CREATED;
+}
+inline bool Message::Builder::isInviteTokenCreated() {
+  return which() == Message::INVITE_TOKEN_CREATED;
+}
+inline bool Message::Reader::hasInviteTokenCreated() const {
+  if (which() != Message::INVITE_TOKEN_CREATED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasInviteTokenCreated() {
+  if (which() != Message::INVITE_TOKEN_CREATED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::InviteTokenCreatedMessage::Reader Message::Reader::getInviteTokenCreated() const {
+  KJ_IREQUIRE((which() == Message::INVITE_TOKEN_CREATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::InviteTokenCreatedMessage::Builder Message::Builder::getInviteTokenCreated() {
+  KJ_IREQUIRE((which() == Message::INVITE_TOKEN_CREATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setInviteTokenCreated( ::globed::schema::main::InviteTokenCreatedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_TOKEN_CREATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::InviteTokenCreatedMessage::Builder Message::Builder::initInviteTokenCreated() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_TOKEN_CREATED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptInviteTokenCreated(
+    ::capnp::Orphan< ::globed::schema::main::InviteTokenCreatedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::INVITE_TOKEN_CREATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::InviteTokenCreatedMessage> Message::Builder::disownInviteTokenCreated() {
+  KJ_IREQUIRE((which() == Message::INVITE_TOKEN_CREATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::InviteTokenCreatedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isJoinFailed() const {
+  return which() == Message::JOIN_FAILED;
+}
+inline bool Message::Builder::isJoinFailed() {
+  return which() == Message::JOIN_FAILED;
+}
+inline bool Message::Reader::hasJoinFailed() const {
+  if (which() != Message::JOIN_FAILED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasJoinFailed() {
+  if (which() != Message::JOIN_FAILED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::JoinFailedMessage::Reader Message::Reader::getJoinFailed() const {
+  KJ_IREQUIRE((which() == Message::JOIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::JoinFailedMessage::Builder Message::Builder::getJoinFailed() {
+  KJ_IREQUIRE((which() == Message::JOIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setJoinFailed( ::globed::schema::main::JoinFailedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::JoinFailedMessage::Builder Message::Builder::initJoinFailed() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_FAILED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptJoinFailed(
+    ::capnp::Orphan< ::globed::schema::main::JoinFailedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::JOIN_FAILED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::JoinFailedMessage> Message::Builder::disownJoinFailed() {
+  KJ_IREQUIRE((which() == Message::JOIN_FAILED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::JoinFailedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isWarpPlayer() const {
+  return which() == Message::WARP_PLAYER;
+}
+inline bool Message::Builder::isWarpPlayer() {
+  return which() == Message::WARP_PLAYER;
+}
+inline bool Message::Reader::hasWarpPlayer() const {
+  if (which() != Message::WARP_PLAYER) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasWarpPlayer() {
+  if (which() != Message::WARP_PLAYER) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::WarpPlayerMessage::Reader Message::Reader::getWarpPlayer() const {
+  KJ_IREQUIRE((which() == Message::WARP_PLAYER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::WarpPlayerMessage::Builder Message::Builder::getWarpPlayer() {
+  KJ_IREQUIRE((which() == Message::WARP_PLAYER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setWarpPlayer( ::globed::schema::main::WarpPlayerMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARP_PLAYER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::WarpPlayerMessage::Builder Message::Builder::initWarpPlayer() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARP_PLAYER);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptWarpPlayer(
+    ::capnp::Orphan< ::globed::schema::main::WarpPlayerMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARP_PLAYER);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::WarpPlayerMessage> Message::Builder::disownWarpPlayer() {
+  KJ_IREQUIRE((which() == Message::WARP_PLAYER),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarpPlayerMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isPlayerCounts() const {
+  return which() == Message::PLAYER_COUNTS;
+}
+inline bool Message::Builder::isPlayerCounts() {
+  return which() == Message::PLAYER_COUNTS;
+}
+inline bool Message::Reader::hasPlayerCounts() const {
+  if (which() != Message::PLAYER_COUNTS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasPlayerCounts() {
+  if (which() != Message::PLAYER_COUNTS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::PlayerCountsMessage::Reader Message::Reader::getPlayerCounts() const {
+  KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::PlayerCountsMessage::Builder Message::Builder::getPlayerCounts() {
+  KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setPlayerCounts( ::globed::schema::main::PlayerCountsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_COUNTS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::PlayerCountsMessage::Builder Message::Builder::initPlayerCounts() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_COUNTS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptPlayerCounts(
+    ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_COUNTS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::PlayerCountsMessage> Message::Builder::disownPlayerCounts() {
+  KJ_IREQUIRE((which() == Message::PLAYER_COUNTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerCountsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isGlobalPlayers() const {
+  return which() == Message::GLOBAL_PLAYERS;
+}
+inline bool Message::Builder::isGlobalPlayers() {
+  return which() == Message::GLOBAL_PLAYERS;
+}
+inline bool Message::Reader::hasGlobalPlayers() const {
+  if (which() != Message::GLOBAL_PLAYERS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasGlobalPlayers() {
+  if (which() != Message::GLOBAL_PLAYERS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::GlobalPlayersMessage::Reader Message::Reader::getGlobalPlayers() const {
+  KJ_IREQUIRE((which() == Message::GLOBAL_PLAYERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::GlobalPlayersMessage::Builder Message::Builder::getGlobalPlayers() {
+  KJ_IREQUIRE((which() == Message::GLOBAL_PLAYERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setGlobalPlayers( ::globed::schema::main::GlobalPlayersMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GLOBAL_PLAYERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::GlobalPlayersMessage::Builder Message::Builder::initGlobalPlayers() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GLOBAL_PLAYERS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptGlobalPlayers(
+    ::capnp::Orphan< ::globed::schema::main::GlobalPlayersMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GLOBAL_PLAYERS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::GlobalPlayersMessage> Message::Builder::disownGlobalPlayers() {
+  KJ_IREQUIRE((which() == Message::GLOBAL_PLAYERS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::GlobalPlayersMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isLevelList() const {
+  return which() == Message::LEVEL_LIST;
+}
+inline bool Message::Builder::isLevelList() {
+  return which() == Message::LEVEL_LIST;
+}
+inline bool Message::Reader::hasLevelList() const {
+  if (which() != Message::LEVEL_LIST) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasLevelList() {
+  if (which() != Message::LEVEL_LIST) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::LevelListMessage::Reader Message::Reader::getLevelList() const {
+  KJ_IREQUIRE((which() == Message::LEVEL_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::LevelListMessage::Builder Message::Builder::getLevelList() {
+  KJ_IREQUIRE((which() == Message::LEVEL_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setLevelList( ::globed::schema::main::LevelListMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::LevelListMessage::Builder Message::Builder::initLevelList() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_LIST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptLevelList(
+    ::capnp::Orphan< ::globed::schema::main::LevelListMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_LIST);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::LevelListMessage> Message::Builder::disownLevelList() {
+  KJ_IREQUIRE((which() == Message::LEVEL_LIST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::LevelListMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isKicked() const {
+  return which() == Message::KICKED;
+}
+inline bool Message::Builder::isKicked() {
+  return which() == Message::KICKED;
+}
+inline bool Message::Reader::hasKicked() const {
+  if (which() != Message::KICKED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasKicked() {
+  if (which() != Message::KICKED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::KickedMessage::Reader Message::Reader::getKicked() const {
+  KJ_IREQUIRE((which() == Message::KICKED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::KickedMessage::Builder Message::Builder::getKicked() {
+  KJ_IREQUIRE((which() == Message::KICKED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setKicked( ::globed::schema::main::KickedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::KICKED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::KickedMessage::Builder Message::Builder::initKicked() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::KICKED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptKicked(
+    ::capnp::Orphan< ::globed::schema::main::KickedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::KICKED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::KickedMessage> Message::Builder::disownKicked() {
+  KJ_IREQUIRE((which() == Message::KICKED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::KickedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isNotice() const {
+  return which() == Message::NOTICE;
+}
+inline bool Message::Builder::isNotice() {
+  return which() == Message::NOTICE;
+}
+inline bool Message::Reader::hasNotice() const {
+  if (which() != Message::NOTICE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasNotice() {
+  if (which() != Message::NOTICE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::NoticeMessage::Reader Message::Reader::getNotice() const {
+  KJ_IREQUIRE((which() == Message::NOTICE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::NoticeMessage::Builder Message::Builder::getNotice() {
+  KJ_IREQUIRE((which() == Message::NOTICE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setNotice( ::globed::schema::main::NoticeMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::NoticeMessage::Builder Message::Builder::initNotice() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptNotice(
+    ::capnp::Orphan< ::globed::schema::main::NoticeMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::NoticeMessage> Message::Builder::disownNotice() {
+  KJ_IREQUIRE((which() == Message::NOTICE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isWarn() const {
+  return which() == Message::WARN;
+}
+inline bool Message::Builder::isWarn() {
+  return which() == Message::WARN;
+}
+inline bool Message::Reader::hasWarn() const {
+  if (which() != Message::WARN) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasWarn() {
+  if (which() != Message::WARN) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::WarnMessage::Reader Message::Reader::getWarn() const {
+  KJ_IREQUIRE((which() == Message::WARN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::WarnMessage::Builder Message::Builder::getWarn() {
+  KJ_IREQUIRE((which() == Message::WARN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setWarn( ::globed::schema::main::WarnMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::WarnMessage::Builder Message::Builder::initWarn() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARN);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptWarn(
+    ::capnp::Orphan< ::globed::schema::main::WarnMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::WARN);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::WarnMessage> Message::Builder::disownWarn() {
+  KJ_IREQUIRE((which() == Message::WARN),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::WarnMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminResult() const {
+  return which() == Message::ADMIN_RESULT;
+}
+inline bool Message::Builder::isAdminResult() {
+  return which() == Message::ADMIN_RESULT;
+}
+inline bool Message::Reader::hasAdminResult() const {
+  if (which() != Message::ADMIN_RESULT) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminResult() {
+  if (which() != Message::ADMIN_RESULT) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminResultMessage::Reader Message::Reader::getAdminResult() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_RESULT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminResultMessage::Builder Message::Builder::getAdminResult() {
+  KJ_IREQUIRE((which() == Message::ADMIN_RESULT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminResult( ::globed::schema::main::AdminResultMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_RESULT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminResultMessage::Builder Message::Builder::initAdminResult() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_RESULT);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminResult(
+    ::capnp::Orphan< ::globed::schema::main::AdminResultMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_RESULT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminResultMessage> Message::Builder::disownAdminResult() {
+  KJ_IREQUIRE((which() == Message::ADMIN_RESULT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminResultMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminFetchResponse() const {
+  return which() == Message::ADMIN_FETCH_RESPONSE;
+}
+inline bool Message::Builder::isAdminFetchResponse() {
+  return which() == Message::ADMIN_FETCH_RESPONSE;
+}
+inline bool Message::Reader::hasAdminFetchResponse() const {
+  if (which() != Message::ADMIN_FETCH_RESPONSE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminFetchResponse() {
+  if (which() != Message::ADMIN_FETCH_RESPONSE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminFetchResponseMessage::Reader Message::Reader::getAdminFetchResponse() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminFetchResponseMessage::Builder Message::Builder::getAdminFetchResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminFetchResponse( ::globed::schema::main::AdminFetchResponseMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminFetchResponseMessage::Builder Message::Builder::initAdminFetchResponse() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_RESPONSE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminFetchResponse(
+    ::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminFetchResponseMessage> Message::Builder::disownAdminFetchResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchResponseMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminFetchModsResponse() const {
+  return which() == Message::ADMIN_FETCH_MODS_RESPONSE;
+}
+inline bool Message::Builder::isAdminFetchModsResponse() {
+  return which() == Message::ADMIN_FETCH_MODS_RESPONSE;
+}
+inline bool Message::Reader::hasAdminFetchModsResponse() const {
+  if (which() != Message::ADMIN_FETCH_MODS_RESPONSE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminFetchModsResponse() {
+  if (which() != Message::ADMIN_FETCH_MODS_RESPONSE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminFetchModsResponseMessage::Reader Message::Reader::getAdminFetchModsResponse() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder Message::Builder::getAdminFetchModsResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminFetchModsResponse( ::globed::schema::main::AdminFetchModsResponseMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminFetchModsResponseMessage::Builder Message::Builder::initAdminFetchModsResponse() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS_RESPONSE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminFetchModsResponse(
+    ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_FETCH_MODS_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminFetchModsResponseMessage> Message::Builder::disownAdminFetchModsResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_FETCH_MODS_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminFetchModsResponseMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminLogsResponse() const {
+  return which() == Message::ADMIN_LOGS_RESPONSE;
+}
+inline bool Message::Builder::isAdminLogsResponse() {
+  return which() == Message::ADMIN_LOGS_RESPONSE;
+}
+inline bool Message::Reader::hasAdminLogsResponse() const {
+  if (which() != Message::ADMIN_LOGS_RESPONSE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminLogsResponse() {
+  if (which() != Message::ADMIN_LOGS_RESPONSE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminLogsResponseMessage::Reader Message::Reader::getAdminLogsResponse() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_LOGS_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminLogsResponseMessage::Builder Message::Builder::getAdminLogsResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_LOGS_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminLogsResponse( ::globed::schema::main::AdminLogsResponseMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_LOGS_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminLogsResponseMessage::Builder Message::Builder::initAdminLogsResponse() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_LOGS_RESPONSE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminLogsResponse(
+    ::capnp::Orphan< ::globed::schema::main::AdminLogsResponseMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_LOGS_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminLogsResponseMessage> Message::Builder::disownAdminLogsResponse() {
+  KJ_IREQUIRE((which() == Message::ADMIN_LOGS_RESPONSE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminLogsResponseMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isCredits() const {
+  return which() == Message::CREDITS;
+}
+inline bool Message::Builder::isCredits() {
+  return which() == Message::CREDITS;
+}
+inline bool Message::Reader::hasCredits() const {
+  if (which() != Message::CREDITS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasCredits() {
+  if (which() != Message::CREDITS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::CreditsMessage::Reader Message::Reader::getCredits() const {
+  KJ_IREQUIRE((which() == Message::CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::CreditsMessage::Builder Message::Builder::getCredits() {
+  KJ_IREQUIRE((which() == Message::CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setCredits( ::globed::schema::main::CreditsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREDITS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::CreditsMessage::Builder Message::Builder::initCredits() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREDITS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptCredits(
+    ::capnp::Orphan< ::globed::schema::main::CreditsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::CREDITS);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::CreditsMessage> Message::Builder::disownCredits() {
+  KJ_IREQUIRE((which() == Message::CREDITS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::CreditsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isDiscordLinkState() const {
+  return which() == Message::DISCORD_LINK_STATE;
+}
+inline bool Message::Builder::isDiscordLinkState() {
+  return which() == Message::DISCORD_LINK_STATE;
+}
+inline bool Message::Reader::hasDiscordLinkState() const {
+  if (which() != Message::DISCORD_LINK_STATE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasDiscordLinkState() {
+  if (which() != Message::DISCORD_LINK_STATE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::DiscordLinkStateMessage::Reader Message::Reader::getDiscordLinkState() const {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::DiscordLinkStateMessage::Builder Message::Builder::getDiscordLinkState() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setDiscordLinkState( ::globed::schema::main::DiscordLinkStateMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::DiscordLinkStateMessage::Builder Message::Builder::initDiscordLinkState() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_STATE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptDiscordLinkState(
+    ::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkStateMessage> Message::Builder::disownDiscordLinkState() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkStateMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isDiscordLinkAttempt() const {
+  return which() == Message::DISCORD_LINK_ATTEMPT;
+}
+inline bool Message::Builder::isDiscordLinkAttempt() {
+  return which() == Message::DISCORD_LINK_ATTEMPT;
+}
+inline bool Message::Reader::hasDiscordLinkAttempt() const {
+  if (which() != Message::DISCORD_LINK_ATTEMPT) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasDiscordLinkAttempt() {
+  if (which() != Message::DISCORD_LINK_ATTEMPT) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::DiscordLinkAttemptMessage::Reader Message::Reader::getDiscordLinkAttempt() const {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_ATTEMPT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder Message::Builder::getDiscordLinkAttempt() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_ATTEMPT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setDiscordLinkAttempt( ::globed::schema::main::DiscordLinkAttemptMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_ATTEMPT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::DiscordLinkAttemptMessage::Builder Message::Builder::initDiscordLinkAttempt() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_ATTEMPT);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptDiscordLinkAttempt(
+    ::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_LINK_ATTEMPT);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::DiscordLinkAttemptMessage> Message::Builder::disownDiscordLinkAttempt() {
+  KJ_IREQUIRE((which() == Message::DISCORD_LINK_ATTEMPT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordLinkAttemptMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline bool Message::Reader::isFeaturedLevel() const {
   return which() == Message::FEATURED_LEVEL;
 }
@@ -20882,111 +20936,57 @@ inline ::capnp::Orphan< ::globed::schema::main::FeaturedListMessage> Message::Bu
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline bool Message::Reader::isFetchUser() const {
-  return which() == Message::FETCH_USER;
+inline bool Message::Reader::isFetchUserResponse() const {
+  return which() == Message::FETCH_USER_RESPONSE;
 }
-inline bool Message::Builder::isFetchUser() {
-  return which() == Message::FETCH_USER;
+inline bool Message::Builder::isFetchUserResponse() {
+  return which() == Message::FETCH_USER_RESPONSE;
 }
-inline bool Message::Reader::hasFetchUser() const {
-  if (which() != Message::FETCH_USER) return false;
+inline bool Message::Reader::hasFetchUserResponse() const {
+  if (which() != Message::FETCH_USER_RESPONSE) return false;
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline bool Message::Builder::hasFetchUser() {
-  if (which() != Message::FETCH_USER) return false;
+inline bool Message::Builder::hasFetchUserResponse() {
+  if (which() != Message::FETCH_USER_RESPONSE) return false;
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::globed::schema::main::FetchUserMessage::Reader Message::Reader::getFetchUser() const {
-  KJ_IREQUIRE((which() == Message::FETCH_USER),
+inline  ::globed::schema::main::FetchUserResponseMessage::Reader Message::Reader::getFetchUserResponse() const {
+  KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::get(_reader.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::globed::schema::main::FetchUserMessage::Builder Message::Builder::getFetchUser() {
-  KJ_IREQUIRE((which() == Message::FETCH_USER),
+inline  ::globed::schema::main::FetchUserResponseMessage::Builder Message::Builder::getFetchUserResponse() {
+  KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::get(_builder.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void Message::Builder::setFetchUser( ::globed::schema::main::FetchUserMessage::Reader value) {
+inline void Message::Builder::setFetchUserResponse( ::globed::schema::main::FetchUserResponseMessage::Reader value) {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline  ::globed::schema::main::FetchUserMessage::Builder Message::Builder::initFetchUser() {
+inline  ::globed::schema::main::FetchUserResponseMessage::Builder Message::Builder::initFetchUserResponse() {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER_RESPONSE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::init(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void Message::Builder::adoptFetchUser(
-    ::capnp::Orphan< ::globed::schema::main::FetchUserMessage>&& value) {
+inline void Message::Builder::adoptFetchUserResponse(
+    ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage>&& value) {
   _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::FETCH_USER_RESPONSE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::globed::schema::main::FetchUserMessage> Message::Builder::disownFetchUser() {
-  KJ_IREQUIRE((which() == Message::FETCH_USER),
+inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> Message::Builder::disownFetchUserResponse() {
+  KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
               "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserMessage>::disown(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool Message::Reader::isMuted() const {
-  return which() == Message::MUTED;
-}
-inline bool Message::Builder::isMuted() {
-  return which() == Message::MUTED;
-}
-inline bool Message::Reader::hasMuted() const {
-  if (which() != Message::MUTED) return false;
-  return !_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline bool Message::Builder::hasMuted() {
-  if (which() != Message::MUTED) return false;
-  return !_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
-}
-inline  ::globed::schema::main::MutedMessage::Reader Message::Reader::getMuted() const {
-  KJ_IREQUIRE((which() == Message::MUTED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::get(_reader.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline  ::globed::schema::main::MutedMessage::Builder Message::Builder::getMuted() {
-  KJ_IREQUIRE((which() == Message::MUTED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::get(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::setMuted( ::globed::schema::main::MutedMessage::Reader value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::MUTED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
-}
-inline  ::globed::schema::main::MutedMessage::Builder Message::Builder::initMuted() {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::MUTED);
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-inline void Message::Builder::adoptMuted(
-    ::capnp::Orphan< ::globed::schema::main::MutedMessage>&& value) {
-  _builder.setDataField<Message::Which>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::MUTED);
-  ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::adopt(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::globed::schema::main::MutedMessage> Message::Builder::disownMuted() {
-  KJ_IREQUIRE((which() == Message::MUTED),
-              "Must check which() before get()ing a union member.");
-  return ::capnp::_::PointerHelpers< ::globed::schema::main::MutedMessage>::disown(_builder.getPointerField(
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
