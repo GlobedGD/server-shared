@@ -7,16 +7,13 @@ using Shared = import "shared.capnp";
 
 # Login messages
 
-struct LoginUTokenMessage {
+struct LoginMessage {
     accountId @0 :Int32;
     token @1 :Text;
     icons @2 :Shared.PlayerIconData;
-}
+    settings @6 :Shared.UserSettings;
 
-struct LoginUTokenAndJoinMessage {
-    accountId @0 :Int32;
-    token @1 :Text;
-    icons @2 :Shared.PlayerIconData;
+    # optional fields
     sessionId @3 :UInt64;
     passcode  @4 :UInt32;
     platformer @5 :Bool;
@@ -192,8 +189,7 @@ struct ChatNotPermittedMessage {
 struct Message {
     union {
         # Client messages
-        loginUToken        @0 :LoginUTokenMessage;
-        loginUTokenAndJoin @3 :LoginUTokenAndJoinMessage;
+        login              @0 :LoginMessage;
         joinSession        @4 :JoinSessionMessage;
         leaveSession       @5 :LeaveSessionMessage;
 
@@ -212,6 +208,6 @@ struct Message {
         kicked             @10 :KickedMessage;
         scriptLogs         @13 :ScriptLogsMessage;
         voiceBroadcast     @15 :VoiceBroadcastMessage;
-        chatNotPermitted   @16 :ChatNotPermittedMessage;
+        chatNotPermitted   @3 :ChatNotPermittedMessage;
     }
 }

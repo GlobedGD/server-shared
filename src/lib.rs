@@ -29,7 +29,9 @@ pub mod schema;
 mod session_id;
 pub mod token_issuer;
 mod typemap;
+mod user_settings;
 
 pub use multi_color::*;
 pub use session_id::SessionId;
 pub use typemap::TypeMap;
+pub use user_settings::UserSettings;

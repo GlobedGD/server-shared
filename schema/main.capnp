@@ -15,23 +15,17 @@ struct PlayerAccountData {
 
 # Login messages
 
-struct LoginUTokenMessage {
+struct LoginMessage {
     accountId @0 :Int32;
-    token @1 :Text;
-    icons @2 :Shared.PlayerIconData;
-    uident @3 :Data;
-}
-
-struct LoginArgonMessage {
-    accountId @0 :Int32;
-    token @1 :Text;
-    icons @2 :Shared.PlayerIconData;
-    uident @3 :Data;
-}
-
-struct LoginPlainMessage {
-    data @0 :PlayerAccountData;
     icons @1 :Shared.PlayerIconData;
+    uident @2 :Data;
+    settings @6 :Shared.UserSettings;
+
+    union {
+        utoken @3 :Text;
+        argon  @4 :Text;
+        plain  @5 :PlayerAccountData;
+    }
 }
 
 struct LoginOkMessage {
@@ -111,6 +105,10 @@ struct RequestPlayerCountsMessage {
 
 struct RequestGlobalPlayerListMessage {
     nameFilter @0 :Text;
+}
+
+struct UpdateUserSettingsMessage {
+    settings @0 :Shared.UserSettings;
 }
 
 # Room management messages
@@ -584,13 +582,12 @@ struct Message {
     union {
         ### Client messages
 
-        loginUToken                 @0 :LoginUTokenMessage;
-        loginArgon                  @1 :LoginArgonMessage;
-        loginPlain                  @2 :LoginPlainMessage;
+        login                       @0 :LoginMessage;
 
         updateOwnData               @6 :UpdateOwnDataMessage;
         requestPlayerCounts         @17 :RequestPlayerCountsMessage;
         requestGlobalPlayerList     @68 :RequestGlobalPlayerListMessage;
+        updateUserSettings          @1 :UpdateUserSettingsMessage;
 
         createRoom                  @7 :CreateRoomMessage;
         joinRoom                    @8 :JoinRoomMessage;
@@ -647,7 +644,7 @@ struct Message {
         loginFailed                 @4 :LoginFailedMessage;
         loginRequired               @5 :LoginRequiredMessage;
         banned                      @23 :BannedMessage;
-        muted                       @85 :MutedMessage;
+        muted                       @84 :MutedMessage;
         serversChanged              @54 :ServersChangedMessage;
         userDataChanged             @77 :UserDataChangedMessage;
 
@@ -686,6 +683,6 @@ struct Message {
         featuredLevel               @81 :FeaturedLevelMessage;
         featuredList                @82 :FeaturedListMessage;
 
-		fetchUserResponse           @84 :FetchUserResponseMessage;
+		fetchUserResponse           @2 :FetchUserResponseMessage;
     }
 }
