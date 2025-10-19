@@ -10,8 +10,9 @@ struct LoginSrvMessage {
 }
 
 struct ServerRole {
-    id       @0 :UInt8;
-    stringId @1 :Text;
+    id          @0 :UInt8;
+    stringId    @1 :Text;
+    canModerate @2 :Bool;
 }
 
 struct LoginOkMessage {
