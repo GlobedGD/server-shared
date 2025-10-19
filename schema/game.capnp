@@ -162,6 +162,10 @@ struct VoiceDataMessage {
     frames @0 :List(Data);
 }
 
+struct UpdateUserSettingsMessage {
+    settings @0 :Shared.UserSettings;
+}
+
 enum KickReason {
     custom @0;
     duplicateLogin @1;
@@ -195,6 +199,7 @@ struct Message {
 
         playerData         @3 :PlayerDataMessage;
         updateIcons        @4 :UpdateIconsMessage;
+        updateUserSettings @16 :UpdateUserSettingsMessage;
         sendLevelScript    @5 :SendLevelScriptMessage;
         voiceData          @6 :VoiceDataMessage;
 

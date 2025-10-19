@@ -51,6 +51,7 @@ CAPNP_DECLARE_SCHEMA(ee95a98b84cdb612);
 CAPNP_DECLARE_SCHEMA(a5e1158db5d33982);
 CAPNP_DECLARE_SCHEMA(a66df788476d46df);
 CAPNP_DECLARE_SCHEMA(931b0abb37c2eb2e);
+CAPNP_DECLARE_SCHEMA(a0a3bbde6d866351);
 CAPNP_DECLARE_SCHEMA(c8a95e9766c5920c);
 enum class KickReason_c8a95e9766c5920c: uint16_t {
   CUSTOM,
@@ -382,6 +383,21 @@ struct VoiceDataMessage {
   };
 };
 
+struct UpdateUserSettingsMessage {
+  UpdateUserSettingsMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(a0a3bbde6d866351, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 typedef ::capnp::schemas::KickReason_c8a95e9766c5920c KickReason;
 
 struct KickedMessage {
@@ -467,6 +483,7 @@ struct Message {
     SCRIPT_LOGS,
     VOICE_BROADCAST,
     CHAT_NOT_PERMITTED,
+    UPDATE_USER_SETTINGS,
   };
 
   struct _capnpPrivate {
@@ -2387,6 +2404,88 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class UpdateUserSettingsMessage::Reader {
+public:
+  typedef UpdateUserSettingsMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasSettings() const;
+  inline  ::globed::schema::shared::UserSettings::Reader getSettings() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class UpdateUserSettingsMessage::Builder {
+public:
+  typedef UpdateUserSettingsMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasSettings();
+  inline  ::globed::schema::shared::UserSettings::Builder getSettings();
+  inline void setSettings( ::globed::schema::shared::UserSettings::Reader value);
+  inline  ::globed::schema::shared::UserSettings::Builder initSettings();
+  inline void adoptSettings(::capnp::Orphan< ::globed::schema::shared::UserSettings>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::UserSettings> disownSettings();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class UpdateUserSettingsMessage::Pipeline {
+public:
+  typedef UpdateUserSettingsMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::shared::UserSettings::Pipeline getSettings();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class KickedMessage::Reader {
 public:
   typedef KickedMessage Reads;
@@ -2800,6 +2899,10 @@ public:
   inline bool hasChatNotPermitted() const;
   inline  ::globed::schema::game::ChatNotPermittedMessage::Reader getChatNotPermitted() const;
 
+  inline bool isUpdateUserSettings() const;
+  inline bool hasUpdateUserSettings() const;
+  inline  ::globed::schema::game::UpdateUserSettingsMessage::Reader getUpdateUserSettings() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2956,6 +3059,14 @@ public:
   inline  ::globed::schema::game::ChatNotPermittedMessage::Builder initChatNotPermitted();
   inline void adoptChatNotPermitted(::capnp::Orphan< ::globed::schema::game::ChatNotPermittedMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::ChatNotPermittedMessage> disownChatNotPermitted();
+
+  inline bool isUpdateUserSettings();
+  inline bool hasUpdateUserSettings();
+  inline  ::globed::schema::game::UpdateUserSettingsMessage::Builder getUpdateUserSettings();
+  inline void setUpdateUserSettings( ::globed::schema::game::UpdateUserSettingsMessage::Reader value);
+  inline  ::globed::schema::game::UpdateUserSettingsMessage::Builder initUpdateUserSettings();
+  inline void adoptUpdateUserSettings(::capnp::Orphan< ::globed::schema::game::UpdateUserSettingsMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::UpdateUserSettingsMessage> disownUpdateUserSettings();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4502,6 +4613,45 @@ inline ::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>> Voi
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline bool UpdateUserSettingsMessage::Reader::hasSettings() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool UpdateUserSettingsMessage::Builder::hasSettings() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::UserSettings::Reader UpdateUserSettingsMessage::Reader::getSettings() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::UserSettings::Builder UpdateUserSettingsMessage::Builder::getSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::UserSettings::Pipeline UpdateUserSettingsMessage::Pipeline::getSettings() {
+  return  ::globed::schema::shared::UserSettings::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void UpdateUserSettingsMessage::Builder::setSettings( ::globed::schema::shared::UserSettings::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::UserSettings::Builder UpdateUserSettingsMessage::Builder::initSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void UpdateUserSettingsMessage::Builder::adoptSettings(
+    ::capnp::Orphan< ::globed::schema::shared::UserSettings>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::UserSettings> UpdateUserSettingsMessage::Builder::disownSettings() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::UserSettings>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline  ::globed::schema::game::KickReason KickedMessage::Reader::getReason() const {
   return _reader.getDataField< ::globed::schema::game::KickReason>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -5524,6 +5674,60 @@ inline ::capnp::Orphan< ::globed::schema::game::ChatNotPermittedMessage> Message
   KJ_IREQUIRE((which() == Message::CHAT_NOT_PERMITTED),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::ChatNotPermittedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isUpdateUserSettings() const {
+  return which() == Message::UPDATE_USER_SETTINGS;
+}
+inline bool Message::Builder::isUpdateUserSettings() {
+  return which() == Message::UPDATE_USER_SETTINGS;
+}
+inline bool Message::Reader::hasUpdateUserSettings() const {
+  if (which() != Message::UPDATE_USER_SETTINGS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUpdateUserSettings() {
+  if (which() != Message::UPDATE_USER_SETTINGS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::UpdateUserSettingsMessage::Reader Message::Reader::getUpdateUserSettings() const {
+  KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateUserSettingsMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::UpdateUserSettingsMessage::Builder Message::Builder::getUpdateUserSettings() {
+  KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateUserSettingsMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUpdateUserSettings( ::globed::schema::game::UpdateUserSettingsMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_USER_SETTINGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateUserSettingsMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::UpdateUserSettingsMessage::Builder Message::Builder::initUpdateUserSettings() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_USER_SETTINGS);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateUserSettingsMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUpdateUserSettings(
+    ::capnp::Orphan< ::globed::schema::game::UpdateUserSettingsMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_USER_SETTINGS);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateUserSettingsMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::UpdateUserSettingsMessage> Message::Builder::disownUpdateUserSettings() {
+  KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateUserSettingsMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
