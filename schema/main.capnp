@@ -230,6 +230,7 @@ struct RoomStateMessage {
     settings @4 :RoomSettings;
     teams @5 :List(UInt32);
     passcode @6 :UInt32;
+    playerCount @7 :UInt32;
 }
 
 struct RoomPlayersMessage {

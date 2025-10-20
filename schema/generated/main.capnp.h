@@ -4625,6 +4625,8 @@ public:
 
   inline  ::uint32_t getPasscode() const;
 
+  inline  ::uint32_t getPlayerCount() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -4690,6 +4692,9 @@ public:
 
   inline  ::uint32_t getPasscode();
   inline void setPasscode( ::uint32_t value);
+
+  inline  ::uint32_t getPlayerCount();
+  inline void setPlayerCount( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -13264,6 +13269,20 @@ inline  ::uint32_t RoomStateMessage::Builder::getPasscode() {
 inline void RoomStateMessage::Builder::setPasscode( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t RoomStateMessage::Reader::getPlayerCount() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t RoomStateMessage::Builder::getPlayerCount() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void RoomStateMessage::Builder::setPlayerCount( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool RoomPlayersMessage::Reader::hasPlayers() const {
