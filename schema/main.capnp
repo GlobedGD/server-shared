@@ -529,6 +529,12 @@ struct AdminLogsResponseMessage {
     accounts @1 :List(PlayerAccountData);
 }
 
+struct AdminPunishmentReasonsMessage {
+    ban @0 :List(Text);
+    mute @1 :List(Text);
+    roomBan @2 :List(Text);
+}
+
 struct AdminBanMessage {
     accountId @0 :Int32;
     reason @1 :Text;
@@ -585,6 +591,10 @@ struct AdminSetWhitelistedMessage {
     whitelisted @1 :Bool;
 }
 
+struct AdminCloseRoomMessage {
+    roomId @0 :UInt32;
+}
+
 struct AdminResultMessage {
     success @0 :Bool;
     error @1 :Text;
@@ -638,6 +648,7 @@ struct Message {
         adminUpdateUser             @37 :AdminUpdateUserMessage;
         adminFetchMods              @38 :AdminFetchModsMessage;
         adminSetWhitelisted         @85 :AdminSetWhitelistedMessage;
+        adminCloseRoom              @87 :AdminCloseRoomMessage;
 
         fetchCredits                @39 :FetchCreditsMessage;
         getDiscordLinkState         @40 :GetDiscordLinkStateMessage;
@@ -690,6 +701,7 @@ struct Message {
         adminFetchResponse          @76 :AdminFetchResponseMessage;
         adminFetchModsResponse      @77 :AdminFetchModsResponseMessage;
         adminLogsResponse           @78 :AdminLogsResponseMessage;
+        adminPunishmentReasons      @88 :AdminPunishmentReasonsMessage;
 
         credits                     @79 :CreditsMessage;
         discordLinkState            @80 :DiscordLinkStateMessage;
