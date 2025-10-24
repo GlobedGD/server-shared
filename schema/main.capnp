@@ -350,6 +350,12 @@ struct NoticeMessage {
     senderName @1 :Text;
     message @2 :Text;
     canReply @3 :Bool = false;
+    isReply @4 :Bool = false;
+}
+
+struct NoticeReplyMessage {
+    receiverId @0 :Int32;
+    message @1 :Text;
 }
 
 struct WarnMessage {
@@ -640,6 +646,7 @@ struct Message {
         getFeaturedLevel            @43 :Void;
         getFeaturedList             @44 :GetFeaturedListMessage;
         sendFeaturedLevel           @45 :SendFeaturedLevelMessage;
+        noticeReply                 @86 :NoticeReplyMessage;
 
         fetchUser                   @46 :FetchUserMessage;
 

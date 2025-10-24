@@ -121,6 +121,7 @@ enum class KickReason_dd60476e8cb3a480: uint16_t {
 CAPNP_DECLARE_ENUM(KickReason, dd60476e8cb3a480);
 CAPNP_DECLARE_SCHEMA(ad6874573952b8c9);
 CAPNP_DECLARE_SCHEMA(aae75eac1c000a68);
+CAPNP_DECLARE_SCHEMA(9e8e4664dfddaa08);
 CAPNP_DECLARE_SCHEMA(8c0515d61d5278e4);
 CAPNP_DECLARE_SCHEMA(97cffa48ab55b2fe);
 CAPNP_DECLARE_SCHEMA(b7ae5d2b46a5be12);
@@ -982,6 +983,21 @@ struct NoticeMessage {
   };
 };
 
+struct NoticeReplyMessage {
+  NoticeReplyMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(9e8e4664dfddaa08, 1, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct WarnMessage {
   WarnMessage() = delete;
 
@@ -1675,6 +1691,7 @@ struct Message {
     FEATURED_LIST,
     FETCH_USER_RESPONSE,
     ADMIN_SET_WHITELISTED,
+    NOTICE_REPLY,
   };
 
   struct _capnpPrivate {
@@ -6335,6 +6352,8 @@ public:
 
   inline bool getCanReply() const;
 
+  inline bool getIsReply() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -6383,6 +6402,9 @@ public:
   inline bool getCanReply();
   inline void setCanReply(bool value);
 
+  inline bool getIsReply();
+  inline void setIsReply(bool value);
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -6396,6 +6418,92 @@ private:
 class NoticeMessage::Pipeline {
 public:
   typedef NoticeMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class NoticeReplyMessage::Reader {
+public:
+  typedef NoticeReplyMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getReceiverId() const;
+
+  inline bool hasMessage() const;
+  inline  ::capnp::Text::Reader getMessage() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class NoticeReplyMessage::Builder {
+public:
+  typedef NoticeReplyMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getReceiverId();
+  inline void setReceiverId( ::int32_t value);
+
+  inline bool hasMessage();
+  inline  ::capnp::Text::Builder getMessage();
+  inline void setMessage( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initMessage(unsigned int size);
+  inline void adoptMessage(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownMessage();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class NoticeReplyMessage::Pipeline {
+public:
+  typedef NoticeReplyMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -10381,6 +10489,10 @@ public:
   inline bool hasAdminSetWhitelisted() const;
   inline  ::globed::schema::main::AdminSetWhitelistedMessage::Reader getAdminSetWhitelisted() const;
 
+  inline bool isNoticeReply() const;
+  inline bool hasNoticeReply() const;
+  inline  ::globed::schema::main::NoticeReplyMessage::Reader getNoticeReply() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -11085,6 +11197,14 @@ public:
   inline  ::globed::schema::main::AdminSetWhitelistedMessage::Builder initAdminSetWhitelisted();
   inline void adoptAdminSetWhitelisted(::capnp::Orphan< ::globed::schema::main::AdminSetWhitelistedMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::AdminSetWhitelistedMessage> disownAdminSetWhitelisted();
+
+  inline bool isNoticeReply();
+  inline bool hasNoticeReply();
+  inline  ::globed::schema::main::NoticeReplyMessage::Builder getNoticeReply();
+  inline void setNoticeReply( ::globed::schema::main::NoticeReplyMessage::Reader value);
+  inline  ::globed::schema::main::NoticeReplyMessage::Builder initNoticeReply();
+  inline void adoptNoticeReply(::capnp::Orphan< ::globed::schema::main::NoticeReplyMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::NoticeReplyMessage> disownNoticeReply();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -14207,6 +14327,68 @@ inline bool NoticeMessage::Builder::getCanReply() {
 inline void NoticeMessage::Builder::setCanReply(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool NoticeMessage::Reader::getIsReply() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+}
+
+inline bool NoticeMessage::Builder::getIsReply() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS);
+}
+inline void NoticeMessage::Builder::setIsReply(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<33>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t NoticeReplyMessage::Reader::getReceiverId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t NoticeReplyMessage::Builder::getReceiverId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void NoticeReplyMessage::Builder::setReceiverId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool NoticeReplyMessage::Reader::hasMessage() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool NoticeReplyMessage::Builder::hasMessage() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader NoticeReplyMessage::Reader::getMessage() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder NoticeReplyMessage::Builder::getMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void NoticeReplyMessage::Builder::setMessage( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder NoticeReplyMessage::Builder::initMessage(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void NoticeReplyMessage::Builder::adoptMessage(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> NoticeReplyMessage::Builder::disownMessage() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline bool WarnMessage::Reader::hasMessage() const {
@@ -21198,6 +21380,60 @@ inline ::capnp::Orphan< ::globed::schema::main::AdminSetWhitelistedMessage> Mess
   KJ_IREQUIRE((which() == Message::ADMIN_SET_WHITELISTED),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetWhitelistedMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isNoticeReply() const {
+  return which() == Message::NOTICE_REPLY;
+}
+inline bool Message::Builder::isNoticeReply() {
+  return which() == Message::NOTICE_REPLY;
+}
+inline bool Message::Reader::hasNoticeReply() const {
+  if (which() != Message::NOTICE_REPLY) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasNoticeReply() {
+  if (which() != Message::NOTICE_REPLY) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::NoticeReplyMessage::Reader Message::Reader::getNoticeReply() const {
+  KJ_IREQUIRE((which() == Message::NOTICE_REPLY),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeReplyMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::NoticeReplyMessage::Builder Message::Builder::getNoticeReply() {
+  KJ_IREQUIRE((which() == Message::NOTICE_REPLY),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeReplyMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setNoticeReply( ::globed::schema::main::NoticeReplyMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE_REPLY);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeReplyMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::NoticeReplyMessage::Builder Message::Builder::initNoticeReply() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE_REPLY);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeReplyMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptNoticeReply(
+    ::capnp::Orphan< ::globed::schema::main::NoticeReplyMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::NOTICE_REPLY);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeReplyMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::NoticeReplyMessage> Message::Builder::disownNoticeReply() {
+  KJ_IREQUIRE((which() == Message::NOTICE_REPLY),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeReplyMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
