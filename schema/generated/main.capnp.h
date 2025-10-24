@@ -159,6 +159,7 @@ CAPNP_DECLARE_SCHEMA(8e6c5f1db63d3471);
 CAPNP_DECLARE_SCHEMA(d806796e0d483927);
 CAPNP_DECLARE_SCHEMA(cc3c33b6ddb6e1a4);
 CAPNP_DECLARE_SCHEMA(ea67ae6a66745db6);
+CAPNP_DECLARE_SCHEMA(8ecb93f9b305636e);
 CAPNP_DECLARE_SCHEMA(911c9aa5c4c5f520);
 CAPNP_DECLARE_SCHEMA(a55b5ef7374b3a21);
 
@@ -1551,6 +1552,21 @@ struct AdminFetchModsMessage {
   };
 };
 
+struct AdminSetWhitelistedMessage {
+  AdminSetWhitelistedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(8ecb93f9b305636e, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct AdminResultMessage {
   AdminResultMessage() = delete;
 
@@ -1658,6 +1674,7 @@ struct Message {
     FEATURED_LEVEL,
     FEATURED_LIST,
     FETCH_USER_RESPONSE,
+    ADMIN_SET_WHITELISTED,
   };
 
   struct _capnpPrivate {
@@ -9838,6 +9855,87 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class AdminSetWhitelistedMessage::Reader {
+public:
+  typedef AdminSetWhitelistedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline bool getWhitelisted() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class AdminSetWhitelistedMessage::Builder {
+public:
+  typedef AdminSetWhitelistedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline bool getWhitelisted();
+  inline void setWhitelisted(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class AdminSetWhitelistedMessage::Pipeline {
+public:
+  typedef AdminSetWhitelistedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class AdminResultMessage::Reader {
 public:
   typedef AdminResultMessage Reads;
@@ -10278,6 +10376,10 @@ public:
   inline bool isFetchUserResponse() const;
   inline bool hasFetchUserResponse() const;
   inline  ::globed::schema::main::FetchUserResponseMessage::Reader getFetchUserResponse() const;
+
+  inline bool isAdminSetWhitelisted() const;
+  inline bool hasAdminSetWhitelisted() const;
+  inline  ::globed::schema::main::AdminSetWhitelistedMessage::Reader getAdminSetWhitelisted() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -10975,6 +11077,14 @@ public:
   inline  ::globed::schema::main::FetchUserResponseMessage::Builder initFetchUserResponse();
   inline void adoptFetchUserResponse(::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> disownFetchUserResponse();
+
+  inline bool isAdminSetWhitelisted();
+  inline bool hasAdminSetWhitelisted();
+  inline  ::globed::schema::main::AdminSetWhitelistedMessage::Builder getAdminSetWhitelisted();
+  inline void setAdminSetWhitelisted( ::globed::schema::main::AdminSetWhitelistedMessage::Reader value);
+  inline  ::globed::schema::main::AdminSetWhitelistedMessage::Builder initAdminSetWhitelisted();
+  inline void adoptAdminSetWhitelisted(::capnp::Orphan< ::globed::schema::main::AdminSetWhitelistedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::AdminSetWhitelistedMessage> disownAdminSetWhitelisted();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -16446,6 +16556,34 @@ inline void AdminUpdateUserMessage::Builder::setGlowColor( ::uint16_t value) {
       ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
 }
 
+inline  ::int32_t AdminSetWhitelistedMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminSetWhitelistedMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminSetWhitelistedMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool AdminSetWhitelistedMessage::Reader::getWhitelisted() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+
+inline bool AdminSetWhitelistedMessage::Builder::getWhitelisted() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS);
+}
+inline void AdminSetWhitelistedMessage::Builder::setWhitelisted(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<32>() * ::capnp::ELEMENTS, value);
+}
+
 inline bool AdminResultMessage::Reader::getSuccess() const {
   return _reader.getDataField<bool>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -21006,6 +21144,60 @@ inline ::capnp::Orphan< ::globed::schema::main::FetchUserResponseMessage> Messag
   KJ_IREQUIRE((which() == Message::FETCH_USER_RESPONSE),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::FetchUserResponseMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isAdminSetWhitelisted() const {
+  return which() == Message::ADMIN_SET_WHITELISTED;
+}
+inline bool Message::Builder::isAdminSetWhitelisted() {
+  return which() == Message::ADMIN_SET_WHITELISTED;
+}
+inline bool Message::Reader::hasAdminSetWhitelisted() const {
+  if (which() != Message::ADMIN_SET_WHITELISTED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasAdminSetWhitelisted() {
+  if (which() != Message::ADMIN_SET_WHITELISTED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::AdminSetWhitelistedMessage::Reader Message::Reader::getAdminSetWhitelisted() const {
+  KJ_IREQUIRE((which() == Message::ADMIN_SET_WHITELISTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetWhitelistedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::AdminSetWhitelistedMessage::Builder Message::Builder::getAdminSetWhitelisted() {
+  KJ_IREQUIRE((which() == Message::ADMIN_SET_WHITELISTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetWhitelistedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setAdminSetWhitelisted( ::globed::schema::main::AdminSetWhitelistedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_WHITELISTED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetWhitelistedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::AdminSetWhitelistedMessage::Builder Message::Builder::initAdminSetWhitelisted() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_WHITELISTED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetWhitelistedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptAdminSetWhitelisted(
+    ::capnp::Orphan< ::globed::schema::main::AdminSetWhitelistedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::ADMIN_SET_WHITELISTED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetWhitelistedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::AdminSetWhitelistedMessage> Message::Builder::disownAdminSetWhitelisted() {
+  KJ_IREQUIRE((which() == Message::ADMIN_SET_WHITELISTED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminSetWhitelistedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

@@ -574,6 +574,11 @@ struct AdminUpdateUserMessage {
 
 struct AdminFetchModsMessage {}
 
+struct AdminSetWhitelistedMessage {
+    accountId @0 :Int32;
+    whitelisted @1 :Bool;
+}
+
 struct AdminResultMessage {
     success @0 :Bool;
     error @1 :Text;
@@ -626,6 +631,7 @@ struct Message {
         adminSetPassword            @36 :AdminSetPasswordMessage;
         adminUpdateUser             @37 :AdminUpdateUserMessage;
         adminFetchMods              @38 :AdminFetchModsMessage;
+        adminSetWhitelisted         @85 :AdminSetWhitelistedMessage;
 
         fetchCredits                @39 :FetchCreditsMessage;
         getDiscordLinkState         @40 :GetDiscordLinkStateMessage;
