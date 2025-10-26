@@ -273,6 +273,7 @@ struct RoomListingInfo {
     roomId @0 :UInt32;
     roomName @1 :Text;
     roomOwner @2 :RoomPlayer;
+    originalOwnerId @6 :Int32;
     playerCount @3 :UInt32;
     hasPassword @4 :Bool;
     settings @5 :RoomSettings;

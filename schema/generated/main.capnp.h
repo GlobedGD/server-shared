@@ -5220,6 +5220,8 @@ public:
   inline bool hasSettings() const;
   inline  ::globed::schema::main::RoomSettings::Reader getSettings() const;
 
+  inline  ::int32_t getOriginalOwnerId() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -5277,6 +5279,9 @@ public:
   inline  ::globed::schema::main::RoomSettings::Builder initSettings();
   inline void adoptSettings(::capnp::Orphan< ::globed::schema::main::RoomSettings>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> disownSettings();
+
+  inline  ::int32_t getOriginalOwnerId();
+  inline void setOriginalOwnerId( ::int32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -14044,6 +14049,20 @@ inline void RoomListingInfo::Builder::adoptSettings(
 inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> RoomListingInfo::Builder::disownSettings() {
   return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::disown(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t RoomListingInfo::Reader::getOriginalOwnerId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t RoomListingInfo::Builder::getOriginalOwnerId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void RoomListingInfo::Builder::setOriginalOwnerId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool RoomBannedMessage::Reader::hasReason() const {
