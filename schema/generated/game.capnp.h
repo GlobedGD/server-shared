@@ -1244,6 +1244,8 @@ public:
   inline bool hasExtData() const;
   inline  ::globed::schema::game::ExtendedPlayerData::Reader getExtData() const;
 
+  inline bool getDidJustJump() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1320,6 +1322,9 @@ public:
   inline  ::globed::schema::game::ExtendedPlayerData::Builder initExtData();
   inline void adoptExtData(::capnp::Orphan< ::globed::schema::game::ExtendedPlayerData>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::ExtendedPlayerData> disownExtData();
+
+  inline bool getDidJustJump();
+  inline void setDidJustJump(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3721,6 +3726,20 @@ inline void PlayerObjectData::Builder::adoptExtData(
 inline ::capnp::Orphan< ::globed::schema::game::ExtendedPlayerData> PlayerObjectData::Builder::disownExtData() {
   return ::capnp::_::PointerHelpers< ::globed::schema::game::ExtendedPlayerData>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool PlayerObjectData::Reader::getDidJustJump() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<122>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getDidJustJump() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<122>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setDidJustJump(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<122>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::game::PlayerData::Which PlayerData::Reader::which() const {
