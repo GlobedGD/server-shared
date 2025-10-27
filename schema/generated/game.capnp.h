@@ -51,6 +51,7 @@ CAPNP_DECLARE_SCHEMA(ee95a98b84cdb612);
 CAPNP_DECLARE_SCHEMA(a5e1158db5d33982);
 CAPNP_DECLARE_SCHEMA(a66df788476d46df);
 CAPNP_DECLARE_SCHEMA(931b0abb37c2eb2e);
+CAPNP_DECLARE_SCHEMA(8c0d234a354180e8);
 CAPNP_DECLARE_SCHEMA(a0a3bbde6d866351);
 CAPNP_DECLARE_SCHEMA(c8a95e9766c5920c);
 enum class KickReason_c8a95e9766c5920c: uint16_t {
@@ -61,6 +62,7 @@ CAPNP_DECLARE_ENUM(KickReason, c8a95e9766c5920c);
 CAPNP_DECLARE_SCHEMA(b42ff33e56f21298);
 CAPNP_DECLARE_SCHEMA(d2d77b5d2f998da1);
 CAPNP_DECLARE_SCHEMA(be5fa37583693d04);
+CAPNP_DECLARE_SCHEMA(bf06433de54163b1);
 CAPNP_DECLARE_SCHEMA(dea093f0d56cacfb);
 CAPNP_DECLARE_SCHEMA(ee430f29eef52d4e);
 
@@ -383,6 +385,21 @@ struct VoiceDataMessage {
   };
 };
 
+struct QuickChatMessage {
+  QuickChatMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(8c0d234a354180e8, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct UpdateUserSettingsMessage {
   UpdateUserSettingsMessage() = delete;
 
@@ -445,6 +462,21 @@ struct VoiceBroadcastMessage {
   };
 };
 
+struct QuickChatBroadcastMessage {
+  QuickChatBroadcastMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(bf06433de54163b1, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct ChatNotPermittedMessage {
   ChatNotPermittedMessage() = delete;
 
@@ -484,6 +516,8 @@ struct Message {
     VOICE_BROADCAST,
     CHAT_NOT_PERMITTED,
     UPDATE_USER_SETTINGS,
+    QUICK_CHAT,
+    QUICK_CHAT_BROADCAST,
   };
 
   struct _capnpPrivate {
@@ -2409,6 +2443,82 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class QuickChatMessage::Reader {
+public:
+  typedef QuickChatMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getId() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class QuickChatMessage::Builder {
+public:
+  typedef QuickChatMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getId();
+  inline void setId( ::uint32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class QuickChatMessage::Pipeline {
+public:
+  typedef QuickChatMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class UpdateUserSettingsMessage::Reader {
 public:
   typedef UpdateUserSettingsMessage Reads;
@@ -2751,6 +2861,87 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class QuickChatBroadcastMessage::Reader {
+public:
+  typedef QuickChatBroadcastMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId() const;
+
+  inline  ::uint32_t getId() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class QuickChatBroadcastMessage::Builder {
+public:
+  typedef QuickChatBroadcastMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::int32_t getAccountId();
+  inline void setAccountId( ::int32_t value);
+
+  inline  ::uint32_t getId();
+  inline void setId( ::uint32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class QuickChatBroadcastMessage::Pipeline {
+public:
+  typedef QuickChatBroadcastMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class ChatNotPermittedMessage::Reader {
 public:
   typedef ChatNotPermittedMessage Reads;
@@ -2907,6 +3098,14 @@ public:
   inline bool isUpdateUserSettings() const;
   inline bool hasUpdateUserSettings() const;
   inline  ::globed::schema::game::UpdateUserSettingsMessage::Reader getUpdateUserSettings() const;
+
+  inline bool isQuickChat() const;
+  inline bool hasQuickChat() const;
+  inline  ::globed::schema::game::QuickChatMessage::Reader getQuickChat() const;
+
+  inline bool isQuickChatBroadcast() const;
+  inline bool hasQuickChatBroadcast() const;
+  inline  ::globed::schema::game::QuickChatBroadcastMessage::Reader getQuickChatBroadcast() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -3072,6 +3271,22 @@ public:
   inline  ::globed::schema::game::UpdateUserSettingsMessage::Builder initUpdateUserSettings();
   inline void adoptUpdateUserSettings(::capnp::Orphan< ::globed::schema::game::UpdateUserSettingsMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::UpdateUserSettingsMessage> disownUpdateUserSettings();
+
+  inline bool isQuickChat();
+  inline bool hasQuickChat();
+  inline  ::globed::schema::game::QuickChatMessage::Builder getQuickChat();
+  inline void setQuickChat( ::globed::schema::game::QuickChatMessage::Reader value);
+  inline  ::globed::schema::game::QuickChatMessage::Builder initQuickChat();
+  inline void adoptQuickChat(::capnp::Orphan< ::globed::schema::game::QuickChatMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::QuickChatMessage> disownQuickChat();
+
+  inline bool isQuickChatBroadcast();
+  inline bool hasQuickChatBroadcast();
+  inline  ::globed::schema::game::QuickChatBroadcastMessage::Builder getQuickChatBroadcast();
+  inline void setQuickChatBroadcast( ::globed::schema::game::QuickChatBroadcastMessage::Reader value);
+  inline  ::globed::schema::game::QuickChatBroadcastMessage::Builder initQuickChatBroadcast();
+  inline void adoptQuickChatBroadcast(::capnp::Orphan< ::globed::schema::game::QuickChatBroadcastMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::QuickChatBroadcastMessage> disownQuickChatBroadcast();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4632,6 +4847,20 @@ inline ::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>> Voi
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline  ::uint32_t QuickChatMessage::Reader::getId() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t QuickChatMessage::Builder::getId() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void QuickChatMessage::Builder::setId( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
 inline bool UpdateUserSettingsMessage::Reader::hasSettings() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -4821,6 +5050,34 @@ inline void VoiceBroadcastMessage::Builder::adoptFrames(
 inline ::capnp::Orphan< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>> VoiceBroadcastMessage::Builder::disownFrames() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::Data,  ::capnp::Kind::BLOB>>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t QuickChatBroadcastMessage::Reader::getAccountId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t QuickChatBroadcastMessage::Builder::getAccountId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void QuickChatBroadcastMessage::Builder::setAccountId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t QuickChatBroadcastMessage::Reader::getId() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t QuickChatBroadcastMessage::Builder::getId() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void QuickChatBroadcastMessage::Builder::setId( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::game::Message::Which Message::Reader::which() const {
@@ -5747,6 +6004,114 @@ inline ::capnp::Orphan< ::globed::schema::game::UpdateUserSettingsMessage> Messa
   KJ_IREQUIRE((which() == Message::UPDATE_USER_SETTINGS),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::UpdateUserSettingsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isQuickChat() const {
+  return which() == Message::QUICK_CHAT;
+}
+inline bool Message::Builder::isQuickChat() {
+  return which() == Message::QUICK_CHAT;
+}
+inline bool Message::Reader::hasQuickChat() const {
+  if (which() != Message::QUICK_CHAT) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasQuickChat() {
+  if (which() != Message::QUICK_CHAT) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::QuickChatMessage::Reader Message::Reader::getQuickChat() const {
+  KJ_IREQUIRE((which() == Message::QUICK_CHAT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::QuickChatMessage::Builder Message::Builder::getQuickChat() {
+  KJ_IREQUIRE((which() == Message::QUICK_CHAT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setQuickChat( ::globed::schema::game::QuickChatMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::QUICK_CHAT);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::QuickChatMessage::Builder Message::Builder::initQuickChat() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::QUICK_CHAT);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptQuickChat(
+    ::capnp::Orphan< ::globed::schema::game::QuickChatMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::QUICK_CHAT);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::QuickChatMessage> Message::Builder::disownQuickChat() {
+  KJ_IREQUIRE((which() == Message::QUICK_CHAT),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isQuickChatBroadcast() const {
+  return which() == Message::QUICK_CHAT_BROADCAST;
+}
+inline bool Message::Builder::isQuickChatBroadcast() {
+  return which() == Message::QUICK_CHAT_BROADCAST;
+}
+inline bool Message::Reader::hasQuickChatBroadcast() const {
+  if (which() != Message::QUICK_CHAT_BROADCAST) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasQuickChatBroadcast() {
+  if (which() != Message::QUICK_CHAT_BROADCAST) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::QuickChatBroadcastMessage::Reader Message::Reader::getQuickChatBroadcast() const {
+  KJ_IREQUIRE((which() == Message::QUICK_CHAT_BROADCAST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatBroadcastMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::QuickChatBroadcastMessage::Builder Message::Builder::getQuickChatBroadcast() {
+  KJ_IREQUIRE((which() == Message::QUICK_CHAT_BROADCAST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatBroadcastMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setQuickChatBroadcast( ::globed::schema::game::QuickChatBroadcastMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::QUICK_CHAT_BROADCAST);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatBroadcastMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::QuickChatBroadcastMessage::Builder Message::Builder::initQuickChatBroadcast() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::QUICK_CHAT_BROADCAST);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatBroadcastMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptQuickChatBroadcast(
+    ::capnp::Orphan< ::globed::schema::game::QuickChatBroadcastMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::QUICK_CHAT_BROADCAST);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatBroadcastMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::QuickChatBroadcastMessage> Message::Builder::disownQuickChatBroadcast() {
+  KJ_IREQUIRE((which() == Message::QUICK_CHAT_BROADCAST),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatBroadcastMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

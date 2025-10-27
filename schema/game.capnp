@@ -163,6 +163,10 @@ struct VoiceDataMessage {
     frames @0 :List(Data);
 }
 
+struct QuickChatMessage {
+    id @0 :UInt32;
+}
+
 struct UpdateUserSettingsMessage {
     settings @0 :Shared.UserSettings;
 }
@@ -187,6 +191,11 @@ struct VoiceBroadcastMessage {
     frames @1 :List(Data);
 }
 
+struct QuickChatBroadcastMessage {
+    accountId @0 :Int32;
+    id @1 :UInt32;
+}
+
 struct ChatNotPermittedMessage {
 
 }
@@ -203,6 +212,7 @@ struct Message {
         updateUserSettings @16 :UpdateUserSettingsMessage;
         sendLevelScript    @5 :SendLevelScriptMessage;
         voiceData          @6 :VoiceDataMessage;
+        quickChat          @17 :QuickChatMessage;
 
         # Server messages
         loginOk            @7 :LoginOkMessage;
@@ -215,5 +225,6 @@ struct Message {
         scriptLogs         @13 :ScriptLogsMessage;
         voiceBroadcast     @14 :VoiceBroadcastMessage;
         chatNotPermitted   @15 :ChatNotPermittedMessage;
+        quickChatBroadcast @18 :QuickChatBroadcastMessage;
     }
 }
