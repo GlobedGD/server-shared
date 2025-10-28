@@ -142,7 +142,7 @@ macro_rules! decode_message_match {
         use $crate::encoding::MaybeIntoResult;
 
         let _res: Result<_, $crate::encoding::DataDecodeError> = try {
-            let mut reader = qunet::buffers::ByteReader::new($data.as_bytes());
+            let mut reader = $crate::qunet::buffers::ByteReader::new($data.as_bytes());
             let unpacked_len = reader.read_varuint()? as usize;
 
             if unpacked_len > 1024 * 1024 {
@@ -230,7 +230,7 @@ macro_rules! encode_with_builder {
     ($($schema:ident)::*, $srvr:expr, $estcap:expr, $builder:expr, $msg:ident => $code:expr) => {{
         use $($schema::)*{self as schema};
 
-        let _res: Result<qunet::message::BufferKind, $crate::encoding::EncodeMessageError> = try {
+        let _res: Result<$crate::qunet::message::BufferKind, $crate::encoding::EncodeMessageError> = try {
             let server = $srvr;
 
             std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
@@ -261,7 +261,7 @@ macro_rules! encode_with_builder {
             let mut buf = server.request_buffer(ser_size + 8);
 
             let mut tmp_len_buf = [0u8; 4];
-            let mut len_buf = qunet::buffers::ByteWriter::new(&mut tmp_len_buf);
+            let mut len_buf = $crate::qunet::buffers::ByteWriter::new(&mut tmp_len_buf);
             len_buf.write_varuint(ser_size as u64).map_err(|_| $crate::encoding::EncodeMessageError::MessageTooLong)?;
             let len_written = len_buf.written();
             buf.append_bytes(len_written);
