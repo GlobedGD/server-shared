@@ -31,6 +31,8 @@ pub mod token_issuer;
 mod typemap;
 mod user_settings;
 
+pub use qunet;
+
 pub use multi_color::*;
 pub use session_id::SessionId;
 pub use typemap::TypeMap;
