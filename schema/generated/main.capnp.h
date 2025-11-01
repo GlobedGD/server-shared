@@ -794,7 +794,7 @@ struct RoomListMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d56d617651a514bf, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(d56d617651a514bf, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -5432,6 +5432,8 @@ public:
   inline bool hasRooms() const;
   inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Reader getRooms() const;
 
+  inline  ::uint16_t getPage() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -5466,6 +5468,9 @@ public:
   inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Builder initRooms(unsigned int size);
   inline void adoptRooms(::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>> disownRooms();
+
+  inline  ::uint16_t getPage();
+  inline void setPage( ::uint16_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -14208,6 +14213,20 @@ inline void RoomListMessage::Builder::adoptRooms(
 inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>> RoomListMessage::Builder::disownRooms() {
   return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::uint16_t RoomListMessage::Reader::getPage() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t RoomListMessage::Builder::getPage() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void RoomListMessage::Builder::setPage( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool InvitedMessage::Reader::hasInvitedBy() const {
