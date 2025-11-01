@@ -5432,6 +5432,8 @@ public:
   inline bool hasRooms() const;
   inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Reader getRooms() const;
 
+  inline  ::uint32_t getTotal() const;
+
   inline  ::uint16_t getPage() const;
 
 private:
@@ -5468,6 +5470,9 @@ public:
   inline  ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>::Builder initRooms(unsigned int size);
   inline void adoptRooms(::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo,  ::capnp::Kind::STRUCT>> disownRooms();
+
+  inline  ::uint32_t getTotal();
+  inline void setTotal( ::uint32_t value);
 
   inline  ::uint16_t getPage();
   inline void setPage( ::uint16_t value);
@@ -14215,18 +14220,32 @@ inline ::capnp::Orphan< ::capnp::List< ::globed::schema::main::RoomListingInfo, 
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline  ::uint32_t RoomListMessage::Reader::getTotal() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t RoomListMessage::Builder::getTotal() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void RoomListMessage::Builder::setTotal( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
 inline  ::uint16_t RoomListMessage::Reader::getPage() const {
   return _reader.getDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
 }
 
 inline  ::uint16_t RoomListMessage::Builder::getPage() {
   return _builder.getDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
 }
 inline void RoomListMessage::Builder::setPage( ::uint16_t value) {
   _builder.setDataField< ::uint16_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool InvitedMessage::Reader::hasInvitedBy() const {

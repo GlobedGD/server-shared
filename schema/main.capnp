@@ -289,7 +289,8 @@ struct RoomBannedMessage {
 
 struct RoomListMessage {
     rooms @0 :List(RoomListingInfo);
-    page @1 :UInt16;
+    total @1 :UInt32;
+    page  @2 :UInt16;
 }
 
 struct InvitedMessage {
