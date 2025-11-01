@@ -148,7 +148,10 @@ struct RequestRoomPlayersMessage {
     nameFilter @0 :Text;
 }
 
-struct RequestRoomListMessage {}
+struct RequestRoomListMessage {
+    nameFilter @0 :Text;
+    page       @1 :UInt32;
+}
 
 struct AssignTeamMessage {
     accountId @0 :Int32;
@@ -615,7 +618,7 @@ struct Message {
         createRoom                  @5 :CreateRoomMessage;
         joinRoom                    @6 :JoinRoomMessage;
         joinRoomByToken             @7 :JoinRoomByTokenMessage;
-        leaveRoom                   @8 :Void; # TODO (high): check if we can change this to a struct without breaking old clients
+        leaveRoom                   @8 :Void;
         checkRoomState              @9 :Void;
         requestRoomPlayers          @10 :RequestRoomPlayersMessage;
         requestRoomList             @11 :RequestRoomListMessage;

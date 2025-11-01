@@ -458,7 +458,7 @@ struct RequestRoomListMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(cc26655ccf6a542b, 0, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(cc26655ccf6a542b, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -3505,6 +3505,11 @@ public:
   }
 #endif  // !CAPNP_LITE
 
+  inline bool hasNameFilter() const;
+  inline  ::capnp::Text::Reader getNameFilter() const;
+
+  inline  ::uint32_t getPage() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -3532,6 +3537,16 @@ public:
 #if !CAPNP_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
+
+  inline bool hasNameFilter();
+  inline  ::capnp::Text::Builder getNameFilter();
+  inline void setNameFilter( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initNameFilter(unsigned int size);
+  inline void adoptNameFilter(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownNameFilter();
+
+  inline  ::uint32_t getPage();
+  inline void setPage( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -13015,6 +13030,54 @@ inline void RequestRoomPlayersMessage::Builder::adoptNameFilter(
 inline ::capnp::Orphan< ::capnp::Text> RequestRoomPlayersMessage::Builder::disownNameFilter() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool RequestRoomListMessage::Reader::hasNameFilter() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool RequestRoomListMessage::Builder::hasNameFilter() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader RequestRoomListMessage::Reader::getNameFilter() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder RequestRoomListMessage::Builder::getNameFilter() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void RequestRoomListMessage::Builder::setNameFilter( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder RequestRoomListMessage::Builder::initNameFilter(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void RequestRoomListMessage::Builder::adoptNameFilter(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> RequestRoomListMessage::Builder::disownNameFilter() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::uint32_t RequestRoomListMessage::Reader::getPage() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t RequestRoomListMessage::Builder::getPage() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void RequestRoomListMessage::Builder::setPage( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::int32_t AssignTeamMessage::Reader::getAccountId() const {
