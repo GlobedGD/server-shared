@@ -306,6 +306,7 @@ struct InviteTokenCreatedMessage {
 
 struct JoinSessionMessage {
     sessionId @0 :UInt64;
+    authorId  @1 :Int32;
 }
 
 struct LeaveSessionMessage {}

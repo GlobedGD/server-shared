@@ -839,7 +839,7 @@ struct JoinSessionMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d29a1ce11a72e63b, 1, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(d29a1ce11a72e63b, 2, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -5685,6 +5685,8 @@ public:
 
   inline  ::uint64_t getSessionId() const;
 
+  inline  ::int32_t getAuthorId() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -5715,6 +5717,9 @@ public:
 
   inline  ::uint64_t getSessionId();
   inline void setSessionId( ::uint64_t value);
+
+  inline  ::int32_t getAuthorId();
+  inline void setAuthorId( ::int32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -14327,6 +14332,20 @@ inline  ::uint64_t JoinSessionMessage::Builder::getSessionId() {
 inline void JoinSessionMessage::Builder::setSessionId( ::uint64_t value) {
   _builder.setDataField< ::uint64_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::int32_t JoinSessionMessage::Reader::getAuthorId() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t JoinSessionMessage::Builder::getAuthorId() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void JoinSessionMessage::Builder::setAuthorId( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::main::JoinSessionFailedReason JoinFailedMessage::Reader::getReason() const {
