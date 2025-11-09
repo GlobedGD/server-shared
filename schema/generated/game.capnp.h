@@ -564,6 +564,8 @@ public:
 
   inline bool getPlatformer() const;
 
+  inline bool getEditorCollab() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -624,6 +626,9 @@ public:
 
   inline bool getPlatformer();
   inline void setPlatformer(bool value);
+
+  inline bool getEditorCollab();
+  inline void setEditorCollab(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -828,6 +833,8 @@ public:
 
   inline bool getPlatformer() const;
 
+  inline bool getEditorCollab() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -864,6 +871,9 @@ public:
 
   inline bool getPlatformer();
   inline void setPlatformer(bool value);
+
+  inline bool getEditorCollab();
+  inline void setEditorCollab(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3484,6 +3494,20 @@ inline void LoginMessage::Builder::setPlatformer(bool value) {
       ::capnp::bounded<128>() * ::capnp::ELEMENTS, value);
 }
 
+inline bool LoginMessage::Reader::getEditorCollab() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<129>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginMessage::Builder::getEditorCollab() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<129>() * ::capnp::ELEMENTS);
+}
+inline void LoginMessage::Builder::setEditorCollab(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<129>() * ::capnp::ELEMENTS, value);
+}
+
 inline  ::uint16_t LoginOkMessage::Reader::getTickrate() const {
   return _reader.getDataField< ::uint16_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -3552,6 +3576,20 @@ inline bool JoinSessionMessage::Builder::getPlatformer() {
 inline void JoinSessionMessage::Builder::setPlatformer(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<96>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool JoinSessionMessage::Reader::getEditorCollab() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<97>() * ::capnp::ELEMENTS);
+}
+
+inline bool JoinSessionMessage::Builder::getEditorCollab() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<97>() * ::capnp::ELEMENTS);
+}
+inline void JoinSessionMessage::Builder::setEditorCollab(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<97>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint64_t JoinSessionOkMessage::Reader::getSessionId() const {

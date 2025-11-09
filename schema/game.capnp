@@ -17,6 +17,7 @@ struct LoginMessage {
     sessionId @4 :UInt64;
     passcode  @5 :UInt32;
     platformer @6 :Bool;
+    editorCollab @7 :Bool;
 }
 
 struct LoginOkMessage {
@@ -38,6 +39,7 @@ struct JoinSessionMessage {
     sessionId @0 :UInt64;
     passcode  @1 :UInt32;
     platformer @2 :Bool;
+    editorCollab @3 :Bool;
 }
 
 struct JoinSessionOkMessage {
