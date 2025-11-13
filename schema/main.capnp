@@ -123,6 +123,7 @@ struct RoomSettings {
     levelIntegrity @6 :Bool = false;
     teams @7 :Bool = false;
     lockedTeams @8 :Bool = false;
+    manualPinning @12 :Bool = false;
 
     collision @9 :Bool = false;
     twoPlayerMode @10 :Bool = false;
@@ -192,6 +193,10 @@ struct InvitePlayerMessage {
     player @0 :Int32;
 }
 
+struct UpdatePinnedLevelMessage {
+    id @0 :UInt64;
+}
+
 struct TeamCreationResultMessage {
     success @0 :Bool;
     teamCount @1 :UInt16;
@@ -234,6 +239,7 @@ struct RoomStateMessage {
     teams @5 :List(UInt32);
     passcode @6 :UInt32;
     playerCount @7 :UInt32;
+    pinnedLevel @8 :UInt64;
 }
 
 struct RoomPlayersMessage {
@@ -246,6 +252,10 @@ struct TeamsUpdatedMessage {
 
 struct RoomSettingsUpdatedMessage {
     settings @0 :RoomSettings;
+}
+
+struct PinnedLevelUpdatedMessage {
+    id @0 :UInt64;
 }
 
 enum RoomJoinFailedReason {
@@ -633,6 +643,7 @@ struct Message {
         roomOwnerAction             @17 :RoomOwnerActionMessage;
         updateRoomSettings          @18 :UpdateRoomSettingsMessage;
         invitePlayer                @19 :InvitePlayerMessage;
+        updatePinnedLevel           @89 :UpdatePinnedLevelMessage;
 
         joinSession                 @20 :JoinSessionMessage;
         leaveSession                @21 :LeaveSessionMessage;
@@ -691,6 +702,7 @@ struct Message {
         teamMembers                 @62 :TeamMembersMessage;
         teamsUpdated                @63 :TeamsUpdatedMessage;
         roomSettingsUpdated         @64 :RoomSettingsUpdatedMessage;
+        pinnedLevelUpdated          @90 :PinnedLevelUpdatedMessage;
         invited                     @65 :InvitedMessage;
         inviteTokenCreated          @66 :InviteTokenCreatedMessage;
 

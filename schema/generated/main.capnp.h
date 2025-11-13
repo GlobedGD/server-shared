@@ -65,6 +65,7 @@ CAPNP_DECLARE_ENUM(RoomOwnerActionType, 8d66f9fc39526e6f);
 CAPNP_DECLARE_SCHEMA(eb7ef953c325008a);
 CAPNP_DECLARE_SCHEMA(80f80ad20817b082);
 CAPNP_DECLARE_SCHEMA(afd98a1f2bb10eb9);
+CAPNP_DECLARE_SCHEMA(b9346478e4f3196d);
 CAPNP_DECLARE_SCHEMA(9ec3ab1a6e918576);
 CAPNP_DECLARE_SCHEMA(c3594139526425cd);
 CAPNP_DECLARE_SCHEMA(da80ce7d00b0d262);
@@ -74,6 +75,7 @@ CAPNP_DECLARE_SCHEMA(ccb001c4c4eb3e03);
 CAPNP_DECLARE_SCHEMA(da123c4c7c24a8a5);
 CAPNP_DECLARE_SCHEMA(b4e1d4b92dce90f4);
 CAPNP_DECLARE_SCHEMA(b3edccb737efb57f);
+CAPNP_DECLARE_SCHEMA(abe13ad84009cd96);
 CAPNP_DECLARE_SCHEMA(e8b80e1d2395f44a);
 enum class RoomJoinFailedReason_e8b80e1d2395f44a: uint16_t {
   NOT_FOUND,
@@ -587,6 +589,21 @@ struct InvitePlayerMessage {
   };
 };
 
+struct UpdatePinnedLevelMessage {
+  UpdatePinnedLevelMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(b9346478e4f3196d, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct TeamCreationResultMessage {
   TeamCreationResultMessage() = delete;
 
@@ -670,7 +687,7 @@ struct RoomStateMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(ccb001c4c4eb3e03, 2, 4)
+    CAPNP_DECLARE_STRUCT_HEADER(ccb001c4c4eb3e03, 3, 4)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -716,6 +733,21 @@ struct RoomSettingsUpdatedMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(b3edccb737efb57f, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct PinnedLevelUpdatedMessage {
+  PinnedLevelUpdatedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(abe13ad84009cd96, 1, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1726,6 +1758,8 @@ struct Message {
     NOTICE_REPLY,
     ADMIN_CLOSE_ROOM,
     ADMIN_PUNISHMENT_REASONS,
+    UPDATE_PINNED_LEVEL,
+    PINNED_LEVEL_UPDATED,
   };
 
   struct _capnpPrivate {
@@ -3063,6 +3097,8 @@ public:
 
   inline bool getDeathlink() const;
 
+  inline bool getManualPinning() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -3126,6 +3162,9 @@ public:
 
   inline bool getDeathlink();
   inline void setDeathlink(bool value);
+
+  inline bool getManualPinning();
+  inline void setManualPinning(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4198,6 +4237,82 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class UpdatePinnedLevelMessage::Reader {
+public:
+  typedef UpdatePinnedLevelMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class UpdatePinnedLevelMessage::Builder {
+public:
+  typedef UpdatePinnedLevelMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId();
+  inline void setId( ::uint64_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class UpdatePinnedLevelMessage::Pipeline {
+public:
+  typedef UpdatePinnedLevelMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class TeamCreationResultMessage::Reader {
 public:
   typedef TeamCreationResultMessage Reads;
@@ -4710,6 +4825,8 @@ public:
 
   inline  ::uint32_t getPlayerCount() const;
 
+  inline  ::uint64_t getPinnedLevel() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -4778,6 +4895,9 @@ public:
 
   inline  ::uint32_t getPlayerCount();
   inline void setPlayerCount( ::uint32_t value);
+
+  inline  ::uint64_t getPinnedLevel();
+  inline void setPinnedLevel( ::uint64_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -5043,6 +5163,82 @@ public:
       : _typeless(kj::mv(typeless)) {}
 
   inline  ::globed::schema::main::RoomSettings::Pipeline getSettings();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class PinnedLevelUpdatedMessage::Reader {
+public:
+  typedef PinnedLevelUpdatedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PinnedLevelUpdatedMessage::Builder {
+public:
+  typedef PinnedLevelUpdatedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId();
+  inline void setId( ::uint64_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PinnedLevelUpdatedMessage::Pipeline {
+public:
+  typedef PinnedLevelUpdatedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -10750,6 +10946,14 @@ public:
   inline bool hasAdminPunishmentReasons() const;
   inline  ::globed::schema::main::AdminPunishmentReasonsMessage::Reader getAdminPunishmentReasons() const;
 
+  inline bool isUpdatePinnedLevel() const;
+  inline bool hasUpdatePinnedLevel() const;
+  inline  ::globed::schema::main::UpdatePinnedLevelMessage::Reader getUpdatePinnedLevel() const;
+
+  inline bool isPinnedLevelUpdated() const;
+  inline bool hasPinnedLevelUpdated() const;
+  inline  ::globed::schema::main::PinnedLevelUpdatedMessage::Reader getPinnedLevelUpdated() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -11478,6 +11682,22 @@ public:
   inline  ::globed::schema::main::AdminPunishmentReasonsMessage::Builder initAdminPunishmentReasons();
   inline void adoptAdminPunishmentReasons(::capnp::Orphan< ::globed::schema::main::AdminPunishmentReasonsMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::AdminPunishmentReasonsMessage> disownAdminPunishmentReasons();
+
+  inline bool isUpdatePinnedLevel();
+  inline bool hasUpdatePinnedLevel();
+  inline  ::globed::schema::main::UpdatePinnedLevelMessage::Builder getUpdatePinnedLevel();
+  inline void setUpdatePinnedLevel( ::globed::schema::main::UpdatePinnedLevelMessage::Reader value);
+  inline  ::globed::schema::main::UpdatePinnedLevelMessage::Builder initUpdatePinnedLevel();
+  inline void adoptUpdatePinnedLevel(::capnp::Orphan< ::globed::schema::main::UpdatePinnedLevelMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UpdatePinnedLevelMessage> disownUpdatePinnedLevel();
+
+  inline bool isPinnedLevelUpdated();
+  inline bool hasPinnedLevelUpdated();
+  inline  ::globed::schema::main::PinnedLevelUpdatedMessage::Builder getPinnedLevelUpdated();
+  inline void setPinnedLevelUpdated( ::globed::schema::main::PinnedLevelUpdatedMessage::Reader value);
+  inline  ::globed::schema::main::PinnedLevelUpdatedMessage::Builder initPinnedLevelUpdated();
+  inline void adoptPinnedLevelUpdated(::capnp::Orphan< ::globed::schema::main::PinnedLevelUpdatedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::PinnedLevelUpdatedMessage> disownPinnedLevelUpdated();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -12884,6 +13104,20 @@ inline void RoomSettings::Builder::setDeathlink(bool value) {
       ::capnp::bounded<33>() * ::capnp::ELEMENTS, value);
 }
 
+inline bool RoomSettings::Reader::getManualPinning() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<34>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getManualPinning() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<34>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setManualPinning(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<34>() * ::capnp::ELEMENTS, value);
+}
+
 inline bool CreateRoomMessage::Reader::hasName() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -13257,6 +13491,20 @@ inline  ::int32_t InvitePlayerMessage::Builder::getPlayer() {
 }
 inline void InvitePlayerMessage::Builder::setPlayer( ::int32_t value) {
   _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint64_t UpdatePinnedLevelMessage::Reader::getId() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t UpdatePinnedLevelMessage::Builder::getId() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void UpdatePinnedLevelMessage::Builder::setId( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
@@ -13836,6 +14084,20 @@ inline void RoomStateMessage::Builder::setPlayerCount( ::uint32_t value) {
       ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
 }
 
+inline  ::uint64_t RoomStateMessage::Reader::getPinnedLevel() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t RoomStateMessage::Builder::getPinnedLevel() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void RoomStateMessage::Builder::setPinnedLevel( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
 inline bool RoomPlayersMessage::Reader::hasPlayers() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -13945,6 +14207,20 @@ inline void RoomSettingsUpdatedMessage::Builder::adoptSettings(
 inline ::capnp::Orphan< ::globed::schema::main::RoomSettings> RoomSettingsUpdatedMessage::Builder::disownSettings() {
   return ::capnp::_::PointerHelpers< ::globed::schema::main::RoomSettings>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::uint64_t PinnedLevelUpdatedMessage::Reader::getId() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t PinnedLevelUpdatedMessage::Builder::getId() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void PinnedLevelUpdatedMessage::Builder::setId( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::main::RoomJoinFailedReason RoomJoinFailedMessage::Reader::getReason() const {
@@ -22047,6 +22323,114 @@ inline ::capnp::Orphan< ::globed::schema::main::AdminPunishmentReasonsMessage> M
   KJ_IREQUIRE((which() == Message::ADMIN_PUNISHMENT_REASONS),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::AdminPunishmentReasonsMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isUpdatePinnedLevel() const {
+  return which() == Message::UPDATE_PINNED_LEVEL;
+}
+inline bool Message::Builder::isUpdatePinnedLevel() {
+  return which() == Message::UPDATE_PINNED_LEVEL;
+}
+inline bool Message::Reader::hasUpdatePinnedLevel() const {
+  if (which() != Message::UPDATE_PINNED_LEVEL) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUpdatePinnedLevel() {
+  if (which() != Message::UPDATE_PINNED_LEVEL) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UpdatePinnedLevelMessage::Reader Message::Reader::getUpdatePinnedLevel() const {
+  KJ_IREQUIRE((which() == Message::UPDATE_PINNED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdatePinnedLevelMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UpdatePinnedLevelMessage::Builder Message::Builder::getUpdatePinnedLevel() {
+  KJ_IREQUIRE((which() == Message::UPDATE_PINNED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdatePinnedLevelMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUpdatePinnedLevel( ::globed::schema::main::UpdatePinnedLevelMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_PINNED_LEVEL);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdatePinnedLevelMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UpdatePinnedLevelMessage::Builder Message::Builder::initUpdatePinnedLevel() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_PINNED_LEVEL);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdatePinnedLevelMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUpdatePinnedLevel(
+    ::capnp::Orphan< ::globed::schema::main::UpdatePinnedLevelMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::UPDATE_PINNED_LEVEL);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UpdatePinnedLevelMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UpdatePinnedLevelMessage> Message::Builder::disownUpdatePinnedLevel() {
+  KJ_IREQUIRE((which() == Message::UPDATE_PINNED_LEVEL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UpdatePinnedLevelMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isPinnedLevelUpdated() const {
+  return which() == Message::PINNED_LEVEL_UPDATED;
+}
+inline bool Message::Builder::isPinnedLevelUpdated() {
+  return which() == Message::PINNED_LEVEL_UPDATED;
+}
+inline bool Message::Reader::hasPinnedLevelUpdated() const {
+  if (which() != Message::PINNED_LEVEL_UPDATED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasPinnedLevelUpdated() {
+  if (which() != Message::PINNED_LEVEL_UPDATED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::PinnedLevelUpdatedMessage::Reader Message::Reader::getPinnedLevelUpdated() const {
+  KJ_IREQUIRE((which() == Message::PINNED_LEVEL_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PinnedLevelUpdatedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::PinnedLevelUpdatedMessage::Builder Message::Builder::getPinnedLevelUpdated() {
+  KJ_IREQUIRE((which() == Message::PINNED_LEVEL_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PinnedLevelUpdatedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setPinnedLevelUpdated( ::globed::schema::main::PinnedLevelUpdatedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PINNED_LEVEL_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::PinnedLevelUpdatedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::PinnedLevelUpdatedMessage::Builder Message::Builder::initPinnedLevelUpdated() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PINNED_LEVEL_UPDATED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PinnedLevelUpdatedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptPinnedLevelUpdated(
+    ::capnp::Orphan< ::globed::schema::main::PinnedLevelUpdatedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PINNED_LEVEL_UPDATED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::PinnedLevelUpdatedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::PinnedLevelUpdatedMessage> Message::Builder::disownPinnedLevelUpdated() {
+  KJ_IREQUIRE((which() == Message::PINNED_LEVEL_UPDATED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::PinnedLevelUpdatedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
