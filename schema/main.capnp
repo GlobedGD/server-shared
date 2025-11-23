@@ -41,6 +41,7 @@ struct LoginOkMessage {
     canEditRoles @9 :Bool;
     canSendFeatures @10 :Bool;
     canRateFeatures @11 :Bool;
+    canNameRooms @15 :Bool;
 
     featuredLevel @12 :Int32;
     featuredLevelTier @13 :UInt8;
