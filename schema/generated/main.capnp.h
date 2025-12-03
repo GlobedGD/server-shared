@@ -2061,6 +2061,8 @@ public:
 
   inline  ::uint32_t getFeaturedLevelEdition() const;
 
+  inline bool getCanNameRooms() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2154,6 +2156,9 @@ public:
 
   inline  ::uint32_t getFeaturedLevelEdition();
   inline void setFeaturedLevelEdition( ::uint32_t value);
+
+  inline bool getCanNameRooms();
+  inline void setCanNameRooms(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -12398,6 +12403,20 @@ inline  ::uint32_t LoginOkMessage::Builder::getFeaturedLevelEdition() {
 inline void LoginOkMessage::Builder::setFeaturedLevelEdition( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::getCanNameRooms() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+
+inline bool LoginOkMessage::Builder::getCanNameRooms() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setCanNameRooms(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::main::LoginFailedReason LoginFailedMessage::Reader::getReason() const {

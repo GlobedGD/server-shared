@@ -116,7 +116,7 @@ struct UserRole {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(a7af61db45598ea4, 0, 3)
+    CAPNP_DECLARE_STRUCT_HEADER(a7af61db45598ea4, 1, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -633,6 +633,8 @@ public:
   inline bool hasNameColor() const;
   inline  ::capnp::Data::Reader getNameColor() const;
 
+  inline bool getHide() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -681,6 +683,9 @@ public:
   inline  ::capnp::Data::Builder initNameColor(unsigned int size);
   inline void adoptNameColor(::capnp::Orphan< ::capnp::Data>&& value);
   inline ::capnp::Orphan< ::capnp::Data> disownNameColor();
+
+  inline bool getHide();
+  inline void setHide(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1468,6 +1473,20 @@ inline void UserRole::Builder::adoptNameColor(
 inline ::capnp::Orphan< ::capnp::Data> UserRole::Builder::disownNameColor() {
   return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline bool UserRole::Reader::getHide() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserRole::Builder::getHide() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void UserRole::Builder::setHide(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool UserSettings::Reader::getHideInLevel() const {

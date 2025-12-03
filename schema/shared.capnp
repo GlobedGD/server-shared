@@ -59,6 +59,7 @@ struct UserRole {
     stringId   @0 :Text;
     icon       @1 :Text;
     nameColor  @2 :Data;
+    hide       @3 :Bool;
 }
 
 struct UserSettings {
