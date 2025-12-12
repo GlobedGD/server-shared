@@ -141,7 +141,7 @@ macro_rules! decode_message_match {
         use $($schema::)*{self as schema};
         use $crate::encoding::MaybeIntoResult;
 
-        let _res: Result<_, $crate::encoding::DataDecodeError> = try {
+        let _res: Result<_, $crate::encoding::DataDecodeError> = async {
             let mut reader = $crate::qunet::buffers::ByteReader::new($data.as_bytes());
             let unpacked_len = reader.read_varuint()? as usize;
 
@@ -165,7 +165,7 @@ macro_rules! decode_message_match {
                 .get_root::<schema::message::Reader>()
                 .map_err(|_| $crate::encoding::DataDecodeError::InvalidDiscriminant)?;
 
-            match message.which().map_err(|_| $crate::encoding::DataDecodeError::InvalidDiscriminant)? {
+            Ok(match message.which().map_err(|_| $crate::encoding::DataDecodeError::InvalidDiscriminant)? {
                 $(schema::message::Which::$variant(msg) => {
                     tracing::trace!("got message {}", stringify!($variant));
 
@@ -174,8 +174,8 @@ macro_rules! decode_message_match {
                 })*
 
                 _ => Err($crate::encoding::DataDecodeError::NoMessageHandler)?,
-            }
-        };
+            })
+        }.await;
 
         _res
     }};
@@ -230,7 +230,7 @@ macro_rules! encode_with_builder {
     ($($schema:ident)::*, $srvr:expr, $estcap:expr, $builder:expr, $msg:ident => $code:expr) => {{
         use $($schema::)*{self as schema};
 
-        let _res: Result<$crate::qunet::message::BufferKind, $crate::encoding::EncodeMessageError> = try {
+        let _res: Result<$crate::qunet::message::BufferKind, $crate::encoding::EncodeMessageError> = (|| {
             let server = $srvr;
 
             std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
@@ -269,8 +269,8 @@ macro_rules! encode_with_builder {
             // this must never fail at this point
             capnp::serialize_packed::write_message(&mut buf, &$builder).expect("capnp write failed");
 
-            buf
-        };
+            Ok(buf)
+        })();
 
         _res
     }};
