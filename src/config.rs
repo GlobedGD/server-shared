@@ -5,9 +5,9 @@ use serde::de::DeserializeOwned;
 use std::net::SocketAddr;
 use tracing::error;
 
-const S_4KIB: usize = 2usize.pow(13);
-const S_8KIB: usize = 2usize.pow(14);
-const S_16KIB: usize = 2usize.pow(15);
+const S_4KIB: usize = 2usize.pow(12);
+const S_8KIB: usize = 2usize.pow(13);
+const S_16KIB: usize = 2usize.pow(14);
 const S_32KIB: usize = 2usize.pow(15);
 const S_64KIB: usize = 2usize.pow(16);
 const S_128KIB: usize = 2usize.pow(17);
@@ -66,6 +66,25 @@ pub fn make_udp_memory_limits(mut usage: u32) -> BufferPoolOpts {
     };
 
     BufferPoolOpts::new(1500, min_bufs, max_bufs)
+}
+
+pub fn log_buffer_size_for_memlimit(mut usage: u32) -> usize {
+    usage = usage.clamp(1, 11);
+
+    match usage {
+        1 => 16,
+        2 => 64,
+        3 => 256,
+        4 => 1024,
+        5 => 2048,
+        6 => S_4KIB,
+        7 => S_8KIB,
+        8 => S_16KIB,
+        9 => S_32KIB,
+        10 => S_64KIB,
+        11 => S_128KIB,
+        _ => unreachable!(),
+    }
 }
 
 pub fn parse_addr(addr: &str, name: &str) -> SocketAddr {

@@ -5,6 +5,8 @@ use tracing_subscriber::{Layer as _, Registry, filter, fmt::Layer, layer::Subscr
 
 pub use tracing_appender::non_blocking::WorkerGuard;
 
+use crate::config::log_buffer_size_for_memlimit;
+
 fn parse_filter(level: &str) -> LevelFilter {
     match level.to_lowercase().as_str() {
         "error" => LevelFilter::ERROR,
@@ -23,6 +25,7 @@ pub fn setup_logger(
     console_level: &str,
     file_level: &str,
     file_enabled: bool,
+    mem_usage: u32,
 ) -> (WorkerGuard, WorkerGuard) {
     // Setup log level filter
     let console_level = parse_filter(console_level);
@@ -43,17 +46,20 @@ pub fn setup_logger(
         rolling::never(directory, file_name_prefix)
     };
 
+    let buf_lines = log_buffer_size_for_memlimit(mem_usage);
+    let stdout_buf_lines = buf_lines / 4;
+
     let (nb_file, guard_file) = NonBlockingBuilder::default()
         .lossy(true)
         .thread_name("Log writer thread")
-        .buffered_lines_limit(8192)
+        .buffered_lines_limit(buf_lines)
         .finish(appender);
 
     // Create stdout layer
     let (nb_stdout, guard_stdout) = NonBlockingBuilder::default()
         .lossy(true)
         .thread_name("Stdout log writer thread")
-        .buffered_lines_limit(8192)
+        .buffered_lines_limit(stdout_buf_lines)
         .finish(std::io::stdout());
 
     let stdout_layer = Layer::default()
