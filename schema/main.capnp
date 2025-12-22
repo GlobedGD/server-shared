@@ -91,6 +91,7 @@ struct UserDataChangedMessage {
     canEditRoles @6 :Bool;
     canSendFeatures @7 :Bool;
     canRateFeatures @8 :Bool;
+    newToken @9 :Text;
 }
 
 # General messages

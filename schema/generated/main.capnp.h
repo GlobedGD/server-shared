@@ -310,7 +310,7 @@ struct UserDataChangedMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(f2ba4cb8b539c421, 1, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(f2ba4cb8b539c421, 1, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -2633,6 +2633,9 @@ public:
 
   inline bool getCanRateFeatures() const;
 
+  inline bool hasNewToken() const;
+  inline  ::capnp::Text::Reader getNewToken() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2696,6 +2699,13 @@ public:
 
   inline bool getCanRateFeatures();
   inline void setCanRateFeatures(bool value);
+
+  inline bool hasNewToken();
+  inline  ::capnp::Text::Builder getNewToken();
+  inline void setNewToken( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initNewToken(unsigned int size);
+  inline void adoptNewToken(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownNewToken();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -12765,6 +12775,40 @@ inline bool UserDataChangedMessage::Builder::getCanRateFeatures() {
 inline void UserDataChangedMessage::Builder::setCanRateFeatures(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserDataChangedMessage::Reader::hasNewToken() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool UserDataChangedMessage::Builder::hasNewToken() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader UserDataChangedMessage::Reader::getNewToken() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder UserDataChangedMessage::Builder::getNewToken() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void UserDataChangedMessage::Builder::setNewToken( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder UserDataChangedMessage::Builder::initNewToken(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+}
+inline void UserDataChangedMessage::Builder::adoptNewToken(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> UserDataChangedMessage::Builder::disownNewToken() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
 inline bool UpdateOwnDataMessage::Reader::hasIcons() const {
