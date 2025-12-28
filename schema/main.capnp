@@ -130,6 +130,7 @@ struct RoomSettings {
     collision @9 :Bool = false;
     twoPlayerMode @10 :Bool = false;
     deathlink @11 :Bool = false;
+    switcheroo @13 :Bool = false;
 }
 
 struct CreateRoomMessage {
