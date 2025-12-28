@@ -3114,6 +3114,8 @@ public:
 
   inline bool getManualPinning() const;
 
+  inline bool getSwitcheroo() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -3180,6 +3182,9 @@ public:
 
   inline bool getManualPinning();
   inline void setManualPinning(bool value);
+
+  inline bool getSwitcheroo();
+  inline void setSwitcheroo(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -13179,6 +13184,20 @@ inline bool RoomSettings::Builder::getManualPinning() {
 inline void RoomSettings::Builder::setManualPinning(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<34>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool RoomSettings::Reader::getSwitcheroo() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<35>() * ::capnp::ELEMENTS);
+}
+
+inline bool RoomSettings::Builder::getSwitcheroo() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<35>() * ::capnp::ELEMENTS);
+}
+inline void RoomSettings::Builder::setSwitcheroo(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<35>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool CreateRoomMessage::Reader::hasName() const {
