@@ -36,6 +36,8 @@ pub fn setup_logger(
         .with_target("tokio", Level::WARN)
         .with_target("runtime", Level::WARN)
         .with_target("serenity", Level::WARN)
+        .with_target("hickory_resolver", Level::WARN)
+        .with_target("hickory_proto", Level::WARN)
         .with_target("h2", Level::WARN)
         .with_target("hyper", Level::WARN);
 

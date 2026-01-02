@@ -2,7 +2,7 @@ use qunet::server::builder::BufferPoolOpts;
 /// Various helper functions for server configuration
 ///
 use serde::de::DeserializeOwned;
-use std::net::SocketAddr;
+use std::{error::Error, net::SocketAddr, path::PathBuf};
 use tracing::error;
 
 const S_4KIB: usize = 2usize.pow(12);
@@ -101,16 +101,68 @@ pub fn parse_addr(addr: &str, name: &str) -> SocketAddr {
     }
 }
 
+pub trait CustomDeserialize: DeserializeOwned {
+    fn deserialize(s: &str) -> Result<Self, Box<dyn Error>>;
+}
+
 /// Reads an environment variable with the given name, and if present, replaces the value of `val` with the parsed value.
-pub fn env_replace<T: DeserializeOwned>(var: &str, val: &mut T) {
-    if let Ok(var) = std::env::var(var) {
-        let newv: T = match toml::from_str(&var) {
-            Ok(v) => v,
+pub fn env_replace<T: CustomDeserialize>(varname: &str, val: &mut T) {
+    if let Ok(var) = std::env::var(varname) {
+        match <T as CustomDeserialize>::deserialize(&var) {
+            Ok(v) => *val = v,
             Err(e) => {
-                panic!("Failed to parse environment variable {var}: {e}");
+                eprintln!("Failed to parse environment variable {varname}: {e}");
+                std::process::exit(1);
             }
         };
-
-        *val = newv;
     }
 }
+
+impl CustomDeserialize for String {
+    fn deserialize(s: &str) -> Result<Self, Box<dyn Error>> {
+        Ok(s.to_string())
+    }
+}
+
+impl CustomDeserialize for PathBuf {
+    fn deserialize(s: &str) -> Result<Self, Box<dyn Error>> {
+        Ok(PathBuf::from(s))
+    }
+}
+
+impl<T: CustomDeserialize> CustomDeserialize for Option<T> {
+    fn deserialize(s: &str) -> Result<Self, Box<dyn Error>> {
+        if s.is_empty() {
+            Ok(None)
+        } else {
+            Ok(Some(<T as CustomDeserialize>::deserialize(s)?))
+        }
+    }
+}
+
+impl CustomDeserialize for bool {
+    fn deserialize(s: &str) -> Result<Self, Box<dyn Error>> {
+        match s.to_lowercase().as_str() {
+            "1" | "true" | "yes" | "on" => Ok(true),
+            "0" | "false" | "no" | "off" => Ok(false),
+            _ => Err(format!("invalid boolean value: {s}").into()),
+        }
+    }
+}
+
+macro_rules! impl_custom_deserialize_int {
+    ( $($t:ty),* ) => {
+        $(
+            impl CustomDeserialize for $t {
+                fn deserialize(s: &str) -> Result<Self, Box<dyn Error>> {
+                    match s.parse::<$t>() {
+                        Ok(x) => Ok(x),
+                        Err(e) => Err(format!("failed to parse integer: {e}").into()),
+                    }
+                }
+            }
+        )*
+    };
+}
+
+impl_custom_deserialize_int!(u8, u16, u32, u64, i8, i16, i32, i64, usize, isize, f32, f64);
