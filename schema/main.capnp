@@ -335,7 +335,12 @@ struct JoinFailedMessage {
     reason @0 :JoinSessionFailedReason;
 }
 
+# Manual warp, independent of rooms
 struct WarpPlayerMessage {
+    session @0 :UInt64;
+}
+# Warp when room owner joins/leaves a level
+struct RoomWarpMessage {
     session @0 :UInt64;
 }
 
@@ -711,6 +716,7 @@ struct Message {
 
         joinFailed                  @67 :JoinFailedMessage;
         warpPlayer                  @68 :WarpPlayerMessage;
+        roomWarp                    @91 :RoomWarpMessage;
         playerCounts                @69 :PlayerCountsMessage;
         globalPlayers               @70 :GlobalPlayersMessage;
         levelList                   @71 :LevelListMessage;
