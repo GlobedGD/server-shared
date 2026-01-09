@@ -21,6 +21,7 @@ namespace schemas {
 
 CAPNP_DECLARE_SCHEMA(d8e63e340b51fcd5);
 CAPNP_DECLARE_SCHEMA(e8fbb9eb6533b3b5);
+CAPNP_DECLARE_SCHEMA(84a01da3617d5a99);
 CAPNP_DECLARE_SCHEMA(d0381709099cc27c);
 CAPNP_DECLARE_SCHEMA(c74467e7c2ba2ab4);
 enum class LoginFailedReason_c74467e7c2ba2ab4: uint16_t {
@@ -211,6 +212,21 @@ struct LoginMessage {
   };
 };
 
+struct ExtendedUserData {
+  ExtendedUserData() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(84a01da3617d5a99, 1, 3)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct LoginOkMessage {
   LoginOkMessage() = delete;
 
@@ -219,7 +235,7 @@ struct LoginOkMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 2, 5)
+    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 2, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -311,7 +327,7 @@ struct UserDataChangedMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(f2ba4cb8b539c421, 1, 3)
+    CAPNP_DECLARE_STRUCT_HEADER(f2ba4cb8b539c421, 0, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -2026,9 +2042,9 @@ private:
 };
 #endif  // !CAPNP_LITE
 
-class LoginOkMessage::Reader {
+class ExtendedUserData::Reader {
 public:
-  typedef LoginOkMessage Reads;
+  typedef ExtendedUserData Reads;
 
   Reader() = default;
   inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
@@ -2046,14 +2062,8 @@ public:
   inline bool hasNewToken() const;
   inline  ::capnp::Text::Reader getNewToken() const;
 
-  inline bool hasServers() const;
-  inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader getServers() const;
-
-  inline bool hasAllRoles() const;
-  inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader getAllRoles() const;
-
-  inline bool hasUserRoles() const;
-  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getUserRoles() const;
+  inline bool hasRoles() const;
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getRoles() const;
 
   inline bool hasNameColor() const;
   inline  ::capnp::Data::Reader getNameColor() const;
@@ -2072,12 +2082,6 @@ public:
 
   inline bool getCanRateFeatures() const;
 
-  inline  ::int32_t getFeaturedLevel() const;
-
-  inline  ::uint8_t getFeaturedLevelTier() const;
-
-  inline  ::uint32_t getFeaturedLevelEdition() const;
-
   inline bool getCanNameRooms() const;
 
 private:
@@ -2092,9 +2096,9 @@ private:
   friend class ::capnp::Orphanage;
 };
 
-class LoginOkMessage::Builder {
+class ExtendedUserData::Builder {
 public:
-  typedef LoginOkMessage Builds;
+  typedef ExtendedUserData Builds;
 
   Builder() = delete;  // Deleted to discourage incorrect usage.
                        // You can explicitly initialize to nullptr instead.
@@ -2115,27 +2119,13 @@ public:
   inline void adoptNewToken(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownNewToken();
 
-  inline bool hasServers();
-  inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder getServers();
-  inline void setServers( ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder initServers(unsigned int size);
-  inline void adoptServers(::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>> disownServers();
-
-  inline bool hasAllRoles();
-  inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder getAllRoles();
-  inline void setAllRoles( ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader value);
-  inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder initAllRoles(unsigned int size);
-  inline void adoptAllRoles(::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>> disownAllRoles();
-
-  inline bool hasUserRoles();
-  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getUserRoles();
-  inline void setUserRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
-  inline void setUserRoles(::kj::ArrayPtr<const  ::uint8_t> value);
-  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initUserRoles(unsigned int size);
-  inline void adoptUserRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownUserRoles();
+  inline bool hasRoles();
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getRoles();
+  inline void setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setRoles(::kj::ArrayPtr<const  ::uint8_t> value);
+  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initRoles(unsigned int size);
+  inline void adoptRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownRoles();
 
   inline bool hasNameColor();
   inline  ::capnp::Data::Builder getNameColor();
@@ -2165,6 +2155,109 @@ public:
   inline bool getCanRateFeatures();
   inline void setCanRateFeatures(bool value);
 
+  inline bool getCanNameRooms();
+  inline void setCanNameRooms(bool value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class ExtendedUserData::Pipeline {
+public:
+  typedef ExtendedUserData Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class LoginOkMessage::Reader {
+public:
+  typedef LoginOkMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasServers() const;
+  inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader getServers() const;
+
+  inline bool hasAllRoles() const;
+  inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader getAllRoles() const;
+
+  inline  ::int32_t getFeaturedLevel() const;
+
+  inline  ::uint8_t getFeaturedLevelTier() const;
+
+  inline  ::uint32_t getFeaturedLevelEdition() const;
+
+  inline bool hasUserData() const;
+  inline  ::globed::schema::main::ExtendedUserData::Reader getUserData() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class LoginOkMessage::Builder {
+public:
+  typedef LoginOkMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasServers();
+  inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder getServers();
+  inline void setServers( ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder initServers(unsigned int size);
+  inline void adoptServers(::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>> disownServers();
+
+  inline bool hasAllRoles();
+  inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder getAllRoles();
+  inline void setAllRoles( ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder initAllRoles(unsigned int size);
+  inline void adoptAllRoles(::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>> disownAllRoles();
+
   inline  ::int32_t getFeaturedLevel();
   inline void setFeaturedLevel( ::int32_t value);
 
@@ -2174,8 +2267,12 @@ public:
   inline  ::uint32_t getFeaturedLevelEdition();
   inline void setFeaturedLevelEdition( ::uint32_t value);
 
-  inline bool getCanNameRooms();
-  inline void setCanNameRooms(bool value);
+  inline bool hasUserData();
+  inline  ::globed::schema::main::ExtendedUserData::Builder getUserData();
+  inline void setUserData( ::globed::schema::main::ExtendedUserData::Reader value);
+  inline  ::globed::schema::main::ExtendedUserData::Builder initUserData();
+  inline void adoptUserData(::capnp::Orphan< ::globed::schema::main::ExtendedUserData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::ExtendedUserData> disownUserData();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -2195,6 +2292,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::globed::schema::main::ExtendedUserData::Pipeline getUserData();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -2630,28 +2728,8 @@ public:
   }
 #endif  // !CAPNP_LITE
 
-  inline bool hasRoles() const;
-  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader getRoles() const;
-
-  inline bool hasNameColor() const;
-  inline  ::capnp::Data::Reader getNameColor() const;
-
-  inline bool getIsModerator() const;
-
-  inline bool getCanMute() const;
-
-  inline bool getCanBan() const;
-
-  inline bool getCanSetPassword() const;
-
-  inline bool getCanEditRoles() const;
-
-  inline bool getCanSendFeatures() const;
-
-  inline bool getCanRateFeatures() const;
-
-  inline bool hasNewToken() const;
-  inline  ::capnp::Text::Reader getNewToken() const;
+  inline bool hasUserData() const;
+  inline  ::globed::schema::main::ExtendedUserData::Reader getUserData() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -2681,48 +2759,12 @@ public:
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
 
-  inline bool hasRoles();
-  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder getRoles();
-  inline void setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
-  inline void setRoles(::kj::ArrayPtr<const  ::uint8_t> value);
-  inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder initRoles(unsigned int size);
-  inline void adoptRoles(::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value);
-  inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> disownRoles();
-
-  inline bool hasNameColor();
-  inline  ::capnp::Data::Builder getNameColor();
-  inline void setNameColor( ::capnp::Data::Reader value);
-  inline  ::capnp::Data::Builder initNameColor(unsigned int size);
-  inline void adoptNameColor(::capnp::Orphan< ::capnp::Data>&& value);
-  inline ::capnp::Orphan< ::capnp::Data> disownNameColor();
-
-  inline bool getIsModerator();
-  inline void setIsModerator(bool value);
-
-  inline bool getCanMute();
-  inline void setCanMute(bool value);
-
-  inline bool getCanBan();
-  inline void setCanBan(bool value);
-
-  inline bool getCanSetPassword();
-  inline void setCanSetPassword(bool value);
-
-  inline bool getCanEditRoles();
-  inline void setCanEditRoles(bool value);
-
-  inline bool getCanSendFeatures();
-  inline void setCanSendFeatures(bool value);
-
-  inline bool getCanRateFeatures();
-  inline void setCanRateFeatures(bool value);
-
-  inline bool hasNewToken();
-  inline  ::capnp::Text::Builder getNewToken();
-  inline void setNewToken( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initNewToken(unsigned int size);
-  inline void adoptNewToken(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownNewToken();
+  inline bool hasUserData();
+  inline  ::globed::schema::main::ExtendedUserData::Builder getUserData();
+  inline void setUserData( ::globed::schema::main::ExtendedUserData::Reader value);
+  inline  ::globed::schema::main::ExtendedUserData::Builder initUserData();
+  inline void adoptUserData(::capnp::Orphan< ::globed::schema::main::ExtendedUserData>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::ExtendedUserData> disownUserData();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -2742,6 +2784,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::globed::schema::main::ExtendedUserData::Pipeline getUserData();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -12211,304 +12254,318 @@ inline ::capnp::Orphan< ::globed::schema::main::PlayerAccountData> LoginMessage:
       ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 
-inline bool LoginOkMessage::Reader::hasNewToken() const {
+inline bool ExtendedUserData::Reader::hasNewToken() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline bool LoginOkMessage::Builder::hasNewToken() {
+inline bool ExtendedUserData::Builder::hasNewToken() {
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::Text::Reader LoginOkMessage::Reader::getNewToken() const {
+inline  ::capnp::Text::Reader ExtendedUserData::Reader::getNewToken() const {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::capnp::Text::Builder LoginOkMessage::Builder::getNewToken() {
+inline  ::capnp::Text::Builder ExtendedUserData::Builder::getNewToken() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void LoginOkMessage::Builder::setNewToken( ::capnp::Text::Reader value) {
+inline void ExtendedUserData::Builder::setNewToken( ::capnp::Text::Reader value) {
   ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline  ::capnp::Text::Builder LoginOkMessage::Builder::initNewToken(unsigned int size) {
+inline  ::capnp::Text::Builder ExtendedUserData::Builder::initNewToken(unsigned int size) {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), size);
 }
-inline void LoginOkMessage::Builder::adoptNewToken(
+inline void ExtendedUserData::Builder::adoptNewToken(
     ::capnp::Orphan< ::capnp::Text>&& value) {
   ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::Text> LoginOkMessage::Builder::disownNewToken() {
+inline ::capnp::Orphan< ::capnp::Text> ExtendedUserData::Builder::disownNewToken() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline bool LoginOkMessage::Reader::hasServers() const {
+inline bool ExtendedUserData::Reader::hasRoles() const {
   return !_reader.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
 }
-inline bool LoginOkMessage::Builder::hasServers() {
+inline bool ExtendedUserData::Builder::hasRoles() {
   return !_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader LoginOkMessage::Reader::getServers() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader ExtendedUserData::Reader::getRoles() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
-inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::getServers() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder ExtendedUserData::Builder::getRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
-inline void LoginOkMessage::Builder::setServers( ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+inline void ExtendedUserData::Builder::setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS), value);
 }
-inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::initServers(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+inline void ExtendedUserData::Builder::setRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder ExtendedUserData::Builder::initRoles(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS), size);
 }
-inline void LoginOkMessage::Builder::adoptServers(
-    ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+inline void ExtendedUserData::Builder::adoptRoles(
+    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>> LoginOkMessage::Builder::disownServers() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> ExtendedUserData::Builder::disownRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
-inline bool LoginOkMessage::Reader::hasAllRoles() const {
+inline bool ExtendedUserData::Reader::hasNameColor() const {
   return !_reader.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
-inline bool LoginOkMessage::Builder::hasAllRoles() {
+inline bool ExtendedUserData::Builder::hasNameColor() {
   return !_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader LoginOkMessage::Reader::getAllRoles() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+inline  ::capnp::Data::Reader ExtendedUserData::Reader::getNameColor() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
-inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::getAllRoles() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+inline  ::capnp::Data::Builder ExtendedUserData::Builder::getNameColor() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
-inline void LoginOkMessage::Builder::setAllRoles( ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+inline void ExtendedUserData::Builder::setNameColor( ::capnp::Data::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS), value);
 }
-inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::initAllRoles(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+inline  ::capnp::Data::Builder ExtendedUserData::Builder::initNameColor(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS), size);
 }
-inline void LoginOkMessage::Builder::adoptAllRoles(
-    ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+inline void ExtendedUserData::Builder::adoptNameColor(
+    ::capnp::Orphan< ::capnp::Data>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>> LoginOkMessage::Builder::disownAllRoles() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+inline ::capnp::Orphan< ::capnp::Data> ExtendedUserData::Builder::disownNameColor() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
-inline bool LoginOkMessage::Reader::hasUserRoles() const {
-  return !_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
-}
-inline bool LoginOkMessage::Builder::hasUserRoles() {
-  return !_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
-}
-inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader LoginOkMessage::Reader::getUserRoles() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
-}
-inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder LoginOkMessage::Builder::getUserRoles() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
-}
-inline void LoginOkMessage::Builder::setUserRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
-}
-inline void LoginOkMessage::Builder::setUserRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
-}
-inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder LoginOkMessage::Builder::initUserRoles(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), size);
-}
-inline void LoginOkMessage::Builder::adoptUserRoles(
-    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> LoginOkMessage::Builder::disownUserRoles() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
-      ::capnp::bounded<3>() * ::capnp::POINTERS));
-}
-
-inline bool LoginOkMessage::Reader::hasNameColor() const {
-  return !_reader.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
-}
-inline bool LoginOkMessage::Builder::hasNameColor() {
-  return !_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
-}
-inline  ::capnp::Data::Reader LoginOkMessage::Reader::getNameColor() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
-}
-inline  ::capnp::Data::Builder LoginOkMessage::Builder::getNameColor() {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
-}
-inline void LoginOkMessage::Builder::setNameColor( ::capnp::Data::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS), value);
-}
-inline  ::capnp::Data::Builder LoginOkMessage::Builder::initNameColor(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS), size);
-}
-inline void LoginOkMessage::Builder::adoptNameColor(
-    ::capnp::Orphan< ::capnp::Data>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::capnp::Data> LoginOkMessage::Builder::disownNameColor() {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
-      ::capnp::bounded<4>() * ::capnp::POINTERS));
-}
-
-inline bool LoginOkMessage::Reader::getIsModerator() const {
+inline bool ExtendedUserData::Reader::getIsModerator() const {
   return _reader.getDataField<bool>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
 
-inline bool LoginOkMessage::Builder::getIsModerator() {
+inline bool ExtendedUserData::Builder::getIsModerator() {
   return _builder.getDataField<bool>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
-inline void LoginOkMessage::Builder::setIsModerator(bool value) {
+inline void ExtendedUserData::Builder::setIsModerator(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool LoginOkMessage::Reader::getCanMute() const {
+inline bool ExtendedUserData::Reader::getCanMute() const {
   return _reader.getDataField<bool>(
       ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
 
-inline bool LoginOkMessage::Builder::getCanMute() {
+inline bool ExtendedUserData::Builder::getCanMute() {
   return _builder.getDataField<bool>(
       ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
-inline void LoginOkMessage::Builder::setCanMute(bool value) {
+inline void ExtendedUserData::Builder::setCanMute(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool LoginOkMessage::Reader::getCanBan() const {
+inline bool ExtendedUserData::Reader::getCanBan() const {
   return _reader.getDataField<bool>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS);
 }
 
-inline bool LoginOkMessage::Builder::getCanBan() {
+inline bool ExtendedUserData::Builder::getCanBan() {
   return _builder.getDataField<bool>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS);
 }
-inline void LoginOkMessage::Builder::setCanBan(bool value) {
+inline void ExtendedUserData::Builder::setCanBan(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool LoginOkMessage::Reader::getCanSetPassword() const {
+inline bool ExtendedUserData::Reader::getCanSetPassword() const {
   return _reader.getDataField<bool>(
       ::capnp::bounded<3>() * ::capnp::ELEMENTS);
 }
 
-inline bool LoginOkMessage::Builder::getCanSetPassword() {
+inline bool ExtendedUserData::Builder::getCanSetPassword() {
   return _builder.getDataField<bool>(
       ::capnp::bounded<3>() * ::capnp::ELEMENTS);
 }
-inline void LoginOkMessage::Builder::setCanSetPassword(bool value) {
+inline void ExtendedUserData::Builder::setCanSetPassword(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool LoginOkMessage::Reader::getCanEditRoles() const {
+inline bool ExtendedUserData::Reader::getCanEditRoles() const {
   return _reader.getDataField<bool>(
       ::capnp::bounded<4>() * ::capnp::ELEMENTS);
 }
 
-inline bool LoginOkMessage::Builder::getCanEditRoles() {
+inline bool ExtendedUserData::Builder::getCanEditRoles() {
   return _builder.getDataField<bool>(
       ::capnp::bounded<4>() * ::capnp::ELEMENTS);
 }
-inline void LoginOkMessage::Builder::setCanEditRoles(bool value) {
+inline void ExtendedUserData::Builder::setCanEditRoles(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool LoginOkMessage::Reader::getCanSendFeatures() const {
+inline bool ExtendedUserData::Reader::getCanSendFeatures() const {
   return _reader.getDataField<bool>(
       ::capnp::bounded<5>() * ::capnp::ELEMENTS);
 }
 
-inline bool LoginOkMessage::Builder::getCanSendFeatures() {
+inline bool ExtendedUserData::Builder::getCanSendFeatures() {
   return _builder.getDataField<bool>(
       ::capnp::bounded<5>() * ::capnp::ELEMENTS);
 }
-inline void LoginOkMessage::Builder::setCanSendFeatures(bool value) {
+inline void ExtendedUserData::Builder::setCanSendFeatures(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool LoginOkMessage::Reader::getCanRateFeatures() const {
+inline bool ExtendedUserData::Reader::getCanRateFeatures() const {
   return _reader.getDataField<bool>(
       ::capnp::bounded<6>() * ::capnp::ELEMENTS);
 }
 
-inline bool LoginOkMessage::Builder::getCanRateFeatures() {
+inline bool ExtendedUserData::Builder::getCanRateFeatures() {
   return _builder.getDataField<bool>(
       ::capnp::bounded<6>() * ::capnp::ELEMENTS);
 }
-inline void LoginOkMessage::Builder::setCanRateFeatures(bool value) {
+inline void ExtendedUserData::Builder::setCanRateFeatures(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
 }
 
+inline bool ExtendedUserData::Reader::getCanNameRooms() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+
+inline bool ExtendedUserData::Builder::getCanNameRooms() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedUserData::Builder::setCanNameRooms(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginOkMessage::Reader::hasServers() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginOkMessage::Builder::hasServers() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader LoginOkMessage::Reader::getServers() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::getServers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void LoginOkMessage::Builder::setServers( ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::initServers(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void LoginOkMessage::Builder::adoptServers(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>> LoginOkMessage::Builder::disownServers() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::GameServer,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool LoginOkMessage::Reader::hasAllRoles() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginOkMessage::Builder::hasAllRoles() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader LoginOkMessage::Reader::getAllRoles() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::getAllRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void LoginOkMessage::Builder::setAllRoles( ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>::Builder LoginOkMessage::Builder::initAllRoles(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void LoginOkMessage::Builder::adoptAllRoles(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>> LoginOkMessage::Builder::disownAllRoles() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::shared::UserRole,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
 inline  ::int32_t LoginOkMessage::Reader::getFeaturedLevel() const {
   return _reader.getDataField< ::int32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
 
 inline  ::int32_t LoginOkMessage::Builder::getFeaturedLevel() {
   return _builder.getDataField< ::int32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
 inline void LoginOkMessage::Builder::setFeaturedLevel( ::int32_t value) {
   _builder.setDataField< ::int32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint8_t LoginOkMessage::Reader::getFeaturedLevelTier() const {
   return _reader.getDataField< ::uint8_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
 }
 
 inline  ::uint8_t LoginOkMessage::Builder::getFeaturedLevelTier() {
   return _builder.getDataField< ::uint8_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
 }
 inline void LoginOkMessage::Builder::setFeaturedLevelTier( ::uint8_t value) {
   _builder.setDataField< ::uint8_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint32_t LoginOkMessage::Reader::getFeaturedLevelEdition() const {
@@ -12525,18 +12582,43 @@ inline void LoginOkMessage::Builder::setFeaturedLevelEdition( ::uint32_t value) 
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
-inline bool LoginOkMessage::Reader::getCanNameRooms() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+inline bool LoginOkMessage::Reader::hasUserData() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
-
-inline bool LoginOkMessage::Builder::getCanNameRooms() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+inline bool LoginOkMessage::Builder::hasUserData() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
-inline void LoginOkMessage::Builder::setCanNameRooms(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<7>() * ::capnp::ELEMENTS, value);
+inline  ::globed::schema::main::ExtendedUserData::Reader LoginOkMessage::Reader::getUserData() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::ExtendedUserData::Builder LoginOkMessage::Builder::getUserData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::ExtendedUserData::Pipeline LoginOkMessage::Pipeline::getUserData() {
+  return  ::globed::schema::main::ExtendedUserData::Pipeline(_typeless.getPointerField(2));
+}
+#endif  // !CAPNP_LITE
+inline void LoginOkMessage::Builder::setUserData( ::globed::schema::main::ExtendedUserData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::ExtendedUserData::Builder LoginOkMessage::Builder::initUserData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void LoginOkMessage::Builder::adoptUserData(
+    ::capnp::Orphan< ::globed::schema::main::ExtendedUserData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::ExtendedUserData> LoginOkMessage::Builder::disownUserData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
 inline  ::globed::schema::main::LoginFailedReason LoginFailedMessage::Reader::getReason() const {
@@ -12717,208 +12799,43 @@ inline ::capnp::Orphan< ::capnp::List< ::globed::schema::shared::GameServer,  ::
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline bool UserDataChangedMessage::Reader::hasRoles() const {
+inline bool UserDataChangedMessage::Reader::hasUserData() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline bool UserDataChangedMessage::Builder::hasRoles() {
+inline bool UserDataChangedMessage::Builder::hasUserData() {
   return !_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
 }
-inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader UserDataChangedMessage::Reader::getRoles() const {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+inline  ::globed::schema::main::ExtendedUserData::Reader UserDataChangedMessage::Reader::getUserData() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::get(_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder UserDataChangedMessage::Builder::getRoles() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+inline  ::globed::schema::main::ExtendedUserData::Builder UserDataChangedMessage::Builder::getUserData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::get(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline void UserDataChangedMessage::Builder::setRoles( ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+#if !CAPNP_LITE
+inline  ::globed::schema::main::ExtendedUserData::Pipeline UserDataChangedMessage::Pipeline::getUserData() {
+  return  ::globed::schema::main::ExtendedUserData::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void UserDataChangedMessage::Builder::setUserData( ::globed::schema::main::ExtendedUserData::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::set(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), value);
 }
-inline void UserDataChangedMessage::Builder::setRoles(::kj::ArrayPtr<const  ::uint8_t> value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+inline  ::globed::schema::main::ExtendedUserData::Builder UserDataChangedMessage::Builder::initUserData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
-inline  ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>::Builder UserDataChangedMessage::Builder::initRoles(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
-      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
-}
-inline void UserDataChangedMessage::Builder::adoptRoles(
-    ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+inline void UserDataChangedMessage::Builder::adoptUserData(
+    ::capnp::Orphan< ::globed::schema::main::ExtendedUserData>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::adopt(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
 }
-inline ::capnp::Orphan< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>> UserDataChangedMessage::Builder::disownRoles() {
-  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint8_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+inline ::capnp::Orphan< ::globed::schema::main::ExtendedUserData> UserDataChangedMessage::Builder::disownUserData() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline bool UserDataChangedMessage::Reader::hasNameColor() const {
-  return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
-}
-inline bool UserDataChangedMessage::Builder::hasNameColor() {
-  return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
-}
-inline  ::capnp::Data::Reader UserDataChangedMessage::Reader::getNameColor() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-inline  ::capnp::Data::Builder UserDataChangedMessage::Builder::getNameColor() {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-inline void UserDataChangedMessage::Builder::setNameColor( ::capnp::Data::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
-}
-inline  ::capnp::Data::Builder UserDataChangedMessage::Builder::initNameColor(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
-}
-inline void UserDataChangedMessage::Builder::adoptNameColor(
-    ::capnp::Orphan< ::capnp::Data>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::capnp::Data> UserDataChangedMessage::Builder::disownNameColor() {
-  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-
-inline bool UserDataChangedMessage::Reader::getIsModerator() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-
-inline bool UserDataChangedMessage::Builder::getIsModerator() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-inline void UserDataChangedMessage::Builder::setIsModerator(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool UserDataChangedMessage::Reader::getCanMute() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
-}
-
-inline bool UserDataChangedMessage::Builder::getCanMute() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
-}
-inline void UserDataChangedMessage::Builder::setCanMute(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool UserDataChangedMessage::Reader::getCanBan() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
-}
-
-inline bool UserDataChangedMessage::Builder::getCanBan() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
-}
-inline void UserDataChangedMessage::Builder::setCanBan(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool UserDataChangedMessage::Reader::getCanSetPassword() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
-}
-
-inline bool UserDataChangedMessage::Builder::getCanSetPassword() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
-}
-inline void UserDataChangedMessage::Builder::setCanSetPassword(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool UserDataChangedMessage::Reader::getCanEditRoles() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
-}
-
-inline bool UserDataChangedMessage::Builder::getCanEditRoles() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
-}
-inline void UserDataChangedMessage::Builder::setCanEditRoles(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool UserDataChangedMessage::Reader::getCanSendFeatures() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
-}
-
-inline bool UserDataChangedMessage::Builder::getCanSendFeatures() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<5>() * ::capnp::ELEMENTS);
-}
-inline void UserDataChangedMessage::Builder::setCanSendFeatures(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<5>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool UserDataChangedMessage::Reader::getCanRateFeatures() const {
-  return _reader.getDataField<bool>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
-}
-
-inline bool UserDataChangedMessage::Builder::getCanRateFeatures() {
-  return _builder.getDataField<bool>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
-}
-inline void UserDataChangedMessage::Builder::setCanRateFeatures(bool value) {
-  _builder.setDataField<bool>(
-      ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool UserDataChangedMessage::Reader::hasNewToken() const {
-  return !_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
-}
-inline bool UserDataChangedMessage::Builder::hasNewToken() {
-  return !_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
-}
-inline  ::capnp::Text::Reader UserDataChangedMessage::Reader::getNewToken() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
-}
-inline  ::capnp::Text::Builder UserDataChangedMessage::Builder::getNewToken() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
-}
-inline void UserDataChangedMessage::Builder::setNewToken( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
-}
-inline  ::capnp::Text::Builder UserDataChangedMessage::Builder::initNewToken(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
-}
-inline void UserDataChangedMessage::Builder::adoptNewToken(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::capnp::Text> UserDataChangedMessage::Builder::disownNewToken() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
 inline bool UpdateOwnDataMessage::Reader::hasIcons() const {

@@ -28,24 +28,29 @@ struct LoginMessage {
     }
 }
 
-struct LoginOkMessage {
-    newToken @0 :Text;
-    servers  @1 :List(Shared.GameServer);
-    allRoles @2 :List(Shared.UserRole);
-    userRoles @3 :List(UInt8);
-    nameColor @4 :Data;
-    isModerator @5 :Bool;
-    canMute @6 :Bool;
-    canBan @7 :Bool;
-    canSetPassword @8 :Bool;
-    canEditRoles @9 :Bool;
-    canSendFeatures @10 :Bool;
-    canRateFeatures @11 :Bool;
-    canNameRooms @15 :Bool;
+struct ExtendedUserData {
+    newToken        @0 :Text;
+    roles           @1 :List(UInt8);
+    nameColor       @2 :Data;
+    isModerator     @3 :Bool;
+    canMute         @4 :Bool;
+    canBan          @5 :Bool;
+    canSetPassword  @6 :Bool;
+    canEditRoles    @7 :Bool;
+    canSendFeatures @8 :Bool;
+    canRateFeatures @9 :Bool;
+    canNameRooms    @10 :Bool;
+}
 
-    featuredLevel @12 :Int32;
-    featuredLevelTier @13 :UInt8;
-    featuredLevelEdition @14 :UInt32;
+struct LoginOkMessage {
+    servers  @0 :List(Shared.GameServer);
+    allRoles @1 :List(Shared.UserRole);
+
+    featuredLevel @2 :Int32;
+    featuredLevelTier @3 :UInt8;
+    featuredLevelEdition @4 :UInt32;
+
+    userData @5 :ExtendedUserData;
 }
 
 enum LoginFailedReason {
@@ -82,16 +87,7 @@ struct ServersChangedMessage {
 }
 
 struct UserDataChangedMessage {
-    roles @0 :List(UInt8);
-    nameColor @1 :Data;
-    isModerator @2 :Bool;
-    canMute @3 :Bool;
-    canBan @4 :Bool;
-    canSetPassword @5 :Bool;
-    canEditRoles @6 :Bool;
-    canSendFeatures @7 :Bool;
-    canRateFeatures @8 :Bool;
-    newToken @9 :Text;
+    userData @0 :ExtendedUserData;
 }
 
 # General messages
