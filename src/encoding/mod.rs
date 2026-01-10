@@ -1,107 +1,11 @@
 use std::{any::Any, fmt::Display};
 
+pub use allocators::{CapnpAlloc, CapnpBorrowAlloc, CapnpHeapAlloc};
 use capnp::message::{Allocator, Builder};
 use qunet::buffers::ByteReaderError;
 use thiserror::Error;
 
-#[repr(align(8))]
-pub struct CapnpAlloc<const N: usize> {
-    buf: [u8; N],
-    called: bool,
-}
-
-unsafe impl<const N: usize> Allocator for CapnpAlloc<N> {
-    #[inline]
-    fn allocate_segment(&mut self, size_words: u32) -> (*mut u8, u32) {
-        if self.called {
-            panic!("CapnpAlloc::allocate_segment called multiple times");
-        }
-
-        let size = (size_words * 8) as usize;
-
-        self.called = true;
-
-        if size > N {
-            panic!("Not enough space in CapnpAlloc");
-        }
-
-        (self.buf.as_mut_ptr(), (N / 8) as u32)
-    }
-
-    #[inline]
-    unsafe fn deallocate_segment(&mut self, _ptr: *mut u8, _word_size: u32, _words_used: u32) {}
-}
-
-impl<const N: usize> CapnpAlloc<N> {
-    pub const fn new() -> Self {
-        Self {
-            buf: [0; N],
-            called: false,
-        }
-    }
-
-    pub fn into_builder(self) -> Builder<Self> {
-        Builder::new(self)
-    }
-}
-
-impl<const N: usize> Default for CapnpAlloc<N> {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-pub struct CapnpBorrowAlloc<'a> {
-    buf: &'a mut [u8],
-    called: bool,
-}
-
-unsafe impl<'a> Allocator for CapnpBorrowAlloc<'a> {
-    #[inline]
-    fn allocate_segment(&mut self, size_words: u32) -> (*mut u8, u32) {
-        if self.called {
-            panic!("CapnpAlloc::allocate_segment called multiple times");
-        }
-
-        let size = (size_words * 8) as usize;
-
-        self.called = true;
-
-        if size > self.buf.len() {
-            panic!("Not enough space in CapnpAlloc");
-        }
-
-        (self.buf.as_mut_ptr(), (self.buf.len() / 8) as u32)
-    }
-
-    #[inline]
-    unsafe fn deallocate_segment(&mut self, _ptr: *mut u8, _word_size: u32, _words_used: u32) {}
-}
-
-impl<'a> CapnpBorrowAlloc<'a> {
-    pub fn new(buf: &'a mut [u8]) -> Self {
-        // zero the buffer
-        buf.fill(0);
-
-        // safety: buffer is zeroed
-        unsafe { Self::new_assert_zeroed(buf) }
-    }
-
-    pub unsafe fn new_assert_zeroed(buf: &'a mut [u8]) -> Self {
-        #[cfg(debug_assertions)]
-        {
-            if !buf.iter().all(|&x| x == 0) {
-                panic!("CapnpBorrowAlloc buffer must be zeroed");
-            }
-        }
-
-        Self { buf, called: false }
-    }
-
-    pub fn into_builder(self) -> Builder<Self> {
-        Builder::new(self)
-    }
-}
+mod allocators;
 
 // Encoding macros
 
@@ -282,7 +186,7 @@ macro_rules! encode_with_builder {
 #[macro_export]
 macro_rules! encode_message_unsafe {
     ($($schema:ident)::*, $srvr:expr, $estcap:expr, $msg:ident => $code:expr) => {{
-        let mut builder = $crate::encoding::CapnpAlloc::<$estcap>::new().into_builder();
+        let mut builder = $crate::encoding::builder($crate::encoding::CapnpAlloc::<$estcap>::new());
 
         $crate::encode_with_builder!($($schema)::*, $srvr, $estcap, builder, $msg => $code)
     }};
@@ -305,9 +209,20 @@ macro_rules! encode_message_heap {
         let wnd = unsafe { buffer.write_window(estcap).unwrap() };
         debug_assert!(wnd.len() >= estcap);
 
-        let mut builder = $crate::encoding::CapnpBorrowAlloc::new(wnd).into_builder();
+        let mut builder = $crate::encoding::builder_borrow(wnd);
 
         $crate::encode_with_builder!($($schema)::*, server, estcap, builder, $msg => $code)
+    }};
+}
+
+/// Encodes a message using the default capnp allocation arena.
+/// This is the least efficient method, but it cannot fail and does not require you to pre-calculate the needed capacity.
+#[macro_export]
+macro_rules! encode_message_dyn {
+    ($($schema:ident)::*, $srvr:expr, $msg:ident => $code:expr) => {{
+        let mut builder = $crate::encoding::builder_dyn();
+
+        $crate::encode_with_builder!($($schema)::*, $srvr, usize::MAX, builder, $msg => $code)
     }};
 }
 
@@ -356,4 +271,16 @@ impl MaybeIntoResult for () {
     fn _maybe_into_result(self) -> Result<(), DataDecodeError> {
         Ok(())
     }
+}
+
+pub fn builder<A: Allocator>(a: A) -> Builder<A> {
+    Builder::new(a)
+}
+
+pub fn builder_dyn() -> Builder<CapnpHeapAlloc> {
+    Builder::new(CapnpHeapAlloc::new())
+}
+
+pub fn builder_borrow(wnd: &mut [u8]) -> Builder<CapnpBorrowAlloc<'_>> {
+    Builder::new(CapnpBorrowAlloc::new(wnd))
 }
