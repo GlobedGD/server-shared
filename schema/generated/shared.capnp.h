@@ -736,6 +736,8 @@ public:
 
   inline bool getHideRoles() const;
 
+  inline bool getDisableNotices() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -772,6 +774,9 @@ public:
 
   inline bool getHideRoles();
   inline void setHideRoles(bool value);
+
+  inline bool getDisableNotices();
+  inline void setDisableNotices(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1529,6 +1534,20 @@ inline bool UserSettings::Builder::getHideRoles() {
 inline void UserSettings::Builder::setHideRoles(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserSettings::Reader::getDisableNotices() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserSettings::Builder::getDisableNotices() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void UserSettings::Builder::setDisableNotices(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
 }
 
 }  // namespace

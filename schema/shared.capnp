@@ -63,7 +63,8 @@ struct UserRole {
 }
 
 struct UserSettings {
-    hideInLevel @0 :Bool = false;
-    hideInMenus @1 :Bool = false;
-    hideRoles   @2 :Bool = false;
+    hideInLevel    @0 :Bool = false;
+    hideInMenus    @1 :Bool = false;
+    hideRoles      @2 :Bool = false;
+    disableNotices @3 :Bool = false;
 }
