@@ -2,6 +2,7 @@
 /// top 8 bits: server ID
 /// next 24 bits: room ID
 /// last 32 bits: level ID
+#[derive(Clone, Copy, Eq, PartialEq, Ord, PartialOrd, Hash, Debug)]
 pub struct SessionId(pub u64);
 
 impl SessionId {
