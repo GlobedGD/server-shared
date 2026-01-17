@@ -20,6 +20,7 @@ pub(crate) mod srvc_capnp;
 pub(crate) mod shared_capnp;
 
 pub mod config;
+mod constants;
 pub mod data;
 pub mod encoding;
 pub mod hmac_signer;
@@ -33,6 +34,7 @@ mod user_settings;
 
 pub use qunet;
 
+pub use constants::*;
 pub use multi_color::*;
 pub use session_id::SessionId;
 pub use typemap::TypeMap;

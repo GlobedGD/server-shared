@@ -7,7 +7,7 @@ use base64::{Engine, engine::general_purpose::URL_SAFE_NO_PAD as b64e};
 use qunet::buffers::{ByteReader, ByteReaderError, ByteWriter};
 use thiserror::Error;
 
-use crate::{MultiColor, MultiColorDecodeError, hmac_signer::HmacSigner};
+use crate::{MultiColor, MultiColorDecodeError, UsernameString, hmac_signer::HmacSigner};
 
 pub struct TokenIssuer {
     signer: HmacSigner,
@@ -18,7 +18,7 @@ pub struct TokenIssuer {
 pub struct TokenData {
     pub account_id: i32,
     pub user_id: i32,
-    pub username: heapless::String<16>,
+    pub username: UsernameString,
     pub roles_str: Option<Box<str>>,
     pub name_color: Option<MultiColor>,
 }
