@@ -151,11 +151,15 @@ macro_rules! encode_with_builder {
 
             #[cfg(debug_assertions)]
             {
-                if ser_size <= $estcap {
+                let is_dyn = $estcap == usize::MAX;
+
+                if ser_size <= $estcap && !is_dyn {
                     let wasted_bytes = $estcap - ser_size as usize;
                     let wasted_percent = (wasted_bytes as f64 / $estcap as f64) * 100.0;
 
                     tracing::trace!("Encoding used {}/{} bytes ({wasted_percent:.1}% wasted) ({}:{})", ser_size, $estcap, file!(), line!());
+                } else if is_dyn {
+                    tracing::trace!("Encoding used {} bytes (dyn allocation) ({}:{})", ser_size, file!(), line!());
                 } else {
                     tracing::warn!("Encoding used {}/{} bytes which is a bug ({}:{})", ser_size, $estcap, file!(), line!());
                 }
