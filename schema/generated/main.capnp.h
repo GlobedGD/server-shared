@@ -20,6 +20,18 @@ namespace capnp {
 namespace schemas {
 
 CAPNP_DECLARE_SCHEMA(d8e63e340b51fcd5);
+CAPNP_DECLARE_SCHEMA(eb5b9b0121a6d140);
+enum class Platform_eb5b9b0121a6d140: uint16_t {
+  UNKNOWN,
+  WINDOWS,
+  WINE,
+  ANDROID32,
+  ANDROID64,
+  MAC_INTEL,
+  MAC_ARM,
+  IOS,
+};
+CAPNP_DECLARE_ENUM(Platform, eb5b9b0121a6d140);
 CAPNP_DECLARE_SCHEMA(e8fbb9eb6533b3b5);
 CAPNP_DECLARE_SCHEMA(84a01da3617d5a99);
 CAPNP_DECLARE_SCHEMA(d0381709099cc27c);
@@ -192,6 +204,8 @@ struct PlayerAccountData {
   };
 };
 
+typedef ::capnp::schemas::Platform_eb5b9b0121a6d140 Platform;
+
 struct LoginMessage {
   LoginMessage() = delete;
 
@@ -205,7 +219,7 @@ struct LoginMessage {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e8fbb9eb6533b3b5, 1, 4)
+    CAPNP_DECLARE_STRUCT_HEADER(e8fbb9eb6533b3b5, 1, 6)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1937,6 +1951,14 @@ public:
   inline bool hasPlain() const;
   inline  ::globed::schema::main::PlayerAccountData::Reader getPlain() const;
 
+  inline  ::globed::schema::main::Platform getPlatform() const;
+
+  inline bool hasGeodeVersion() const;
+  inline  ::capnp::Text::Reader getGeodeVersion() const;
+
+  inline bool hasGlobedVersion() const;
+  inline  ::capnp::Text::Reader getGlobedVersion() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2013,6 +2035,23 @@ public:
   inline  ::globed::schema::main::PlayerAccountData::Builder initPlain();
   inline void adoptPlain(::capnp::Orphan< ::globed::schema::main::PlayerAccountData>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::PlayerAccountData> disownPlain();
+
+  inline  ::globed::schema::main::Platform getPlatform();
+  inline void setPlatform( ::globed::schema::main::Platform value);
+
+  inline bool hasGeodeVersion();
+  inline  ::capnp::Text::Builder getGeodeVersion();
+  inline void setGeodeVersion( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initGeodeVersion(unsigned int size);
+  inline void adoptGeodeVersion(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownGeodeVersion();
+
+  inline bool hasGlobedVersion();
+  inline  ::capnp::Text::Builder getGlobedVersion();
+  inline void setGlobedVersion( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initGlobedVersion(unsigned int size);
+  inline void adoptGlobedVersion(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownGlobedVersion();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -12252,6 +12291,88 @@ inline ::capnp::Orphan< ::globed::schema::main::PlayerAccountData> LoginMessage:
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::PlayerAccountData>::disown(_builder.getPointerField(
       ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+
+inline  ::globed::schema::main::Platform LoginMessage::Reader::getPlatform() const {
+  return _reader.getDataField< ::globed::schema::main::Platform>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline  ::globed::schema::main::Platform LoginMessage::Builder::getPlatform() {
+  return _builder.getDataField< ::globed::schema::main::Platform>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void LoginMessage::Builder::setPlatform( ::globed::schema::main::Platform value) {
+  _builder.setDataField< ::globed::schema::main::Platform>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginMessage::Reader::hasGeodeVersion() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginMessage::Builder::hasGeodeVersion() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader LoginMessage::Reader::getGeodeVersion() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder LoginMessage::Builder::getGeodeVersion() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS));
+}
+inline void LoginMessage::Builder::setGeodeVersion( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder LoginMessage::Builder::initGeodeVersion(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS), size);
+}
+inline void LoginMessage::Builder::adoptGeodeVersion(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> LoginMessage::Builder::disownGeodeVersion() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS));
+}
+
+inline bool LoginMessage::Reader::hasGlobedVersion() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginMessage::Builder::hasGlobedVersion() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<5>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader LoginMessage::Reader::getGlobedVersion() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<5>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder LoginMessage::Builder::getGlobedVersion() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<5>() * ::capnp::POINTERS));
+}
+inline void LoginMessage::Builder::setGlobedVersion( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<5>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder LoginMessage::Builder::initGlobedVersion(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<5>() * ::capnp::POINTERS), size);
+}
+inline void LoginMessage::Builder::adoptGlobedVersion(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<5>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> LoginMessage::Builder::disownGlobedVersion() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<5>() * ::capnp::POINTERS));
 }
 
 inline bool ExtendedUserData::Reader::hasNewToken() const {

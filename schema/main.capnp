@@ -15,6 +15,17 @@ struct PlayerAccountData {
 
 # Login messages
 
+enum Platform {
+    unknown     @0;
+    windows     @1;
+    wine        @2;
+    android32   @3;
+    android64   @4;
+    macIntel    @5;
+    macArm      @6;
+    ios         @7;
+}
+
 struct LoginMessage {
     accountId @0 :Int32;
     icons @1 :Shared.PlayerIconData;
@@ -26,6 +37,10 @@ struct LoginMessage {
         argon  @5 :Text;
         plain  @6 :PlayerAccountData;
     }
+
+    platform @7 :Platform;
+    geodeVersion @8 :Text;
+    globedVersion @9 :Text;
 }
 
 struct ExtendedUserData {
