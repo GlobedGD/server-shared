@@ -32,6 +32,7 @@ pub mod token_issuer;
 mod typemap;
 mod user_settings;
 
+pub use capnp;
 pub use qunet;
 
 pub use constants::*;

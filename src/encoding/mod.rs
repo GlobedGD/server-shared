@@ -57,10 +57,10 @@ macro_rules! decode_message_match {
             let mut $unpacked_data = $srvr.request_buffer(unpacked_len);
 
             let mut rembuf = reader.remaining_bytes();
-            let reader = capnp::serialize_packed::read_message_no_alloc(
+            let reader = $crate::capnp::serialize_packed::read_message_no_alloc(
                 &mut rembuf,
                 unsafe { $unpacked_data.write_window(unpacked_len).unwrap() },
-                capnp::message::ReaderOptions::new(),
+                $crate::capnp::message::ReaderOptions::new(),
             )?;
 
             $data.discard();
@@ -147,7 +147,7 @@ macro_rules! encode_with_builder {
                 line: line!(),
             })?;
 
-            let ser_size = capnp::serialize::compute_serialized_size_in_words(&$builder) * 8;
+            let ser_size = $crate::capnp::serialize::compute_serialized_size_in_words(&$builder) * 8;
 
             #[cfg(debug_assertions)]
             {
@@ -175,7 +175,7 @@ macro_rules! encode_with_builder {
             buf.append_bytes(len_written);
 
             // this must never fail at this point
-            capnp::serialize_packed::write_message(&mut buf, &$builder).expect("capnp write failed");
+            $crate::capnp::serialize_packed::write_message(&mut buf, &$builder).expect("capnp write failed");
 
             Ok(buf)
         })();
