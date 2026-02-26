@@ -136,12 +136,14 @@ struct PlayerDataMessage {
     cameraX @3 :Float32;
     cameraY @4 :Float32;
     cameraRadius @5 :Float32;
+    messageId @6 :UInt16; # wraps
 }
 
 struct LevelDataMessage {
     players @0 :List(PlayerData);
     displayDatas @1 :List(Shared.PlayerDisplayData);
     eventData @2 :Data;
+    messageId @3 :UInt16; # same as client provided value
 }
 
 # Misc

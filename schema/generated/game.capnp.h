@@ -318,7 +318,7 @@ struct LevelDataMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 0, 3)
+    CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 1, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1915,6 +1915,8 @@ public:
 
   inline float getCameraRadius() const;
 
+  inline  ::uint16_t getMessageId() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1974,6 +1976,9 @@ public:
   inline float getCameraRadius();
   inline void setCameraRadius(float value);
 
+  inline  ::uint16_t getMessageId();
+  inline void setMessageId( ::uint16_t value);
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -2027,6 +2032,8 @@ public:
   inline bool hasEventData() const;
   inline  ::capnp::Data::Reader getEventData() const;
 
+  inline  ::uint16_t getMessageId() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2075,6 +2082,9 @@ public:
   inline  ::capnp::Data::Builder initEventData(unsigned int size);
   inline void adoptEventData(::capnp::Orphan< ::capnp::Data>&& value);
   inline ::capnp::Orphan< ::capnp::Data> disownEventData();
+
+  inline  ::uint16_t getMessageId();
+  inline void setMessageId( ::uint16_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4556,6 +4566,20 @@ inline void PlayerDataMessage::Builder::setCameraRadius(float value) {
       ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
+inline  ::uint16_t PlayerDataMessage::Reader::getMessageId() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t PlayerDataMessage::Builder::getMessageId() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS);
+}
+inline void PlayerDataMessage::Builder::setMessageId( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
+}
+
 inline bool LevelDataMessage::Reader::hasPlayers() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -4656,6 +4680,20 @@ inline void LevelDataMessage::Builder::adoptEventData(
 inline ::capnp::Orphan< ::capnp::Data> LevelDataMessage::Builder::disownEventData() {
   return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline  ::uint16_t LevelDataMessage::Reader::getMessageId() const {
+  return _reader.getDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint16_t LevelDataMessage::Builder::getMessageId() {
+  return _builder.getDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void LevelDataMessage::Builder::setMessageId( ::uint16_t value) {
+  _builder.setDataField< ::uint16_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline bool UpdateIconsMessage::Reader::hasIcons() const {
