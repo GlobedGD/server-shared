@@ -1159,6 +1159,12 @@ public:
 
   inline bool getTouchedPad() const;
 
+  inline bool getMaybeFalling() const;
+
+  inline float getFallSpeed() const;
+
+  inline bool getIsOnGround4() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1213,6 +1219,15 @@ public:
 
   inline bool getTouchedPad();
   inline void setTouchedPad(bool value);
+
+  inline bool getMaybeFalling();
+  inline void setMaybeFalling(bool value);
+
+  inline float getFallSpeed();
+  inline void setFallSpeed(float value);
+
+  inline bool getIsOnGround4();
+  inline void setIsOnGround4(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3754,6 +3769,48 @@ inline bool ExtendedPlayerData::Builder::getTouchedPad() {
 inline void ExtendedPlayerData::Builder::setTouchedPad(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<66>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool ExtendedPlayerData::Reader::getMaybeFalling() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<67>() * ::capnp::ELEMENTS);
+}
+
+inline bool ExtendedPlayerData::Builder::getMaybeFalling() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<67>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setMaybeFalling(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<67>() * ::capnp::ELEMENTS, value);
+}
+
+inline float ExtendedPlayerData::Reader::getFallSpeed() const {
+  return _reader.getDataField<float>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+
+inline float ExtendedPlayerData::Builder::getFallSpeed() {
+  return _builder.getDataField<float>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setFallSpeed(float value) {
+  _builder.setDataField<float>(
+      ::capnp::bounded<7>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool ExtendedPlayerData::Reader::getIsOnGround4() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<68>() * ::capnp::ELEMENTS);
+}
+
+inline bool ExtendedPlayerData::Builder::getIsOnGround4() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<68>() * ::capnp::ELEMENTS);
+}
+inline void ExtendedPlayerData::Builder::setIsOnGround4(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<68>() * ::capnp::ELEMENTS, value);
 }
 
 inline float PlayerObjectData::Reader::getPositionX() const {

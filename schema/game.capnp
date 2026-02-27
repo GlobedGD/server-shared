@@ -70,6 +70,9 @@ struct ExtendedPlayerData {
     gravityMod @6 :Float32;
     gravity    @7 :Float32;
     touchedPad @8 :Bool;
+    maybeFalling @9 :Bool;
+    fallSpeed @10 :Float32;
+    isOnGround4 @11 :Bool;
 }
 
 struct PlayerObjectData { # aka SpecificIconData in globed v1
