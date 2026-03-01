@@ -1305,6 +1305,8 @@ public:
 
   inline bool getDidJustJump() const;
 
+  inline bool getIsFlipped() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1384,6 +1386,9 @@ public:
 
   inline bool getDidJustJump();
   inline void setDidJustJump(bool value);
+
+  inline bool getIsFlipped();
+  inline void setIsFlipped(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4060,6 +4065,20 @@ inline bool PlayerObjectData::Builder::getDidJustJump() {
 inline void PlayerObjectData::Builder::setDidJustJump(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<122>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsFlipped() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<123>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsFlipped() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<123>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsFlipped(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<123>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::game::PlayerData::Which PlayerData::Reader::which() const {
