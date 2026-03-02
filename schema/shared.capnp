@@ -37,6 +37,7 @@ struct PlayerIconData {
     deathEffect @12 :UInt8 = 1;     # 255 means none/default
     trail       @13 :UInt8 = 255;
     shipTrail   @14 :UInt8 = 255;
+    defaultMini @15 :Bool;
 }
 
 struct PlayerDisplayData {

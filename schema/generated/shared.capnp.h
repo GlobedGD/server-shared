@@ -279,6 +279,8 @@ public:
 
   inline  ::uint8_t getShipTrail() const;
 
+  inline bool getDefaultMini() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -351,6 +353,9 @@ public:
 
   inline  ::uint8_t getShipTrail();
   inline void setShipTrail( ::uint8_t value);
+
+  inline bool getDefaultMini();
+  inline void setDefaultMini(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1086,6 +1091,20 @@ inline  ::uint8_t PlayerIconData::Builder::getShipTrail() {
 inline void PlayerIconData::Builder::setShipTrail( ::uint8_t value) {
   _builder.setDataField< ::uint8_t>(
       ::capnp::bounded<26>() * ::capnp::ELEMENTS, value, 255u);
+}
+
+inline bool PlayerIconData::Reader::getDefaultMini() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<216>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerIconData::Builder::getDefaultMini() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<216>() * ::capnp::ELEMENTS);
+}
+inline void PlayerIconData::Builder::setDefaultMini(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<216>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::int32_t PlayerDisplayData::Reader::getAccountId() const {

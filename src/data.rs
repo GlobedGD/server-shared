@@ -29,6 +29,7 @@ pub struct PlayerIconData {
     pub death_effect: u8,
     pub trail: u8,
     pub ship_trail: u8,
+    pub default_mini: bool,
 }
 
 impl Default for PlayerIconData {
@@ -49,6 +50,7 @@ impl Default for PlayerIconData {
             death_effect: 1,
             trail: 255,
             ship_trail: 255,
+            default_mini: false,
         }
     }
 }
@@ -71,6 +73,7 @@ impl PlayerIconData {
             death_effect: reader.get_death_effect(),
             trail: reader.get_trail(),
             ship_trail: reader.get_ship_trail(),
+            default_mini: reader.get_default_mini(),
         })
     }
 
@@ -90,6 +93,7 @@ impl PlayerIconData {
         builder.set_death_effect(self.death_effect);
         builder.set_trail(self.trail);
         builder.set_ship_trail(self.ship_trail);
+        builder.set_default_mini(self.default_mini);
     }
 }
 
