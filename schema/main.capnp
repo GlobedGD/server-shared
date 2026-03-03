@@ -389,6 +389,11 @@ struct NoticeMessage {
     isReply @4 :Bool = false;
 }
 
+struct NoticeReplyResultMessage {
+    success @0 :Bool;
+    error @1 :Text;
+}
+
 struct NoticeReplyMessage {
     receiverId @0 :Int32;
     message @1 :Text;
@@ -735,6 +740,7 @@ struct Message {
         kicked                      @72 :KickedMessage;
         notice                      @73 :NoticeMessage;
         warn                        @74 :WarnMessage;
+        noticeReplyResult           @92 :NoticeReplyResultMessage;
 
         adminResult                 @75 :AdminResultMessage;
         adminFetchResponse          @76 :AdminFetchResponseMessage;
