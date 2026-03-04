@@ -1402,7 +1402,7 @@ struct AdminFetchUserMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(a2ab0121cd9f02f2, 0, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(a2ab0121cd9f02f2, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -8883,6 +8883,8 @@ public:
   inline bool hasQuery() const;
   inline  ::capnp::Text::Reader getQuery() const;
 
+  inline  ::int32_t getQueryNum() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -8917,6 +8919,9 @@ public:
   inline  ::capnp::Text::Builder initQuery(unsigned int size);
   inline void adoptQuery(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownQuery();
+
+  inline  ::int32_t getQueryNum();
+  inline void setQueryNum( ::int32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -16624,6 +16629,20 @@ inline void AdminFetchUserMessage::Builder::adoptQuery(
 inline ::capnp::Orphan< ::capnp::Text> AdminFetchUserMessage::Builder::disownQuery() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::int32_t AdminFetchUserMessage::Reader::getQueryNum() const {
+  return _reader.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::int32_t AdminFetchUserMessage::Builder::getQueryNum() {
+  return _builder.getDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void AdminFetchUserMessage::Builder::setQueryNum( ::int32_t value) {
+  _builder.setDataField< ::int32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::int32_t UserPunishment::Reader::getIssuedBy() const {

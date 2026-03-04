@@ -513,6 +513,7 @@ struct AdminNoticeEveryoneMessage {
 
 struct AdminFetchUserMessage {
     query @0 :Text;
+    queryNum @1 :Int32;
 }
 
 struct UserPunishment {
