@@ -51,6 +51,10 @@ struct NotifyUserDataMessage {
     isBanned    @2 :Bool;
 }
 
+struct NotifyKickUserMessage {
+    accountId @0 :Int32;
+}
+
 struct Message {
     union {
         # Game server messages
@@ -63,5 +67,6 @@ struct Message {
         notifyRoomCreated @3 :NotifyRoomCreatedMessage;
         notifyRoomDeleted @4 :NotifyRoomDeletedMessage;
         notifyUserData    @6 :NotifyUserDataMessage;
+        notifyKickUser    @7 :NotifyKickUserMessage;
     }
 }

@@ -1992,8 +1992,207 @@ pub mod notify_user_data_message {
   }
 }
 
+pub mod notify_kick_user_message {
+  #[derive(Copy, Clone)]
+  pub struct Owned(());
+  impl ::capnp::introspect::Introspect for Owned { fn introspect() -> ::capnp::introspect::Type { ::capnp::introspect::TypeVariant::Struct(::capnp::introspect::RawBrandedStructSchema { generic: &_private::RAW_SCHEMA, field_types: _private::get_field_types, annotation_types: _private::get_annotation_types }).into() } }
+  impl ::capnp::traits::Owned for Owned { type Reader<'a> = Reader<'a>; type Builder<'a> = Builder<'a>; }
+  impl ::capnp::traits::OwnedStruct for Owned { type Reader<'a> = Reader<'a>; type Builder<'a> = Builder<'a>; }
+  impl ::capnp::traits::Pipelined for Owned { type Pipeline = Pipeline; }
+
+  pub struct Reader<'a> { reader: ::capnp::private::layout::StructReader<'a> }
+  impl <> ::core::marker::Copy for Reader<'_,>  {}
+  impl <> ::core::clone::Clone for Reader<'_,>  {
+    fn clone(&self) -> Self { *self }
+  }
+
+  impl <> ::capnp::traits::HasTypeId for Reader<'_,>  {
+    const TYPE_ID: u64 = _private::TYPE_ID;
+  }
+  impl <'a,> ::core::convert::From<::capnp::private::layout::StructReader<'a>> for Reader<'a,>  {
+    fn from(reader: ::capnp::private::layout::StructReader<'a>) -> Self {
+      Self { reader,  }
+    }
+  }
+
+  impl <'a,> ::core::convert::From<Reader<'a,>> for ::capnp::dynamic_value::Reader<'a>  {
+    fn from(reader: Reader<'a,>) -> Self {
+      Self::Struct(::capnp::dynamic_struct::Reader::new(reader.reader, ::capnp::schema::StructSchema::new(::capnp::introspect::RawBrandedStructSchema { generic: &_private::RAW_SCHEMA, field_types: _private::get_field_types::<>, annotation_types: _private::get_annotation_types::<>})))
+    }
+  }
+
+  impl <> ::core::fmt::Debug for Reader<'_,>  {
+    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::result::Result<(), ::core::fmt::Error> {
+      core::fmt::Debug::fmt(&::core::convert::Into::<::capnp::dynamic_value::Reader<'_>>::into(*self), f)
+    }
+  }
+
+  impl <'a,> ::capnp::traits::FromPointerReader<'a> for Reader<'a,>  {
+    fn get_from_pointer(reader: &::capnp::private::layout::PointerReader<'a>, default: ::core::option::Option<&'a [::capnp::Word]>) -> ::capnp::Result<Self> {
+      ::core::result::Result::Ok(reader.get_struct(default)?.into())
+    }
+  }
+
+  impl <'a,> ::capnp::traits::IntoInternalStructReader<'a> for Reader<'a,>  {
+    fn into_internal_struct_reader(self) -> ::capnp::private::layout::StructReader<'a> {
+      self.reader
+    }
+  }
+
+  impl <'a,> ::capnp::traits::Imbue<'a> for Reader<'a,>  {
+    fn imbue(&mut self, cap_table: &'a ::capnp::private::layout::CapTable) {
+      self.reader.imbue(::capnp::private::layout::CapTableReader::Plain(cap_table))
+    }
+  }
+
+  impl <> Reader<'_,>  {
+    pub fn reborrow(&self) -> Reader<'_,> {
+      Self { .. *self }
+    }
+
+    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      self.reader.total_size()
+    }
+    #[inline]
+    pub fn get_account_id(self) -> i32 {
+      self.reader.get_data_field::<i32>(0)
+    }
+  }
+
+  pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
+  impl <> ::capnp::traits::HasStructSize for Builder<'_,>  {
+    const STRUCT_SIZE: ::capnp::private::layout::StructSize = ::capnp::private::layout::StructSize { data: 1, pointers: 0 };
+  }
+  impl <> ::capnp::traits::HasTypeId for Builder<'_,>  {
+    const TYPE_ID: u64 = _private::TYPE_ID;
+  }
+  impl <'a,> ::core::convert::From<::capnp::private::layout::StructBuilder<'a>> for Builder<'a,>  {
+    fn from(builder: ::capnp::private::layout::StructBuilder<'a>) -> Self {
+      Self { builder,  }
+    }
+  }
+
+  impl <'a,> ::core::convert::From<Builder<'a,>> for ::capnp::dynamic_value::Builder<'a>  {
+    fn from(builder: Builder<'a,>) -> Self {
+      Self::Struct(::capnp::dynamic_struct::Builder::new(builder.builder, ::capnp::schema::StructSchema::new(::capnp::introspect::RawBrandedStructSchema { generic: &_private::RAW_SCHEMA, field_types: _private::get_field_types::<>, annotation_types: _private::get_annotation_types::<>})))
+    }
+  }
+
+  impl <'a,> ::capnp::traits::ImbueMut<'a> for Builder<'a,>  {
+    fn imbue_mut(&mut self, cap_table: &'a mut ::capnp::private::layout::CapTable) {
+      self.builder.imbue(::capnp::private::layout::CapTableBuilder::Plain(cap_table))
+    }
+  }
+
+  impl <'a,> ::capnp::traits::FromPointerBuilder<'a> for Builder<'a,>  {
+    fn init_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, _size: u32) -> Self {
+      builder.init_struct(<Self as ::capnp::traits::HasStructSize>::STRUCT_SIZE).into()
+    }
+    fn get_from_pointer(builder: ::capnp::private::layout::PointerBuilder<'a>, default: ::core::option::Option<&'a [::capnp::Word]>) -> ::capnp::Result<Self> {
+      ::core::result::Result::Ok(builder.get_struct(<Self as ::capnp::traits::HasStructSize>::STRUCT_SIZE, default)?.into())
+    }
+  }
+
+  impl <> ::capnp::traits::SetterInput<Owned<>> for Reader<'_,>  {
+    fn set_pointer_builder(mut pointer: ::capnp::private::layout::PointerBuilder<'_>, value: Self, canonicalize: bool) -> ::capnp::Result<()> { pointer.set_struct(&value.reader, canonicalize) }
+  }
+
+  impl <'a,> Builder<'a,>  {
+    pub fn into_reader(self) -> Reader<'a,> {
+      self.builder.into_reader().into()
+    }
+    pub fn reborrow(&mut self) -> Builder<'_,> {
+      Builder { builder: self.builder.reborrow() }
+    }
+    pub fn reborrow_as_reader(&self) -> Reader<'_,> {
+      self.builder.as_reader().into()
+    }
+
+    pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
+      self.builder.as_reader().total_size()
+    }
+    #[inline]
+    pub fn get_account_id(self) -> i32 {
+      self.builder.get_data_field::<i32>(0)
+    }
+    #[inline]
+    pub fn set_account_id(&mut self, value: i32)  {
+      self.builder.set_data_field::<i32>(0, value);
+    }
+  }
+
+  pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
+  impl ::capnp::capability::FromTypelessPipeline for Pipeline {
+    fn new(typeless: ::capnp::any_pointer::Pipeline) -> Self {
+      Self { _typeless: typeless,  }
+    }
+  }
+  impl Pipeline  {
+  }
+  mod _private {
+    pub static ENCODED_NODE: [::capnp::Word; 36] = [
+      ::capnp::word(0, 0, 0, 0, 6, 0, 6, 0),
+      ::capnp::word(179, 8, 146, 112, 10, 144, 123, 224),
+      ::capnp::word(11, 0, 0, 0, 1, 0, 1, 0),
+      ::capnp::word(202, 56, 128, 205, 209, 23, 135, 179),
+      ::capnp::word(0, 0, 7, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(63, 3, 0, 0, 120, 3, 0, 0),
+      ::capnp::word(21, 0, 0, 0, 10, 1, 0, 0),
+      ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(33, 0, 0, 0, 63, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(115, 114, 118, 99, 46, 99, 97, 112),
+      ::capnp::word(110, 112, 58, 78, 111, 116, 105, 102),
+      ::capnp::word(121, 75, 105, 99, 107, 85, 115, 101),
+      ::capnp::word(114, 77, 101, 115, 115, 97, 103, 101),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 1, 0, 1, 0),
+      ::capnp::word(4, 0, 0, 0, 3, 0, 4, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 0, 0, 0, 82, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(12, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(24, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(97, 99, 99, 111, 117, 110, 116, 73),
+      ::capnp::word(100, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(4, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(4, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+    ];
+    pub fn get_field_types(index: u16) -> ::capnp::introspect::Type {
+      match index {
+        0 => <i32 as ::capnp::introspect::Introspect>::introspect(),
+        _ => ::capnp::introspect::panic_invalid_field_index(index),
+      }
+    }
+    pub fn get_annotation_types(child_index: Option<u16>, index: u32) -> ::capnp::introspect::Type {
+      ::capnp::introspect::panic_invalid_annotation_indices(child_index, index)
+    }
+    pub static ARENA: ::capnp::private::arena::GeneratedCodeArena = ::capnp::private::arena::GeneratedCodeArena::new(&ENCODED_NODE);
+    pub static RAW_SCHEMA: ::capnp::introspect::RawStructSchema = ::capnp::introspect::RawStructSchema::new(
+      &ARENA,
+      NONUNION_MEMBERS,
+      MEMBERS_BY_DISCRIMINANT,
+      MEMBERS_BY_NAME
+    );
+    pub static NONUNION_MEMBERS : &[u16] = &[0];
+    pub static MEMBERS_BY_DISCRIMINANT : &[u16] = &[];
+    pub static MEMBERS_BY_NAME : &[u16] = &[0];
+    pub const TYPE_ID: u64 = 0xe07b_900a_7092_08b3;
+  }
+}
+
 pub mod message {
-  pub use self::Which::{LoginSrv,LoginOk,LoginFailed,NotifyRoomCreated,NotifyRoomDeleted,RoomCreatedAck,NotifyUserData};
+  pub use self::Which::{LoginSrv,LoginOk,LoginFailed,NotifyRoomCreated,NotifyRoomDeleted,RoomCreatedAck,NotifyUserData,NotifyKickUser};
 
   #[derive(Copy, Clone)]
   pub struct Owned(());
@@ -2091,6 +2290,11 @@ pub mod message {
       !self.reader.get_pointer_field(0).is_null()
     }
     #[inline]
+    pub fn has_notify_kick_user(&self) -> bool {
+      if self.reader.get_data_field::<u16>(0) != 7 { return false; }
+      !self.reader.get_pointer_field(0).is_null()
+    }
+    #[inline]
     pub fn which(self) -> ::core::result::Result<WhichReader<'a,>, ::capnp::NotInSchema> {
       match self.reader.get_data_field::<u16>(0) {
         0 => {
@@ -2125,6 +2329,11 @@ pub mod message {
         }
         6 => {
           ::core::result::Result::Ok(NotifyUserData(
+            ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
+        7 => {
+          ::core::result::Result::Ok(NotifyKickUser(
             ::capnp::traits::FromPointerReader::get_from_pointer(&self.reader.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
@@ -2291,6 +2500,21 @@ pub mod message {
       !self.builder.is_pointer_field_null(0)
     }
     #[inline]
+    pub fn set_notify_kick_user(&mut self, value: crate::srvc_capnp::notify_kick_user_message::Reader<'_>) -> ::capnp::Result<()> {
+      self.builder.set_data_field::<u16>(0, 7);
+      ::capnp::traits::SetterInput::set_pointer_builder(self.builder.reborrow().get_pointer_field(0), value, false)
+    }
+    #[inline]
+    pub fn init_notify_kick_user(self, ) -> crate::srvc_capnp::notify_kick_user_message::Builder<'a> {
+      self.builder.set_data_field::<u16>(0, 7);
+      ::capnp::traits::FromPointerBuilder::init_pointer(self.builder.get_pointer_field(0), 0)
+    }
+    #[inline]
+    pub fn has_notify_kick_user(&self) -> bool {
+      if self.builder.get_data_field::<u16>(0) != 7 { return false; }
+      !self.builder.is_pointer_field_null(0)
+    }
+    #[inline]
     pub fn which(self) -> ::core::result::Result<WhichBuilder<'a,>, ::capnp::NotInSchema> {
       match self.builder.get_data_field::<u16>(0) {
         0 => {
@@ -2328,6 +2552,11 @@ pub mod message {
             ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
           ))
         }
+        7 => {
+          ::core::result::Result::Ok(NotifyKickUser(
+            ::capnp::traits::FromPointerBuilder::get_from_pointer(self.builder.get_pointer_field(0), ::core::option::Option::None)
+          ))
+        }
         x => ::core::result::Result::Err(::capnp::NotInSchema(x))
       }
     }
@@ -2342,74 +2571,81 @@ pub mod message {
   impl Pipeline  {
   }
   mod _private {
-    pub static ENCODED_NODE: [::capnp::Word; 131] = [
+    pub static ENCODED_NODE: [::capnp::Word; 147] = [
       ::capnp::word(0, 0, 0, 0, 6, 0, 6, 0),
       ::capnp::word(153, 211, 215, 237, 17, 170, 236, 253),
       ::capnp::word(11, 0, 0, 0, 1, 0, 1, 0),
       ::capnp::word(202, 56, 128, 205, 209, 23, 135, 179),
-      ::capnp::word(1, 0, 7, 0, 0, 0, 7, 0),
+      ::capnp::word(1, 0, 7, 0, 0, 0, 8, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(63, 3, 0, 0, 242, 4, 0, 0),
+      ::capnp::word(122, 3, 0, 0, 98, 5, 0, 0),
       ::capnp::word(21, 0, 0, 0, 154, 0, 0, 0),
       ::capnp::word(29, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(25, 0, 0, 0, 143, 1, 0, 0),
+      ::capnp::word(25, 0, 0, 0, 199, 1, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(115, 114, 118, 99, 46, 99, 97, 112),
       ::capnp::word(110, 112, 58, 77, 101, 115, 115, 97),
       ::capnp::word(103, 101, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 1, 0, 1, 0),
-      ::capnp::word(28, 0, 0, 0, 3, 0, 4, 0),
+      ::capnp::word(32, 0, 0, 0, 3, 0, 4, 0),
       ::capnp::word(0, 0, 255, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(181, 0, 0, 0, 74, 0, 0, 0),
+      ::capnp::word(209, 0, 0, 0, 74, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(180, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(192, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(208, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(220, 0, 0, 0, 2, 0, 1, 0),
       ::capnp::word(2, 0, 254, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 1, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(189, 0, 0, 0, 66, 0, 0, 0),
+      ::capnp::word(217, 0, 0, 0, 66, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(184, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(196, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(212, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(224, 0, 0, 0, 2, 0, 1, 0),
       ::capnp::word(3, 0, 253, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 2, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(193, 0, 0, 0, 98, 0, 0, 0),
+      ::capnp::word(221, 0, 0, 0, 98, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(192, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(204, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(220, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(232, 0, 0, 0, 2, 0, 1, 0),
       ::capnp::word(4, 0, 252, 255, 0, 0, 0, 0),
       ::capnp::word(0, 0, 1, 0, 3, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(201, 0, 0, 0, 146, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(204, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(216, 0, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(5, 0, 251, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 4, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(213, 0, 0, 0, 146, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(216, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(228, 0, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(1, 0, 250, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 5, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(225, 0, 0, 0, 122, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(224, 0, 0, 0, 3, 0, 1, 0),
-      ::capnp::word(236, 0, 0, 0, 2, 0, 1, 0),
-      ::capnp::word(6, 0, 249, 255, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 1, 0, 6, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(233, 0, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(229, 0, 0, 0, 146, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(232, 0, 0, 0, 3, 0, 1, 0),
       ::capnp::word(244, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(5, 0, 251, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 4, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(241, 0, 0, 0, 146, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(244, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(0, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(1, 0, 250, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 5, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(253, 0, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(252, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(8, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(6, 0, 249, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 6, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(5, 1, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(4, 1, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(16, 1, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(7, 0, 248, 255, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 7, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(13, 1, 0, 0, 122, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(12, 1, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(24, 1, 0, 0, 2, 0, 1, 0),
       ::capnp::word(108, 111, 103, 105, 110, 83, 114, 118),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
@@ -2474,6 +2710,15 @@ pub mod message {
       ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(110, 111, 116, 105, 102, 121, 75, 105),
+      ::capnp::word(99, 107, 85, 115, 101, 114, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(179, 8, 146, 112, 10, 144, 123, 224),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(16, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
     ];
     pub fn get_field_types(index: u16) -> ::capnp::introspect::Type {
       match index {
@@ -2484,6 +2729,7 @@ pub mod message {
         4 => <crate::srvc_capnp::notify_room_deleted_message::Owned as ::capnp::introspect::Introspect>::introspect(),
         5 => <crate::srvc_capnp::room_created_ack_message::Owned as ::capnp::introspect::Introspect>::introspect(),
         6 => <crate::srvc_capnp::notify_user_data_message::Owned as ::capnp::introspect::Introspect>::introspect(),
+        7 => <crate::srvc_capnp::notify_kick_user_message::Owned as ::capnp::introspect::Introspect>::introspect(),
         _ => ::capnp::introspect::panic_invalid_field_index(index),
       }
     }
@@ -2498,11 +2744,11 @@ pub mod message {
       MEMBERS_BY_NAME
     );
     pub static NONUNION_MEMBERS : &[u16] = &[];
-    pub static MEMBERS_BY_DISCRIMINANT : &[u16] = &[0,1,2,3,4,5,6];
-    pub static MEMBERS_BY_NAME : &[u16] = &[2,1,0,3,4,6,5];
+    pub static MEMBERS_BY_DISCRIMINANT : &[u16] = &[0,1,2,3,4,5,6,7];
+    pub static MEMBERS_BY_NAME : &[u16] = &[2,1,0,7,3,4,6,5];
     pub const TYPE_ID: u64 = 0xfdec_aa11_edd7_d399;
   }
-  pub enum Which<A0,A1,A2,A3,A4,A5,A6> {
+  pub enum Which<A0,A1,A2,A3,A4,A5,A6,A7> {
     LoginSrv(A0),
     LoginOk(A1),
     LoginFailed(A2),
@@ -2510,7 +2756,8 @@ pub mod message {
     NotifyRoomDeleted(A4),
     RoomCreatedAck(A5),
     NotifyUserData(A6),
+    NotifyKickUser(A7),
   }
-  pub type WhichReader<'a,> = Which<::capnp::Result<crate::srvc_capnp::login_srv_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::login_ok_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::login_failed_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::notify_room_created_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::notify_room_deleted_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::room_created_ack_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::notify_user_data_message::Reader<'a>>>;
-  pub type WhichBuilder<'a,> = Which<::capnp::Result<crate::srvc_capnp::login_srv_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::login_ok_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::login_failed_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::notify_room_created_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::notify_room_deleted_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::room_created_ack_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::notify_user_data_message::Builder<'a>>>;
+  pub type WhichReader<'a,> = Which<::capnp::Result<crate::srvc_capnp::login_srv_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::login_ok_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::login_failed_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::notify_room_created_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::notify_room_deleted_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::room_created_ack_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::notify_user_data_message::Reader<'a>>,::capnp::Result<crate::srvc_capnp::notify_kick_user_message::Reader<'a>>>;
+  pub type WhichBuilder<'a,> = Which<::capnp::Result<crate::srvc_capnp::login_srv_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::login_ok_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::login_failed_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::notify_room_created_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::notify_room_deleted_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::room_created_ack_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::notify_user_data_message::Builder<'a>>,::capnp::Result<crate::srvc_capnp::notify_kick_user_message::Builder<'a>>>;
 }
