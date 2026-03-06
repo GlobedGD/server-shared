@@ -77,6 +77,7 @@ enum LoginFailedReason {
     internalDbError     @5;
     invalidAccountData  @6;
     notWhitelisted      @7;
+    maintenance         @8;
 }
 
 struct LoginFailedMessage {
