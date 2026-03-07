@@ -118,14 +118,14 @@ unsafe impl Allocator for CapnpHeapAlloc {
         unsafe {
             std::alloc::dealloc(ptr, layout);
         }
-        self.next_size = 128; // reset to initial size
+        self.next_size = 64; // reset to initial size
     }
 }
 
 impl CapnpHeapAlloc {
     pub fn new() -> Self {
         Self {
-            next_size: 128, // 1 kb (128 words)
+            next_size: 64, // 512 bytes (64 words)
         }
     }
 }
