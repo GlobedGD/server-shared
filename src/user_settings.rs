@@ -4,6 +4,7 @@ pub struct UserSettings {
     pub hide_in_menus: bool,
     pub hide_roles: bool,
     pub disable_notices: bool,
+    pub friends_only_vc: bool,
 }
 
 impl UserSettings {
@@ -13,6 +14,7 @@ impl UserSettings {
             hide_in_menus: reader.get_hide_in_menus(),
             hide_roles: reader.get_hide_roles(),
             disable_notices: reader.get_disable_notices(),
+            friends_only_vc: reader.get_friends_only_vc(),
         }
     }
 }

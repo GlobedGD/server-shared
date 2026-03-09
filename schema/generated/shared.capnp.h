@@ -743,6 +743,8 @@ public:
 
   inline bool getDisableNotices() const;
 
+  inline bool getFriendsOnlyVc() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -782,6 +784,9 @@ public:
 
   inline bool getDisableNotices();
   inline void setDisableNotices(bool value);
+
+  inline bool getFriendsOnlyVc();
+  inline void setFriendsOnlyVc(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1567,6 +1572,20 @@ inline bool UserSettings::Builder::getDisableNotices() {
 inline void UserSettings::Builder::setDisableNotices(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserSettings::Reader::getFriendsOnlyVc() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline bool UserSettings::Builder::getFriendsOnlyVc() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void UserSettings::Builder::setFriendsOnlyVc(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
 }
 
 }  // namespace

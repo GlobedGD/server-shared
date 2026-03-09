@@ -68,4 +68,5 @@ struct UserSettings {
     hideInMenus    @1 :Bool = false;
     hideRoles      @2 :Bool = false;
     disableNotices @3 :Bool = false;
+    friendsOnlyVc  @4 :Bool = false;
 }
