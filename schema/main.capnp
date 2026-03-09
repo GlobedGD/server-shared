@@ -473,6 +473,7 @@ struct FeaturedLevelMessage {
 struct FeaturedListMessage {
     levelIds @0 :List(Int32);
     rateTiers @1 :List(UInt8);
+    featureTimes @4 :List(UInt64);
 
     page @2 :UInt32;
     totalPages @3 :UInt32;

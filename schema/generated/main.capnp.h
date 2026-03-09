@@ -1298,7 +1298,7 @@ struct FeaturedListMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e806d85d4b1d84da, 1, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(e806d85d4b1d84da, 1, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -8261,6 +8261,9 @@ public:
 
   inline  ::uint32_t getTotalPages() const;
 
+  inline bool hasFeatureTimes() const;
+  inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader getFeatureTimes() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -8310,6 +8313,14 @@ public:
 
   inline  ::uint32_t getTotalPages();
   inline void setTotalPages( ::uint32_t value);
+
+  inline bool hasFeatureTimes();
+  inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder getFeatureTimes();
+  inline void setFeatureTimes( ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setFeatureTimes(::kj::ArrayPtr<const  ::uint64_t> value);
+  inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder initFeatureTimes(unsigned int size);
+  inline void adoptFeatureTimes(::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>> disownFeatureTimes();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -16276,6 +16287,44 @@ inline  ::uint32_t FeaturedListMessage::Builder::getTotalPages() {
 inline void FeaturedListMessage::Builder::setTotalPages( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool FeaturedListMessage::Reader::hasFeatureTimes() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool FeaturedListMessage::Builder::hasFeatureTimes() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader FeaturedListMessage::Reader::getFeatureTimes() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::getFeatureTimes() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void FeaturedListMessage::Builder::setFeatureTimes( ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline void FeaturedListMessage::Builder::setFeatureTimes(::kj::ArrayPtr<const  ::uint64_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>::Builder FeaturedListMessage::Builder::initFeatureTimes(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+}
+inline void FeaturedListMessage::Builder::adoptFeatureTimes(
+    ::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>> FeaturedListMessage::Builder::disownFeatureTimes() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::uint64_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
 inline  ::int32_t FetchUserMessage::Reader::getAccountId() const {
