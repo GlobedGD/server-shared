@@ -28,6 +28,7 @@ console-subscriber = { version = "0.5.0", features = [
 ], optional = true }
 parking_lot = { version = "0.12.5", features = ["hardware-lock-elision"] }
 smallvec = "1.15.1"
+validator = { version = "0.20.0", features = ["derive"] }
 
 [build-dependencies]
 capnpc = "0.25.0"

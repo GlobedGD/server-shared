@@ -1,35 +1,90 @@
-use std::path::Path;
+use serde::{Deserialize, Serialize};
 use tracing::{Level, level_filters::LevelFilter};
-use tracing_appender::{non_blocking::NonBlockingBuilder, rolling};
+use tracing_appender::{
+    non_blocking::NonBlockingBuilder,
+    rolling::{RollingFileAppender, Rotation},
+};
 use tracing_subscriber::{Layer as _, Registry, filter, fmt::Layer, layer::SubscriberExt};
+use validator::{Validate, ValidationError};
 
 pub use tracing_appender::non_blocking::WorkerGuard;
 
 use crate::config::log_buffer_size_for_memlimit;
 
-fn parse_filter(level: &str) -> LevelFilter {
-    match level.to_lowercase().as_str() {
-        "error" => LevelFilter::ERROR,
-        "warn" => LevelFilter::WARN,
-        "info" => LevelFilter::INFO,
-        "debug" => LevelFilter::DEBUG,
-        "trace" => LevelFilter::TRACE,
-        _ => LevelFilter::INFO,
+fn default_file_enabled() -> bool {
+    true
+}
+
+fn default_directory() -> String {
+    "logs".to_string()
+}
+
+fn default_file_level() -> String {
+    "debug".to_string()
+}
+
+fn default_console_level() -> String {
+    "info".to_string()
+}
+
+fn default_filename() -> String {
+    "server".to_string()
+}
+
+fn default_rolling() -> bool {
+    false
+}
+
+fn default_retention_days() -> u32 {
+    7
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, Validate)]
+pub struct LoggerConfig {
+    /// Whether to enable logging to a file. If disabled, logs will only be printed to stdout.
+    #[serde(default = "default_file_enabled")]
+    pub file_enabled: bool,
+    /// The directory where logs will be stored.
+    #[serde(default = "default_directory")]
+    pub directory: String,
+    /// Minimum log level to print to the file. Logs below this level will be ignored. Possible values: 'trace', 'debug', 'info', 'warn', 'error'.
+    #[serde(default = "default_file_level")]
+    #[validate(custom(function = "validate_log_level"))]
+    pub file_level: String,
+    /// Minimum log level to print to the console. Logs below this level will be ignored. Possible values: 'trace', 'debug', 'info', 'warn', 'error'.
+    #[serde(default = "default_console_level")]
+    #[validate(custom(function = "validate_log_level"))]
+    pub console_level: String,
+    /// Prefix for the filename of the log file.
+    #[serde(default = "default_filename")]
+    pub filename: String,
+    /// Whether to roll the log file daily. If enabled, rather than overwriting the same log file on restart,
+    /// a new log file will be created with the current date appended to the filename.
+    #[serde(default = "default_rolling")]
+    pub rolling: bool,
+    /// If rolling is enabled and this value is nonzero, old logs are deleted after this many days
+    #[serde(default = "default_retention_days")]
+    pub retention_days: u32,
+}
+
+impl Default for LoggerConfig {
+    fn default() -> Self {
+        Self {
+            file_enabled: default_file_enabled(),
+            directory: default_directory(),
+            file_level: default_file_level(),
+            console_level: default_console_level(),
+            filename: default_filename(),
+            rolling: default_rolling(),
+            retention_days: default_retention_days(),
+        }
     }
 }
 
-pub fn setup_logger(
-    rolling: bool,
-    directory: impl AsRef<Path>,
-    file_name_prefix: impl AsRef<Path>,
-    console_level: &str,
-    file_level: &str,
-    file_enabled: bool,
-    mem_usage: u32,
-) -> (WorkerGuard, WorkerGuard) {
+pub fn setup_logger(config: &LoggerConfig, mem_usage: u32) -> (WorkerGuard, WorkerGuard) {
     // Setup log level filter
-    let console_level = parse_filter(console_level);
-    let file_level = parse_filter(file_level);
+    let console_level = parse_filter(&config.console_level);
+    let file_level = parse_filter(&config.file_level);
 
     let filter = filter::Targets::new()
         .with_target("sqlx", Level::WARN)
@@ -42,11 +97,16 @@ pub fn setup_logger(
         .with_target("hyper", Level::WARN);
 
     // Create file appender
-    let appender = if rolling {
-        rolling::daily(directory, file_name_prefix)
-    } else {
-        rolling::never(directory, file_name_prefix)
-    };
+    let appender = RollingFileAppender::builder()
+        .rotation(if config.rolling {
+            Rotation::DAILY
+        } else {
+            Rotation::NEVER
+        })
+        .filename_prefix(&config.filename)
+        .max_log_files(config.retention_days as usize)
+        .build(&config.directory)
+        .expect("failed to build file appender");
 
     let buf_lines = log_buffer_size_for_memlimit(mem_usage);
     let stdout_buf_lines = buf_lines / 4;
@@ -76,7 +136,7 @@ pub fn setup_logger(
     #[cfg(feature = "tokio_tracing")]
     let subscriber = subscriber.with(console_layer);
 
-    if file_enabled {
+    if config.file_enabled {
         let file_layer = Layer::default()
             .with_writer(nb_file)
             .with_ansi(false)
@@ -91,4 +151,21 @@ pub fn setup_logger(
     .expect("failed to set global subscriber");
 
     (guard_file, guard_stdout)
+}
+
+fn parse_filter(level: &str) -> LevelFilter {
+    match level.to_lowercase().as_str() {
+        "error" => LevelFilter::ERROR,
+        "warn" => LevelFilter::WARN,
+        "info" => LevelFilter::INFO,
+        "debug" => LevelFilter::DEBUG,
+        "trace" => LevelFilter::TRACE,
+        _ => LevelFilter::INFO,
+    }
+}
+fn validate_log_level(level: &str) -> Result<(), ValidationError> {
+    match level.to_lowercase().as_str() {
+        "trace" | "debug" | "info" | "warn" | "error" => Ok(()),
+        _ => Err(ValidationError::new("invalid log level")),
+    }
 }
