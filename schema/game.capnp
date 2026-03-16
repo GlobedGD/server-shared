@@ -93,6 +93,7 @@ struct PlayerObjectData { # aka SpecificIconData in globed v1
     isSideways    @13 :Bool;
     didJustJump   @15 :Bool;
     isFlipped     @16 :Bool;
+    isHolding     @17 :Bool;
 
     extData       @14 :ExtendedPlayerData;
 }

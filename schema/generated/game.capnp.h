@@ -1307,6 +1307,8 @@ public:
 
   inline bool getIsFlipped() const;
 
+  inline bool getIsHolding() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1389,6 +1391,9 @@ public:
 
   inline bool getIsFlipped();
   inline void setIsFlipped(bool value);
+
+  inline bool getIsHolding();
+  inline void setIsHolding(bool value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4079,6 +4084,20 @@ inline bool PlayerObjectData::Builder::getIsFlipped() {
 inline void PlayerObjectData::Builder::setIsFlipped(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<123>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool PlayerObjectData::Reader::getIsHolding() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<124>() * ::capnp::ELEMENTS);
+}
+
+inline bool PlayerObjectData::Builder::getIsHolding() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<124>() * ::capnp::ELEMENTS);
+}
+inline void PlayerObjectData::Builder::setIsHolding(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<124>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::game::PlayerData::Which PlayerData::Reader::which() const {
