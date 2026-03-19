@@ -1,6 +1,4 @@
-use std::alloc::Layout;
-
-use capnp::{message::Allocator, private::units::BYTES_PER_WORD};
+use capnp::message::Allocator;
 
 #[repr(align(8))]
 pub struct CapnpAlloc<const N: usize> {
@@ -93,15 +91,17 @@ impl<'a> CapnpBorrowAlloc<'a> {
     }
 }
 
+#[cfg(feature = "dyn-encoding")]
 pub struct CapnpHeapAlloc {
     next_size: u32,
 }
 
+#[cfg(feature = "dyn-encoding")]
 unsafe impl Allocator for CapnpHeapAlloc {
     #[inline]
     fn allocate_segment(&mut self, size_words: u32) -> (*mut u8, u32) {
         let size = size_words.max(self.next_size);
-        let layout = Layout::from_size_align(size as usize * BYTES_PER_WORD, 8).unwrap();
+        let layout = std::alloc::Layout::from_size_align(size as usize * 8, 8).unwrap();
         let ptr = unsafe { std::alloc::alloc_zeroed(layout) };
         if ptr.is_null() {
             std::alloc::handle_alloc_error(layout);
@@ -113,7 +113,7 @@ unsafe impl Allocator for CapnpHeapAlloc {
 
     #[inline]
     unsafe fn deallocate_segment(&mut self, ptr: *mut u8, word_size: u32, _words_used: u32) {
-        let layout = Layout::from_size_align(word_size as usize * BYTES_PER_WORD, 8).unwrap();
+        let layout = std::alloc::Layout::from_size_align(word_size as usize * 8, 8).unwrap();
 
         unsafe {
             std::alloc::dealloc(ptr, layout);
@@ -122,6 +122,7 @@ unsafe impl Allocator for CapnpHeapAlloc {
     }
 }
 
+#[cfg(feature = "dyn-encoding")]
 impl CapnpHeapAlloc {
     pub fn new() -> Self {
         Self {
@@ -130,6 +131,7 @@ impl CapnpHeapAlloc {
     }
 }
 
+#[cfg(feature = "dyn-encoding")]
 impl Default for CapnpHeapAlloc {
     fn default() -> Self {
         Self::new()

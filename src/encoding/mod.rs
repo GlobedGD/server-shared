@@ -1,6 +1,10 @@
 use std::{any::Any, fmt::Display};
 
-pub use allocators::{CapnpAlloc, CapnpBorrowAlloc, CapnpHeapAlloc};
+pub use allocators::{CapnpAlloc, CapnpBorrowAlloc};
+
+#[cfg(feature = "dyn-encoding")]
+pub use allocators::CapnpHeapAlloc;
+
 use capnp::message::{Allocator, Builder};
 use qunet::buffers::ByteReaderError;
 use thiserror::Error;
@@ -222,6 +226,7 @@ macro_rules! encode_message_heap {
 /// Encodes a message using the default capnp allocation arena.
 /// This is the least efficient method, but it cannot fail and does not require you to pre-calculate the needed capacity.
 #[macro_export]
+#[cfg(feature = "dyn-encoding")]
 macro_rules! encode_message_dyn {
     ($($schema:ident)::*, $srvr:expr, $msg:ident => $code:expr) => {{
         let mut builder = $crate::encoding::builder_dyn();
@@ -281,6 +286,7 @@ pub fn builder<A: Allocator>(a: A) -> Builder<A> {
     Builder::new(a)
 }
 
+#[cfg(feature = "dyn-encoding")]
 pub fn builder_dyn() -> Builder<CapnpHeapAlloc> {
     Builder::new(CapnpHeapAlloc::new())
 }
