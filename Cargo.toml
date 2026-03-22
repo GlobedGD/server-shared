@@ -16,7 +16,7 @@ tracing-appender = { version = "0.2.4", features = ["parking_lot"] }
 tracing-subscriber = "0.3.22"
 toml = "1.0.3"
 base64 = "0.22.1"
-qunet = { git = "https://github.com/dankmeme01/qunet", rev = "9848026", default-features = false }
+qunet = { git = "https://github.com/dankmeme01/qunet", rev = "ac226c1", default-features = false }
 thiserror = "2.0.18"
 blake3 = "1.8.3"
 heapless = "0.9.2"
@@ -37,8 +37,9 @@ default = []
 main = []
 game = []
 srvc = []
-all = ["main", "game", "srvc", "quic"]
+all = ["main", "game", "srvc", "quic", "websocket"]
 quic = ["qunet/quic"]
+websocket = ["qunet/websocket"]
 qunet-client = ["qunet/client"]
 tokio_tracing = ["dep:console-subscriber"]
 dyn-encoding = ["capnp/alloc"]
