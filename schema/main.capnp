@@ -41,6 +41,7 @@ struct LoginMessage {
     platform @7 :Platform;
     geodeVersion @8 :Text;
     globedVersion @9 :Text;
+    platformDesc @10 :Text;
 }
 
 struct ExtendedUserData {

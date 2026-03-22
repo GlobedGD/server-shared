@@ -221,7 +221,7 @@ struct LoginMessage {
   };
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e8fbb9eb6533b3b5, 1, 6)
+    CAPNP_DECLARE_STRUCT_HEADER(e8fbb9eb6533b3b5, 1, 7)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1977,6 +1977,9 @@ public:
   inline bool hasGlobedVersion() const;
   inline  ::capnp::Text::Reader getGlobedVersion() const;
 
+  inline bool hasPlatformDesc() const;
+  inline  ::capnp::Text::Reader getPlatformDesc() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2070,6 +2073,13 @@ public:
   inline  ::capnp::Text::Builder initGlobedVersion(unsigned int size);
   inline void adoptGlobedVersion(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownGlobedVersion();
+
+  inline bool hasPlatformDesc();
+  inline  ::capnp::Text::Builder getPlatformDesc();
+  inline void setPlatformDesc( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initPlatformDesc(unsigned int size);
+  inline void adoptPlatformDesc(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownPlatformDesc();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -12505,6 +12515,40 @@ inline void LoginMessage::Builder::adoptGlobedVersion(
 inline ::capnp::Orphan< ::capnp::Text> LoginMessage::Builder::disownGlobedVersion() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<5>() * ::capnp::POINTERS));
+}
+
+inline bool LoginMessage::Reader::hasPlatformDesc() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<6>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginMessage::Builder::hasPlatformDesc() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<6>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader LoginMessage::Reader::getPlatformDesc() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<6>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder LoginMessage::Builder::getPlatformDesc() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<6>() * ::capnp::POINTERS));
+}
+inline void LoginMessage::Builder::setPlatformDesc( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<6>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder LoginMessage::Builder::initPlatformDesc(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<6>() * ::capnp::POINTERS), size);
+}
+inline void LoginMessage::Builder::adoptPlatformDesc(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<6>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> LoginMessage::Builder::disownPlatformDesc() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<6>() * ::capnp::POINTERS));
 }
 
 inline bool ExtendedUserData::Reader::hasNewToken() const {
