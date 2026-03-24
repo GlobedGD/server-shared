@@ -6,6 +6,11 @@ use crate::{
     schema::shared::{player_display_data, player_icon_data},
 };
 
+#[cfg(feature = "srvc")]
+pub const SRVC_MAGIC: u64 = 0x92869be51214ba4f;
+#[cfg(feature = "srvc")]
+pub const SRVC_PROTOCOL_VERSION: u32 = 1;
+
 #[derive(Clone, Debug)]
 pub struct GameServerData {
     pub id: u8,
