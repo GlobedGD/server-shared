@@ -44,11 +44,17 @@ struct RoomCreatedAckMessage {
 
 # misc
 
-struct NotifyUserDataMessage {
+struct SrvUserData {
     accountId   @0 :Int32;
     canUseVoice @1 :Bool;
     canUseQuickChat @3 :Bool;
     isBanned    @2 :Bool;
+    isLinked    @4 :Bool;
+    isMuted     @5 :Bool;
+}
+
+struct NotifyUserDataMessage {
+    data @0 :SrvUserData;
 }
 
 struct NotifyKickUserMessage {

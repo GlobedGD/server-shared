@@ -205,8 +205,17 @@ struct QuickChatBroadcastMessage {
     id @1 :UInt32;
 }
 
-struct ChatNotPermittedMessage {
+enum ChatNotPermittedReason {
+    notLinked @0;
+    muted     @1;
+    rateLimited @2;
+    unknown    @3;
+    disallowed @4;
+}
 
+struct ChatNotPermittedMessage {
+    isVoice @0 :Bool;
+    reason @1 :ChatNotPermittedReason;
 }
 
 struct Message {

@@ -7644,6 +7644,93 @@ pub mod quick_chat_broadcast_message {
   }
 }
 
+#[repr(u16)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum ChatNotPermittedReason {
+  NotLinked = 0,
+  Muted = 1,
+  RateLimited = 2,
+  Unknown = 3,
+  Disallowed = 4,
+}
+
+impl ::capnp::introspect::Introspect for ChatNotPermittedReason {
+  fn introspect() -> ::capnp::introspect::Type { ::capnp::introspect::TypeVariant::Enum(::capnp::introspect::RawEnumSchema { encoded_node: &chat_not_permitted_reason::ENCODED_NODE, annotation_types: chat_not_permitted_reason::get_annotation_types }).into() }
+}
+impl ::core::convert::From<ChatNotPermittedReason> for ::capnp::dynamic_value::Reader<'_> {
+  fn from(e: ChatNotPermittedReason) -> Self { ::capnp::dynamic_value::Enum::new(e.into(), ::capnp::introspect::RawEnumSchema { encoded_node: &chat_not_permitted_reason::ENCODED_NODE, annotation_types: chat_not_permitted_reason::get_annotation_types }.into()).into() }
+}
+impl ::core::convert::TryFrom<u16> for ChatNotPermittedReason {
+  type Error = ::capnp::NotInSchema;
+  fn try_from(value: u16) -> ::core::result::Result<Self, <ChatNotPermittedReason as ::core::convert::TryFrom<u16>>::Error> {
+    match value {
+      0 => ::core::result::Result::Ok(Self::NotLinked),
+      1 => ::core::result::Result::Ok(Self::Muted),
+      2 => ::core::result::Result::Ok(Self::RateLimited),
+      3 => ::core::result::Result::Ok(Self::Unknown),
+      4 => ::core::result::Result::Ok(Self::Disallowed),
+      n => ::core::result::Result::Err(::capnp::NotInSchema(n)),
+    }
+  }
+}
+impl From<ChatNotPermittedReason> for u16 {
+  #[inline]
+  fn from(x: ChatNotPermittedReason) -> u16 { x as u16 }
+}
+impl ::capnp::traits::HasTypeId for ChatNotPermittedReason {
+  const TYPE_ID: u64 = 0x8e77_a75f_766f_45d9u64;
+}
+mod chat_not_permitted_reason {
+pub static ENCODED_NODE: [::capnp::Word; 43] = [
+  ::capnp::word(0, 0, 0, 0, 6, 0, 6, 0),
+  ::capnp::word(217, 69, 111, 118, 95, 167, 119, 142),
+  ::capnp::word(11, 0, 0, 0, 2, 0, 0, 0),
+  ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(171, 15, 0, 0, 40, 16, 0, 0),
+  ::capnp::word(21, 0, 0, 0, 18, 1, 0, 0),
+  ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(33, 0, 0, 0, 127, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(103, 97, 109, 101, 46, 99, 97, 112),
+  ::capnp::word(110, 112, 58, 67, 104, 97, 116, 78),
+  ::capnp::word(111, 116, 80, 101, 114, 109, 105, 116),
+  ::capnp::word(116, 101, 100, 82, 101, 97, 115, 111),
+  ::capnp::word(110, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 1, 0, 1, 0),
+  ::capnp::word(20, 0, 0, 0, 1, 0, 2, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(53, 0, 0, 0, 82, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(49, 0, 0, 0, 50, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(2, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(41, 0, 0, 0, 98, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(3, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(37, 0, 0, 0, 66, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(4, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(29, 0, 0, 0, 90, 0, 0, 0),
+  ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(110, 111, 116, 76, 105, 110, 107, 101),
+  ::capnp::word(100, 0, 0, 0, 0, 0, 0, 0),
+  ::capnp::word(109, 117, 116, 101, 100, 0, 0, 0),
+  ::capnp::word(114, 97, 116, 101, 76, 105, 109, 105),
+  ::capnp::word(116, 101, 100, 0, 0, 0, 0, 0),
+  ::capnp::word(117, 110, 107, 110, 111, 119, 110, 0),
+  ::capnp::word(100, 105, 115, 97, 108, 108, 111, 119),
+  ::capnp::word(101, 100, 0, 0, 0, 0, 0, 0),
+];
+pub fn get_annotation_types(child_index: Option<u16>, index: u32) -> ::capnp::introspect::Type {
+  ::capnp::introspect::panic_invalid_annotation_indices(child_index, index)
+}
+}
+
 pub mod chat_not_permitted_message {
   #[derive(Copy, Clone)]
   pub struct Owned(());
@@ -7705,11 +7792,19 @@ pub mod chat_not_permitted_message {
     pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
       self.reader.total_size()
     }
+    #[inline]
+    pub fn get_is_voice(self) -> bool {
+      self.reader.get_bool_field(0)
+    }
+    #[inline]
+    pub fn get_reason(self) -> ::core::result::Result<crate::game_capnp::ChatNotPermittedReason,::capnp::NotInSchema> {
+      ::core::convert::TryInto::try_into(self.reader.get_data_field::<u16>(1))
+    }
   }
 
   pub struct Builder<'a> { builder: ::capnp::private::layout::StructBuilder<'a> }
   impl <> ::capnp::traits::HasStructSize for Builder<'_,>  {
-    const STRUCT_SIZE: ::capnp::private::layout::StructSize = ::capnp::private::layout::StructSize { data: 0, pointers: 0 };
+    const STRUCT_SIZE: ::capnp::private::layout::StructSize = ::capnp::private::layout::StructSize { data: 1, pointers: 0 };
   }
   impl <> ::capnp::traits::HasTypeId for Builder<'_,>  {
     const TYPE_ID: u64 = _private::TYPE_ID;
@@ -7759,6 +7854,22 @@ pub mod chat_not_permitted_message {
     pub fn total_size(&self) -> ::capnp::Result<::capnp::MessageSize> {
       self.builder.as_reader().total_size()
     }
+    #[inline]
+    pub fn get_is_voice(self) -> bool {
+      self.builder.get_bool_field(0)
+    }
+    #[inline]
+    pub fn set_is_voice(&mut self, value: bool)  {
+      self.builder.set_bool_field(0, value);
+    }
+    #[inline]
+    pub fn get_reason(self) -> ::core::result::Result<crate::game_capnp::ChatNotPermittedReason,::capnp::NotInSchema> {
+      ::core::convert::TryInto::try_into(self.builder.get_data_field::<u16>(1))
+    }
+    #[inline]
+    pub fn set_reason(&mut self, value: crate::game_capnp::ChatNotPermittedReason)  {
+      self.builder.set_data_field::<u16>(1, value as u16);
+    }
   }
 
   pub struct Pipeline { _typeless: ::capnp::any_pointer::Pipeline }
@@ -7770,18 +7881,18 @@ pub mod chat_not_permitted_message {
   impl Pipeline  {
   }
   mod _private {
-    pub static ENCODED_NODE: [::capnp::Word; 19] = [
+    pub static ENCODED_NODE: [::capnp::Word; 50] = [
       ::capnp::word(0, 0, 0, 0, 6, 0, 6, 0),
       ::capnp::word(251, 172, 108, 213, 240, 147, 160, 222),
-      ::capnp::word(11, 0, 0, 0, 1, 0, 0, 0),
+      ::capnp::word(11, 0, 0, 0, 1, 0, 1, 0),
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(0, 0, 7, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(171, 15, 0, 0, 206, 15, 0, 0),
+      ::capnp::word(42, 16, 0, 0, 137, 16, 0, 0),
       ::capnp::word(21, 0, 0, 0, 26, 1, 0, 0),
       ::capnp::word(37, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(33, 0, 0, 0, 119, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
       ::capnp::word(103, 97, 109, 101, 46, 99, 97, 112),
@@ -7790,9 +7901,44 @@ pub mod chat_not_permitted_message {
       ::capnp::word(116, 101, 100, 77, 101, 115, 115, 97),
       ::capnp::word(103, 101, 0, 0, 0, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 1, 0, 1, 0),
+      ::capnp::word(8, 0, 0, 0, 3, 0, 4, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(41, 0, 0, 0, 66, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(36, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(48, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(1, 0, 0, 0, 1, 0, 0, 0),
+      ::capnp::word(0, 0, 1, 0, 1, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(45, 0, 0, 0, 58, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(40, 0, 0, 0, 3, 0, 1, 0),
+      ::capnp::word(52, 0, 0, 0, 2, 0, 1, 0),
+      ::capnp::word(105, 115, 86, 111, 105, 99, 101, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(1, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(114, 101, 97, 115, 111, 110, 0, 0),
+      ::capnp::word(15, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(217, 69, 111, 118, 95, 167, 119, 142),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(15, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
+      ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
     ];
     pub fn get_field_types(index: u16) -> ::capnp::introspect::Type {
-      ::capnp::introspect::panic_invalid_field_index(index)
+      match index {
+        0 => <bool as ::capnp::introspect::Introspect>::introspect(),
+        1 => <crate::game_capnp::ChatNotPermittedReason as ::capnp::introspect::Introspect>::introspect(),
+        _ => ::capnp::introspect::panic_invalid_field_index(index),
+      }
     }
     pub fn get_annotation_types(child_index: Option<u16>, index: u32) -> ::capnp::introspect::Type {
       ::capnp::introspect::panic_invalid_annotation_indices(child_index, index)
@@ -7804,9 +7950,9 @@ pub mod chat_not_permitted_message {
       MEMBERS_BY_DISCRIMINANT,
       MEMBERS_BY_NAME
     );
-    pub static NONUNION_MEMBERS : &[u16] = &[];
+    pub static NONUNION_MEMBERS : &[u16] = &[0,1];
     pub static MEMBERS_BY_DISCRIMINANT : &[u16] = &[];
-    pub static MEMBERS_BY_NAME : &[u16] = &[];
+    pub static MEMBERS_BY_NAME : &[u16] = &[0,1];
     pub const TYPE_ID: u64 = 0xdea0_93f0_d56c_acfb;
   }
 }
@@ -8528,7 +8674,7 @@ pub mod message {
       ::capnp::word(209, 60, 14, 10, 111, 74, 104, 149),
       ::capnp::word(1, 0, 7, 0, 0, 0, 19, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),
-      ::capnp::word(208, 15, 0, 0, 9, 20, 0, 0),
+      ::capnp::word(139, 16, 0, 0, 196, 20, 0, 0),
       ::capnp::word(21, 0, 0, 0, 154, 0, 0, 0),
       ::capnp::word(29, 0, 0, 0, 7, 0, 0, 0),
       ::capnp::word(0, 0, 0, 0, 0, 0, 0, 0),

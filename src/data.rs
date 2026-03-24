@@ -1,3 +1,6 @@
+#[cfg(feature = "srvc")]
+use crate::schema::srvc::srv_user_data;
+
 use crate::{
     encoding::{DataDecodeError, heapless_str_from_reader},
     schema::shared::{player_display_data, player_icon_data},
@@ -121,5 +124,39 @@ impl PlayerDisplayData {
         builder.set_user_id(self.user_id);
         builder.set_username(self.username.as_str());
         self.icons.encode(builder.reborrow().init_icons());
+    }
+}
+
+#[cfg(feature = "srvc")]
+#[derive(Clone, Debug, Default)]
+pub struct SrvUserData {
+    pub account_id: i32,
+    pub can_use_voice: bool,
+    pub can_use_quick_chat: bool,
+    pub is_banned: bool,
+    pub is_muted: bool,
+    pub is_linked: bool,
+}
+
+#[cfg(feature = "srvc")]
+impl SrvUserData {
+    pub fn from_reader(reader: srv_user_data::Reader<'_>) -> Result<Self, DataDecodeError> {
+        Ok(Self {
+            account_id: reader.get_account_id(),
+            can_use_voice: reader.get_can_use_voice(),
+            can_use_quick_chat: reader.get_can_use_quick_chat(),
+            is_banned: reader.get_is_banned(),
+            is_muted: reader.get_is_muted(),
+            is_linked: reader.get_is_linked(),
+        })
+    }
+
+    pub fn encode(&self, mut builder: srv_user_data::Builder<'_>) {
+        builder.set_account_id(self.account_id);
+        builder.set_can_use_voice(self.can_use_voice);
+        builder.set_can_use_quick_chat(self.can_use_quick_chat);
+        builder.set_is_banned(self.is_banned);
+        builder.set_is_muted(self.is_muted);
+        builder.set_is_linked(self.is_linked);
     }
 }
