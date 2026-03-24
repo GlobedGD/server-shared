@@ -63,6 +63,15 @@ CAPNP_DECLARE_SCHEMA(b42ff33e56f21298);
 CAPNP_DECLARE_SCHEMA(d2d77b5d2f998da1);
 CAPNP_DECLARE_SCHEMA(be5fa37583693d04);
 CAPNP_DECLARE_SCHEMA(bf06433de54163b1);
+CAPNP_DECLARE_SCHEMA(8e77a75f766f45d9);
+enum class ChatNotPermittedReason_8e77a75f766f45d9: uint16_t {
+  NOT_LINKED,
+  MUTED,
+  RATE_LIMITED,
+  UNKNOWN,
+  DISALLOWED,
+};
+CAPNP_DECLARE_ENUM(ChatNotPermittedReason, 8e77a75f766f45d9);
 CAPNP_DECLARE_SCHEMA(dea093f0d56cacfb);
 CAPNP_DECLARE_SCHEMA(ee430f29eef52d4e);
 
@@ -477,6 +486,8 @@ struct QuickChatBroadcastMessage {
   };
 };
 
+typedef ::capnp::schemas::ChatNotPermittedReason_8e77a75f766f45d9 ChatNotPermittedReason;
+
 struct ChatNotPermittedMessage {
   ChatNotPermittedMessage() = delete;
 
@@ -485,7 +496,7 @@ struct ChatNotPermittedMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(dea093f0d56cacfb, 0, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(dea093f0d56cacfb, 1, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -3004,6 +3015,10 @@ public:
   }
 #endif  // !CAPNP_LITE
 
+  inline bool getIsVoice() const;
+
+  inline  ::globed::schema::game::ChatNotPermittedReason getReason() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -3031,6 +3046,12 @@ public:
 #if !CAPNP_LITE
   inline ::kj::StringTree toString() const { return asReader().toString(); }
 #endif  // !CAPNP_LITE
+
+  inline bool getIsVoice();
+  inline void setIsVoice(bool value);
+
+  inline  ::globed::schema::game::ChatNotPermittedReason getReason();
+  inline void setReason( ::globed::schema::game::ChatNotPermittedReason value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -5248,6 +5269,34 @@ inline  ::uint32_t QuickChatBroadcastMessage::Builder::getId() {
 }
 inline void QuickChatBroadcastMessage::Builder::setId( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool ChatNotPermittedMessage::Reader::getIsVoice() const {
+  return _reader.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline bool ChatNotPermittedMessage::Builder::getIsVoice() {
+  return _builder.getDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void ChatNotPermittedMessage::Builder::setIsVoice(bool value) {
+  _builder.setDataField<bool>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::globed::schema::game::ChatNotPermittedReason ChatNotPermittedMessage::Reader::getReason() const {
+  return _reader.getDataField< ::globed::schema::game::ChatNotPermittedReason>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::globed::schema::game::ChatNotPermittedReason ChatNotPermittedMessage::Builder::getReason() {
+  return _builder.getDataField< ::globed::schema::game::ChatNotPermittedReason>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void ChatNotPermittedMessage::Builder::setReason( ::globed::schema::game::ChatNotPermittedReason value) {
+  _builder.setDataField< ::globed::schema::game::ChatNotPermittedReason>(
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }
 
