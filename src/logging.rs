@@ -40,6 +40,7 @@ fn default_retention_days() -> u32 {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, Validate)]
+#[serde(deny_unknown_fields)]
 pub struct LoggerConfig {
     /// Whether to enable logging to a file. If disabled, logs will only be printed to stdout.
     #[serde(default = "default_file_enabled")]
