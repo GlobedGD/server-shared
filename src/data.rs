@@ -1,5 +1,5 @@
 #[cfg(feature = "srvc")]
-use crate::schema::srvc::srv_user_data;
+use crate::schema::srvc::{srv_user_data, status_message};
 
 use crate::{
     encoding::{DataDecodeError, heapless_str_from_reader},
@@ -9,7 +9,7 @@ use crate::{
 #[cfg(feature = "srvc")]
 pub const SRVC_MAGIC: u64 = 0x92869be51214ba4f;
 #[cfg(feature = "srvc")]
-pub const SRVC_PROTOCOL_VERSION: u32 = 1;
+pub const SRVC_PROTOCOL_VERSION: u32 = 2;
 
 #[derive(Clone, Debug)]
 pub struct GameServerData {
@@ -163,5 +163,39 @@ impl SrvUserData {
         builder.set_is_banned(self.is_banned);
         builder.set_is_muted(self.is_muted);
         builder.set_is_linked(self.is_linked);
+    }
+}
+
+#[cfg(feature = "srvc")]
+#[derive(Clone, Debug, Default)]
+pub struct SrvStatusData {
+    pub clients: u32,
+    pub auth_clients: u32,
+    pub rooms: u32,
+    pub sessions: u32,
+    pub total_connections: u64,
+    pub total_data_messages: u64,
+}
+
+#[cfg(feature = "srvc")]
+impl SrvStatusData {
+    pub fn from_reader(reader: status_message::Reader<'_>) -> Result<Self, DataDecodeError> {
+        Ok(Self {
+            clients: reader.get_clients(),
+            auth_clients: reader.get_auth_clients(),
+            rooms: reader.get_rooms(),
+            sessions: reader.get_sessions(),
+            total_connections: reader.get_total_connections(),
+            total_data_messages: reader.get_total_data_messages(),
+        })
+    }
+
+    pub fn encode(&self, mut builder: status_message::Builder<'_>) {
+        builder.set_clients(self.clients);
+        builder.set_sessions(self.sessions);
+        builder.set_auth_clients(self.auth_clients);
+        builder.set_rooms(self.rooms);
+        builder.set_total_connections(self.total_connections);
+        builder.set_total_data_messages(self.total_data_messages);
     }
 }

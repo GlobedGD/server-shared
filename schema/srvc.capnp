@@ -61,11 +61,27 @@ struct NotifyKickUserMessage {
     accountId @0 :Int32;
 }
 
+struct StatusMessage {
+    # All clients, including unauthenticated ones
+    clients @0: UInt32;
+    # Clients that are authenticated
+    authClients @1 :UInt32;
+    # Rooms
+    rooms @2 :UInt32;
+    # Active game sessions
+    sessions @3 :UInt32;
+    # Total connections made since the server was launched
+    totalConnections @4 :UInt64;
+    # Total in-level data messages processed
+    totalDataMessages @5 :UInt64;
+}
+
 struct Message {
     union {
         # Game server messages
         loginSrv @0 :LoginSrvMessage;
         roomCreatedAck @5 :RoomCreatedAckMessage;
+        status @8 :StatusMessage;
 
         # Central server messages
         loginOk @1 :LoginOkMessage;
