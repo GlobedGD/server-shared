@@ -150,6 +150,7 @@ CAPNP_DECLARE_SCHEMA(ed7f151440678799);
 CAPNP_DECLARE_SCHEMA(d0b534d0fb2c4228);
 CAPNP_DECLARE_SCHEMA(b268f4798c74eac3);
 CAPNP_DECLARE_SCHEMA(9c5cf60c8ccf185e);
+CAPNP_DECLARE_SCHEMA(c2998ea4b03f78a2);
 CAPNP_DECLARE_SCHEMA(f22826a27d7e0863);
 CAPNP_DECLARE_SCHEMA(eaa4eda829518a91);
 CAPNP_DECLARE_SCHEMA(daae1a3c80e59eb4);
@@ -1245,6 +1246,21 @@ struct SendFeaturedLevelMessage {
   };
 };
 
+struct UserStateMessage {
+  UserStateMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(c2998ea4b03f78a2, 0, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct DiscordLinkStateMessage {
   DiscordLinkStateMessage() = delete;
 
@@ -1825,6 +1841,8 @@ struct Message {
     PINNED_LEVEL_UPDATED,
     ROOM_WARP,
     NOTICE_REPLY_RESULT,
+    GET_USER_STATE,
+    USER_STATE,
   };
 
   struct _capnpPrivate {
@@ -7966,6 +7984,99 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class UserStateMessage::Reader {
+public:
+  typedef UserStateMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasActiveMute() const;
+  inline  ::globed::schema::main::UserPunishment::Reader getActiveMute() const;
+
+  inline bool hasActiveRoomBan() const;
+  inline  ::globed::schema::main::UserPunishment::Reader getActiveRoomBan() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class UserStateMessage::Builder {
+public:
+  typedef UserStateMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasActiveMute();
+  inline  ::globed::schema::main::UserPunishment::Builder getActiveMute();
+  inline void setActiveMute( ::globed::schema::main::UserPunishment::Reader value);
+  inline  ::globed::schema::main::UserPunishment::Builder initActiveMute();
+  inline void adoptActiveMute(::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> disownActiveMute();
+
+  inline bool hasActiveRoomBan();
+  inline  ::globed::schema::main::UserPunishment::Builder getActiveRoomBan();
+  inline void setActiveRoomBan( ::globed::schema::main::UserPunishment::Reader value);
+  inline  ::globed::schema::main::UserPunishment::Builder initActiveRoomBan();
+  inline void adoptActiveRoomBan(::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> disownActiveRoomBan();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class UserStateMessage::Pipeline {
+public:
+  typedef UserStateMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::main::UserPunishment::Pipeline getActiveMute();
+  inline  ::globed::schema::main::UserPunishment::Pipeline getActiveRoomBan();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class DiscordLinkStateMessage::Reader {
 public:
   typedef DiscordLinkStateMessage Reads;
@@ -11287,6 +11398,13 @@ public:
   inline bool hasNoticeReplyResult() const;
   inline  ::globed::schema::main::NoticeReplyResultMessage::Reader getNoticeReplyResult() const;
 
+  inline bool isGetUserState() const;
+  inline  ::capnp::Void getGetUserState() const;
+
+  inline bool isUserState() const;
+  inline bool hasUserState() const;
+  inline  ::globed::schema::main::UserStateMessage::Reader getUserState() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -12047,6 +12165,18 @@ public:
   inline  ::globed::schema::main::NoticeReplyResultMessage::Builder initNoticeReplyResult();
   inline void adoptNoticeReplyResult(::capnp::Orphan< ::globed::schema::main::NoticeReplyResultMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::NoticeReplyResultMessage> disownNoticeReplyResult();
+
+  inline bool isGetUserState();
+  inline  ::capnp::Void getGetUserState();
+  inline void setGetUserState( ::capnp::Void value = ::capnp::VOID);
+
+  inline bool isUserState();
+  inline bool hasUserState();
+  inline  ::globed::schema::main::UserStateMessage::Builder getUserState();
+  inline void setUserState( ::globed::schema::main::UserStateMessage::Reader value);
+  inline  ::globed::schema::main::UserStateMessage::Builder initUserState();
+  inline void adoptUserState(::capnp::Orphan< ::globed::schema::main::UserStateMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::UserStateMessage> disownUserState();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -16021,6 +16151,84 @@ inline bool SendFeaturedLevelMessage::Builder::getQueue() {
 inline void SendFeaturedLevelMessage::Builder::setQueue(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<72>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool UserStateMessage::Reader::hasActiveMute() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool UserStateMessage::Builder::hasActiveMute() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UserPunishment::Reader UserStateMessage::Reader::getActiveMute() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UserPunishment::Builder UserStateMessage::Builder::getActiveMute() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::UserPunishment::Pipeline UserStateMessage::Pipeline::getActiveMute() {
+  return  ::globed::schema::main::UserPunishment::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void UserStateMessage::Builder::setActiveMute( ::globed::schema::main::UserPunishment::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UserPunishment::Builder UserStateMessage::Builder::initActiveMute() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void UserStateMessage::Builder::adoptActiveMute(
+    ::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> UserStateMessage::Builder::disownActiveMute() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool UserStateMessage::Reader::hasActiveRoomBan() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool UserStateMessage::Builder::hasActiveRoomBan() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UserPunishment::Reader UserStateMessage::Reader::getActiveRoomBan() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UserPunishment::Builder UserStateMessage::Builder::getActiveRoomBan() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::main::UserPunishment::Pipeline UserStateMessage::Pipeline::getActiveRoomBan() {
+  return  ::globed::schema::main::UserPunishment::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void UserStateMessage::Builder::setActiveRoomBan( ::globed::schema::main::UserPunishment::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UserPunishment::Builder UserStateMessage::Builder::initActiveRoomBan() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void UserStateMessage::Builder::adoptActiveRoomBan(
+    ::capnp::Orphan< ::globed::schema::main::UserPunishment>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UserPunishment> UserStateMessage::Builder::disownActiveRoomBan() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserPunishment>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline  ::uint64_t DiscordLinkStateMessage::Reader::getId() const {
@@ -23054,6 +23262,86 @@ inline ::capnp::Orphan< ::globed::schema::main::NoticeReplyResultMessage> Messag
   KJ_IREQUIRE((which() == Message::NOTICE_REPLY_RESULT),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::NoticeReplyResultMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isGetUserState() const {
+  return which() == Message::GET_USER_STATE;
+}
+inline bool Message::Builder::isGetUserState() {
+  return which() == Message::GET_USER_STATE;
+}
+inline  ::capnp::Void Message::Reader::getGetUserState() const {
+  KJ_IREQUIRE((which() == Message::GET_USER_STATE),
+              "Must check which() before get()ing a union member.");
+  return _reader.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::capnp::Void Message::Builder::getGetUserState() {
+  KJ_IREQUIRE((which() == Message::GET_USER_STATE),
+              "Must check which() before get()ing a union member.");
+  return _builder.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void Message::Builder::setGetUserState( ::capnp::Void value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::GET_USER_STATE);
+  _builder.setDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool Message::Reader::isUserState() const {
+  return which() == Message::USER_STATE;
+}
+inline bool Message::Builder::isUserState() {
+  return which() == Message::USER_STATE;
+}
+inline bool Message::Reader::hasUserState() const {
+  if (which() != Message::USER_STATE) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasUserState() {
+  if (which() != Message::USER_STATE) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::UserStateMessage::Reader Message::Reader::getUserState() const {
+  KJ_IREQUIRE((which() == Message::USER_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserStateMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::UserStateMessage::Builder Message::Builder::getUserState() {
+  KJ_IREQUIRE((which() == Message::USER_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserStateMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setUserState( ::globed::schema::main::UserStateMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserStateMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::UserStateMessage::Builder Message::Builder::initUserState() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_STATE);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserStateMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptUserState(
+    ::capnp::Orphan< ::globed::schema::main::UserStateMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::USER_STATE);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::UserStateMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::UserStateMessage> Message::Builder::disownUserState() {
+  KJ_IREQUIRE((which() == Message::USER_STATE),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::UserStateMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

@@ -453,6 +453,11 @@ struct SendFeaturedLevelMessage {
     queue       @6 :Bool;
 }
 
+struct UserStateMessage {
+    activeMute @0 :UserPunishment;
+    activeRoomBan @1 :UserPunishment;
+}
+
 struct DiscordLinkStateMessage {
     id @0 :UInt64;
     username @1 :Text;
@@ -697,6 +702,7 @@ struct Message {
         adminCloseRoom              @87 :AdminCloseRoomMessage;
 
         fetchCredits                @39 :FetchCreditsMessage;
+        getUserState                @93 :Void;
         getDiscordLinkState         @40 :GetDiscordLinkStateMessage;
         setDiscordPairingState      @41 :SetDiscordPairingStateMessage;
         discordLinkConfirm          @42 :DiscordLinkConfirmMessage;
@@ -753,6 +759,7 @@ struct Message {
         adminPunishmentReasons      @88 :AdminPunishmentReasonsMessage;
 
         credits                     @79 :CreditsMessage;
+        userState                   @94 :UserStateMessage;
         discordLinkState            @80 :DiscordLinkStateMessage;
         discordLinkAttempt          @81 :DiscordLinkAttemptMessage;
         featuredLevel               @82 :FeaturedLevelMessage;
