@@ -153,6 +153,7 @@ CAPNP_DECLARE_SCHEMA(9c5cf60c8ccf185e);
 CAPNP_DECLARE_SCHEMA(c2998ea4b03f78a2);
 CAPNP_DECLARE_SCHEMA(f22826a27d7e0863);
 CAPNP_DECLARE_SCHEMA(eaa4eda829518a91);
+CAPNP_DECLARE_SCHEMA(fde795a4cdd61270);
 CAPNP_DECLARE_SCHEMA(daae1a3c80e59eb4);
 CAPNP_DECLARE_SCHEMA(e806d85d4b1d84da);
 CAPNP_DECLARE_SCHEMA(a9bfdaabb1cd622b);
@@ -1291,6 +1292,21 @@ struct DiscordLinkAttemptMessage {
   };
 };
 
+struct DiscordOauthUrlMessage {
+  DiscordOauthUrlMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(fde795a4cdd61270, 0, 1)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct FeaturedLevelMessage {
   FeaturedLevelMessage() = delete;
 
@@ -1843,6 +1859,8 @@ struct Message {
     NOTICE_REPLY_RESULT,
     GET_USER_STATE,
     USER_STATE,
+    REQUEST_DISCORD_OAUTH,
+    DISCORD_OAUTH_URL,
   };
 
   struct _capnpPrivate {
@@ -8269,6 +8287,87 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class DiscordOauthUrlMessage::Reader {
+public:
+  typedef DiscordOauthUrlMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasUrl() const;
+  inline  ::capnp::Text::Reader getUrl() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class DiscordOauthUrlMessage::Builder {
+public:
+  typedef DiscordOauthUrlMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasUrl();
+  inline  ::capnp::Text::Builder getUrl();
+  inline void setUrl( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initUrl(unsigned int size);
+  inline void adoptUrl(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownUrl();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class DiscordOauthUrlMessage::Pipeline {
+public:
+  typedef DiscordOauthUrlMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class FeaturedLevelMessage::Reader {
 public:
   typedef FeaturedLevelMessage Reads;
@@ -11405,6 +11504,13 @@ public:
   inline bool hasUserState() const;
   inline  ::globed::schema::main::UserStateMessage::Reader getUserState() const;
 
+  inline bool isRequestDiscordOauth() const;
+  inline  ::capnp::Void getRequestDiscordOauth() const;
+
+  inline bool isDiscordOauthUrl() const;
+  inline bool hasDiscordOauthUrl() const;
+  inline  ::globed::schema::main::DiscordOauthUrlMessage::Reader getDiscordOauthUrl() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -12177,6 +12283,18 @@ public:
   inline  ::globed::schema::main::UserStateMessage::Builder initUserState();
   inline void adoptUserState(::capnp::Orphan< ::globed::schema::main::UserStateMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::UserStateMessage> disownUserState();
+
+  inline bool isRequestDiscordOauth();
+  inline  ::capnp::Void getRequestDiscordOauth();
+  inline void setRequestDiscordOauth( ::capnp::Void value = ::capnp::VOID);
+
+  inline bool isDiscordOauthUrl();
+  inline bool hasDiscordOauthUrl();
+  inline  ::globed::schema::main::DiscordOauthUrlMessage::Builder getDiscordOauthUrl();
+  inline void setDiscordOauthUrl( ::globed::schema::main::DiscordOauthUrlMessage::Reader value);
+  inline  ::globed::schema::main::DiscordOauthUrlMessage::Builder initDiscordOauthUrl();
+  inline void adoptDiscordOauthUrl(::capnp::Orphan< ::globed::schema::main::DiscordOauthUrlMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::DiscordOauthUrlMessage> disownDiscordOauthUrl();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -16393,6 +16511,40 @@ inline void DiscordLinkAttemptMessage::Builder::adoptAvatarUrl(
 inline ::capnp::Orphan< ::capnp::Text> DiscordLinkAttemptMessage::Builder::disownAvatarUrl() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool DiscordOauthUrlMessage::Reader::hasUrl() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool DiscordOauthUrlMessage::Builder::hasUrl() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader DiscordOauthUrlMessage::Reader::getUrl() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder DiscordOauthUrlMessage::Builder::getUrl() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void DiscordOauthUrlMessage::Builder::setUrl( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder DiscordOauthUrlMessage::Builder::initUrl(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void DiscordOauthUrlMessage::Builder::adoptUrl(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> DiscordOauthUrlMessage::Builder::disownUrl() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline  ::int32_t FeaturedLevelMessage::Reader::getLevelId() const {
@@ -23342,6 +23494,86 @@ inline ::capnp::Orphan< ::globed::schema::main::UserStateMessage> Message::Build
   KJ_IREQUIRE((which() == Message::USER_STATE),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::main::UserStateMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRequestDiscordOauth() const {
+  return which() == Message::REQUEST_DISCORD_OAUTH;
+}
+inline bool Message::Builder::isRequestDiscordOauth() {
+  return which() == Message::REQUEST_DISCORD_OAUTH;
+}
+inline  ::capnp::Void Message::Reader::getRequestDiscordOauth() const {
+  KJ_IREQUIRE((which() == Message::REQUEST_DISCORD_OAUTH),
+              "Must check which() before get()ing a union member.");
+  return _reader.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::capnp::Void Message::Builder::getRequestDiscordOauth() {
+  KJ_IREQUIRE((which() == Message::REQUEST_DISCORD_OAUTH),
+              "Must check which() before get()ing a union member.");
+  return _builder.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void Message::Builder::setRequestDiscordOauth( ::capnp::Void value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REQUEST_DISCORD_OAUTH);
+  _builder.setDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool Message::Reader::isDiscordOauthUrl() const {
+  return which() == Message::DISCORD_OAUTH_URL;
+}
+inline bool Message::Builder::isDiscordOauthUrl() {
+  return which() == Message::DISCORD_OAUTH_URL;
+}
+inline bool Message::Reader::hasDiscordOauthUrl() const {
+  if (which() != Message::DISCORD_OAUTH_URL) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasDiscordOauthUrl() {
+  if (which() != Message::DISCORD_OAUTH_URL) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::DiscordOauthUrlMessage::Reader Message::Reader::getDiscordOauthUrl() const {
+  KJ_IREQUIRE((which() == Message::DISCORD_OAUTH_URL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordOauthUrlMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::DiscordOauthUrlMessage::Builder Message::Builder::getDiscordOauthUrl() {
+  KJ_IREQUIRE((which() == Message::DISCORD_OAUTH_URL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordOauthUrlMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setDiscordOauthUrl( ::globed::schema::main::DiscordOauthUrlMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_OAUTH_URL);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordOauthUrlMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::DiscordOauthUrlMessage::Builder Message::Builder::initDiscordOauthUrl() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_OAUTH_URL);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordOauthUrlMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptDiscordOauthUrl(
+    ::capnp::Orphan< ::globed::schema::main::DiscordOauthUrlMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_OAUTH_URL);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordOauthUrlMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::DiscordOauthUrlMessage> Message::Builder::disownDiscordOauthUrl() {
+  KJ_IREQUIRE((which() == Message::DISCORD_OAUTH_URL),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordOauthUrlMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
