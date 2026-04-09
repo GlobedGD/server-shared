@@ -45,8 +45,11 @@ CAPNP_DECLARE_SCHEMA(8c81bcb5b34031b2);
 CAPNP_DECLARE_SCHEMA(93f977e044434ab7);
 CAPNP_DECLARE_SCHEMA(cf89bb52472b08d4);
 CAPNP_DECLARE_SCHEMA(f3df92cfd07ba2ea);
+CAPNP_DECLARE_SCHEMA(9ce4c61497f01328);
 CAPNP_DECLARE_SCHEMA(f5b211f1db0defbc);
+CAPNP_DECLARE_SCHEMA(ce726d7eefbc1a24);
 CAPNP_DECLARE_SCHEMA(f3e0f84d2138b356);
+CAPNP_DECLARE_SCHEMA(ae2d127fc5f1a4cc);
 CAPNP_DECLARE_SCHEMA(ee95a98b84cdb612);
 CAPNP_DECLARE_SCHEMA(a5e1158db5d33982);
 CAPNP_DECLARE_SCHEMA(a66df788476d46df);
@@ -70,6 +73,7 @@ enum class ChatNotPermittedReason_8e77a75f766f45d9: uint16_t {
   RATE_LIMITED,
   UNKNOWN,
   DISALLOWED,
+  LEVEL_DISABLED,
 };
 CAPNP_DECLARE_ENUM(ChatNotPermittedReason, 8e77a75f766f45d9);
 CAPNP_DECLARE_SCHEMA(dea093f0d56cacfb);
@@ -304,6 +308,21 @@ struct Event {
   };
 };
 
+struct PlayerLevelMeta {
+  PlayerLevelMeta() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(9ce4c61497f01328, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct PlayerDataMessage {
   PlayerDataMessage() = delete;
 
@@ -319,6 +338,21 @@ struct PlayerDataMessage {
   };
 };
 
+struct PlayerUpdateMetaMessage {
+  PlayerUpdateMetaMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(ce726d7eefbc1a24, 0, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct LevelDataMessage {
   LevelDataMessage() = delete;
 
@@ -328,6 +362,21 @@ struct LevelDataMessage {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(f3e0f84d2138b356, 1, 3)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct LevelMetaMessage {
+  LevelMetaMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(ae2d127fc5f1a4cc, 0, 2)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -529,6 +578,8 @@ struct Message {
     UPDATE_USER_SETTINGS,
     QUICK_CHAT,
     QUICK_CHAT_BROADCAST,
+    PLAYER_UPDATE_META,
+    LEVEL_META,
   };
 
   struct _capnpPrivate {
@@ -1919,6 +1970,82 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class PlayerLevelMeta::Reader {
+public:
+  typedef PlayerLevelMeta Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getProgress() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PlayerLevelMeta::Builder {
+public:
+  typedef PlayerLevelMeta Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getProgress();
+  inline void setProgress( ::uint32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PlayerLevelMeta::Pipeline {
+public:
+  typedef PlayerLevelMeta Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class PlayerDataMessage::Reader {
 public:
   typedef PlayerDataMessage Reads;
@@ -2042,6 +2169,99 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class PlayerUpdateMetaMessage::Reader {
+public:
+  typedef PlayerUpdateMetaMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasMeta() const;
+  inline  ::globed::schema::game::PlayerLevelMeta::Reader getMeta() const;
+
+  inline bool hasRequests() const;
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getRequests() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class PlayerUpdateMetaMessage::Builder {
+public:
+  typedef PlayerUpdateMetaMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasMeta();
+  inline  ::globed::schema::game::PlayerLevelMeta::Builder getMeta();
+  inline void setMeta( ::globed::schema::game::PlayerLevelMeta::Reader value);
+  inline  ::globed::schema::game::PlayerLevelMeta::Builder initMeta();
+  inline void adoptMeta(::capnp::Orphan< ::globed::schema::game::PlayerLevelMeta>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::PlayerLevelMeta> disownMeta();
+
+  inline bool hasRequests();
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getRequests();
+  inline void setRequests( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setRequests(::kj::ArrayPtr<const  ::int32_t> value);
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initRequests(unsigned int size);
+  inline void adoptRequests(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownRequests();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class PlayerUpdateMetaMessage::Pipeline {
+public:
+  typedef PlayerUpdateMetaMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::globed::schema::game::PlayerLevelMeta::Pipeline getMeta();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class LevelDataMessage::Reader {
 public:
   typedef LevelDataMessage Reads;
@@ -2135,6 +2355,98 @@ private:
 class LevelDataMessage::Pipeline {
 public:
   typedef LevelDataMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class LevelMetaMessage::Reader {
+public:
+  typedef LevelMetaMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline bool hasIds() const;
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader getIds() const;
+
+  inline bool hasMetas() const;
+  inline  ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>::Reader getMetas() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class LevelMetaMessage::Builder {
+public:
+  typedef LevelMetaMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline bool hasIds();
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder getIds();
+  inline void setIds( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value);
+  inline void setIds(::kj::ArrayPtr<const  ::int32_t> value);
+  inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder initIds(unsigned int size);
+  inline void adoptIds(::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> disownIds();
+
+  inline bool hasMetas();
+  inline  ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>::Builder getMetas();
+  inline void setMetas( ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>::Builder initMetas(unsigned int size);
+  inline void adoptMetas(::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>> disownMetas();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class LevelMetaMessage::Pipeline {
+public:
+  typedef LevelMetaMessage Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -3173,6 +3485,14 @@ public:
   inline bool hasQuickChatBroadcast() const;
   inline  ::globed::schema::game::QuickChatBroadcastMessage::Reader getQuickChatBroadcast() const;
 
+  inline bool isPlayerUpdateMeta() const;
+  inline bool hasPlayerUpdateMeta() const;
+  inline  ::globed::schema::game::PlayerUpdateMetaMessage::Reader getPlayerUpdateMeta() const;
+
+  inline bool isLevelMeta() const;
+  inline bool hasLevelMeta() const;
+  inline  ::globed::schema::game::LevelMetaMessage::Reader getLevelMeta() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -3353,6 +3673,22 @@ public:
   inline  ::globed::schema::game::QuickChatBroadcastMessage::Builder initQuickChatBroadcast();
   inline void adoptQuickChatBroadcast(::capnp::Orphan< ::globed::schema::game::QuickChatBroadcastMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::QuickChatBroadcastMessage> disownQuickChatBroadcast();
+
+  inline bool isPlayerUpdateMeta();
+  inline bool hasPlayerUpdateMeta();
+  inline  ::globed::schema::game::PlayerUpdateMetaMessage::Builder getPlayerUpdateMeta();
+  inline void setPlayerUpdateMeta( ::globed::schema::game::PlayerUpdateMetaMessage::Reader value);
+  inline  ::globed::schema::game::PlayerUpdateMetaMessage::Builder initPlayerUpdateMeta();
+  inline void adoptPlayerUpdateMeta(::capnp::Orphan< ::globed::schema::game::PlayerUpdateMetaMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::PlayerUpdateMetaMessage> disownPlayerUpdateMeta();
+
+  inline bool isLevelMeta();
+  inline bool hasLevelMeta();
+  inline  ::globed::schema::game::LevelMetaMessage::Builder getLevelMeta();
+  inline void setLevelMeta( ::globed::schema::game::LevelMetaMessage::Reader value);
+  inline  ::globed::schema::game::LevelMetaMessage::Builder initLevelMeta();
+  inline void adoptLevelMeta(::capnp::Orphan< ::globed::schema::game::LevelMetaMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::game::LevelMetaMessage> disownLevelMeta();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4529,6 +4865,20 @@ inline ::capnp::Orphan< ::capnp::Data> Event::Builder::disownData() {
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
+inline  ::uint32_t PlayerLevelMeta::Reader::getProgress() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t PlayerLevelMeta::Builder::getProgress() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void PlayerLevelMeta::Builder::setProgress( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
 inline bool PlayerDataMessage::Reader::hasData() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -4696,6 +5046,83 @@ inline void PlayerDataMessage::Builder::setMessageId( ::uint16_t value) {
       ::capnp::bounded<6>() * ::capnp::ELEMENTS, value);
 }
 
+inline bool PlayerUpdateMetaMessage::Reader::hasMeta() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerUpdateMetaMessage::Builder::hasMeta() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::PlayerLevelMeta::Reader PlayerUpdateMetaMessage::Reader::getMeta() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerLevelMeta>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::PlayerLevelMeta::Builder PlayerUpdateMetaMessage::Builder::getMeta() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerLevelMeta>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::game::PlayerLevelMeta::Pipeline PlayerUpdateMetaMessage::Pipeline::getMeta() {
+  return  ::globed::schema::game::PlayerLevelMeta::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void PlayerUpdateMetaMessage::Builder::setMeta( ::globed::schema::game::PlayerLevelMeta::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerLevelMeta>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::PlayerLevelMeta::Builder PlayerUpdateMetaMessage::Builder::initMeta() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerLevelMeta>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void PlayerUpdateMetaMessage::Builder::adoptMeta(
+    ::capnp::Orphan< ::globed::schema::game::PlayerLevelMeta>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerLevelMeta>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::PlayerLevelMeta> PlayerUpdateMetaMessage::Builder::disownMeta() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerLevelMeta>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool PlayerUpdateMetaMessage::Reader::hasRequests() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool PlayerUpdateMetaMessage::Builder::hasRequests() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader PlayerUpdateMetaMessage::Reader::getRequests() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerUpdateMetaMessage::Builder::getRequests() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void PlayerUpdateMetaMessage::Builder::setRequests( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline void PlayerUpdateMetaMessage::Builder::setRequests(::kj::ArrayPtr<const  ::int32_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder PlayerUpdateMetaMessage::Builder::initRequests(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void PlayerUpdateMetaMessage::Builder::adoptRequests(
+    ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> PlayerUpdateMetaMessage::Builder::disownRequests() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
 inline bool LevelDataMessage::Reader::hasPlayers() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -4810,6 +5237,78 @@ inline  ::uint16_t LevelDataMessage::Builder::getMessageId() {
 inline void LevelDataMessage::Builder::setMessageId( ::uint16_t value) {
   _builder.setDataField< ::uint16_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LevelMetaMessage::Reader::hasIds() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool LevelMetaMessage::Builder::hasIds() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader LevelMetaMessage::Reader::getIds() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder LevelMetaMessage::Builder::getIds() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void LevelMetaMessage::Builder::setIds( ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline void LevelMetaMessage::Builder::setIds(::kj::ArrayPtr<const  ::int32_t> value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>::Builder LevelMetaMessage::Builder::initIds(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void LevelMetaMessage::Builder::adoptIds(
+    ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>> LevelMetaMessage::Builder::disownIds() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::int32_t,  ::capnp::Kind::PRIMITIVE>>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool LevelMetaMessage::Reader::hasMetas() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool LevelMetaMessage::Builder::hasMetas() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>::Reader LevelMetaMessage::Reader::getMetas() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>::Builder LevelMetaMessage::Builder::getMetas() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void LevelMetaMessage::Builder::setMetas( ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>::Builder LevelMetaMessage::Builder::initMetas(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void LevelMetaMessage::Builder::adoptMetas(
+    ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>> LevelMetaMessage::Builder::disownMetas() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::globed::schema::game::PlayerLevelMeta,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline bool UpdateIconsMessage::Reader::hasIcons() const {
@@ -6332,6 +6831,114 @@ inline ::capnp::Orphan< ::globed::schema::game::QuickChatBroadcastMessage> Messa
   KJ_IREQUIRE((which() == Message::QUICK_CHAT_BROADCAST),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::QuickChatBroadcastMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isPlayerUpdateMeta() const {
+  return which() == Message::PLAYER_UPDATE_META;
+}
+inline bool Message::Builder::isPlayerUpdateMeta() {
+  return which() == Message::PLAYER_UPDATE_META;
+}
+inline bool Message::Reader::hasPlayerUpdateMeta() const {
+  if (which() != Message::PLAYER_UPDATE_META) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasPlayerUpdateMeta() {
+  if (which() != Message::PLAYER_UPDATE_META) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::PlayerUpdateMetaMessage::Reader Message::Reader::getPlayerUpdateMeta() const {
+  KJ_IREQUIRE((which() == Message::PLAYER_UPDATE_META),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerUpdateMetaMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::PlayerUpdateMetaMessage::Builder Message::Builder::getPlayerUpdateMeta() {
+  KJ_IREQUIRE((which() == Message::PLAYER_UPDATE_META),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerUpdateMetaMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setPlayerUpdateMeta( ::globed::schema::game::PlayerUpdateMetaMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_UPDATE_META);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerUpdateMetaMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::PlayerUpdateMetaMessage::Builder Message::Builder::initPlayerUpdateMeta() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_UPDATE_META);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerUpdateMetaMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptPlayerUpdateMeta(
+    ::capnp::Orphan< ::globed::schema::game::PlayerUpdateMetaMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::PLAYER_UPDATE_META);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerUpdateMetaMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::PlayerUpdateMetaMessage> Message::Builder::disownPlayerUpdateMeta() {
+  KJ_IREQUIRE((which() == Message::PLAYER_UPDATE_META),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::PlayerUpdateMetaMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isLevelMeta() const {
+  return which() == Message::LEVEL_META;
+}
+inline bool Message::Builder::isLevelMeta() {
+  return which() == Message::LEVEL_META;
+}
+inline bool Message::Reader::hasLevelMeta() const {
+  if (which() != Message::LEVEL_META) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasLevelMeta() {
+  if (which() != Message::LEVEL_META) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::game::LevelMetaMessage::Reader Message::Reader::getLevelMeta() const {
+  KJ_IREQUIRE((which() == Message::LEVEL_META),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelMetaMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::game::LevelMetaMessage::Builder Message::Builder::getLevelMeta() {
+  KJ_IREQUIRE((which() == Message::LEVEL_META),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelMetaMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setLevelMeta( ::globed::schema::game::LevelMetaMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_META);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::LevelMetaMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::game::LevelMetaMessage::Builder Message::Builder::initLevelMeta() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_META);
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelMetaMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptLevelMeta(
+    ::capnp::Orphan< ::globed::schema::game::LevelMetaMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::LEVEL_META);
+  ::capnp::_::PointerHelpers< ::globed::schema::game::LevelMetaMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::game::LevelMetaMessage> Message::Builder::disownLevelMeta() {
+  KJ_IREQUIRE((which() == Message::LEVEL_META),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelMetaMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

@@ -134,9 +134,16 @@ struct Event {
     data @1 :Data;
 }
 
+struct PlayerLevelMeta {
+    # This is one of:
+    # 1. in platformer: user's best time on the level in milliseconds
+    # 2. in classic: user's best percentage, where 0 is 0% and 2^32-1 is 100%
+    progress @0 :UInt32;
+}
+
 struct PlayerDataMessage {
     data @0 :PlayerData;
-    dataRequests @1 :List(Int32);
+    dataRequests @1 :List(Int32); # at most 64 requests
     eventData @2 :Data;
     cameraX @3 :Float32;
     cameraY @4 :Float32;
@@ -144,11 +151,21 @@ struct PlayerDataMessage {
     messageId @6 :UInt16; # wraps
 }
 
+struct PlayerUpdateMetaMessage {
+    meta @0 :PlayerLevelMeta;
+    requests @1 :List(Int32); # at most 256 requests
+}
+
 struct LevelDataMessage {
     players @0 :List(PlayerData);
     displayDatas @1 :List(Shared.PlayerDisplayData);
     eventData @2 :Data;
     messageId @3 :UInt16; # same as client provided value
+}
+
+struct LevelMetaMessage {
+    ids @0 :List(Int32);
+    metas @1 :List(PlayerLevelMeta);
 }
 
 # Misc
@@ -211,6 +228,7 @@ enum ChatNotPermittedReason {
     rateLimited @2;
     unknown    @3;
     disallowed @4;
+    levelDisabled @5;
 }
 
 struct ChatNotPermittedMessage {
@@ -226,6 +244,7 @@ struct Message {
         leaveSession       @2 :LeaveSessionMessage;
 
         playerData         @3 :PlayerDataMessage;
+        playerUpdateMeta   @19 :PlayerUpdateMetaMessage;
         updateIcons        @4 :UpdateIconsMessage;
         updateUserSettings @16 :UpdateUserSettingsMessage;
         sendLevelScript    @5 :SendLevelScriptMessage;
@@ -239,6 +258,7 @@ struct Message {
         joinSessionFailed  @10 :JoinSessionFailedMessage;
 
         levelData          @11 :LevelDataMessage;
+        levelMeta          @20 :LevelMetaMessage;
         kicked             @12 :KickedMessage;
         scriptLogs         @13 :ScriptLogsMessage;
         voiceBroadcast     @14 :VoiceBroadcastMessage;
