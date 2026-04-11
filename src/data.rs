@@ -175,6 +175,7 @@ pub struct SrvStatusData {
     pub sessions: u32,
     pub total_connections: u64,
     pub total_data_messages: u64,
+    pub server_load: f32,
 }
 
 #[cfg(feature = "srvc")]
@@ -187,6 +188,7 @@ impl SrvStatusData {
             sessions: reader.get_sessions(),
             total_connections: reader.get_total_connections(),
             total_data_messages: reader.get_total_data_messages(),
+            server_load: reader.get_server_load(),
         })
     }
 
@@ -197,5 +199,6 @@ impl SrvStatusData {
         builder.set_rooms(self.rooms);
         builder.set_total_connections(self.total_connections);
         builder.set_total_data_messages(self.total_data_messages);
+        builder.set_server_load(self.server_load);
     }
 }

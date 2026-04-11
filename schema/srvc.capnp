@@ -74,6 +74,8 @@ struct StatusMessage {
     totalConnections @4 :UInt64;
     # Total in-level data messages processed
     totalDataMessages @5 :UInt64;
+    # Estimated server load from 0 to 1, for deciding which servers to prioritize/deprioritize
+    serverLoad @6 :Float32;
 }
 
 struct Message {
