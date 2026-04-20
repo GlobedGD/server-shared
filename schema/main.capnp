@@ -474,6 +474,11 @@ struct DiscordOauthUrlMessage {
     url @0 :Text;
 }
 
+struct DiscordUnlinkResultMessage {
+    success @0 :Bool;
+    error @1 :Text;
+}
+
 struct FeaturedLevelMessage {
     levelId  @0 :Int32;
     rateTier @1 :UInt8;
@@ -711,6 +716,7 @@ struct Message {
         setDiscordPairingState      @41 :SetDiscordPairingStateMessage;
         discordLinkConfirm          @42 :DiscordLinkConfirmMessage;
         requestDiscordOauth         @95 :Void;
+        requestDiscordUnlink        @97 :Void;
         getFeaturedLevel            @43 :Void;
         getFeaturedList             @44 :GetFeaturedListMessage;
         sendFeaturedLevel           @45 :SendFeaturedLevelMessage;
@@ -768,6 +774,7 @@ struct Message {
         discordLinkState            @80 :DiscordLinkStateMessage;
         discordLinkAttempt          @81 :DiscordLinkAttemptMessage;
         discordOauthUrl             @96 :DiscordOauthUrlMessage;
+        discordUnlinkResult         @98 :DiscordUnlinkResultMessage;
         featuredLevel               @82 :FeaturedLevelMessage;
         featuredList                @83 :FeaturedListMessage;
 
