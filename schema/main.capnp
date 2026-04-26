@@ -42,6 +42,8 @@ struct LoginMessage {
     geodeVersion @8 :Text;
     globedVersion @9 :Text;
     platformDesc @10 :Text;
+
+    eventDictionary @11 :Data;
 }
 
 struct ExtendedUserData {
@@ -779,5 +781,10 @@ struct Message {
         featuredList                @83 :FeaturedListMessage;
 
 		fetchUserResponse           @84 :FetchUserResponseMessage;
+
+
+        ### Both client + server messages
+
+        events                      @99 :Data;
     }
 }

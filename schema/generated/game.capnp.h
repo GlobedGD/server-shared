@@ -94,7 +94,7 @@ struct LoginMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(aae1e6391a0fa6f6, 3, 3)
+    CAPNP_DECLARE_STRUCT_HEADER(aae1e6391a0fa6f6, 3, 4)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -580,6 +580,7 @@ struct Message {
     QUICK_CHAT_BROADCAST,
     PLAYER_UPDATE_META,
     LEVEL_META,
+    EVENTS,
   };
 
   struct _capnpPrivate {
@@ -627,6 +628,9 @@ public:
   inline bool getPlatformer() const;
 
   inline bool getEditorCollab() const;
+
+  inline bool hasEventDictionary() const;
+  inline  ::capnp::Data::Reader getEventDictionary() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -691,6 +695,13 @@ public:
 
   inline bool getEditorCollab();
   inline void setEditorCollab(bool value);
+
+  inline bool hasEventDictionary();
+  inline  ::capnp::Data::Builder getEventDictionary();
+  inline void setEventDictionary( ::capnp::Data::Reader value);
+  inline  ::capnp::Data::Builder initEventDictionary(unsigned int size);
+  inline void adoptEventDictionary(::capnp::Orphan< ::capnp::Data>&& value);
+  inline ::capnp::Orphan< ::capnp::Data> disownEventDictionary();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3493,6 +3504,10 @@ public:
   inline bool hasLevelMeta() const;
   inline  ::globed::schema::game::LevelMetaMessage::Reader getLevelMeta() const;
 
+  inline bool isEvents() const;
+  inline bool hasEvents() const;
+  inline  ::capnp::Data::Reader getEvents() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -3689,6 +3704,14 @@ public:
   inline  ::globed::schema::game::LevelMetaMessage::Builder initLevelMeta();
   inline void adoptLevelMeta(::capnp::Orphan< ::globed::schema::game::LevelMetaMessage>&& value);
   inline ::capnp::Orphan< ::globed::schema::game::LevelMetaMessage> disownLevelMeta();
+
+  inline bool isEvents();
+  inline bool hasEvents();
+  inline  ::capnp::Data::Builder getEvents();
+  inline void setEvents( ::capnp::Data::Reader value);
+  inline  ::capnp::Data::Builder initEvents(unsigned int size);
+  inline void adoptEvents(::capnp::Orphan< ::capnp::Data>&& value);
+  inline ::capnp::Orphan< ::capnp::Data> disownEvents();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3898,6 +3921,40 @@ inline bool LoginMessage::Builder::getEditorCollab() {
 inline void LoginMessage::Builder::setEditorCollab(bool value) {
   _builder.setDataField<bool>(
       ::capnp::bounded<129>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool LoginMessage::Reader::hasEventDictionary() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginMessage::Builder::hasEventDictionary() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Data::Reader LoginMessage::Reader::getEventDictionary() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Data::Builder LoginMessage::Builder::getEventDictionary() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+inline void LoginMessage::Builder::setEventDictionary( ::capnp::Data::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Data::Builder LoginMessage::Builder::initEventDictionary(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), size);
+}
+inline void LoginMessage::Builder::adoptEventDictionary(
+    ::capnp::Orphan< ::capnp::Data>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Data> LoginMessage::Builder::disownEventDictionary() {
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 
 inline  ::uint16_t LoginOkMessage::Reader::getTickrate() const {
@@ -6939,6 +6996,60 @@ inline ::capnp::Orphan< ::globed::schema::game::LevelMetaMessage> Message::Build
   KJ_IREQUIRE((which() == Message::LEVEL_META),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::globed::schema::game::LevelMetaMessage>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isEvents() const {
+  return which() == Message::EVENTS;
+}
+inline bool Message::Builder::isEvents() {
+  return which() == Message::EVENTS;
+}
+inline bool Message::Reader::hasEvents() const {
+  if (which() != Message::EVENTS) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasEvents() {
+  if (which() != Message::EVENTS) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Data::Reader Message::Reader::getEvents() const {
+  KJ_IREQUIRE((which() == Message::EVENTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Data::Builder Message::Builder::getEvents() {
+  KJ_IREQUIRE((which() == Message::EVENTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setEvents( ::capnp::Data::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::EVENTS);
+  ::capnp::_::PointerHelpers< ::capnp::Data>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Data::Builder Message::Builder::initEvents(unsigned int size) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::EVENTS);
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void Message::Builder::adoptEvents(
+    ::capnp::Orphan< ::capnp::Data>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::EVENTS);
+  ::capnp::_::PointerHelpers< ::capnp::Data>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Data> Message::Builder::disownEvents() {
+  KJ_IREQUIRE((which() == Message::EVENTS),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 

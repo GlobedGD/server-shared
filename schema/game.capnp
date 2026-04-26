@@ -18,6 +18,8 @@ struct LoginMessage {
     passcode  @5 :UInt32;
     platformer @6 :Bool;
     editorCollab @7 :Bool;
+
+    eventDictionary @8 :Data;
 }
 
 struct LoginOkMessage {
@@ -144,7 +146,7 @@ struct PlayerLevelMeta {
 struct PlayerDataMessage {
     data @0 :PlayerData;
     dataRequests @1 :List(Int32); # at most 64 requests
-    eventData @2 :Data;
+    eventData @2 :Data; # pre v2.2.0 legacy events
     cameraX @3 :Float32;
     cameraY @4 :Float32;
     cameraRadius @5 :Float32;
@@ -264,5 +266,8 @@ struct Message {
         voiceBroadcast     @14 :VoiceBroadcastMessage;
         chatNotPermitted   @15 :ChatNotPermittedMessage;
         quickChatBroadcast @18 :QuickChatBroadcastMessage;
+
+        # Both client + server messages
+        events              @21 :Data;
     }
 }
