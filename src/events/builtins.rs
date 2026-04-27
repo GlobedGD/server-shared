@@ -38,8 +38,6 @@ pub(super) fn build_game_builtins(
 
     if version >= 1 {
         push("dankmeme.globed2/counter-change");
-        push("dankmeme.globed2/player-join");
-        push("dankmeme.globed2/player-leave");
         push("dankmeme.globed2/display-data-refreshed");
 
         push("dankmeme.globed2/scripting.custom");
@@ -51,7 +49,9 @@ pub(super) fn build_game_builtins(
         push("dankmeme.globed2/scripting.follow-player");
         push("dankmeme.globed2/scripting.follow-rotation");
 
-        push("dankmeme.globed2/2p.link-request");
+        push("dankmeme.globed2/2p.legacy.link-request");
+        push("dankmeme.globed2/2p.legacy.unlink");
+        push("dankmeme.globed2/2p.link");
         push("dankmeme.globed2/2p.unlink");
 
         push("dankmeme.globed2/switcheroo.full-state");

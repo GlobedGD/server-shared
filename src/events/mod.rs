@@ -8,7 +8,7 @@ use std::{
 };
 
 use arc_swap::ArcSwap;
-use bitpiece::{B4, bitpiece};
+use bitpiece::{B2, bitpiece};
 use heapless::CapacityError;
 use qunet::buffers::{BinaryWriter, ByteReader, ByteReaderError, HeapByteWriter};
 use thiserror::Error;
@@ -26,15 +26,19 @@ pub struct EventFlags {
     pub no_data: bool,
     pub reliable: bool,
     pub urgent: bool,
+    pub sent_by_player: bool,
 
-    pub padding: B4,
+    pub padding: B2,
+
+    pub more_flags: bool,
 }
 
-#[derive(Default)]
+#[derive(Default, Clone)]
 pub struct EventOptions {
     pub reliable: bool,
     pub urgent: bool,
     pub target_players: Vec<i32>,
+    pub sent_by_player: Option<i32>,
 }
 
 #[derive(Default)]
@@ -89,6 +93,7 @@ pub struct RawDecodedEvent<'a> {
     pub options: EventOptions,
 }
 
+#[derive(Clone)]
 pub struct OwnedEvent {
     pub id: Arc<str>,
     pub data: Vec<u8>,
@@ -196,6 +201,9 @@ impl EventEncoder {
         if options.urgent {
             flags.set_urgent(true);
         }
+        if options.sent_by_player.is_some() {
+            flags.set_sent_by_player(true);
+        }
 
         writer.write_bits(flags)?;
         if !options.target_players.is_empty() {
@@ -203,6 +211,10 @@ impl EventEncoder {
             for player in &options.target_players {
                 writer.write_i32(*player)?;
             }
+        }
+
+        if let Some(player_id) = options.sent_by_player {
+            writer.write_i32(player_id)?;
         }
 
         if !data.is_empty() {
@@ -255,6 +267,12 @@ impl EventEncoder {
             }
         }
 
+        let sent_by_player = if flags.sent_by_player() {
+            Some(reader.read_i32()?)
+        } else {
+            None
+        };
+
         let data = if !flags.no_data() {
             let len = reader.read_varuint()? as usize;
             if len > MAX_EVENT_LENGTH {
@@ -275,6 +293,7 @@ impl EventEncoder {
             options: EventOptions {
                 reliable: flags.reliable(),
                 urgent: flags.urgent(),
+                sent_by_player,
                 target_players,
             },
         })
