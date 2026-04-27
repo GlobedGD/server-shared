@@ -67,6 +67,8 @@ pub enum EventEncodingError {
     UnknownEvent,
     #[error("Failed to write event data: {0}")]
     WriteError(#[from] std::io::Error),
+    #[error("{0}")]
+    Custom(String),
 }
 
 #[derive(Error, Debug)]
@@ -345,15 +347,15 @@ impl OwnedEvent {
         value: &T,
         options: EventOptions,
         cache: &EventStringCache,
-    ) -> Result<Self, EventEncodingError> {
+    ) -> Self {
         let mut writer = HeapByteWriter::new();
-        value.encode(&mut writer)?;
+        value.encode(&mut writer);
 
-        Ok(Self {
+        Self {
             id: cache.get(T::id()),
             data: writer.into_inner(),
             options,
-        })
+        }
     }
 }
 
@@ -362,5 +364,5 @@ pub trait EventEncode {
     fn size_bound(&self) -> Option<usize>;
     fn id() -> &'static str;
 
-    fn encode(&self, writer: &mut HeapByteWriter) -> std::io::Result<()>;
+    fn encode(&self, writer: &mut HeapByteWriter);
 }
