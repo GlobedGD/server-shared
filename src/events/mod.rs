@@ -343,16 +343,21 @@ impl From<RawDecodedEvent<'_>> for OwnedEvent {
 }
 
 impl OwnedEvent {
-    pub fn from_encodable<T: EventEncode>(
-        value: &T,
+    pub fn from_encodable<'a, T: EventEncode>(
+        value: &'a T,
         options: EventOptions,
-        cache: &EventStringCache,
+        cache: impl Into<Option<&'a EventStringCache>>,
     ) -> Self {
         let mut writer = HeapByteWriter::new();
         value.encode(&mut writer);
 
+        let id = match cache.into() {
+            Some(cache) => cache.get(T::id()),
+            None => Arc::from(T::id()),
+        };
+
         Self {
-            id: cache.get(T::id()),
+            id,
             data: writer.into_inner(),
             options,
         }
