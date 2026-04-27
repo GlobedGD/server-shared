@@ -42,6 +42,7 @@ pub(super) fn build_game_builtins(
         push("dankmeme.globed2/player-leave");
         push("dankmeme.globed2/display-data-refreshed");
 
+        push("dankmeme.globed2/scripting.custom");
         push("dankmeme.globed2/scripting.spawn-group");
         push("dankmeme.globed2/scripting.set-item");
         push("dankmeme.globed2/scripting.request-script-logs");
