@@ -10,7 +10,7 @@ use std::{
 use arc_swap::ArcSwap;
 use bitpiece::{B4, bitpiece};
 use heapless::CapacityError;
-use qunet::buffers::{BinaryWriter, ByteReader, ByteReaderError};
+use qunet::buffers::{BinaryWriter, ByteReader, ByteReaderError, HeapByteWriter};
 use thiserror::Error;
 
 mod builtins;
@@ -338,4 +338,29 @@ impl From<RawDecodedEvent<'_>> for OwnedEvent {
             options: value.options,
         }
     }
+}
+
+impl OwnedEvent {
+    pub fn from_encodable<T: EventEncode>(
+        value: &T,
+        options: EventOptions,
+        cache: &EventStringCache,
+    ) -> Result<Self, EventEncodingError> {
+        let mut writer = HeapByteWriter::new();
+        value.encode(&mut writer)?;
+
+        Ok(Self {
+            id: cache.get(T::id()),
+            data: writer.into_inner(),
+            options,
+        })
+    }
+}
+
+/// an interface for encoding a custom struct into an OwnedEvent
+pub trait EventEncode {
+    fn size_bound(&self) -> Option<usize>;
+    fn id() -> &'static str;
+
+    fn encode(&self, writer: &mut HeapByteWriter) -> std::io::Result<()>;
 }
