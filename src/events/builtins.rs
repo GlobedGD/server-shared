@@ -17,7 +17,7 @@ pub(super) fn build_central_builtins(
     let mut push = |s: &str| out.push(cache.get(s));
 
     if version >= 1 {
-        push("dankmeme.globed2/test");
+        push("globed/test");
     }
 
     Ok(())
@@ -37,25 +37,23 @@ pub(super) fn build_game_builtins(
     let mut push = |s: &str| out.push(cache.get(s));
 
     if version >= 1 {
-        push("dankmeme.globed2/counter-change");
-        push("dankmeme.globed2/display-data-refreshed");
+        push("globed/counter-change");
+        push("globed/display-data-refreshed");
 
-        push("dankmeme.globed2/scripting.custom");
-        push("dankmeme.globed2/scripting.spawn-group");
-        push("dankmeme.globed2/scripting.set-item");
-        push("dankmeme.globed2/scripting.request-script-logs");
-        push("dankmeme.globed2/scripting.move-group");
-        push("dankmeme.globed2/scripting.move-group-absolute");
-        push("dankmeme.globed2/scripting.follow-player");
-        push("dankmeme.globed2/scripting.follow-rotation");
+        push("globed/scripting.custom");
+        push("globed/scripting.spawn-group");
+        push("globed/scripting.set-item");
+        push("globed/scripting.request-script-logs");
+        push("globed/scripting.move-group");
+        push("globed/scripting.move-group-absolute");
+        push("globed/scripting.follow-player");
+        push("globed/scripting.follow-rotation");
 
-        push("dankmeme.globed2/2p.legacy.link-request");
-        push("dankmeme.globed2/2p.legacy.unlink");
-        push("dankmeme.globed2/2p.link");
-        push("dankmeme.globed2/2p.unlink");
+        push("globed/2p.link");
+        push("globed/2p.unlink");
 
-        push("dankmeme.globed2/switcheroo.full-state");
-        push("dankmeme.globed2/switcheroo.switch");
+        push("globed/switcheroo.full-state");
+        push("globed/switcheroo.switch");
     }
 
     Ok(())
