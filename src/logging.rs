@@ -162,7 +162,8 @@ pub fn setup_panic_hook() {
             .map(|loc| format!("{}:{}", loc.file(), loc.line()))
             .unwrap_or_else(|| "unknown location".to_string());
 
-        tracing::error!("Server panicked at {location}: {payload}");
+        tracing::error!("!! Server panicked at {location}: {payload} !!");
+        tracing::error!("This should never happen and indicates a critical bug in the server!")
     }));
 }
 
