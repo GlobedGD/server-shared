@@ -154,6 +154,18 @@ pub fn setup_logger(config: &LoggerConfig, mem_usage: u32) -> (WorkerGuard, Work
     (guard_file, guard_stdout)
 }
 
+pub fn setup_panic_hook() {
+    std::panic::set_hook(Box::new(|info| {
+        let payload = info.payload_as_str().unwrap_or("unknown panic payload");
+        let location = info
+            .location()
+            .map(|loc| format!("{}:{}", loc.file(), loc.line()))
+            .unwrap_or_else(|| "unknown location".to_string());
+
+        tracing::error!("Server panicked at {location}: {payload}");
+    }));
+}
+
 fn parse_filter(level: &str) -> LevelFilter {
     match level.to_lowercase().as_str() {
         "error" => LevelFilter::ERROR,
