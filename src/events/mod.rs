@@ -169,6 +169,10 @@ impl EventEncoder {
         self.inv_mapping.get(event).copied()
     }
 
+    pub fn knows_event(&self, event: &str) -> bool {
+        self.inv_mapping.contains_key(event)
+    }
+
     pub fn encode_event(
         &self,
         id: &str,
