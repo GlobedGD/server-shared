@@ -392,6 +392,23 @@ impl OwnedEvent {
             options,
         }
     }
+
+    pub fn max_encoded_size(&self) -> usize {
+        // 4 for event id, 1 for flags
+        let mut count = 4 + 1;
+
+        if !self.options.target_players.is_empty() {
+            count += 4 + 4 * self.options.target_players.len();
+        }
+
+        if self.options.sent_by_player.is_some() {
+            count += 4;
+        }
+
+        count += self.data.len();
+
+        count
+    }
 }
 
 /// an interface for encoding a custom struct into an OwnedEvent
