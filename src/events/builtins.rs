@@ -45,9 +45,9 @@ pub(super) fn build_game_builtins(
         push("globed/scripting.set-item");
         push("globed/scripting.request-script-logs");
         push("globed/scripting.move-group");
-        push("globed/scripting.move-group-absolute");
         push("globed/scripting.follow-player");
         push("globed/scripting.follow-rotation");
+        push("globed/scripting.follow-absolute");
 
         push("globed/2p.link");
         push("globed/2p.unlink");
