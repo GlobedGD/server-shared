@@ -15,6 +15,7 @@ use thiserror::Error;
 
 mod builtins;
 use builtins::*;
+use tracing::trace;
 
 const MAX_EVENT_LENGTH: usize = 1024;
 const MAX_EVENT_COUNT: usize = 128;
@@ -304,6 +305,12 @@ impl EventEncoder {
     }
 
     pub fn decode_events_owned(&self, data: &[u8]) -> Result<Vec<OwnedEvent>, EventDecodingError> {
+        trace!("decoding event buf: {data:x?}");
+
+        if data.is_empty() {
+            return Ok(Vec::new());
+        }
+
         let mut reader = ByteReader::new(data);
         let mut events = Vec::new();
 
