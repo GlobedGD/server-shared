@@ -8,7 +8,7 @@ use std::{
 };
 
 use arc_swap::ArcSwap;
-use bitpiece::{B2, bitpiece};
+use bitpiece::{B1, bitpiece};
 use heapless::CapacityError;
 use qunet::buffers::{BinaryWriter, ByteReader, ByteReaderError, HeapByteWriter};
 use thiserror::Error;
@@ -28,8 +28,9 @@ pub struct EventFlags {
     pub reliable: bool,
     pub urgent: bool,
     pub sent_by_player: bool,
+    pub send_back: bool,
 
-    pub padding: B2,
+    pub padding: B1,
 
     pub more_flags: bool,
 }
@@ -38,6 +39,7 @@ pub struct EventFlags {
 pub struct EventOptions {
     pub reliable: bool,
     pub urgent: bool,
+    pub send_back: bool,
     pub target_players: Vec<i32>,
     pub sent_by_player: Option<i32>,
 }
@@ -298,6 +300,7 @@ impl EventEncoder {
             options: EventOptions {
                 reliable: flags.reliable(),
                 urgent: flags.urgent(),
+                send_back: flags.send_back(),
                 sent_by_player,
                 target_players,
             },
