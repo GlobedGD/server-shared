@@ -20,7 +20,7 @@ impl EventRateLimiter {
     pub fn tick(&mut self, targets: usize, data_size: usize, reliable: bool) -> bool {
         // compute amount of tokens to consume
         let mut quota = match targets {
-            0..1 => 1,
+            0..=1 => 1,
             _ => targets as u32 / 2,
         };
 
