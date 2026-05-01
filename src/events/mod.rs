@@ -4,6 +4,7 @@
 use std::{
     collections::{HashMap, HashSet},
     io::Write,
+    num::NonZero,
     sync::Arc,
 };
 
@@ -41,7 +42,7 @@ pub struct EventOptions {
     pub urgent: bool,
     pub send_back: bool,
     pub target_players: Vec<i32>,
-    pub sent_by_player: Option<i32>,
+    pub sent_by_player: Option<NonZero<i32>>,
 }
 
 #[derive(Default)]
@@ -221,7 +222,7 @@ impl EventEncoder {
         }
 
         if let Some(player_id) = options.sent_by_player {
-            writer.write_i32(player_id)?;
+            writer.write_i32(player_id.get())?;
         }
 
         if !data.is_empty() {
@@ -275,7 +276,7 @@ impl EventEncoder {
         }
 
         let sent_by_player = if flags.sent_by_player() {
-            Some(reader.read_i32()?)
+            NonZero::new(reader.read_i32()?)
         } else {
             None
         };
