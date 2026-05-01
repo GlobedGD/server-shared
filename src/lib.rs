@@ -1,4 +1,4 @@
-#![feature(associated_type_defaults, downcast_unchecked)]
+#![feature(associated_type_defaults, downcast_unchecked, adt_const_params)]
 
 #[cfg(feature = "main")]
 #[allow(warnings)]

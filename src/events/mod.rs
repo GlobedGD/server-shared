@@ -15,8 +15,11 @@ use qunet::buffers::{BinaryWriter, ByteReader, ByteReaderError, HeapByteWriter};
 use thiserror::Error;
 
 mod builtins;
+mod rate_limiter;
 use builtins::*;
 use tracing::trace;
+
+pub use rate_limiter::*;
 
 const MAX_EVENT_LENGTH: usize = 1024;
 const MAX_EVENT_COUNT: usize = 128;
