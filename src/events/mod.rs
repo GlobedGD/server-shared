@@ -52,6 +52,7 @@ pub struct EventOptions {
 pub struct EventStringCache {
     cache: ArcSwap<HashSet<Arc<str>>>,
 }
+
 #[derive(Error, Debug)]
 pub enum EventDictionaryBuildError {
     #[error("Failed to decode event dictionary: {0}")]
