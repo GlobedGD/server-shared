@@ -28,7 +28,7 @@ impl EventRateLimiter {
             quota *= 2;
         }
 
-        quota *= data_size.max(1).div_ceil(256) as u32;
+        quota *= data_size.max(1).div_ceil(512) as u32;
 
         self.limiter.consume_many(quota)
     }
