@@ -78,6 +78,8 @@ struct StatusMessage {
     serverLoad @6 :Float32;
 }
 
+struct ReloadConfigMessage {}
+
 struct Message {
     union {
         # Game server messages
@@ -92,5 +94,6 @@ struct Message {
         notifyRoomDeleted @4 :NotifyRoomDeletedMessage;
         notifyUserData    @6 :NotifyUserDataMessage;
         notifyKickUser    @7 :NotifyKickUserMessage;
+        reloadConfig      @9 :ReloadConfigMessage;
     }
 }
