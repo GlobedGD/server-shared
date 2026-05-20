@@ -21,6 +21,7 @@ pub struct TokenData {
     pub username: UsernameString,
     pub roles_str: Option<Box<str>>,
     pub name_color: Option<MultiColor>,
+    pub issued_at: SystemTime,
 }
 
 #[derive(Debug, Error)]
@@ -99,11 +100,9 @@ impl TokenIssuer {
             None
         };
 
-        let now = SystemTime::now()
-            .duration_since(UNIX_EPOCH)
-            .unwrap()
-            .as_secs() as i64;
-        let expires_at = issued_at + self.token_expiry.as_secs() as i64;
+        let issued_at = UNIX_EPOCH + Duration::from_secs(issued_at as u64);
+        let expires_at = issued_at + self.token_expiry;
+        let now = SystemTime::now();
 
         if now < issued_at || now > expires_at {
             return Err(TokenValidationError::Expired);
@@ -115,6 +114,7 @@ impl TokenIssuer {
             username,
             roles_str,
             name_color,
+            issued_at,
         })
     }
 
@@ -132,21 +132,19 @@ impl TokenIssuer {
         Ok(data)
     }
 
-    pub fn generate(
+    fn generate_with_issue_date(
         &self,
         account_id: i32,
         user_id: i32,
         username: &str,
         roles_str: &str,
         name_color: Option<&MultiColor>,
+        issued_at: SystemTime,
     ) -> String {
         let mut buf = [0u8; 512];
         let mut writer = ByteWriter::new(&mut buf);
 
-        let now = SystemTime::now()
-            .duration_since(UNIX_EPOCH)
-            .unwrap()
-            .as_secs() as i64;
+        let now = issued_at.duration_since(UNIX_EPOCH).unwrap().as_secs() as i64;
 
         writer.write_u8(3); // version
         writer.write_i64(now); // issued at
@@ -185,5 +183,43 @@ impl TokenIssuer {
             str::from_utf8(&data_buf[..data_len]).expect("data must be valid UTF-8"),
             str::from_utf8(&sig_buf).expect("signature must be valid UTF-8"),
         )
+    }
+
+    pub fn generate(
+        &self,
+        account_id: i32,
+        user_id: i32,
+        username: &str,
+        roles_str: &str,
+        name_color: Option<&MultiColor>,
+    ) -> String {
+        self.generate_with_issue_date(
+            account_id,
+            user_id,
+            username,
+            roles_str,
+            name_color,
+            SystemTime::now(),
+        )
+    }
+
+    pub fn refresh(
+        &self,
+        token: &str,
+        username: &str,
+        roles_str: &str,
+        name_color: Option<&MultiColor>,
+    ) -> Result<String, TokenValidationError> {
+        let data = self.validate(token)?;
+
+        // keep the date
+        Ok(self.generate_with_issue_date(
+            data.account_id,
+            data.user_id,
+            username,
+            roles_str,
+            name_color,
+            data.issued_at,
+        ))
     }
 }
