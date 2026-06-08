@@ -9,19 +9,19 @@ capnp = { git = "https://github.com/dankmeme01/capnproto-rust", rev = "2c2bdee",
     "std",
     "sync_reader",
 ] }
-rustc-hash = "2.1.1"
+rustc-hash = "2.1.2"
 serde = { version = "1.0.228", features = ["derive"] }
 tracing = "0.1.44"
-tracing-appender = { version = "0.2.4", features = ["parking_lot"] }
-tracing-subscriber = "0.3.22"
-toml = "1.0.3"
+tracing-appender = { version = "0.2.5", features = ["parking_lot"] }
+tracing-subscriber = "0.3.23"
+toml = "1.1.2"
 base64 = "0.22.1"
 qunet = { git = "https://github.com/dankmeme01/qunet", rev = "afd8b7f", default-features = false }
 thiserror = "2.0.18"
-blake3 = "1.8.3"
-heapless = "0.9.2"
+blake3 = "1.8.5"
+heapless = "0.9.3"
 hex = "0.4.3"
-hmac = "0.12.1"
+hmac = "0.13.0"
 console-subscriber = { version = "0.5.0", features = [
     "parking_lot",
 ], optional = true }
@@ -32,7 +32,7 @@ bitpiece = "2.5.0"
 arc-swap = "1.9.1"
 
 [build-dependencies]
-capnpc = "0.25.0"
+capnpc = { git = "https://github.com/dankmeme01/capnproto-rust", rev = "2c2bdee" }
 
 [features]
 default = []
