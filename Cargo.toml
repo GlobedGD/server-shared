@@ -16,7 +16,7 @@ tracing-appender = { version = "0.2.5", features = ["parking_lot"] }
 tracing-subscriber = "0.3.23"
 toml = "1.1.4"
 base64 = "0.23.1"
-qunet = { git = "https://github.com/dankmeme01/qunet", rev = "04ad012", default-features = false }
+qunet = { git = "https://github.com/dankmeme01/qunet", rev = "1c60a0a", default-features = false }
 thiserror = "2.0.20"
 blake3 = "1.8.7"
 heapless = "0.9.3"
