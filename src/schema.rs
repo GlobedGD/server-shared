@@ -10,12 +10,6 @@ pub mod game {
     pub use crate::game_capnp::*;
 }
 
-#[cfg(feature = "srvc")]
-pub mod srvc {
-    #[allow(unused)]
-    pub use crate::srvc_capnp::*;
-}
-
 pub mod shared {
     #[allow(unused)]
     pub use crate::shared_capnp::*;
