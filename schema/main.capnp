@@ -33,8 +33,12 @@ struct LoginMessage {
     settings @3 :Shared.UserSettings;
 
     union {
+        # TODO: deprecated
         utoken @4 :Text;
+        # TODO: deprecated
         argon  @5 :Text;
+
+        argonV2 @12 :Text;
         plain  @6 :PlayerAccountData;
     }
 
@@ -69,6 +73,7 @@ struct LoginOkMessage {
     featuredLevelEdition @4 :UInt32;
 
     userData @5 :ExtendedUserData;
+    secretKey @6 :UInt64;
 }
 
 enum LoginFailedReason {

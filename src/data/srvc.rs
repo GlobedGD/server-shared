@@ -5,22 +5,15 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::data::GameServerData;
+use crate::{
+    BinaryMultiColor, UsernameString,
+    data::{ClientAccountData, GameServerData},
+};
 
 pub use rmp_serde::{decode::Error as SrvDecodeError, encode::Error as SrvEncodeError};
 
 pub const SRVC_MAGIC: u64 = 0x92869be51214ba4f;
 pub const SRVC_PROTOCOL_VERSION: u32 = 3;
-
-#[derive(Clone, Debug, Default, Serialize, Deserialize)]
-pub struct SrvUserData {
-    pub account_id: i32,
-    pub can_use_voice: bool,
-    pub can_use_quick_chat: bool,
-    pub is_banned: bool,
-    pub is_muted: bool,
-    pub is_linked: bool,
-}
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct SrvStatusData {
@@ -46,6 +39,31 @@ impl SrvRole {
             id,
             string_id: string_id.to_owned(),
             can_moderate,
+        }
+    }
+}
+
+#[derive(Clone, Default, Debug, Serialize, Deserialize)]
+pub struct SrvUserData {
+    pub account_id: i32,
+    pub user_id: i32,
+    pub username: UsernameString,
+    pub role_ids: Vec<u8>,
+    pub name_color: Option<BinaryMultiColor>,
+
+    pub is_linked: bool,
+    pub can_use_voice: bool,
+    pub can_use_quick_chat: bool,
+    pub is_banned: bool,
+    pub is_muted: bool,
+}
+
+impl SrvUserData {
+    pub fn account_data(&self) -> ClientAccountData {
+        ClientAccountData {
+            account_id: self.account_id,
+            user_id: self.user_id,
+            username: self.username.clone(),
         }
     }
 }
@@ -91,6 +109,20 @@ pub enum SrvMessage {
         id: i32,
     },
 
+    UserLogin {
+        request_id: u64,
+        account_id: i32,
+        secret: u64,
+        // TODO: deprecated
+        token: String,
+    },
+
+    UserLoginResponse {
+        request_id: u64,
+        data: Option<SrvUserData>,
+    },
+
+    //
     ReloadConfig,
 
     Status(SrvStatusData),

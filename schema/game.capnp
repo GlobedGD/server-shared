@@ -9,7 +9,10 @@ using Shared = import "shared.capnp";
 
 struct LoginMessage {
     accountId @0 :Int32;
+    # TODO: deprecated
     token @1 :Text;
+    secret @9 :UInt64;
+
     icons @2 :Shared.PlayerIconData;
     settings @3 :Shared.UserSettings;
 

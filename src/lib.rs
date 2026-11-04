@@ -10,11 +10,6 @@ pub(crate) mod main_capnp;
 #[path = "../schema/generated/game_capnp.rs"]
 pub(crate) mod game_capnp;
 
-#[cfg(feature = "srvc")]
-#[allow(warnings)]
-#[path = "../schema/generated/srvc_capnp.rs"]
-pub(crate) mod srvc_capnp;
-
 #[allow(warnings)]
 #[path = "../schema/generated/shared_capnp.rs"]
 pub(crate) mod shared_capnp;

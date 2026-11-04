@@ -221,6 +221,7 @@ struct LoginMessage {
     UTOKEN,
     ARGON,
     PLAIN,
+    ARGON_V2,
   };
 
   struct _capnpPrivate {
@@ -2038,6 +2039,10 @@ public:
   inline bool hasEventDictionary() const;
   inline  ::capnp::Data::Reader getEventDictionary() const;
 
+  inline bool isArgonV2() const;
+  inline bool hasArgonV2() const;
+  inline  ::capnp::Text::Reader getArgonV2() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2145,6 +2150,14 @@ public:
   inline  ::capnp::Data::Builder initEventDictionary(unsigned int size);
   inline void adoptEventDictionary(::capnp::Orphan< ::capnp::Data>&& value);
   inline ::capnp::Orphan< ::capnp::Data> disownEventDictionary();
+
+  inline bool isArgonV2();
+  inline bool hasArgonV2();
+  inline  ::capnp::Text::Builder getArgonV2();
+  inline void setArgonV2( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initArgonV2(unsigned int size);
+  inline void adoptArgonV2(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownArgonV2();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -12977,6 +12990,60 @@ inline void LoginMessage::Builder::adoptEventDictionary(
 inline ::capnp::Orphan< ::capnp::Data> LoginMessage::Builder::disownEventDictionary() {
   return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
       ::capnp::bounded<7>() * ::capnp::POINTERS));
+}
+
+inline bool LoginMessage::Reader::isArgonV2() const {
+  return which() == LoginMessage::ARGON_V2;
+}
+inline bool LoginMessage::Builder::isArgonV2() {
+  return which() == LoginMessage::ARGON_V2;
+}
+inline bool LoginMessage::Reader::hasArgonV2() const {
+  if (which() != LoginMessage::ARGON_V2) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginMessage::Builder::hasArgonV2() {
+  if (which() != LoginMessage::ARGON_V2) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader LoginMessage::Reader::getArgonV2() const {
+  KJ_IREQUIRE((which() == LoginMessage::ARGON_V2),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder LoginMessage::Builder::getArgonV2() {
+  KJ_IREQUIRE((which() == LoginMessage::ARGON_V2),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+inline void LoginMessage::Builder::setArgonV2( ::capnp::Text::Reader value) {
+  _builder.setDataField<LoginMessage::Which>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::ARGON_V2);
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder LoginMessage::Builder::initArgonV2(unsigned int size) {
+  _builder.setDataField<LoginMessage::Which>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::ARGON_V2);
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), size);
+}
+inline void LoginMessage::Builder::adoptArgonV2(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  _builder.setDataField<LoginMessage::Which>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, LoginMessage::ARGON_V2);
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> LoginMessage::Builder::disownArgonV2() {
+  KJ_IREQUIRE((which() == LoginMessage::ARGON_V2),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<3>() * ::capnp::POINTERS));
 }
 
 inline bool ExtendedUserData::Reader::hasNewToken() const {

@@ -240,3 +240,35 @@ impl Serialize for MultiColor {
         }
     }
 }
+
+/// Wrapper over a binary encoded form of MultiColor, for use in srvc communication
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+pub struct BinaryMultiColor(pub serde_bytes::ByteBuf);
+
+impl BinaryMultiColor {
+    pub fn from_multicolor(value: &MultiColor) -> Self {
+        let mut arr = [0u8; 1024];
+        let mut writer = ByteWriter::new(&mut arr);
+        value.encode(&mut writer);
+
+        Self(serde_bytes::ByteBuf::from(writer.written()))
+    }
+
+    pub fn to_multicolor(&self) -> Result<MultiColor, MultiColorDecodeError> {
+        let mut reader = ByteReader::new(&self.0);
+        MultiColor::decode(&mut reader)
+    }
+}
+
+impl From<MultiColor> for BinaryMultiColor {
+    fn from(value: MultiColor) -> Self {
+        Self::from_multicolor(&value)
+    }
+}
+
+impl TryFrom<BinaryMultiColor> for MultiColor {
+    type Error = MultiColorDecodeError;
+    fn try_from(value: BinaryMultiColor) -> Result<Self, MultiColorDecodeError> {
+        value.to_multicolor()
+    }
+}

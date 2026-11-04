@@ -24,8 +24,4 @@ fn main() {
     if std::env::var("CARGO_FEATURE_GAME").is_ok() {
         generate_for("game");
     }
-
-    if std::env::var("CARGO_FEATURE_SRVC").is_ok() {
-        generate_for("srvc");
-    }
 }
