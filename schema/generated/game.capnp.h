@@ -94,7 +94,7 @@ struct LoginMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(aae1e6391a0fa6f6, 3, 4)
+    CAPNP_DECLARE_STRUCT_HEADER(aae1e6391a0fa6f6, 4, 4)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -632,6 +632,8 @@ public:
   inline bool hasEventDictionary() const;
   inline  ::capnp::Data::Reader getEventDictionary() const;
 
+  inline  ::uint64_t getSecret() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -702,6 +704,9 @@ public:
   inline  ::capnp::Data::Builder initEventDictionary(unsigned int size);
   inline void adoptEventDictionary(::capnp::Orphan< ::capnp::Data>&& value);
   inline ::capnp::Orphan< ::capnp::Data> disownEventDictionary();
+
+  inline  ::uint64_t getSecret();
+  inline void setSecret( ::uint64_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -3955,6 +3960,20 @@ inline void LoginMessage::Builder::adoptEventDictionary(
 inline ::capnp::Orphan< ::capnp::Data> LoginMessage::Builder::disownEventDictionary() {
   return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
       ::capnp::bounded<3>() * ::capnp::POINTERS));
+}
+
+inline  ::uint64_t LoginMessage::Reader::getSecret() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t LoginMessage::Builder::getSecret() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+}
+inline void LoginMessage::Builder::setSecret( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::uint16_t LoginOkMessage::Reader::getTickrate() const {

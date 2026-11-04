@@ -255,7 +255,7 @@ struct LoginOkMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 2, 3)
+    CAPNP_DECLARE_STRUCT_HEADER(d0381709099cc27c, 3, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -2361,6 +2361,8 @@ public:
   inline bool hasUserData() const;
   inline  ::globed::schema::main::ExtendedUserData::Reader getUserData() const;
 
+  inline  ::uint64_t getSecretKey() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -2418,6 +2420,9 @@ public:
   inline  ::globed::schema::main::ExtendedUserData::Builder initUserData();
   inline void adoptUserData(::capnp::Orphan< ::globed::schema::main::ExtendedUserData>&& value);
   inline ::capnp::Orphan< ::globed::schema::main::ExtendedUserData> disownUserData();
+
+  inline  ::uint64_t getSecretKey();
+  inline void setSecretKey( ::uint64_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -13411,6 +13416,20 @@ inline void LoginOkMessage::Builder::adoptUserData(
 inline ::capnp::Orphan< ::globed::schema::main::ExtendedUserData> LoginOkMessage::Builder::disownUserData() {
   return ::capnp::_::PointerHelpers< ::globed::schema::main::ExtendedUserData>::disown(_builder.getPointerField(
       ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline  ::uint64_t LoginOkMessage::Reader::getSecretKey() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t LoginOkMessage::Builder::getSecretKey() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+}
+inline void LoginOkMessage::Builder::setSecretKey( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
 }
 
 inline  ::globed::schema::main::LoginFailedReason LoginFailedMessage::Reader::getReason() const {
