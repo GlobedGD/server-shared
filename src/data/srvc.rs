@@ -50,6 +50,7 @@ pub struct SrvUserData {
     pub username: UsernameString,
     pub role_ids: Vec<u8>,
     pub name_color: Option<BinaryMultiColor>,
+    pub is_moderator: bool,
 
     pub is_linked: bool,
     pub can_use_voice: bool,
@@ -80,9 +81,7 @@ pub enum SrvMessage {
     },
 
     LoginOk {
-        token_key: String,
         script_key: String,
-        token_expiry: u64, // seconds
         roles: Vec<SrvRole>,
     },
 
