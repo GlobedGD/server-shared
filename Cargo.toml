@@ -23,7 +23,7 @@ hex = "0.4.3"
 console-subscriber = { version = "0.5.0", features = [
     "parking_lot",
 ], optional = true }
-parking_lot = { version = "0.13.0", features = ["hardware-lock-elision"] }
+parking_lot = "0.13.0"
 smallvec = "1.16.4"
 validator = { version = "0.21.0", features = ["derive"] }
 bitpiece = "2.6.0"
