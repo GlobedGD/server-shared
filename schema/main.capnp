@@ -86,6 +86,7 @@ enum LoginFailedReason {
     invalidAccountData  @6;
     notWhitelisted      @7;
     maintenance         @8;
+    updateRequired      @9;
 }
 
 struct LoginFailedMessage {
