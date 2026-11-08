@@ -156,6 +156,7 @@ CAPNP_DECLARE_SCHEMA(f22826a27d7e0863);
 CAPNP_DECLARE_SCHEMA(eaa4eda829518a91);
 CAPNP_DECLARE_SCHEMA(fde795a4cdd61270);
 CAPNP_DECLARE_SCHEMA(a6887cb7dd668602);
+CAPNP_DECLARE_SCHEMA(d046c88561368060);
 CAPNP_DECLARE_SCHEMA(daae1a3c80e59eb4);
 CAPNP_DECLARE_SCHEMA(e806d85d4b1d84da);
 CAPNP_DECLARE_SCHEMA(a9bfdaabb1cd622b);
@@ -1325,6 +1326,21 @@ struct DiscordUnlinkResultMessage {
   };
 };
 
+struct DiscordRefreshedMessage {
+  DiscordRefreshedMessage() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(d046c88561368060, 1, 2)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
 struct FeaturedLevelMessage {
   FeaturedLevelMessage() = delete;
 
@@ -1882,6 +1898,8 @@ struct Message {
     REQUEST_DISCORD_UNLINK,
     DISCORD_UNLINK_RESULT,
     EVENTS,
+    REFRESH_DISCORD_STATE,
+    DISCORD_REFRESHED,
   };
 
   struct _capnpPrivate {
@@ -8502,6 +8520,102 @@ private:
 };
 #endif  // !CAPNP_LITE
 
+class DiscordRefreshedMessage::Reader {
+public:
+  typedef DiscordRefreshedMessage Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId() const;
+
+  inline bool hasUsername() const;
+  inline  ::capnp::Text::Reader getUsername() const;
+
+  inline bool hasAvatarUrl() const;
+  inline  ::capnp::Text::Reader getAvatarUrl() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class DiscordRefreshedMessage::Builder {
+public:
+  typedef DiscordRefreshedMessage Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint64_t getId();
+  inline void setId( ::uint64_t value);
+
+  inline bool hasUsername();
+  inline  ::capnp::Text::Builder getUsername();
+  inline void setUsername( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initUsername(unsigned int size);
+  inline void adoptUsername(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownUsername();
+
+  inline bool hasAvatarUrl();
+  inline  ::capnp::Text::Builder getAvatarUrl();
+  inline void setAvatarUrl( ::capnp::Text::Reader value);
+  inline  ::capnp::Text::Builder initAvatarUrl(unsigned int size);
+  inline void adoptAvatarUrl(::capnp::Orphan< ::capnp::Text>&& value);
+  inline ::capnp::Orphan< ::capnp::Text> disownAvatarUrl();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class DiscordRefreshedMessage::Pipeline {
+public:
+  typedef DiscordRefreshedMessage Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
 class FeaturedLevelMessage::Reader {
 public:
   typedef FeaturedLevelMessage Reads;
@@ -11656,6 +11770,13 @@ public:
   inline bool hasEvents() const;
   inline  ::capnp::Data::Reader getEvents() const;
 
+  inline bool isRefreshDiscordState() const;
+  inline  ::capnp::Void getRefreshDiscordState() const;
+
+  inline bool isDiscordRefreshed() const;
+  inline bool hasDiscordRefreshed() const;
+  inline  ::globed::schema::main::DiscordRefreshedMessage::Reader getDiscordRefreshed() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -12460,6 +12581,18 @@ public:
   inline  ::capnp::Data::Builder initEvents(unsigned int size);
   inline void adoptEvents(::capnp::Orphan< ::capnp::Data>&& value);
   inline ::capnp::Orphan< ::capnp::Data> disownEvents();
+
+  inline bool isRefreshDiscordState();
+  inline  ::capnp::Void getRefreshDiscordState();
+  inline void setRefreshDiscordState( ::capnp::Void value = ::capnp::VOID);
+
+  inline bool isDiscordRefreshed();
+  inline bool hasDiscordRefreshed();
+  inline  ::globed::schema::main::DiscordRefreshedMessage::Builder getDiscordRefreshed();
+  inline void setDiscordRefreshed( ::globed::schema::main::DiscordRefreshedMessage::Reader value);
+  inline  ::globed::schema::main::DiscordRefreshedMessage::Builder initDiscordRefreshed();
+  inline void adoptDiscordRefreshed(::capnp::Orphan< ::globed::schema::main::DiscordRefreshedMessage>&& value);
+  inline ::capnp::Orphan< ::globed::schema::main::DiscordRefreshedMessage> disownDiscordRefreshed();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -16860,6 +16993,88 @@ inline void DiscordUnlinkResultMessage::Builder::adoptError(
 inline ::capnp::Orphan< ::capnp::Text> DiscordUnlinkResultMessage::Builder::disownError() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline  ::uint64_t DiscordRefreshedMessage::Reader::getId() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t DiscordRefreshedMessage::Builder::getId() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void DiscordRefreshedMessage::Builder::setId( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool DiscordRefreshedMessage::Reader::hasUsername() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool DiscordRefreshedMessage::Builder::hasUsername() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader DiscordRefreshedMessage::Reader::getUsername() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder DiscordRefreshedMessage::Builder::getUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void DiscordRefreshedMessage::Builder::setUsername( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder DiscordRefreshedMessage::Builder::initUsername(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), size);
+}
+inline void DiscordRefreshedMessage::Builder::adoptUsername(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> DiscordRefreshedMessage::Builder::disownUsername() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool DiscordRefreshedMessage::Reader::hasAvatarUrl() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool DiscordRefreshedMessage::Builder::hasAvatarUrl() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::Text::Reader DiscordRefreshedMessage::Reader::getAvatarUrl() const {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::Text::Builder DiscordRefreshedMessage::Builder::getAvatarUrl() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void DiscordRefreshedMessage::Builder::setAvatarUrl( ::capnp::Text::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::Text::Builder DiscordRefreshedMessage::Builder::initAvatarUrl(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
+}
+inline void DiscordRefreshedMessage::Builder::adoptAvatarUrl(
+    ::capnp::Orphan< ::capnp::Text>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::Text> DiscordRefreshedMessage::Builder::disownAvatarUrl() {
+  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline  ::int32_t FeaturedLevelMessage::Reader::getLevelId() const {
@@ -24023,6 +24238,86 @@ inline ::capnp::Orphan< ::capnp::Data> Message::Builder::disownEvents() {
   KJ_IREQUIRE((which() == Message::EVENTS),
               "Must check which() before get()ing a union member.");
   return ::capnp::_::PointerHelpers< ::capnp::Data>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
+inline bool Message::Reader::isRefreshDiscordState() const {
+  return which() == Message::REFRESH_DISCORD_STATE;
+}
+inline bool Message::Builder::isRefreshDiscordState() {
+  return which() == Message::REFRESH_DISCORD_STATE;
+}
+inline  ::capnp::Void Message::Reader::getRefreshDiscordState() const {
+  KJ_IREQUIRE((which() == Message::REFRESH_DISCORD_STATE),
+              "Must check which() before get()ing a union member.");
+  return _reader.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::capnp::Void Message::Builder::getRefreshDiscordState() {
+  KJ_IREQUIRE((which() == Message::REFRESH_DISCORD_STATE),
+              "Must check which() before get()ing a union member.");
+  return _builder.getDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void Message::Builder::setRefreshDiscordState( ::capnp::Void value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::REFRESH_DISCORD_STATE);
+  _builder.setDataField< ::capnp::Void>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool Message::Reader::isDiscordRefreshed() const {
+  return which() == Message::DISCORD_REFRESHED;
+}
+inline bool Message::Builder::isDiscordRefreshed() {
+  return which() == Message::DISCORD_REFRESHED;
+}
+inline bool Message::Reader::hasDiscordRefreshed() const {
+  if (which() != Message::DISCORD_REFRESHED) return false;
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool Message::Builder::hasDiscordRefreshed() {
+  if (which() != Message::DISCORD_REFRESHED) return false;
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::main::DiscordRefreshedMessage::Reader Message::Reader::getDiscordRefreshed() const {
+  KJ_IREQUIRE((which() == Message::DISCORD_REFRESHED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordRefreshedMessage>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::main::DiscordRefreshedMessage::Builder Message::Builder::getDiscordRefreshed() {
+  KJ_IREQUIRE((which() == Message::DISCORD_REFRESHED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordRefreshedMessage>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::setDiscordRefreshed( ::globed::schema::main::DiscordRefreshedMessage::Reader value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_REFRESHED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordRefreshedMessage>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::main::DiscordRefreshedMessage::Builder Message::Builder::initDiscordRefreshed() {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_REFRESHED);
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordRefreshedMessage>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void Message::Builder::adoptDiscordRefreshed(
+    ::capnp::Orphan< ::globed::schema::main::DiscordRefreshedMessage>&& value) {
+  _builder.setDataField<Message::Which>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, Message::DISCORD_REFRESHED);
+  ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordRefreshedMessage>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::main::DiscordRefreshedMessage> Message::Builder::disownDiscordRefreshed() {
+  KJ_IREQUIRE((which() == Message::DISCORD_REFRESHED),
+              "Must check which() before get()ing a union member.");
+  return ::capnp::_::PointerHelpers< ::globed::schema::main::DiscordRefreshedMessage>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
