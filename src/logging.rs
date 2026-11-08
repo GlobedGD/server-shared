@@ -94,6 +94,7 @@ pub fn setup_logger(config: &LoggerConfig, mem_usage: u32) -> (WorkerGuard, Work
         .with_target("serenity", Level::WARN)
         .with_target("hickory_resolver", Level::WARN)
         .with_target("hickory_proto", Level::WARN)
+        .with_target("clickhouse", Level::WARN)
         .with_target("h2", Level::WARN)
         .with_target("hyper", Level::WARN);
 
