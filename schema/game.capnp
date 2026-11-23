@@ -17,10 +17,15 @@ struct LoginMessage {
     settings @3 :Shared.UserSettings;
 
     # optional fields
-    sessionId @4 :UInt64;
+
     passcode  @5 :UInt32;
     platformer @6 :Bool;
+
+    # == legacy fields, pre v2.3.0 ==
+    sessionId @4 :UInt64;
     editorCollab @7 :Bool;
+    # == new session ID field ==
+    session @10 :Shared.SessionId;
 
     eventDictionary @8 :Data;
 }
@@ -41,19 +46,26 @@ struct LoginFailedMessage {
 # Session messages
 
 struct JoinSessionMessage {
-    sessionId @0 :UInt64;
     passcode  @1 :UInt32;
     platformer @2 :Bool;
+    # == legacy fields, pre v2.3.0 ==
+    sessionId @0 :UInt64;
     editorCollab @3 :Bool;
+    # == new session ID field ==
+    session @4 :Shared.SessionId;
 }
 
 struct JoinSessionOkMessage {
+    # legacy field
     sessionId @0 :UInt64;
+    # v2.3.0 session field
+    session @1 :Shared.SessionId;
 }
 
 enum JoinSessionFailedReason {
     invalidPasscode @0;
     invalidRoom @1;
+    invalidSession @2;
 }
 
 struct JoinSessionFailedMessage {

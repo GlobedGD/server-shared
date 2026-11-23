@@ -8,7 +8,7 @@
 
 #ifndef CAPNP_VERSION
 #error "CAPNP_VERSION is not defined, is capnp/generated-header-support.h missing?"
-#elif CAPNP_VERSION != 1004000
+#elif CAPNP_VERSION != 1005000
 #error "Version mismatch between generated code and library headers.  You must use the same version of the Cap'n Proto compiler and library."
 #endif
 
@@ -38,6 +38,7 @@ CAPNP_DECLARE_SCHEMA(afd5225b4d2e5029);
 CAPNP_DECLARE_SCHEMA(dbd9733cd0577674);
 CAPNP_DECLARE_SCHEMA(a7af61db45598ea4);
 CAPNP_DECLARE_SCHEMA(a5a81e32b8254af2);
+CAPNP_DECLARE_SCHEMA(8a4f68da0a3d0402);
 
 }  // namespace schemas
 }  // namespace capnp
@@ -132,6 +133,21 @@ struct UserSettings {
 
   struct _capnpPrivate {
     CAPNP_DECLARE_STRUCT_HEADER(a5a81e32b8254af2, 1, 0)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct SessionId {
+  SessionId() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(8a4f68da0a3d0402, 3, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -801,6 +817,97 @@ private:
 class UserSettings::Pipeline {
 public:
   typedef UserSettings Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class SessionId::Reader {
+public:
+  typedef SessionId Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getNamespace() const;
+
+  inline  ::uint64_t getLevelId() const;
+
+  inline  ::uint8_t getServerId() const;
+
+  inline  ::uint32_t getRoomId() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class SessionId::Builder {
+public:
+  typedef SessionId Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getNamespace();
+  inline void setNamespace( ::uint32_t value);
+
+  inline  ::uint64_t getLevelId();
+  inline void setLevelId( ::uint64_t value);
+
+  inline  ::uint8_t getServerId();
+  inline void setServerId( ::uint8_t value);
+
+  inline  ::uint32_t getRoomId();
+  inline void setRoomId( ::uint32_t value);
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class SessionId::Pipeline {
+public:
+  typedef SessionId Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -1585,6 +1692,62 @@ inline bool UserSettings::Builder::getFriendsOnlyVc() {
 }
 inline void UserSettings::Builder::setFriendsOnlyVc(bool value) {
   _builder.setDataField<bool>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t SessionId::Reader::getNamespace() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t SessionId::Builder::getNamespace() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
+}
+inline void SessionId::Builder::setNamespace( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
+      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint64_t SessionId::Reader::getLevelId() const {
+  return _reader.getDataField< ::uint64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint64_t SessionId::Builder::getLevelId() {
+  return _builder.getDataField< ::uint64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
+}
+inline void SessionId::Builder::setLevelId( ::uint64_t value) {
+  _builder.setDataField< ::uint64_t>(
+      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint8_t SessionId::Reader::getServerId() const {
+  return _reader.getDataField< ::uint8_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint8_t SessionId::Builder::getServerId() {
+  return _builder.getDataField< ::uint8_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void SessionId::Builder::setServerId( ::uint8_t value) {
+  _builder.setDataField< ::uint8_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
+}
+
+inline  ::uint32_t SessionId::Reader::getRoomId() const {
+  return _reader.getDataField< ::uint32_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+
+inline  ::uint32_t SessionId::Builder::getRoomId() {
+  return _builder.getDataField< ::uint32_t>(
+      ::capnp::bounded<4>() * ::capnp::ELEMENTS);
+}
+inline void SessionId::Builder::setRoomId( ::uint32_t value) {
+  _builder.setDataField< ::uint32_t>(
       ::capnp::bounded<4>() * ::capnp::ELEMENTS, value);
 }
 

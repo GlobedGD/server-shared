@@ -8,7 +8,7 @@
 
 #ifndef CAPNP_VERSION
 #error "CAPNP_VERSION is not defined, is capnp/generated-header-support.h missing?"
-#elif CAPNP_VERSION != 1004000
+#elif CAPNP_VERSION != 1005000
 #error "Version mismatch between generated code and library headers.  You must use the same version of the Cap'n Proto compiler and library."
 #endif
 
@@ -34,6 +34,7 @@ CAPNP_DECLARE_SCHEMA(dff86b3bb0c6c45f);
 enum class JoinSessionFailedReason_dff86b3bb0c6c45f: uint16_t {
   INVALID_PASSCODE,
   INVALID_ROOM,
+  INVALID_SESSION,
 };
 CAPNP_DECLARE_ENUM(JoinSessionFailedReason, dff86b3bb0c6c45f);
 CAPNP_DECLARE_SCHEMA(d0220b919cc3f7e9);
@@ -94,7 +95,7 @@ struct LoginMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(aae1e6391a0fa6f6, 4, 4)
+    CAPNP_DECLARE_STRUCT_HEADER(aae1e6391a0fa6f6, 4, 5)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -141,7 +142,7 @@ struct JoinSessionMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(cb73420259ca5cfc, 2, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(cb73420259ca5cfc, 2, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -156,7 +157,7 @@ struct JoinSessionOkMessage {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(bc6decb777029037, 1, 0)
+    CAPNP_DECLARE_STRUCT_HEADER(bc6decb777029037, 1, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -634,6 +635,9 @@ public:
 
   inline  ::uint64_t getSecret() const;
 
+  inline bool hasSession() const;
+  inline  ::globed::schema::shared::SessionId::Reader getSession() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -708,6 +712,13 @@ public:
   inline  ::uint64_t getSecret();
   inline void setSecret( ::uint64_t value);
 
+  inline bool hasSession();
+  inline  ::globed::schema::shared::SessionId::Builder getSession();
+  inline void setSession( ::globed::schema::shared::SessionId::Reader value);
+  inline  ::globed::schema::shared::SessionId::Builder initSession();
+  inline void adoptSession(::capnp::Orphan< ::globed::schema::shared::SessionId>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::SessionId> disownSession();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -728,6 +739,7 @@ public:
 
   inline  ::globed::schema::shared::PlayerIconData::Pipeline getIcons();
   inline  ::globed::schema::shared::UserSettings::Pipeline getSettings();
+  inline  ::globed::schema::shared::SessionId::Pipeline getSession();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -913,6 +925,9 @@ public:
 
   inline bool getEditorCollab() const;
 
+  inline bool hasSession() const;
+  inline  ::globed::schema::shared::SessionId::Reader getSession() const;
+
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -953,6 +968,13 @@ public:
   inline bool getEditorCollab();
   inline void setEditorCollab(bool value);
 
+  inline bool hasSession();
+  inline  ::globed::schema::shared::SessionId::Builder getSession();
+  inline void setSession( ::globed::schema::shared::SessionId::Reader value);
+  inline  ::globed::schema::shared::SessionId::Builder initSession();
+  inline void adoptSession(::capnp::Orphan< ::globed::schema::shared::SessionId>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::SessionId> disownSession();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -971,6 +993,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::globed::schema::shared::SessionId::Pipeline getSession();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -997,6 +1020,9 @@ public:
 #endif  // !CAPNP_LITE
 
   inline  ::uint64_t getSessionId() const;
+
+  inline bool hasSession() const;
+  inline  ::globed::schema::shared::SessionId::Reader getSession() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1029,6 +1055,13 @@ public:
   inline  ::uint64_t getSessionId();
   inline void setSessionId( ::uint64_t value);
 
+  inline bool hasSession();
+  inline  ::globed::schema::shared::SessionId::Builder getSession();
+  inline void setSession( ::globed::schema::shared::SessionId::Reader value);
+  inline  ::globed::schema::shared::SessionId::Builder initSession();
+  inline void adoptSession(::capnp::Orphan< ::globed::schema::shared::SessionId>&& value);
+  inline ::capnp::Orphan< ::globed::schema::shared::SessionId> disownSession();
+
 private:
   ::capnp::_::StructBuilder _builder;
   template <typename, ::capnp::Kind>
@@ -1047,6 +1080,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::globed::schema::shared::SessionId::Pipeline getSession();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -3976,6 +4010,45 @@ inline void LoginMessage::Builder::setSecret( ::uint64_t value) {
       ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
 }
 
+inline bool LoginMessage::Reader::hasSession() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
+}
+inline bool LoginMessage::Builder::hasSession() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::SessionId::Reader LoginMessage::Reader::getSession() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::get(_reader.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::SessionId::Builder LoginMessage::Builder::getSession() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::get(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::SessionId::Pipeline LoginMessage::Pipeline::getSession() {
+  return  ::globed::schema::shared::SessionId::Pipeline(_typeless.getPointerField(4));
+}
+#endif  // !CAPNP_LITE
+inline void LoginMessage::Builder::setSession( ::globed::schema::shared::SessionId::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::set(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::SessionId::Builder LoginMessage::Builder::initSession() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::init(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS));
+}
+inline void LoginMessage::Builder::adoptSession(
+    ::capnp::Orphan< ::globed::schema::shared::SessionId>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::adopt(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::SessionId> LoginMessage::Builder::disownSession() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::disown(_builder.getPointerField(
+      ::capnp::bounded<4>() * ::capnp::POINTERS));
+}
+
 inline  ::uint16_t LoginOkMessage::Reader::getTickrate() const {
   return _reader.getDataField< ::uint16_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -4060,6 +4133,45 @@ inline void JoinSessionMessage::Builder::setEditorCollab(bool value) {
       ::capnp::bounded<97>() * ::capnp::ELEMENTS, value);
 }
 
+inline bool JoinSessionMessage::Reader::hasSession() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool JoinSessionMessage::Builder::hasSession() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::SessionId::Reader JoinSessionMessage::Reader::getSession() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::SessionId::Builder JoinSessionMessage::Builder::getSession() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::SessionId::Pipeline JoinSessionMessage::Pipeline::getSession() {
+  return  ::globed::schema::shared::SessionId::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void JoinSessionMessage::Builder::setSession( ::globed::schema::shared::SessionId::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::SessionId::Builder JoinSessionMessage::Builder::initSession() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void JoinSessionMessage::Builder::adoptSession(
+    ::capnp::Orphan< ::globed::schema::shared::SessionId>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::SessionId> JoinSessionMessage::Builder::disownSession() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+
 inline  ::uint64_t JoinSessionOkMessage::Reader::getSessionId() const {
   return _reader.getDataField< ::uint64_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
@@ -4072,6 +4184,45 @@ inline  ::uint64_t JoinSessionOkMessage::Builder::getSessionId() {
 inline void JoinSessionOkMessage::Builder::setSessionId( ::uint64_t value) {
   _builder.setDataField< ::uint64_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
+}
+
+inline bool JoinSessionOkMessage::Reader::hasSession() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline bool JoinSessionOkMessage::Builder::hasSession() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
+}
+inline  ::globed::schema::shared::SessionId::Reader JoinSessionOkMessage::Reader::getSession() const {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::get(_reader.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline  ::globed::schema::shared::SessionId::Builder JoinSessionOkMessage::Builder::getSession() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::get(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::globed::schema::shared::SessionId::Pipeline JoinSessionOkMessage::Pipeline::getSession() {
+  return  ::globed::schema::shared::SessionId::Pipeline(_typeless.getPointerField(0));
+}
+#endif  // !CAPNP_LITE
+inline void JoinSessionOkMessage::Builder::setSession( ::globed::schema::shared::SessionId::Reader value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::set(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), value);
+}
+inline  ::globed::schema::shared::SessionId::Builder JoinSessionOkMessage::Builder::initSession() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::init(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
+}
+inline void JoinSessionOkMessage::Builder::adoptSession(
+    ::capnp::Orphan< ::globed::schema::shared::SessionId>&& value) {
+  ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::adopt(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::globed::schema::shared::SessionId> JoinSessionOkMessage::Builder::disownSession() {
+  return ::capnp::_::PointerHelpers< ::globed::schema::shared::SessionId>::disown(_builder.getPointerField(
+      ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
 inline  ::globed::schema::game::JoinSessionFailedReason JoinSessionFailedMessage::Reader::getReason() const {

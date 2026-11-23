@@ -70,3 +70,10 @@ struct UserSettings {
     disableNotices @3 :Bool = false;
     friendsOnlyVc  @4 :Bool = false;
 }
+
+struct SessionId {
+    namespace @0 :UInt32;
+    levelId @1 :UInt64;
+    serverId @2 :UInt8;
+    roomId @3 :UInt32;
+}
