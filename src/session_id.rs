@@ -63,7 +63,7 @@ impl SessionId {
         Some(
             ((self.server_id as u64) << 56)
                 | (((self.room_id & 0x00ffffff) as u64) << 32)
-                | (self.level.id),
+                | (self.level.id as u32 as u64),
         )
     }
 
