@@ -55,6 +55,26 @@ impl SessionId {
         }
     }
 
+    pub fn as_legacy(&self) -> Option<u64> {
+        if self.level.ns != 0 {
+            return None;
+        }
+
+        Some(
+            ((self.server_id as u64) << 56)
+                | (((self.room_id & 0x00ffffff) as u64) << 32)
+                | (self.level.id),
+        )
+    }
+
+    pub fn vanilla_level_id(&self) -> Option<i32> {
+        if self.level.ns != 0 {
+            return None;
+        }
+
+        Some(self.level.id as i32)
+    }
+
     pub fn from_reader(reader: crate::schema::shared::session_id::Reader<'_>) -> SessionId {
         Self {
             server_id: reader.get_server_id(),
@@ -68,6 +88,14 @@ impl SessionId {
 
     pub fn is_zero(&self) -> bool {
         self.level.ns == 0 && self.level.id == 0 && self.server_id == 0 && self.room_id == 0
+    }
+
+    pub fn is_vanilla_level(&self) -> bool {
+        self.level.ns == 0
+    }
+
+    pub fn is_eq_vanilla_level(&self, id: i32) -> bool {
+        self.level.ns == 0 && self.level.id == id as u64
     }
 }
 

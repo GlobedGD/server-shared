@@ -33,6 +33,6 @@ pub use qunet;
 
 pub use constants::*;
 pub use multi_color::*;
-pub use session_id::SessionId;
+pub use session_id::*;
 pub use typemap::TypeMap;
 pub use user_settings::UserSettings;
